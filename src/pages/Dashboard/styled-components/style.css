@@ -1,0 +1,66 @@
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}
+
+.MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular {
+  display: none;
+}
+
+.rdrDefinedRangesWrapper2 {
+  font-size: 12px;
+  width: 226px;
+  border-right: 1px solid #eff2f7;
+  background: #fff;
+}
+
+.MuiTableCell-head div {
+  font-family: "Helvetica-NeueL-Title"!important;
+  color: #334d6e!important;
+  font-size: 13px!important;
+  opacity: .5!important;
+  font-weight: 500!important;
+  width: max-content;
+}
+
+/* .tables .MuiPaper-root div:nth-child(1).MuiToolbar-gutters {
+  border: 1px solid red;
+} */
+
+.MuiAccordionDetails-root {
+  border: none !important;
+}
+
+.dropdown-toggle-icon {
+  background-color: #fff!important;
+  height: 31px;
+  width: 30px;
+  border: 0.4px solid #d1d1d1!important;
+  border-radius: 5px!important;
+  box-sizing: border-box;
+}
+
+.dropdown-toggle-icon::after {
+  content: none !important;
+}
+
+.MuiAccordion-root {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15) !important;
+}
+
+.MuiAccordionSummary-root {
+  background-color: #fff !important;
+}
+
+.box-shadow {
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 6%);
+}
+
+span.MuiButtonBase-root .MuiTableSortLabel-root {
+  width: max-content !important;
+}
+
+.MuiToolbar-gutters {
+  min-height: 4px!important;
+}

@@ -1,0 +1,27 @@
+import { SidebarItem, SidebarTitle } from "../../models";
+import Rectangle4 from "../../assets/images/Rectangle4.svg";
+
+export const SidebarData: SidebarItem[] = [
+  {
+    title: SidebarTitle.DASHBOARD,
+    path: "/dashboard",
+    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+    // iconClosed: <AiFillCaretDown />,
+    // iconOpened: <AiFillCaretUp />,
+  },
+  {
+    title: SidebarTitle.CONTACTS,
+    path: "/lead",
+    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+  },
+  // {
+  //     title: 'History',
+  //     path: '/history',
+  //     icon: <AiOutlineHistory />
+  // },
+  // {
+  //     title: 'Configurations',
+  //     path: '/configurations',
+  //     icon: <FaCog />
+  // }
+];

@@ -1,0 +1,131 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "../../../hooks/appDispatch";
+import { User } from "../../../models";
+import { setUser } from "../../../redux/state/slices/login/authSlice";
+import { useLoginUserMutation } from "../services/userService";
+import { ButtonLogin, FormLogin, TitleH4 } from "../styled-components";
+import logo from "../../../assets/images/logoRoalytics.png";
+
+interface FormState {
+  user: User;
+}
+
+const Form = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  const [userForm, setUserForm] = useState<FormState["user"]>({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = userForm;
+
+  const [
+    loginUser,
+    {
+      data: loginData,
+      isSuccess: isLoginSuccess,
+      isError: isLoginError,
+      error: loginError,
+    },
+  ] = useLoginUserMutation();
+
+  const hadleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserForm({
+      ...userForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (email && password) {
+      await loginUser({ email, password });
+    } else {
+      toast.error("ingrese correo o contraseña");
+    }
+  };
+
+  useEffect(() => {
+    if (isLoginSuccess) {
+      // toast.success("Usuario logeado");
+      console.log("user", loginData.user);
+      console.log("toekn", loginData.token);
+      dispatch(
+        setUser({
+          user: loginData.user,
+          token: loginData.token,
+          dataRegister: loginData.dataRegister,
+          isLoading: loginData.isLoading,
+        })
+      );
+      navigate("/dashboard");
+    }
+  }, [isLoginSuccess]);
+
+  return (
+    <>
+      <div className="text-center w-75">
+        <TitleH4 className="text-dark-50 text-center mt-0 font-weight-bold mb-4">
+          ¡Bienvenido a{" "}
+          <span>
+            <img src={logo} alt="" />
+          </span>
+          !
+        </TitleH4>
+      </div>
+      <FormLogin onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="title-email">E-Mail</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="example@gmail.com"
+            name="email"
+            defaultValue={userForm.email}
+            onChange={hadleChange}
+            style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+          />
+        </div>
+        <div className="form-group">
+          <label className="title-email">Contraseña</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Contraseña"
+            name="password"
+            defaultValue={userForm.password}
+            onChange={hadleChange}
+            style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+          />
+        </div>
+        <div className="form-group d-flex justify-content-between">
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            {/* <label className="form-check-label check-recordarme" for="flexCheckDefault">
+                    Recordarme
+                  </label> */}
+          </div>
+          <a className="restablecer-contraseña">Restablecer Contraseña</a>
+        </div>
+        <ButtonLogin className="mt-2">Iniciar Sesión</ButtonLogin>
+        <div className="row mt-3">
+          <div className="col-12 text-center">
+            {/* <p className="text-crear-cuenta">¿No tenes una cuenta?<Link to="editPassword" className="crear-cuenta ml-1"><b>Crear nueva cuenta</b></Link></p> */}
+          </div>
+        </div>
+      </FormLogin>
+    </>
+  );
+};
+
+export default Form;
