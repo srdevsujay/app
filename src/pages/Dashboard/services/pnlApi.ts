@@ -13,6 +13,14 @@ export const getDataPnl = async (data: DateFormat) => {
   });
 };
 
+export const loginHandle = async (data: any) => {
+  return clientAxios.post("/login", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 export const getDataFunnel = async (id: number) => {
   return clientAxios.get(`/get_tracking_user/${id}`, {
     headers: {

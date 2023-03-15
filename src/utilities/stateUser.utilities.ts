@@ -8,6 +8,6 @@ export const stateUser = {
   status: 0,
   tokens: [],
   user_type: 0,
-  time_zone: 0,
+  time_zone: "",
   type_currency: 0,
 };

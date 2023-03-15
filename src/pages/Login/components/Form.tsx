@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../../../hooks/appDispatch";
+import { useAppDispatch, useAppSelector } from "../../../hooks/appDispatch";
 import { User } from "../../../models";
 import { setUser } from "../../../redux/state/slices/login/authSlice";
 import { useLoginUserMutation } from "../services/userService";
 import { ButtonLogin, FormLogin, TitleH4 } from "../styled-components";
 import logo from "../../../assets/images/logoRoalytics.png";
+import { hadleLogin } from "../../../redux/state/slices/login/loginThunk";
 
 interface FormState {
   user: User;
@@ -22,6 +23,9 @@ const Form = () => {
     password: "",
   });
 
+  const login = useAppSelector((state: any) => state.user.user);
+  console.log("login---", login.email === "");
+
   const { email, password } = userForm;
 
   const [
@@ -33,7 +37,7 @@ const Form = () => {
       error: loginError,
     },
   ] = useLoginUserMutation();
-
+  console.log("useLoginUserMutation", useLoginUserMutation());
   const hadleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserForm({
       ...userForm,
@@ -44,7 +48,8 @@ const Form = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email && password) {
-      await loginUser({ email, password });
+      dispatch(hadleLogin({ email, password }));
+      // await loginUser({ email, password });
     } else {
       toast.error("ingrese correo o contraseña");
     }
@@ -66,6 +71,12 @@ const Form = () => {
       navigate("/dashboard");
     }
   }, [isLoginSuccess]);
+
+  useEffect(() => {
+    if (login.email !== "") {
+      navigate("/dashboard");
+    }
+  }, [login]);
 
   return (
     <>

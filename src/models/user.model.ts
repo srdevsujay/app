@@ -22,6 +22,7 @@ export interface UserState {
   status: number;
   tokens: Token[];
   user_type: number;
+  time_zone: string;
 }
 
 export interface UserInfo {
@@ -39,6 +40,6 @@ export interface RegisterUser {
   image_name: string;
   status: number;
   user_type: number;
-  time_zone: number;
+  time_zone: string;
   type_currency: number;
 }

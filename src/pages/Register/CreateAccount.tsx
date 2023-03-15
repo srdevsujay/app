@@ -15,7 +15,7 @@ const CreateAccount = () => {
     image_name: "image",
     status: 1,
     user_type: 2,
-    time_zone: 0,
+    time_zone: "",
     type_currency: 0,
   });
 

@@ -57,6 +57,15 @@ const Dashboard = () => {
   const [selectPlatform, setSelectPlatform] = useState([]);
   const dispatch = useAppDispatch();
   const [isModalOpen, setModalState] = useState<boolean>(false);
+  const [tablePnl, setTablePnl] = useState([]);
+  const [currentCalendar, setCurrentCalendar] = useState([
+    {
+      startDate: addDays(new Date(), -6),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+  const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
   const toggleModal = () => setModalState(!isModalOpen);
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const idUser = useAppSelector((state) => state.user.user.id);
@@ -64,8 +73,6 @@ const Dashboard = () => {
   // const dataFunnel = useAppSelector(
   //   (state: AppStore) => state.dashboard.dataFunnel
   // );
-
-  const [tablePnl, setTablePnl] = useState([]);
 
   console.log("dashboardMain", dashboardMain);
 
@@ -78,18 +85,13 @@ const Dashboard = () => {
   }, [dashboardMain]);
 
   useEffect(() => {
-    if (idUser !== null) {
-      dispatch(getTrackingFunnel(idUser));
+    console.log("dataFunnel...", dataFunnel);
+    if (dataFunnel.length === 0) {
+      if (idUser !== null) {
+        dispatch(getTrackingFunnel(idUser));
+      }
     }
   }, [idUser]);
-
-  const [currentCalendar, setCurrentCalendar] = useState([
-    {
-      startDate: addDays(new Date(), -6),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
 
   const handleDateDashboardMain = () => {
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");
@@ -117,7 +119,7 @@ const Dashboard = () => {
   };
 
   const handleYesterday = () => {
-    const item = yesterDay(1);
+    const item = yesterDay();
     setPnlDays(1);
     setFlagModal(1);
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);

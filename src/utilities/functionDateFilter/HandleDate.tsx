@@ -1,13 +1,12 @@
+import { getISOWeek } from "date-fns";
 import moment from "moment";
 
-export const yesterDay = (xDayInitial: number) => {
-  const dayInitial = new Date();
-  dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  const dayFinal = new Date();
-  const xDayFinal = 1;
-  dayFinal.setDate(dayFinal.getDate() - xDayFinal);
-  let firstDay = moment(dayInitial).format("YYYY-MM-DD");
-  let lastDay = moment(dayFinal).format("YYYY-MM-DD");
+export const yesterDay = () => {
+  const today = new Date();
+  const yesterday = new Date(today.getTime());
+  yesterday.setDate(today.getDate() - 1);
+  let firstDay = moment(yesterday).format("YYYY-MM-DD");
+  let lastDay = moment(yesterday).format("YYYY-MM-DD");
   const dateFormat = {
     fecha_inicial: firstDay,
     fecha_final: lastDay,
@@ -43,44 +42,10 @@ export const handleDays = (xDayInitial: number) => {
 };
 
 export const currentWeek = () => {
-  const day = new Date().getDay();
-  console.log("day", day);
-  let dayInitial = new Date();
-  if (day == 1) {
-    dayInitial.setDate(dayInitial.getDate());
-  }
-  if (day == 2) {
-    const xDayInitial = 1;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  if (day == 3) {
-    const xDayInitial = 2;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  if (day == 4) {
-    const xDayInitial = 3;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  if (day == 5) {
-    const xDayInitial = 4;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  if (day == 6) {
-    const xDayInitial = 5;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  if (day == 0) {
-    const xDayInitial = 6;
-    dayInitial.setDate(dayInitial.getDate() - xDayInitial);
-  }
-  const dayFinal = new Date();
-  const xDayFinal = 0;
-  dayFinal.setDate(dayFinal.getDate() - xDayFinal);
-  let firstDay = moment(dayInitial).format("YYYY-MM-DD");
-  let lastDay = moment(dayFinal).format("YYYY-MM-DD");
   const dateFormat = {
-    fecha_inicial: firstDay,
-    fecha_final: lastDay,
+    // .day(0) es para empezar desde el domingo la semana
+    fecha_inicial: moment().startOf("week").day(1).format("YYYY-MM-DD"),
+    fecha_final: moment().format("YYYY-MM-DD"),
   };
   return dateFormat;
 };

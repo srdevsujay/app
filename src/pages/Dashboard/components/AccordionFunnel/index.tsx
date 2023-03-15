@@ -102,6 +102,8 @@ const AccordionFunnel = () => {
     dataTrackingInitialState
   );
 
+  const [visibleColumns, setVisibleColumns] = useState(["ACV", "ATR"]);
+
   useEffect(() => {
     const tracking =
       dataTracking.length > 0 ? dataTracking : [dataTrackingInitialState];
@@ -126,10 +128,15 @@ const AccordionFunnel = () => {
   useEffect(() => {
     let arr = 0;
     if (dataFunnel.length > 0 && dataTracking.length > 0 && arr === 0) {
-      const getDataColumns = dataFunnel.map((funnel) => {
+      const getDataColumns = dataFunnel.map((funnel: any) => {
         return TypeDashboardData(funnel, dataTrackingState.type_dashboard);
       });
-
+      // const columnsToShow = getDataColumns[0].filter((column: any) =>
+      // condición para mostrar y ocultar comunas
+      const columnsToShow = (getDataColumns[0] as any).filter((column: any) =>
+        visibleColumns.includes(column.field)
+      );
+      console.log("columnsToShow", columnsToShow);
       console.log("getDataColumns", getDataColumns);
       setColumnsToSet(getDataColumns[0]);
       setDataFunnelToggle(getDataColumns[0]);
@@ -191,7 +198,7 @@ const AccordionFunnel = () => {
   };
 
   const handleYesterday = () => {
-    const item = yesterDay(1);
+    const item = yesterDay();
     setFunnelDays(1);
     setFlagModal(1);
     setTitleDatePickerFunnel(`${item.fecha_inicial} - ${item.fecha_final}`);
@@ -360,7 +367,7 @@ const AccordionFunnel = () => {
                 className="dropdown-menu dropdown-style top-menu-dropdown"
                 aria-labelledby="dropdownMenuButton"
               >
-                {dataFunnelToggle.map((column: any) => (
+                {/* {dataFunnelToggle.map((column: any) => (
                   <div key={column.field}>
                     <input
                       type="checkbox"
@@ -375,7 +382,7 @@ const AccordionFunnel = () => {
                     />
                     <label>{column.field}</label>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
           </ContainerFiltersFunnel>

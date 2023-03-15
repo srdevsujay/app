@@ -17,11 +17,13 @@ import { authSlice } from "./state/slices/login";
 import { DashboardInfo } from "../pages/Dashboard/models/dashboard.model";
 import dashboardSlice from "./state/slices/dashboard/dashboardSlice";
 import logger from "redux-logger";
+import contactSlice from "./state/slices/contacts/contactsSlice";
 
 export interface AppStore {
   authApi: any;
   user: UserInfo;
   dashboard: DashboardInfo;
+  contact: any;
 }
 
 const persistConfig = {
@@ -34,6 +36,7 @@ const reducer = combineReducers<AppStore>({
   [authApi.reducerPath]: authApi.reducer,
   user: authSlice,
   dashboard: dashboardSlice,
+  contact: contactSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -41,7 +44,11 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV === "development",
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (defaultMiddleware) =>
+    defaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }),
   // devTools: process.env.NODE_ENV === "development",
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(authApi.middleware),
