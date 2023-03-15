@@ -1,6 +1,7 @@
 import { formattTimeZone } from "../../../../utilities/FormattTimeZone";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { joinedColumn } from "./columnsTable/atr";
+import { nameColumn } from "./columnsTable/name";
 
 export const TableContacts = (dataContacts: any, time_Zone: any) => {
   console.log("dataContacts", dataContacts);
@@ -21,19 +22,20 @@ export const TableContacts = (dataContacts: any, time_Zone: any) => {
     //     </div>
     //   ),
     // },
-    {
-      title: "NOMBRE",
-      field: "name",
-      // render: (dataContacts) => (
-      //   <div className="widthDateLead">
-      //     {/* <img src={perfilAvatar} style={{ width: 20, borderRadius: "50%" }} /> */}
-      //     <span
-      //       className="font-HelveticaNeueL etiquetaA span-width-table"
-      //       onClick={() => dispatch(obtainUserProfile(dataContacts.email))}
-      //     >{`${dataContacts?.name}`}</span>
-      //   </div>
-      // ),
-    },
+    // {
+    // title: "NOMBRE",
+    // field: "name",
+    nameColumn(),
+    // render: (dataContacts) => (
+    //   <div className="widthDateLead">
+    //     {/* <img src={perfilAvatar} style={{ width: 20, borderRadius: "50%" }} /> */}
+    //     <span
+    //       className="font-HelveticaNeueL etiquetaA span-width-table"
+    //       onClick={() => dispatch(obtainUserProfile(dataContacts.email))}
+    //     >{`${dataContacts?.name}`}</span>
+    //   </div>
+    // ),
+    // },
     {
       title: "E-MAIL",
       field: "email",
