@@ -133,10 +133,10 @@ const AccordionFunnel = () => {
       });
       // const columnsToShow = getDataColumns[0].filter((column: any) =>
       // condición para mostrar y ocultar comunas
-      const columnsToShow = (getDataColumns[0] as any).filter((column: any) =>
-        visibleColumns.includes(column.field)
-      );
-      console.log("columnsToShow", columnsToShow);
+      // const columnsToShow = (getDataColumns[0] as any).filter((column: any) =>
+      //   visibleColumns.includes(column.field)
+      // );
+      // console.log("columnsToShow", columnsToShow);
       console.log("getDataColumns", getDataColumns);
       setColumnsToSet(getDataColumns[0]);
       setDataFunnelToggle(getDataColumns[0]);

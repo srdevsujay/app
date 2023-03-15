@@ -8,8 +8,8 @@ import {
   Bar,
   ButtonFunnel,
   NewFunnel,
-  TableStyle,
-  TextColors,
+  // TableStyle,
+  // TextColors,
   Title,
 } from "./styled-components/dashboardStyled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -35,6 +35,8 @@ import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
 import { FormatNumber } from "../../utilities/FormatNumber";
 import FooterMenu from "../../components/Footer/index";
+import { TableStyle, TextColors } from "../../styled-components/Table/index";
+
 import {
   yesterDay,
   todayDay,
@@ -219,9 +221,7 @@ const Dashboard = () => {
       title: "Fuente",
       field: "plataform",
       render: (dashboardMain: any) => (
-        <div className="widthDateLead">
-          <TableStyle>{`${dashboardMain?.plataform}`}</TableStyle>
-        </div>
+        <TableStyle>{`${dashboardMain?.plataform}`}</TableStyle>
       ),
     },
     {

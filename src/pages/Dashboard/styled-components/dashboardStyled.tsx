@@ -74,24 +74,26 @@ export const FilterSource = styled.div`
   }
 `;
 
-export const TableStyle = styled.span`
-  font-size: 13px !important;
-  font-family: "Helvetica-NeueL" !important;
-  color: #464646 !important;
-  font-weight: 400 !important;
-`;
+// export const TableStyle = styled.span`
+//   font-size: 13px !important;
+//   font-family: "Helvetica-NeueL" !important;
+//   color: #464646 !important;
+//   font-weight: 400 !important;
+//   display: block;
+//   width: max-content;
+// `;
 
-export const TextColors = styled.span`
-  font-size: 13px !important;
-  font-family: "Helvetica-NeueL-Title" !important;
-  &.text-danger {
-    color: #e3507a !important;
-  }
+// export const TextColors = styled.span`
+//   font-size: 13px !important;
+//   font-family: "Helvetica-NeueL-Title" !important;
+//   &.text-danger {
+//     color: #e3507a !important;
+//   }
 
-  &.text-green {
-    color: #2bb596 !important;
-  }
-`;
+//   &.text-green {
+//     color: #2bb596 !important;
+//   }
+// `;
 
 export const BackColorsTable = styled.div`
   font-size: 12px !important;
