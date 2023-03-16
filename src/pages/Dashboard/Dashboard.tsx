@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { InputComponent } from "../../components/input";
 import { Modal } from "../../components/modal";
@@ -69,7 +69,11 @@ const Dashboard = () => {
   ]);
   const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
   const toggleModal = () => setModalState(!isModalOpen);
-  const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
+
+  const mySelector = useCallback((state: any) => state.dashboard.dataPNL, []);
+  const dashboardMain = useAppSelector(mySelector);
+
+  // const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(
@@ -83,7 +87,9 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    setTablePnl(dashboardMain);
+    if (dashboardMain.length > 0) {
+      setTablePnl(dashboardMain);
+    }
   }, [dashboardMain]);
 
   useEffect(() => {
@@ -302,7 +308,7 @@ const Dashboard = () => {
               </Title>
               <div className="d-flex mt-2">
                 <SourceFilter
-                  dashboardMain={dashboardMain}
+                  // dashboardMain={dashboardMain}
                   groupPlataform={groupPlataform}
                   setGroupPlataform={setGroupPlataform}
                   setSelectPlatform={setSelectPlatform}

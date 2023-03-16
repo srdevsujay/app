@@ -1,0 +1,7 @@
+.MuiTabPanel-root {
+  padding: 0px !important;
+}
+
+.MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular {
+  display: none !important;
+}

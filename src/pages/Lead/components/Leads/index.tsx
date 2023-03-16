@@ -5,6 +5,7 @@ import GeneralTable from "../../../../utilities/Table/index";
 import { Table } from "../../../../styled-components/Table/index";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
+import "../../style-components/style.css";
 
 const Leads = () => {
   const dispatch = useAppDispatch();

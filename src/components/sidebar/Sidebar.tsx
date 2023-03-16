@@ -13,15 +13,20 @@ import logo from "../../assets/images/logoRoalytics.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { signOut } from "../../utilities/localstorage.utility";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/appDispatch";
+import { logoutUser } from "../../redux/state/slices/login/authSlice";
+import { stateUser } from "../../utilities/stateUser.utilities";
 
 const Sidebar: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [close, setClose] = useState(false);
   const showSidebar = () => setClose(!close);
 
   const handleLogout = () => {
     signOut();
     navigate("/login");
+    dispatch(logoutUser());
   };
 
   return (

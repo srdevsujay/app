@@ -64,3 +64,13 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
 .MuiToolbar-gutters {
   min-height: 4px!important;
 }
+
+.backgroundTotal {
+  background: #d5eafe;
+  display: none;
+}
+
+.backgroundTotal:nth-child(1) {
+  background: #d5eafe;
+  display: table-row !important;
+}

@@ -8,6 +8,9 @@ import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import _ from "lodash";
 import { FilterSource } from "../../styled-components/dashboardStyled";
+import { totalPnl } from "../TotalPnl";
+import { useAppSelector } from "../../../../hooks/appDispatch";
+import { useCallback } from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -43,7 +46,6 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 }
 
 const SourceFilter = ({
-  dashboardMain,
   groupPlataform,
   setGroupPlataform,
   setSelectPlatform,
@@ -51,6 +53,9 @@ const SourceFilter = ({
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
   const [uniquePlataform, setUniquePlataform] = useState<string[]>([]);
+  const mySelector = useCallback((state: any) => state.dashboard.dataPNL, []);
+  const dashboardMain = useAppSelector(mySelector);
+  console.log("dashboardMainFunnel", dashboardMain);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -64,8 +69,11 @@ const SourceFilter = ({
 
   useEffect(() => {
     // setTablePnl(dashboardMain);
-    groupByPNL();
-    getPlataform();
+    if (dashboardMain.length > 0) {
+      groupByPNL();
+      getPlataform();
+    }
+    console.log("dashboardMainEffect", dashboardMain);
   }, [dashboardMain]);
 
   const getPlataform = () => {
@@ -107,40 +115,9 @@ const SourceFilter = ({
         }))
         .value();
       setGroupPlataform(tempGroup);
-      // console.log('tempGroup', tempGroup);
-      // const dataTotal = {
-      //   plataform: "Total",
-      //   gastos: _.sumBy(tempGroup, 'gastos'),
-      //   ingresos: _.sumBy(tempGroup, 'ingresos'),
-      //   porcentajerentabilidad: _.sumBy(tempGroup, 'porcentajerentabilidad'),
-      //   rentabilidad: _.sumBy(tempGroup, 'rentabilidad'),
-      //   roi: _.sumBy(tempGroup, 'roi'),
-      //   leeds: _.sumBy(tempGroup, 'leeds'),
-      //   bookings: _.sumBy(tempGroup, 'bookings'),
-      // }
+      totalPnl(tempGroup);
       console.log("dataTotal", tempGroup);
-      // setTotalIncome(dataTotal.ingresos.toFixed(2));
-      // setTotalCosts(dataTotal.gastos.toFixed(2));
-      // setRentabilidadTotal(dataTotal.ingresos-dataTotal.gastos);
-      // setPorcentajeRentabilidadTotal(rentabilidadTotal/dataTotal.ingresos);
-      // setRoiTotal(dataTotal.ingresos/dataTotal.gastos);
-      // // if(currentTotal === true)  {
-      // const tbody = document.createElement('tr');
-      // tbody.className = "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgorundTotal";
-      // tbody.innerHTML = `
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">Total</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.ingresos.toFixed(2)}</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.gastos.toFixed(2)}</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${(dataTotal.ingresos.toFixed(2)/(dataTotal.ingresos.toFixed(2)-dataTotal.gastos.toFixed(2))).toFixed(2)}%</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.ingresos/dataTotal.gastos == Infinity ? 0 : (dataTotal.ingresos/dataTotal.gastos).toFixed(2)}</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.leeds.toFixed(2)}</td>
-      //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.bookings.toFixed(2)}</td>
-      // `;
-      // document.querySelector(".MuiTableHead-root").prepend(tbody);
       return;
-      //   setCurrentTotal(false);
-      // }
     }
   };
 

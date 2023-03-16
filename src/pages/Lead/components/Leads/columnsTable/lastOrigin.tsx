@@ -2,6 +2,7 @@ import { BackColorsTableOrigin } from "../../../../../styled-components/Table/in
 import "../../../../../styled-components/Table/style.css";
 import venta from "../../../../../assets/images/venta.svg";
 import click from "../../../../../assets/images/click.svg";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 
 export const lastOriginColumn = () => {
   return {
@@ -25,7 +26,7 @@ export const lastOriginColumn = () => {
           ) : dataContacts?.last_origentag.substr(0, 1) === "!" ? (
             <img src={venta} alt="" className="iconos-table-origin" />
           ) : (
-            ""
+            <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
           )}
           {dataContacts?.last_origentag.substr(1)}
         </BackColorsTableOrigin>

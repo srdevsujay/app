@@ -36,11 +36,16 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.dataRegister = action.payload.dataRegister;
     },
+    logoutUser: (state) => {
+      state.isLoading = false;
+      state.user = stateUser;
+    },
   },
 });
 
 // export const selectAuth = (state: RootState) => state.auth;
 
-export const { starLoading, setUser, registerUser } = authSlice.actions;
+export const { starLoading, setUser, registerUser, logoutUser } =
+  authSlice.actions;
 
 export default authSlice.reducer;
