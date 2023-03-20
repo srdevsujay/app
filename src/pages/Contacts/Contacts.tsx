@@ -7,7 +7,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Leads from "./components/Leads/index";
 
-const Lead = () => {
+const Contacts = () => {
   const [value, setValue] = useState("1");
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -68,4 +68,4 @@ const Lead = () => {
   );
 };
 
-export default Lead;
+export default Contacts;

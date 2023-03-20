@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import _ from "lodash";
 import { FilterSource } from "../../styled-components/dashboardStyled";
-import { totalPnl } from "../TotalPnl";
+import { totalPnl } from "../TotalTablePnl";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { useCallback } from "react";
 
@@ -51,10 +51,10 @@ const SourceFilter = ({
   setSelectPlatform,
 }: any) => {
   const theme = useTheme();
+  const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [personName, setPersonName] = React.useState<string[]>([]);
   const [uniquePlataform, setUniquePlataform] = useState<string[]>([]);
-  const mySelector = useCallback((state: any) => state.dashboard.dataPNL, []);
-  const dashboardMain = useAppSelector(mySelector);
+  const [canCallTotalTable, setCanCallTotalTable] = useState(true);
   console.log("dashboardMainFunnel", dashboardMain);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -69,11 +69,12 @@ const SourceFilter = ({
 
   useEffect(() => {
     // setTablePnl(dashboardMain);
-    if (dashboardMain.length > 0) {
+    if (dashboardMain.length > 0 && canCallTotalTable) {
       groupByPNL();
       getPlataform();
+      console.log("dashboardMainEffect", dashboardMain);
+      setCanCallTotalTable(false);
     }
-    console.log("dashboardMainEffect", dashboardMain);
   }, [dashboardMain]);
 
   const getPlataform = () => {

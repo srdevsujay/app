@@ -13,25 +13,19 @@ import { AppStore } from "./redux/store";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
-const Lead = lazy(() => import("./pages/Lead/Lead"));
+const Contacts = lazy(() => import("./pages/Contacts/Contacts"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
 
 function App() {
   // const user: any = useAppSelector((state) => state.user?.user);
   const user = useSelector((state: AppStore) => state.user.user);
-  console.log("user", user);
   let hostedpage: any = "";
   useEffect(() => {
     const url = window.location.href;
     if (url.split("/")[3] === "login") {
       hostedpage = url.split("/")[3];
-      console.log("url", url);
-      console.log(hostedpage, hostedpage.length);
     } else if (url.split("/")[3] !== "login") {
       hostedpage = url.split("/")[3];
-      console.log("entra al else");
-      console.log("url", url);
-      console.log(hostedpage, hostedpage.length);
     }
   }, []);
 
@@ -50,7 +44,7 @@ function App() {
             <Route path={publicRoutes.LOGIN} element={<Login />} />
             <Route element={<AuthGuard />}>
               <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
-              <Route path={privateRoutes.LEAD} element={<Lead />} />
+              <Route path={privateRoutes.LEAD} element={<Contacts />} />
             </Route>
             <Route path="/signun" element={<CreateAccount />} />
           </RoutesWithNotFound>

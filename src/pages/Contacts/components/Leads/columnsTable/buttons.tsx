@@ -1,3 +1,5 @@
+import ellipsisOff from "../../../../../assets/images/ellipsisOff.svg";
+
 export const buttonEditColumn = () => {
   return {
     render: (param: any, index: any) => (
@@ -10,7 +12,7 @@ export const buttonEditColumn = () => {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {/* <img src={ellipsisOff} alt="" className="" /> */}
+          <img src={ellipsisOff} alt="" className="" />
         </button>
         <div
           className="dropdown-menu dropdown-style"

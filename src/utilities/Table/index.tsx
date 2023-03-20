@@ -1,4 +1,5 @@
 import MaterialTable from "material-table";
+import { useEffect } from "react";
 
 const GeneralTable = ({
   data,
@@ -7,6 +8,10 @@ const GeneralTable = ({
   maxBodyHeight,
   pageSize,
 }: any) => {
+  useEffect(() => {
+    console.log("dataTable--", data);
+  }, [data]);
+
   return (
     <div className="tables">
       <MaterialTable

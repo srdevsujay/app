@@ -126,8 +126,7 @@ const AccordionFunnel = () => {
   }, [dataTrackingState]);
 
   useEffect(() => {
-    let arr = 0;
-    if (dataFunnel.length > 0 && dataTracking.length > 0 && arr === 0) {
+    if (dataFunnel.length > 0 && dataTracking.length > 0) {
       const getDataColumns = dataFunnel.map((funnel: any) => {
         return TypeDashboardData(funnel, dataTrackingState.type_dashboard);
       });
@@ -140,7 +139,6 @@ const AccordionFunnel = () => {
       console.log("getDataColumns", getDataColumns);
       setColumnsToSet(getDataColumns[0]);
       setDataFunnelToggle(getDataColumns[0]);
-      arr = 1;
     }
   }, [dataFunnel, dataTracking]);
 

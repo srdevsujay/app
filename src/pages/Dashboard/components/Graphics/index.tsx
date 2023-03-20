@@ -5,8 +5,10 @@ import { Pnl } from "../../models/dashboard.model";
 import { groupAndSumDatePNL } from "../../../../utilities/groupSumPNL";
 import { Checkbox } from "@mui/material";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
+import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const Graphics = ({ dashboardMain }: any) => {
+const Graphics = () => {
+  const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
   const [dateGraphic, setDateGraphic] = useState<string[]>([]);

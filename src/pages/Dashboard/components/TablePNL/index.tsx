@@ -2,8 +2,30 @@ import React from "react";
 import MaterialTable from "material-table";
 import { Bar } from "../../styled-components/dashboardStyled";
 import { Table } from "../../../../styled-components/Table";
+import { useAppSelector } from "../../../../hooks/appDispatch";
+import { platformColumn } from "../ColumnTable/platform";
+import { incomeColumn } from "../ColumnTable/income";
+import { expenseColumn } from "../ColumnTable/expense";
+import { profitabilityColumn } from "../ColumnTable/profitability";
+import { roiColumn } from "../ColumnTable/roi";
+import { percentageProfitabilityColumn } from "../ColumnTable/percentageProfitability";
+import { leadColumn } from "../ColumnTable/lead";
+import { bookingColumn } from "../ColumnTable/booking";
 
-const TablePNL = ({ tablePnl, columnsTablePNL, selectPlatform }: any) => {
+const TablePNL = ({ tablePnl, selectPlatform }: any) => {
+  const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
+
+  const columnsTablePNL = [
+    platformColumn(dashboardMain),
+    incomeColumn(dashboardMain),
+    expenseColumn(dashboardMain),
+    profitabilityColumn(dashboardMain),
+    percentageProfitabilityColumn(dashboardMain),
+    roiColumn(dashboardMain),
+    leadColumn(dashboardMain),
+    bookingColumn(dashboardMain),
+  ];
+
   return (
     <Table className="tables">
       <MaterialTable

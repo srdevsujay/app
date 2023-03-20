@@ -14,10 +14,6 @@ export function formattTimeZone(date, timeZone) {
       acc[part.type] = part.value;
       return acc;
     }, {});
-  console.log(
-    "formmat",
-    `${p.day}-${p.month}-${p.year} ${p.hour}:${p.minute} ${p.dayPeriod}`
-  );
   const mesActual = new Date(date);
   const meses = [
     "Enero",

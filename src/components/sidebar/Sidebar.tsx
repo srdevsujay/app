@@ -1,12 +1,11 @@
 import React, { FC } from "react";
 import {
-  ButtonLogout,
   MenuIconClose,
   MenuIconOpen,
   MenuItemLinks,
   MenuItems,
   SidebarMenu,
-} from "../../styled-components";
+} from "../../styled-components/sidebar";
 import { useState } from "react";
 import { SidebarData } from "./SidebarData";
 import logo from "../../assets/images/logoRoalytics.png";
@@ -16,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/appDispatch";
 import { logoutUser } from "../../redux/state/slices/login/authSlice";
 import { stateUser } from "../../utilities/stateUser.utilities";
+import { ButtonLogout } from "../../styled-components/button";
 
 const Sidebar: FC = () => {
   const navigate = useNavigate();

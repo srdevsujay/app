@@ -59,7 +59,6 @@ const Dashboard = () => {
   const [selectPlatform, setSelectPlatform] = useState([]);
   const dispatch = useAppDispatch();
   const [isModalOpen, setModalState] = useState<boolean>(false);
-  const [tablePnl, setTablePnl] = useState([]);
   const [currentCalendar, setCurrentCalendar] = useState([
     {
       startDate: addDays(new Date(), -6),
@@ -67,30 +66,21 @@ const Dashboard = () => {
       key: "selection",
     },
   ]);
+  const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
   const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
   const toggleModal = () => setModalState(!isModalOpen);
-
-  const mySelector = useCallback((state: any) => state.dashboard.dataPNL, []);
-  const dashboardMain = useAppSelector(mySelector);
-
-  // const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(
   //   (state: AppStore) => state.dashboard.dataFunnel
   // );
 
-  console.log("dashboardMain", dashboardMain);
-
   useEffect(() => {
-    dispatch(getMetricFunnel());
-  }, []);
-
-  useEffect(() => {
-    if (dashboardMain.length > 0) {
-      setTablePnl(dashboardMain);
+    if (canCallMetricFunnel) {
+      dispatch(getMetricFunnel());
+      setCanCallMetricFunnel(false);
     }
-  }, [dashboardMain]);
+  }, [canCallMetricFunnel]);
 
   useEffect(() => {
     console.log("dataFunnel...", dataFunnel);
@@ -222,77 +212,6 @@ const Dashboard = () => {
     dispatch(getMetricFunnel(dateFormat));
   };
 
-  const columnsTablePNL = [
-    {
-      title: "Fuente",
-      field: "plataform",
-      render: (dashboardMain: any) => (
-        <TableStyle>{`${dashboardMain?.plataform}`}</TableStyle>
-      ),
-    },
-    {
-      title: "$Ingresos",
-      field: "ingresos",
-      render: (dashboardMain: any) => (
-        <TableStyle>
-          <>
-            <FormatNumber number={dashboardMain?.ingresos} />
-          </>
-        </TableStyle>
-      ),
-    },
-    {
-      title: "#Gastos",
-      field: "gastos",
-      render: (dashboardMain: any) => (
-        <TableStyle>{`${dashboardMain?.gastos.toFixed(2)}`}</TableStyle>
-      ),
-    },
-    {
-      title: "#Rentabilidad",
-      field: "rentabilidad",
-      render: (dashboardMain: any) => (
-        <TextColors
-          className={`${
-            dashboardMain?.rentabilidad < 0 ? "text-danger" : "text-green"
-          }`}
-        >{`${dashboardMain?.rentabilidad.toFixed(2)}`}</TextColors>
-      ),
-    },
-    {
-      title: "%Rentabilidad",
-      field: "porcentajerentabilidad",
-      render: (dashboardMain: any) => (
-        <TableStyle>
-          {`${dashboardMain?.porcentajerentabilidad.toFixed(2)}`}
-        </TableStyle>
-      ),
-    },
-    {
-      title: "#ROI",
-      field: "roi",
-      render: (dashboardMain: any) => (
-        <TableStyle>{`${dashboardMain?.roi.toFixed(2)}`}</TableStyle>
-      ),
-    },
-    {
-      title: "#Leads",
-      field: "leeds",
-      render: (dashboardMain: any) => (
-        <TableStyle>{`${dashboardMain?.leeds.toFixed(2)}`}</TableStyle>
-      ),
-    },
-    {
-      title: "#Bookings",
-      field: "bookings",
-      render: (dashboardMain: any) => (
-        <TableStyle>{`${dashboardMain?.bookings.toFixed(2)}`}</TableStyle>
-      ),
-    },
-  ];
-
-  console.log("columnsTablePNL", columnsTablePNL);
-
   return (
     <Main>
       <Card>
@@ -308,7 +227,6 @@ const Dashboard = () => {
               </Title>
               <div className="d-flex mt-2">
                 <SourceFilter
-                  // dashboardMain={dashboardMain}
                   groupPlataform={groupPlataform}
                   setGroupPlataform={setGroupPlataform}
                   setSelectPlatform={setSelectPlatform}
@@ -334,12 +252,11 @@ const Dashboard = () => {
             </div>
             <TablePNL
               tablePnl={groupPlataform}
-              columnsTablePNL={columnsTablePNL}
               selectPlatform={selectPlatform}
             />
           </div>
           <div className="col-sm-5">
-            <Graphics dashboardMain={dashboardMain} />
+            <Graphics />
           </div>
         </div>
         <div className="row">

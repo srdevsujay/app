@@ -67,7 +67,7 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
 
 .backgroundTotal {
   background: #d5eafe;
-  display: none;
+  display: none !important;
 }
 
 .backgroundTotal:nth-child(1) {

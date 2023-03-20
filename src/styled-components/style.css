@@ -1,0 +1,12 @@
+.dropdown-toggle-icon {
+  background-color: #fff!important;
+  height: 31px;
+  width: 30px;
+  border: 0.4px solid #d1d1d1!important;
+  border-radius: 5px!important;
+  box-sizing: border-box;
+}
+
+.dropdown-toggle-icon::after {
+  content: none !important;
+}

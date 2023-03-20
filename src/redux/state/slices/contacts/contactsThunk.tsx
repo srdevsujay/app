@@ -1,6 +1,6 @@
 import { AppThunk } from "../../../store";
 import { setLeads, starLoading } from "./contactsSlice";
-import { getDataLeads } from "../../../../pages/Lead/services/index";
+import { getDataLeads } from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
 
 export const obtainApiContacts = (): AppThunk => {
