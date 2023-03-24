@@ -1,5 +1,5 @@
 import { ChangeEventHandler, InputHTMLAttributes } from "react";
-import { InputSearch } from "../../styled-components";
+import { InputSearch } from "../../styled-components/input";
 
 type InputProps = {
   label?: string;
