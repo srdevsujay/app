@@ -4,4 +4,5 @@
 
 .MuiToolbar-root .MuiToolbar-gutters .MuiToolbar-regular {
   display: none !important;
+  margin-top: 5px;
 }

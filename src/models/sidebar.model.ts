@@ -8,6 +8,7 @@ export interface SidebarItem {
 
 export enum SidebarTitle {
   DASHBOARD = 'Dashboard',
+  FUNNEL = 'Funnel',
   CONTACTS = 'Contactos',
   TRACKING = "Tracking",
   CONFIGURATION = "Configuración",

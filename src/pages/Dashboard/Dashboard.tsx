@@ -58,7 +58,7 @@ const Dashboard = () => {
   const [groupPlataform, setGroupPlataform] = useState([]);
   const [selectPlatform, setSelectPlatform] = useState([]);
   const dispatch = useAppDispatch();
-  const [isModalOpen, setModalState] = useState<boolean>(false);
+
   const [currentCalendar, setCurrentCalendar] = useState([
     {
       startDate: addDays(new Date(), -6),
@@ -68,7 +68,7 @@ const Dashboard = () => {
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
   const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
-  const toggleModal = () => setModalState(!isModalOpen);
+
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(
@@ -214,7 +214,7 @@ const Dashboard = () => {
 
   return (
     <Main>
-      <Card height="75vh" borderRadius="16px 16px 0 0">
+      <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
           Dashboard
         </Title>
@@ -259,31 +259,18 @@ const Dashboard = () => {
             <Graphics />
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-sm-12">
             <AccordionFunnel />
           </div>
-        </div>
+        </div> */}
         {/* <section>
           <Accordion items={accordionItems} />
         </section> */}
       </Card>
-      <NewFunnel>
+      {/* <NewFunnel>
         <ButtonFunnel onClick={toggleModal}>+</ButtonFunnel>
-      </NewFunnel>
-
-      <Modal
-        title={"Agregar Funnel"}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        width="55vw"
-        padding="50px"
-        btnClose={1}
-      >
-        <AddFunnelInput />
-        <StepsFunnel />
-        <AdAccount />
-      </Modal>
+      </NewFunnel> */}
       <FooterMenu />
     </Main>
   );

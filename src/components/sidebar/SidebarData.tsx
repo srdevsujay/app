@@ -10,6 +10,11 @@ export const SidebarData: SidebarItem[] = [
     // iconOpened: <AiFillCaretUp />,
   },
   {
+    title: SidebarTitle.FUNNEL,
+    path: "/funnel",
+    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+  },
+  {
     title: SidebarTitle.CONTACTS,
     path: "/lead",
     icon: <img src={Rectangle4} alt="" height="12" width="12" />,

@@ -3,3 +3,7 @@
   height: 15px;
   margin-right: 5px;
 }
+
+.MuiTableCell-root .MuiTableCell-head {
+  z-index: inherit !important;
+}
