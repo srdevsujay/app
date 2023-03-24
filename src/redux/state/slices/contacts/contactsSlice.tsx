@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const contactState: any = {
   isLoading: false,
   dataLead: [],
+  registerLead: [],
 };
 
 export const contactSlice = createSlice({
@@ -13,10 +14,19 @@ export const contactSlice = createSlice({
       state.isLoading = true;
     },
     setLeads: (state, action) => {
+      state.isLoading = false;
       state.dataLead = action.payload;
+    },
+    setCreateLead: (state, action) => {
+      state.isLoading = false;
+      // state.registerLead = action.payload;
+    },
+    setEditLead: (state, action) => {
+      state.isLoading = false;
+      // state.registerLead = action.payload;
     },
   },
 });
 
-export const { starLoading, setLeads } = contactSlice.actions;
+export const { starLoading, setLeads, setCreateLead } = contactSlice.actions;
 export default contactSlice.reducer;

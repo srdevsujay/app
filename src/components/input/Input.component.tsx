@@ -1,5 +1,5 @@
 import { ChangeEventHandler, InputHTMLAttributes } from "react";
-import { Input } from "../../styled-components";
+import { InputSearch } from "../../styled-components";
 
 type InputProps = {
   label?: string;
@@ -15,7 +15,7 @@ const InputComponent = (props: InputProps) => {
   return (
     <>
       {label ? <label htmlFor={otherProps.id}>{label}</label> : ""}
-      <Input onChange={handleChange} {...otherProps} />
+      <InputSearch onChange={handleChange} {...otherProps} />
     </>
   );
 };

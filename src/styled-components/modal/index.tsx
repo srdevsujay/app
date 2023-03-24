@@ -23,17 +23,20 @@ export const ModalOverlay = styled.div`
   cursor: pointer;
 `;
 
-export const ModalBox = styled.span<ModalWidthBox>(({ width, padding }) => ({
-  position: "relative",
-  width: width,
-  margin: "0 10%",
-  padding: padding,
-  boxSizing: "border-box",
-  borderRadius: "10px",
-  backgroundColor: "white",
-  cursor: "auto",
-  overflowY: "auto",
-}));
+export const ModalBox = styled.div<ModalWidthBox>(
+  ({ width, padding, bottom, height }) => ({
+    width: width,
+    padding: padding,
+    bottom: bottom,
+    height: height,
+    position: "relative",
+    boxSizing: "border-box",
+    borderRadius: "10px",
+    backgroundColor: "white",
+    cursor: "auto",
+    overflowY: "auto",
+  })
+);
 
 // export const ModalBox = styled.div`
 //   position: relative;
@@ -48,8 +51,15 @@ export const ModalBox = styled.span<ModalWidthBox>(({ width, padding }) => ({
 // `;
 
 export const ModalTitle = styled.div`
-  color: #9e25fc;
-  font-size: 30px;
+  /* color: #9e25fc;
+  font-size: 30px; */
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 18px;
+  color: #030229;
+  line-height: 21px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 20px;
 `;
 
 export const ModalContent = styled.div`
@@ -59,13 +69,24 @@ export const ModalContent = styled.div`
 `;
 
 export const ModalClose = styled.button`
-  position: absolute;
+  /* position: absolute;
   top: 20px;
   right: 20px;
   transition: transform 250ms ease-in-out;
-  transform-origin: 50% 50%;
+  transform-origin: 50% 50%; */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 35px;
+  height: 35px;
+  background: rgba(16, 156, 241, 0.14901960784313725);
+  border-radius: 20px;
+  color: #109cf1;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
 
-  &:hover {
+  /* &:hover {
     transform: rotate(180deg);
-  }
+  } */
 `;

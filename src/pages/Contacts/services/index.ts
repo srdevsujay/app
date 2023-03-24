@@ -9,3 +9,27 @@ export const getDataLeads = async () => {
     }
   });
 };
+
+export const createLeadService = async (data: any) => {
+  return clientAxios.post("/lead", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const editLeadService = async (data: any) => {
+  return clientAxios.put("/lead", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const deleteLeadService = async (id: any) => {
+  return clientAxios.post("/deletelead", id, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

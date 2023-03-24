@@ -1,6 +1,19 @@
 import ellipsisOff from "../../../../../assets/images/ellipsisOff.svg";
 
-export const buttonEditColumn = () => {
+export const buttonEditColumn = (
+  setCurrentEdit: any,
+  setIdEditCurrent: any
+) => {
+  const editLead = (param: any) => {
+    console.log("param", param);
+
+    setCurrentEdit(param);
+  };
+
+  const handleDeleteLead = (id: number) => {
+    setIdEditCurrent(id);
+  };
+
   return {
     render: (param: any, index: any) => (
       <div className="btn-group" role="group">
@@ -20,14 +33,14 @@ export const buttonEditColumn = () => {
         >
           <button
             className="dropdown-item dropdown-style-button"
-            // onClick={() => editLead(param)}
+            onClick={() => editLead(param)}
           >
             {/* <img src={edit} height="12" className="" /> */}
             Editar
           </button>
           <button
             className="dropdown-item dropdown-style-button"
-            // onClick={() => deleteLead(param)}
+            onClick={() => handleDeleteLead(param.id)}
           >
             {/* <img src={deleted} height="12" className="" /> */}
             Eliminar

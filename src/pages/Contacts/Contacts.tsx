@@ -15,7 +15,7 @@ const Contacts = () => {
 
   return (
     <Main>
-      <Card>
+      <Card height="85vh" borderRadius="16px">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -33,31 +33,9 @@ const Contacts = () => {
               <Leads />
             </TabPanel>
             <TabPanel value="2">
-              {/* <TabBooking
-                ExcelFile={ExcelFile}
-                exportar={exportar}
-                ExcelSheet={ExcelSheet}
-                dataContacts={dataContacts}
-                ExcelColumn={ExcelColumn}
-                Vector={Vector}
-                DataTableExtensions={DataTableExtensions}
-                TableContacts={TableContacts}
-                loading={loading}
-              /> */}
               <h1>Bookings</h1>
             </TabPanel>
             <TabPanel value="3">
-              {/* <TabVenta
-                ExcelFile={ExcelFile}
-                exportar={exportar}
-                ExcelSheet={ExcelSheet}
-                dataContacts={dataContacts}
-                ExcelColumn={ExcelColumn}
-                Vector={Vector}
-                DataTableExtensions={DataTableExtensions}
-                TableContacts={TableContacts}
-                loading={loading}
-              /> */}
               <h1>Ventas</h1>
             </TabPanel>
           </TabContext>

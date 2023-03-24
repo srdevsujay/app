@@ -16,6 +16,8 @@ const Modal: FC<ModalProps> = ({
   children,
   width,
   padding,
+  bottom,
+  height,
   btnClose,
 }) => {
   const outsideRef = useRef(null);
@@ -31,12 +33,12 @@ const Modal: FC<ModalProps> = ({
   return isOpen ? (
     <ModalContainer>
       <ModalOverlay ref={outsideRef} onClick={handleCloseOnOverlay} />
-      <ModalBox width={width} padding={padding}>
+      <ModalBox width={width} padding={padding} bottom={bottom} height={height}>
         {btnClose === 0 ? (
           ""
         ) : (
           <ModalClose onClick={onClose}>
-            {/* x<img src={iconX} alt={'close'} /> */}
+            {/* x<img src={iconX} alt={'close'} /> */}x
           </ModalClose>
         )}
         <ModalTitle>{title}</ModalTitle>

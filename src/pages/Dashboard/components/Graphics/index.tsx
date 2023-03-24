@@ -6,6 +6,8 @@ import { groupAndSumDatePNL } from "../../../../utilities/groupSumPNL";
 import { Checkbox } from "@mui/material";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { useAppSelector } from "../../../../hooks/appDispatch";
+import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
+import { SpanTitle } from "../../../../styled-components/span/index";
 
 const Graphics = () => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
@@ -182,42 +184,42 @@ const Graphics = () => {
 
   return (
     <div className="box-shadow">
-      <div className="row ml-1 mt-2 header-graphic HelveticaNeueLTitle justify-content-center align-items-center p-0 font-weight-bold">
+      <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
-      </div>
+      </HeaderTitleGraphic>
       <div className="filterPNL mt-2">
-        <div className="ml-1 mb-1">
+        <div className="d-flex check-toggle-graphic">
           <Checkbox
             checked={checkedSelectIncomeGraphic}
             onChange={(e) => handleChangeSelectGraphicIncome(e)}
             inputProps={{ "aria-label": "controlled" }}
           />
-          <span style={{ color: "green" }}>Ingresos</span>
+          <SpanTitle className="green">Ingresos</SpanTitle>
           <Checkbox
             checked={checkedSelectCostsGraphic}
             onChange={(e) => handleChangeSelectGraphicCosts(e)}
             className="ml-2"
           />
-          <span style={{ color: "red" }}>Gastos</span>
+          <SpanTitle className="red">Gastos</SpanTitle>
         </div>
-        <div className="">
+        <div className="d-flex justify-content-evenly w-75">
           {checkedSelectIncomeGraphic === true ? (
-            <span style={{ color: "green" }} className="ml-2 mr-2">
+            <SpanTitle className="green ml-3">
               Ingresos: <FormatNumber number={totalIncome} />
-            </span>
+            </SpanTitle>
           ) : (
             ""
           )}
           {checkedSelectIncomeGraphic === true &&
           checkedSelectCostsGraphic === true ? (
-            <span>-</span>
+            <span className="ml-2 mr-2">-</span>
           ) : (
             ""
           )}
           {checkedSelectCostsGraphic === true ? (
-            <span style={{ color: "red" }} className="ml-2">
+            <SpanTitle className="red">
               Gastos: <FormatNumber number={totalExpense} />
-            </span>
+            </SpanTitle>
           ) : (
             ""
           )}

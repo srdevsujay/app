@@ -8,7 +8,12 @@ import { firstOriginColumn } from "./columnsTable/firstOrigin";
 import { lastOriginColumn } from "./columnsTable/lastOrigin";
 import { buttonEditColumn } from "./columnsTable/buttons";
 
-export const TableContacts = (dataContacts: any, time_Zone: any) => {
+export const TableContacts = (
+  dataContacts: any,
+  time_Zone: any,
+  setCurrentEdit: any,
+  setIdEditCurrent: any
+) => {
   return [
     joinedColumn(time_Zone),
     nameColumn(),
@@ -16,6 +21,6 @@ export const TableContacts = (dataContacts: any, time_Zone: any) => {
     totalValueColumn(),
     firstOriginColumn(),
     lastOriginColumn(),
-    buttonEditColumn(),
+    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

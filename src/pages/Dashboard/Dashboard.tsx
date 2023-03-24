@@ -214,7 +214,7 @@ const Dashboard = () => {
 
   return (
     <Main>
-      <Card>
+      <Card height="75vh" borderRadius="16px 16px 0 0">
         <Title fontSize="17px" color="#123249">
           Dashboard
         </Title>

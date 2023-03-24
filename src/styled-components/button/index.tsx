@@ -42,6 +42,38 @@ export const ButtonCreate = styled.button`
   box-shadow: 0 4px 10px rgba(16, 156, 241, 0.24);
   font-size: 11px !important;
   margin-right: 0.5rem !important;
+  height: 31px !important;
+
+  &:hover {
+    background-color: rgba(16, 156, 241, 0.7019607843137254) !important;
+  }
+`;
+
+export const ButtonsModal = styled.button`
+  font-family: "Helvetica-NeueL-Title";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 5px;
+  color: #3997ff;
+  width: 100% !important;
+  box-shadow: -14px 30px 20px rgba(0, 0, 0, 0.05);
+
+  &.btn-close {
+    background: #fff;
+    border: 1px solid #3997ff;
+  }
+
+  &.btn-add {
+    color: #fff !important;
+    background-color: #109cf1 !important;
+  }
+
+  &.btn-add:hover {
+    background-color: rgba(16, 156, 241, 0.7019607843137254) !important;
+  }
 `;
 
 // const theme = {

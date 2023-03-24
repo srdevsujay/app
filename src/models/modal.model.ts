@@ -6,4 +6,6 @@ export interface ModalProps {
   width: string;
   padding: string;
   btnClose: number
+  bottom?: string;
+  height?: string;
 }

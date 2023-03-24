@@ -1,6 +1,9 @@
 import Vector from "../../assets/images/Vector.png";
 import "../../styled-components/style.css";
 import { useState, useEffect } from "react";
+import Checkbox from "@mui/material/Checkbox";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export const ToggleColumnsTable = ({
   columns,
@@ -61,8 +64,8 @@ export const ToggleColumnsTable = ({
         aria-labelledby="dropdownMenuButton"
       >
         {dataFunnelToggle.map((column: any) => (
-          <div key={column.field}>
-            <input
+          <div key={column.field} className="column-container">
+            {/* <input
               type="checkbox"
               checked={
                 !!columnsToSet.find((selectedColumn: any) => {
@@ -70,8 +73,17 @@ export const ToggleColumnsTable = ({
                 })
               }
               onChange={() => handleColumnToggle(column)}
+            /> */}
+            <Checkbox
+              {...label}
+              checked={
+                !!columnsToSet.find((selectedColumn: any) => {
+                  return column ? selectedColumn.field === column.field : false;
+                })
+              }
+              onChange={() => handleColumnToggle(column)}
             />
-            <label>{column.field}</label>
+            <label>{column.title}</label>
           </div>
         ))}
       </div>

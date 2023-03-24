@@ -1,7 +1,13 @@
 import { AppThunk } from "../../../store";
 import { setLeads, starLoading } from "./contactsSlice";
-import { getDataLeads } from "../../../../pages/Contacts/services/index";
+import {
+  createLeadService,
+  deleteLeadService,
+  editLeadService,
+  getDataLeads,
+} from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
+import Swal from "sweetalert2";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -14,5 +20,88 @@ export const obtainApiContacts = (): AppThunk => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const createLead = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const today = new Date().toISOString();
+      const form = {
+        create_date: today,
+        email: data.email,
+        funnel_id: data.selectFunnel,
+        name: data.fullName,
+        phone: data.telephone,
+      };
+      const result = await createLeadService(form);
+      if (result.data.message === "Create Lead successfully!") {
+        dispatch(obtainApiContacts());
+        Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editLead = (data: any, id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const today = new Date().toISOString();
+      const form = {
+        id: id,
+        create_date: today,
+        email: data.email,
+        funnel_id: data.selectFunnel,
+        name: data.fullName,
+        phone: data.telephone,
+      };
+      const result = await editLeadService(form);
+      if (result.data.message === "Create Event and device successfully!") {
+        dispatch(obtainApiContacts());
+        Swal.fire("Correcto", "Lead Editado correctamente!!", "success");
+      }
+      // setCreateLead
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteLead = (id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: "Esta acción va a eliminar toda la información de tracking relacionado con este  lead. Tenga en cuenta que esta acción es permanente y no se podrá deshacer.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#109cf1",
+      cancelButtonColor: "#E71D36",
+      confirmButtonText: "Sí, Borrar!",
+    }).then(async (result) => {
+      console.log("result", result);
+      console.log("resultid", id);
+      if (result.isConfirmed) {
+        try {
+          const objId = {
+            id,
+          };
+          const resultData = await deleteLeadService(objId);
+          console.log("resultData", resultData);
+          if (resultData.data.message === "Delete lead successfully!") {
+            dispatch(obtainApiContacts());
+            Swal.fire(
+              "Eliminado!",
+              "El Lead se ha eliminado correctamente.",
+              "success"
+            );
+          }
+        } catch (error) {}
+      }
+    });
   };
 };

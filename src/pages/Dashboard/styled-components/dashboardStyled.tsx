@@ -63,7 +63,7 @@ export const ButtonTitlePicker = styled.button`
 
 export const FilterSource = styled.div`
   div:first-child {
-    width: 200px !important;
+    width: 236px !important;
     margin-top: 0;
     height: 30px;
     font-size: 13px;
@@ -71,6 +71,7 @@ export const FilterSource = styled.div`
   }
   div div:first-child {
     padding-top: 14px;
+    font-family: "Helvetica-NeueL-Title";
   }
 `;
 
@@ -132,4 +133,14 @@ export const ContainerFiltersFunnel = styled.div`
   padding-right: 22px !important;
   z-index: 9;
   margin-top: 8px;
+`;
+
+export const HeaderTitleGraphic = styled.div`
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 13px;
+  padding: 10px 0 !important;
+  margin-top: 0.5rem !important;
+  justify-content: center !important;
+  display: flex;
+  border-bottom: 1px solid #ebeff2;
 `;

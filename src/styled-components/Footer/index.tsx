@@ -7,7 +7,7 @@ export const Footer = styled.div`
   position: absolute;
   width: 100%;
   background: #fff;
-  z-index: 99999;
+  z-index: 99;
 
   .franjaFooter {
     height: 3px;

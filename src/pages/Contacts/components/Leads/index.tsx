@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
-import { obtainApiContacts } from "../../../../redux/state/slices/contacts/contactsThunk";
+import {
+  deleteLead,
+  obtainApiContacts,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
 import GeneralTable from "../../../../utilities/Table/index";
 import { Table } from "../../../../styled-components/Table/index";
 import { TableContacts } from "./ColumnsLeads";
@@ -18,29 +21,40 @@ const Leads = () => {
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
-  const [search, setSearch] = useState<any>();
-  // const [currentDataLead, setCurrentDataLead] = useState<any[]>(dataLead);
-  // const [searchTerm, setSearchTerm] = useState("");
-
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
-  // console.log("originalData", originalData);
-  // console.log("filteredData", filteredData);
 
   useEffect(() => {
     dispatch(obtainApiContacts());
   }, []);
 
+  const [currentEdit, setCurrentEdit] = useState();
+  const [idEditCurrent, setIdEditCurrent] = useState(0);
+  const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+
   useEffect(() => {
     if (dataLead.length > 0) {
-      const columns = TableContacts(dataLead, time_Zone);
+      const columns = TableContacts(
+        dataLead,
+        time_Zone,
+        setCurrentEdit,
+        setIdEditCurrent
+      );
       setCurrentColumns(columns as any);
       setOriginalData(dataLead);
       setFilteredData(dataLead);
     }
   }, [dataLead]);
+
+  useEffect(() => {
+    if (idEditCurrent !== 0) {
+      dispatch(deleteLead(idEditCurrent));
+      setIdEditCurrent(0);
+    }
+    console.log("idEditCurrent", idEditCurrent);
+  }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {
     setColumnsToSet(newData);
@@ -67,6 +81,10 @@ const Leads = () => {
         columnsToSet={columnsToSet}
         updateData={updateData}
         setSearchString={setSearchString}
+        currentEdit={currentEdit}
+        setCurrentEdit={setCurrentEdit}
+        idEditCurrent={idEditCurrent}
+        setIdEditCurrent={setIdEditCurrent}
       />
       <Table className="tables">
         <GeneralTable
