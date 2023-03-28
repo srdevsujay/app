@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Title,
   ContainerFiltersFunnel,
-} from "../../styled-components/dashboardStyled";
+} from "../../../Dashboard/styled-components/dashboardStyled";
 import MuiAccordion from "@mui/material/Accordion";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { obtainApiDashboardFunnel } from "../../../../redux/state/slices/dashboard";
 import MaterialTable from "material-table";
-import DateFilter from "../DateFilter";
+import DateFilter from "../../../Dashboard/components/DateFilter";
 import { addDays } from "date-fns";
 import moment from "moment";
 import {
@@ -31,9 +31,9 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import GeneralTable from "../../../../utilities/Table";
-import { TypeDashboardData } from "../TypeDasboardFunnelData";
+import { TypeDashboardDataTableColumns } from "../TypeDasboardFunnelData";
 import { AppStore } from "../../../../redux/store";
-import { CampaignData } from "../../models/dashboard.model";
+import { CampaignData } from "../../../Dashboard/models/dashboard.model";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -76,8 +76,9 @@ const AccordionFunnel = () => {
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
-  const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
   console.log("dataTracking", dataTracking);
+  const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
+  const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [funnelDays, setFunnelDays] = useState<number>(7);
   const [expanded, setExpanded] = useState(0);
   const [flagModal, setFlagModal] = useState<number>(0);
@@ -128,7 +129,7 @@ const AccordionFunnel = () => {
   useEffect(() => {
     if (dataFunnel.length > 0 && dataTracking.length > 0) {
       const getDataColumns = dataFunnel.map((funnel: any) => {
-        return TypeDashboardData(funnel, dataTrackingState.type_dashboard);
+        return TypeDashboardDataTableColumns(funnel, dataTrackingState.type_dashboard, time_Zone);
       });
       // const columnsToShow = getDataColumns[0].filter((column: any) =>
       // condición para mostrar y ocultar comunas

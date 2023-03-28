@@ -4,6 +4,7 @@ import {
   getDefaultMiddleware,
   ThunkAction,
   AnyAction,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 // import { TypedUseSelectorHook, useSelector, AppDispatch } from "react-redux";
 import { authApi } from "../pages/Login/services/userService";
@@ -18,6 +19,7 @@ import { DashboardInfo } from "../pages/Dashboard/models/dashboard.model";
 import dashboardSlice from "./state/slices/dashboard/dashboardSlice";
 import logger from "redux-logger";
 import contactSlice from "./state/slices/contacts/contactsSlice";
+import { logoutUser } from "./state/slices/login/authSlice";
 
 export interface AppStore {
   authApi: any;
@@ -39,7 +41,15 @@ const reducer = combineReducers<AppStore>({
   contact: contactSlice,
 });
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const resettableRootReducer = (state: any, action: PayloadAction<UserInfo>) => {
+  if (action.type === logoutUser.type) {
+    state = undefined;
+  }
+
+  return reducer(state, action);
+};
+
+const persistedReducer = persistReducer(persistConfig, resettableRootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

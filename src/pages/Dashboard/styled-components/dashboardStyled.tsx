@@ -9,31 +9,6 @@ export const Bar = styled.div`
   border: 1px solid;
 `;
 
-export const NewFunnel = styled.div`
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  height: 70px;
-  border: 1px solid transparent;
-  background: #f3f4f6;
-`;
-
-export const ButtonFunnel = styled.button`
-  height: 40px;
-  background: #fff;
-  margin: 14px;
-  text-align: center;
-  width: 97%;
-  border: none;
-`;
-
-// export const Title = styled.h4`
-//   font-size: 13px;
-//   line-height: 15px;
-//   letter-spacing: 0.01em;
-//   color: #192a3e;
-//   font-family: "HelveticaNeueLTitle" !important;
-// `;
-
 export const Title = styled.text<TitleDashboard>(({ fontSize, color }) => ({
   fontStyle: "normal",
   fontSize: fontSize,
@@ -75,15 +50,6 @@ export const FilterSource = styled.div`
   }
 `;
 
-// export const TableStyle = styled.span`
-//   font-size: 13px !important;
-//   font-family: "Helvetica-NeueL" !important;
-//   color: #464646 !important;
-//   font-weight: 400 !important;
-//   display: block;
-//   width: max-content;
-// `;
-
 // export const TextColors = styled.span`
 //   font-size: 13px !important;
 //   font-family: "Helvetica-NeueL-Title" !important;
@@ -95,30 +61,6 @@ export const FilterSource = styled.div`
 //     color: #2bb596 !important;
 //   }
 // `;
-
-export const BackColorsTable = styled.div`
-  font-size: 12px !important;
-  font-family: "Helvetica-NeueL-Title" !important;
-  padding: 4px 10px 0 10px;
-  height: 27px;
-  width: auto;
-  border-radius: 22.5px;
-  text-align: center;
-  &.back-danger {
-    background: #e3507a20;
-    color: #e3507a !important;
-  }
-
-  &.back-green-table {
-    background-color: #a4e1d320;
-    color: #2bb596 !important;
-  }
-  &.back-grey {
-    background: #5d5f600f;
-    color: #464646 !important;
-    opacity: 0.5;
-  }
-`;
 
 export const DateData = styled.div`
   font-size: 12px !important;

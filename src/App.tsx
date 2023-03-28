@@ -35,7 +35,7 @@ function App() {
       <Router>
         <ToastContainer />
         <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
-          {user.email != "" ? <Sidebar /> : ""}
+          {user !== null ? <Sidebar /> : ""}
 
           <RoutesWithNotFound>
             <Route

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AdAccountType } from "../../models";
-import AdAccountFunnel from "../AdAccountFunnel";
+import { AdAccountType } from "../../../Dashboard/models";
+import AdAccountFunnel from "../../../Dashboard/components/AdAccountFunnel";
 import { Option } from "../../../../components/Select";
 
 const AdAccount = () => {

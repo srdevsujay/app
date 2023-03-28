@@ -24,7 +24,6 @@ const Form = () => {
   });
 
   const login = useAppSelector((state: any) => state.user.user);
-  console.log("login---", login.email === "");
 
   const { email, password } = userForm;
 
@@ -73,7 +72,7 @@ const Form = () => {
   }, [isLoginSuccess]);
 
   useEffect(() => {
-    if (login.email !== "") {
+    if (login !== null) {
       navigate("/dashboard");
     }
   }, [login]);

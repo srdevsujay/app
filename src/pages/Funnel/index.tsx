@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { Main, Card } from "../../styled-components/main/index";
-import {
-  Title,
-  Bar,
-  NewFunnel,
-  ButtonFunnel,
-} from "../Dashboard/styled-components/dashboardStyled";
+import { Title, Bar } from "../Dashboard/styled-components/dashboardStyled";
 import FooterMenu from "../../components/Footer/index";
-import AccordionFunnel from "../Dashboard/components/AccordionFunnel/index";
+import AccordionFunnel from "./components/AccordionFunnel/index";
 import Modal from "../../components/modal/Modal.component";
-import AddFunnelInput from "../Dashboard/components/AddFunnellnput/index";
-import StepsFunnel from "../Dashboard/components/Steps/index";
-import AdAccount from "../Dashboard/components/AdAccount/index";
+import AddFunnelInput from "./components/AddFunnellnput/index";
+import StepsFunnel from "./components/Steps/index";
+import AdAccount from "./components/AdAccount/index";
 import "../../styled-components/Table/style.css";
+import { NewFunnel, ButtonFunnel } from "./styled-components/funnel-styled";
 
 const Funnel = () => {
   const [isModalOpen, setModalState] = useState<boolean>(false);

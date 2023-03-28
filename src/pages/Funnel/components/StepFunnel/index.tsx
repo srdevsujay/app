@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { AddCircleOutlineIcon } from "@material-ui/icons";
 import { InputComponent } from "../../../../components/input";
-import { StepFunnelProps } from "../../models";
+import { StepFunnelProps } from "../../../Dashboard/models";
 
 const StepFunnel = ({ setStepFunnel, step, idFunnel }: StepFunnelProps) => {
   const [stepObject, setStepObject] = useState(step);

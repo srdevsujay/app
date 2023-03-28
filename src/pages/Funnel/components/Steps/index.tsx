@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FunnelStep } from "../../models";
+import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
 
 const StepsFunnel = () => {

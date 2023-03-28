@@ -47,6 +47,30 @@ export const TextColors = styled.span`
   }
 `;
 
+export const BackColorsTable = styled.div`
+  font-size: 12px !important;
+  font-family: "Helvetica-NeueL-Title" !important;
+  padding: 4px 10px 0 10px;
+  height: 27px;
+  width: auto;
+  border-radius: 22.5px;
+  text-align: center;
+  &.back-danger-table {
+    background: #e3507a20;
+    color: #e3507a !important;
+  }
+
+  &.back-green-table {
+    background-color: #a4e1d320;
+    color: #2bb596 !important;
+  }
+  &.back-grey-table {
+    background: #5d5f600f;
+    color: #464646 !important;
+    opacity: 0.5;
+  }
+`;
+
 export const BackColorsTableOrigin = styled.div`
   font-size: 13px !important;
   font-family: "Helvetica-NeueL" !important;

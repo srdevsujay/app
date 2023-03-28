@@ -1,41 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { InputComponent } from "../../components/input";
-import { Modal } from "../../components/modal";
-import Sidebar from "../../components/sidebar/Sidebar";
 import { Card, Main } from "../../styled-components/main";
-import {
-  Bar,
-  ButtonFunnel,
-  NewFunnel,
-  // TableStyle,
-  // TextColors,
-  Title,
-} from "./styled-components/dashboardStyled";
+import { Bar, Title } from "./styled-components/dashboardStyled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-// import { getMetricFunnel } from "../../redux/state/slices/dashboard/dashboardThunk";
-import Accordion from "../../components/accordion/Accordion";
-import AddFunnelInput from "./components/AddFunnellnput";
-import StepFunnel from "./components/StepFunnel";
-import StepsFunnel from "./components/Steps";
-import AdAccount from "./components/AdAccount";
 import {
   getMetricFunnel,
   getTrackingFunnel,
 } from "../../redux/state/slices/dashboard/dashboardThunk";
-import { AppStore } from "../../redux/store";
 import { setAutoFreeze } from "immer";
 import TablePNL from "./components/TablePNL";
-import AccordionFunnel from "./components/AccordionFunnel";
 import DateFilter from "./components/DateFilter";
 import "./styled-components/style.css";
 import moment from "moment";
 import { addDays } from "date-fns";
 import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
-import { FormatNumber } from "../../utilities/FormatNumber";
 import FooterMenu from "../../components/Footer/index";
-import { TableStyle, TextColors } from "../../styled-components/Table/index";
 
 import {
   yesterDay,
@@ -68,6 +47,8 @@ const Dashboard = () => {
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
   const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
+  const dataFunnelData = useAppSelector((state) => state.dashboard);
+  console.log("dataFunnelData", dataFunnelData);
 
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
@@ -259,18 +240,7 @@ const Dashboard = () => {
             <Graphics />
           </div>
         </div>
-        {/* <div className="row">
-          <div className="col-sm-12">
-            <AccordionFunnel />
-          </div>
-        </div> */}
-        {/* <section>
-          <Accordion items={accordionItems} />
-        </section> */}
       </Card>
-      {/* <NewFunnel>
-        <ButtonFunnel onClick={toggleModal}>+</ButtonFunnel>
-      </NewFunnel> */}
       <FooterMenu />
     </Main>
   );
