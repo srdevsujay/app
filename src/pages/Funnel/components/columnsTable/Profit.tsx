@@ -23,6 +23,8 @@ export const ProfitColumn = () => {
       </Tooltip>
     ),
     field: "profit",
+    name: "$Profit",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

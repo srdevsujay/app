@@ -21,6 +21,8 @@ export const DWSColumn = () => {
       </Tooltip>
     ),
     field: "dws",
+    name: "#DWS",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

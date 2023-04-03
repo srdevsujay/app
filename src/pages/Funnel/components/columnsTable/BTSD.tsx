@@ -27,6 +27,8 @@ export const BTSDColumn = () => {
       </Tooltip>
     ),
     field: "btsd",
+    name: "#BTSD",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

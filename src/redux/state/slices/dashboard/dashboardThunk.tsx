@@ -100,14 +100,15 @@ export const obtainApiDashboardFunnel = (
         funnel_id: id,
         type_dashboard,
       };
-      const resultAction = await getDashboardFunnel(objFacebook);
-      const currentDataFunnel: any = _.orderBy(
-        resultAction.data.data,
-        "id",
-        "asc"
-      );
-      console.log("dataFunnel-", currentDataFunnel);
-      dispatch(setDataFunnel(currentDataFunnel));
+      const resultAction: any = await getDashboardFunnel(objFacebook);
+      console.log("resultAction", resultAction);
+      // const currentDataFunnel: any = _.orderBy(
+      //   resultAction.data,
+      //   "id",
+      //   "asc"
+      // );
+      console.log("dataFunnel-", resultAction);
+      dispatch(setDataFunnel(resultAction.data));
     } catch (error) {
       console.log(error);
     }

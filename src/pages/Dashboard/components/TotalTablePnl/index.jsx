@@ -24,5 +24,5 @@ export const totalPnl = (tempGroup) => {
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.leeds.toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.bookings.toFixed(2)}</td>
   `;
-  return document.querySelector(".MuiTableHead-root").prepend(tbody);
+  return document.querySelector(".MuiTableHead-root")?.prepend(tbody);
 }

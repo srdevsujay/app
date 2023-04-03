@@ -34,6 +34,10 @@ import GeneralTable from "../../../../utilities/Table";
 import { TypeDashboardDataTableColumns } from "../TypeDasboardFunnelData";
 import { AppStore } from "../../../../redux/store";
 import { CampaignData } from "../../../Dashboard/models/dashboard.model";
+import InputComponent from "../../../../components/input/Input.component";
+import { useDebounce } from "../../../../hooks/useDebounce";
+import "../../../../styled-components/style.css";
+import { ContainerFilter } from "../../../../styled-components/input/index";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -71,13 +75,17 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-const AccordionFunnel = () => {
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
   const dispatch = useAppDispatch();
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
   console.log("dataTracking", dataTracking);
-  const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
+  const { data: dataFunnel }: any = useAppSelector(
+    (state) => state.dashboard.dataFunnel
+  );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [funnelDays, setFunnelDays] = useState<number>(7);
   const [expanded, setExpanded] = useState(0);
@@ -93,6 +101,7 @@ const AccordionFunnel = () => {
     },
   ]);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([]);
+  const [columnDataFunnelToggle, setColumnDataFunnelToggle] = useState<any>([]);
   const [columnsToSet, setColumnsToSet] = useState<any>([]);
   const [columnsFunnelHideShow, setColumnsFunnelHideShow] = useState<any>([]);
   const dataTrackingInitialState = {
@@ -103,7 +112,11 @@ const AccordionFunnel = () => {
     dataTrackingInitialState
   );
 
-  const [visibleColumns, setVisibleColumns] = useState(["ACV", "ATR"]);
+  const [searchString, setSearchString] = useState("");
+  const [originalData, setOriginalData] = useState<any>();
+  const [filteredData, setFilteredData] = useState<any[]>();
+  const searchStringDebounced = useDebounce(searchString, 100);
+  console.log("columnsToSet", columnsToSet);
 
   useEffect(() => {
     const tracking =
@@ -127,9 +140,13 @@ const AccordionFunnel = () => {
   }, [dataTrackingState]);
 
   useEffect(() => {
-    if (dataFunnel.length > 0 && dataTracking.length > 0) {
+    if (dataFunnel?.length > 0 && dataTracking.length > 0) {
       const getDataColumns = dataFunnel.map((funnel: any) => {
-        return TypeDashboardDataTableColumns(funnel, dataTrackingState.type_dashboard, time_Zone);
+        return TypeDashboardDataTableColumns(
+          funnel,
+          dataTrackingState.type_dashboard,
+          time_Zone
+        );
       });
       // const columnsToShow = getDataColumns[0].filter((column: any) =>
       // condición para mostrar y ocultar comunas
@@ -140,6 +157,8 @@ const AccordionFunnel = () => {
       console.log("getDataColumns", getDataColumns);
       setColumnsToSet(getDataColumns[0]);
       setDataFunnelToggle(getDataColumns[0]);
+      setOriginalData(getDataColumns[0]);
+      // setFilteredData(getDataColumns[0]);
     }
   }, [dataFunnel, dataTracking]);
 
@@ -311,22 +330,53 @@ const AccordionFunnel = () => {
   };
 
   const handleColumnToggle = (column: any) => {
+    console.log("column--", column);
     const isChecked = columnsToSet.find(
-      (selectedColumn: any) => selectedColumn.field === column.field
+      (selectedColumn: any) => selectedColumn.name === column.name
     );
     let newColumns = columnsToSet;
+    console.log("isChecked", isChecked);
     if (isChecked) {
       newColumns = columnsToSet.filter(
-        (selectedColumn: any) => selectedColumn.field !== column.field
+        (selectedColumn: any) => selectedColumn.name !== column.name
       );
     } else {
       newColumns = [...columnsToSet, column];
     }
     setColumnsToSet(newColumns);
+    // setCurrentToggleTotal(newColumns);
   };
 
   console.log("dataFunnelToggle", dataFunnelToggle);
   console.log("dataTrackingState", dataTrackingState);
+
+  useEffect(() => {
+    if (searchStringDebounced.trim()) {
+      const currentData = originalData.filter((item: any) =>
+        item.name.toLowerCase().includes(searchStringDebounced.toLowerCase())
+      );
+      setDataFunnelToggle(currentData);
+    } else {
+      setDataFunnelToggle(originalData);
+    }
+  }, [searchStringDebounced]);
+
+  useEffect(() => {
+    if (columnsToSet?.length > 0) {
+      let currentFunnel: any = [];
+      columnsToSet.map((funnel: any) => {
+        const dataFunnel = {
+          field: funnel.field,
+          name: funnel.name,
+          checkbox: funnel.checkbox,
+        };
+        currentFunnel.push(dataFunnel);
+      });
+      console.log("currentFunnel", currentFunnel);
+      setFilteredData(currentFunnel);
+    }
+  }, [columnsToSet]);
+  console.log("filteredData", filteredData);
 
   return (
     <div className="mt-3">
@@ -349,7 +399,6 @@ const AccordionFunnel = () => {
               handleThirtyDays={handleThirtyDays}
               handleCurrentMonth={handleCurrentMonth}
               handleFourteenDays={handleFourteenDays}
-              // handleThreeMonth={handleThreeMonth}
             />
             <div className="dropdown">
               <button
@@ -366,22 +415,36 @@ const AccordionFunnel = () => {
                 className="dropdown-menu dropdown-style top-menu-dropdown"
                 aria-labelledby="dropdownMenuButton"
               >
-                {/* {dataFunnelToggle.map((column: any) => (
-                  <div key={column.field}>
-                    <input
-                      type="checkbox"
-                      checked={
-                        !!columnsToSet.find((selectedColumn: any) => {
-                          return column
-                            ? selectedColumn.field === column.field
-                            : false;
-                        })
-                      }
-                      onChange={() => handleColumnToggle(column)}
-                    />
-                    <label>{column.field}</label>
-                  </div>
-                ))} */}
+                <ContainerFilter>
+                  <InputComponent
+                    // max={5}
+                    placeholder="Buscar..."
+                    label=""
+                    type="text"
+                    onChange={(e: any) => setSearchString(e)}
+                  />
+                </ContainerFilter>
+                <div className="filter-scroll">
+                  {dataFunnelToggle?.map((column: any) => (
+                    // {dataFunnelToggle?.map((column: any) => (
+                    <div key={column.name} className="column-container">
+                      <Checkbox
+                        {...label}
+                        checked={
+                          !!columnsToSet.find((selectedColumn: any) => {
+                            // !!filteredData.find((selectedColumn: any) => {
+                            return column
+                              ? selectedColumn.name === column.name
+                              : false;
+                          })
+                          // column.checkbox
+                        }
+                        onChange={() => handleColumnToggle(column)}
+                      />
+                      <label>{column.name}</label>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </ContainerFiltersFunnel>

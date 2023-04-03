@@ -5,6 +5,7 @@ export const AccountCurrencyColumn = () => {
   return {
     title: "$Cuenta de dinero",
     field: "account_currency",
+    name: "$Cuenta de dinero",
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

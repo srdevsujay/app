@@ -5,7 +5,6 @@ import {
   obtainApiContacts,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
 import GeneralTable from "../../../../utilities/Table/index";
-import { Table } from "../../../../styled-components/Table/index";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
@@ -86,15 +85,13 @@ const Leads = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
       />
-      <Table className="tables">
-        <GeneralTable
-          data={filteredData}
-          columns={columnsToSet}
-          pageSizeOptions={[7, 15, 31, 31]}
-          maxBodyHeight={"60vh"}
-          pageSize={7}
-        />
-      </Table>
+      <GeneralTable
+        data={filteredData}
+        columns={columnsToSet}
+        pageSizeOptions={[7, 15, 31, 31]}
+        maxBodyHeight={"60vh"}
+        pageSize={7}
+      />
     </>
   );
 };

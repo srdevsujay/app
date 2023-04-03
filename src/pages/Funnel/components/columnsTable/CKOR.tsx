@@ -24,6 +24,8 @@ export const CKORColumn = () => {
       </Tooltip>
     ),
     field: "CKOR",
+    name: "%CKOR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

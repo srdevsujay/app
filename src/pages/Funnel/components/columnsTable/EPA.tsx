@@ -22,6 +22,8 @@ export const EPAColumn = () => {
       </Tooltip>
     ),
     field: "EPA",
+    name: "$EPA",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

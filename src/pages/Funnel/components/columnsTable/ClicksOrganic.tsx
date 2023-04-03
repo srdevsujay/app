@@ -27,6 +27,7 @@ export const ClicksOrganicColumn = () => {
       </Tooltip>
     ),
     field: "clicks_organic",
+    name: "#Clicks Organicos",
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

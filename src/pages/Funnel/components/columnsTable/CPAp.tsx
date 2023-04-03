@@ -22,6 +22,8 @@ export const CPApColumn = () => {
       </Tooltip>
     ),
     field: "CPAp",
+    name: "$CPAp.",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

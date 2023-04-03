@@ -25,6 +25,8 @@ export const atColumn = () => {
       </Tooltip>
     ),
     field: "AT",
+    name: "#AT",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

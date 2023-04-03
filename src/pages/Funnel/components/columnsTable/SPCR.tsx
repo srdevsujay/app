@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const SPCRColumn = () => {
+export const SPCRColumn = (show: boolean) => {
   return {
     title: (
       <Tooltip
@@ -24,6 +24,8 @@ export const SPCRColumn = () => {
       </Tooltip>
     ),
     field: "SPCR",
+    name: "%SPCR",
+    checkbox: show ? true : false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

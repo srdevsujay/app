@@ -25,6 +25,8 @@ export const UCRColumn = () => {
       </Tooltip>
     ),
     field: "UCR",
+    name: "%UCR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

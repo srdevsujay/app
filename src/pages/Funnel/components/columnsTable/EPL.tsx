@@ -23,6 +23,8 @@ export const EPLColumn = () => {
       </Tooltip>
     ),
     field: "EPL",
+    name: "$EPL",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -1,5 +1,7 @@
 import MaterialTable from "material-table";
 import { useEffect } from "react";
+import { Table } from "../../styled-components/Table/index";
+import "../../styled-components/style.css";
 
 const GeneralTable = ({
   data,
@@ -13,7 +15,7 @@ const GeneralTable = ({
   }, [data]);
 
   return (
-    <div className="tables">
+    <Table className="tables">
       <MaterialTable
         title=""
         data={data}
@@ -35,7 +37,7 @@ const GeneralTable = ({
           },
         }}
       />
-    </div>
+    </Table>
   );
 };
 

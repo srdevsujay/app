@@ -5,6 +5,8 @@ export const dateColumn = (time_Zone: string) => {
     title: "FECHA",
     value: "FECHA",
     field: "date_start",
+    name: "FECHA",
+    checkbox: true,
     render: (funnelData: any) => (
       <TableStyle>{funnelData.date_start}</TableStyle>
     ),

@@ -22,6 +22,8 @@ export const EPBColumn = () => {
       </Tooltip>
     ),
     field: "EPB",
+    name: "$EPB",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

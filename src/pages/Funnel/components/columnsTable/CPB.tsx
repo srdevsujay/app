@@ -24,6 +24,8 @@ export const CPBColumn = () => {
       </Tooltip>
     ),
     field: "CPB",
+    name: "$CPB",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

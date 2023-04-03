@@ -19,6 +19,8 @@ export const viewColumn = () => {
       </Tooltip>
     ),
     field: "views",
+    name: "#LV",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

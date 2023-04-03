@@ -21,6 +21,13 @@ export const Input = styled.input`
   } */
 `;
 
+export const ContainerFilter = styled.div`
+  height: 38px;
+  background: white;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+`;
+
 export const InputSearch = styled.input`
   display: block;
   width: 100%;

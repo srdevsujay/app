@@ -19,6 +19,8 @@ export const ApsColumn = () => {
       </Tooltip>
     ),
     field: "Aps",
+    name: "#Aps.",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

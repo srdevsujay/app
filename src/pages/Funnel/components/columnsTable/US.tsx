@@ -25,6 +25,8 @@ export const USColumn = () => {
       </Tooltip>
     ),
     field: "us",
+    name: "#US",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

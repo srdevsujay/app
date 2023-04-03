@@ -23,6 +23,8 @@ export const LTBColumn = () => {
       </Tooltip>
     ),
     field: "LTB",
+    name: "%LTB",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

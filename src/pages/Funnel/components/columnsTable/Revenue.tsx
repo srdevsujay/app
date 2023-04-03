@@ -19,6 +19,8 @@ export const RevenueColumn = () => {
       </Tooltip>
     ),
     field: "revenue",
+    name: "$Revenue",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

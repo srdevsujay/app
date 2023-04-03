@@ -25,6 +25,8 @@ export const DWCRColumn = () => {
       </Tooltip>
     ),
     field: "DWCR",
+    name: "%DWCR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

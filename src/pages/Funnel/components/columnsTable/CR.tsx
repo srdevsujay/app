@@ -6,6 +6,7 @@ export const CRColumn = () => {
   return {
     title: "%CR",
     field: "CR",
+    name: "%CR",
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

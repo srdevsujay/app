@@ -46,7 +46,6 @@ const Dashboard = () => {
     },
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
-  const dataFunnel = useAppSelector((state) => state.dashboard.dataFunnel);
   const dataFunnelData = useAppSelector((state) => state.dashboard);
   console.log("dataFunnelData", dataFunnelData);
 
@@ -64,11 +63,8 @@ const Dashboard = () => {
   }, [canCallMetricFunnel]);
 
   useEffect(() => {
-    console.log("dataFunnel...", dataFunnel);
-    if (dataFunnel.length === 0) {
-      if (idUser !== null) {
-        dispatch(getTrackingFunnel(idUser));
-      }
+    if (idUser !== null) {
+      dispatch(getTrackingFunnel(idUser));
     }
   }, [idUser]);
 

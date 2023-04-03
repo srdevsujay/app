@@ -24,6 +24,8 @@ export const ApRColumn = () => {
       </Tooltip>
     ),
     field: "Apr",
+    name: "%APR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

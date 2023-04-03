@@ -23,6 +23,8 @@ export const FCRColumn = () => {
       </Tooltip>
     ),
     field: "FCR",
+    name: "%FCR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

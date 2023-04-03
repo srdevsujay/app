@@ -25,6 +25,7 @@ export const ROIColumn = () => {
       </Tooltip>
     ),
     field: "ROI",
+    name: "#ROI",
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

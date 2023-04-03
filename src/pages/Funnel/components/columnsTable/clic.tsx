@@ -22,6 +22,8 @@ export const ClicColumn = () => {
       </Tooltip>
     ),
     field: "clicks",
+    name: "#Clics",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

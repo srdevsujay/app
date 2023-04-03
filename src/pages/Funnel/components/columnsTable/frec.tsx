@@ -23,6 +23,8 @@ export const frecColumn = () => {
       </Tooltip>
     ),
     field: "frequency",
+    name: "#Frec.",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

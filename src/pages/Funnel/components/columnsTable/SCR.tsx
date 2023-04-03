@@ -26,6 +26,8 @@ export const SCRColumn = () => {
       </Tooltip>
     ),
     field: "SCR",
+    name: "%SCR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

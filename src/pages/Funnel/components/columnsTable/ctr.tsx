@@ -24,6 +24,8 @@ export const ctrColumn = () => {
       </Tooltip>
     ),
     field: "ctr",
+    name: "%CTR",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

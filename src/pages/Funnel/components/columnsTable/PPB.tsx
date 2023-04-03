@@ -23,6 +23,8 @@ export const PPBColumn = () => {
       </Tooltip>
     ),
     field: "PPB",
+    name: "$PPB",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

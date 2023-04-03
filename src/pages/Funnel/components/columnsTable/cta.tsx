@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { NumericFormat } from "react-number-format";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const ctaColumn = () => {
+export const ctaColumn = (show: boolean) => {
   return {
     title: (
       <Tooltip
@@ -27,6 +27,8 @@ export const ctaColumn = () => {
       </Tooltip>
     ),
     field: "CTA",
+    name: "#CTA",
+    checkbox: show ? true : false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -24,6 +24,8 @@ export const EPVColumn = () => {
       </Tooltip>
     ),
     field: "EPV",
+    name: "$EPV",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

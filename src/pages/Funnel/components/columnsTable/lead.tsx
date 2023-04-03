@@ -25,6 +25,8 @@ export const leadColumn = () => {
       </Tooltip>
     ),
     field: "leeds",
+    name: "#Leads",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -2,28 +2,30 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const cohortColumn = () => {
+export const cohortColumn = (show: boolean) => {
   return {
     title: (
       <Tooltip
         title={
           <>
             <span>
-              cohort: Promedio de días desde que una persona se registra al
+              Cohort: Promedio de días desde que una persona se registra al
               funnel hasta que compra.
             </span>
             <br />
             <span>
-              cohort: Average number of days from registration to purchase
+              Cohort: Average number of days from registration to purchase
             </span>
           </>
         }
         placement="top"
       >
-        <span>%cohort</span>
+        <span>#Cohort</span>
       </Tooltip>
     ),
     field: "cohort",
+    name: "#Cohort",
+    checkbox: show ? true : false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

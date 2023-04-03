@@ -25,6 +25,8 @@ export const SUTSDColumn = () => {
       </Tooltip>
     ),
     field: "sutds",
+    name: "#SUTSD",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

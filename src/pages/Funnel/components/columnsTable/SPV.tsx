@@ -19,6 +19,7 @@ export const SPVColumn = () => {
       </Tooltip>
     ),
     field: "SPV",
+    name: "#SPV",
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

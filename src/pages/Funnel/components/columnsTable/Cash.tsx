@@ -19,6 +19,8 @@ export const CashColumn = () => {
       </Tooltip>
     ),
     field: "cash",
+    name: "$Cash",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

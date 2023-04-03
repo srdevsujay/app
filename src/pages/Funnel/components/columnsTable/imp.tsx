@@ -24,6 +24,8 @@ export const ImpColumn = () => {
       </Tooltip>
     ),
     field: "impressions",
+    name: "#Imp.",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -22,6 +22,8 @@ export const acvColumn = () => {
       </Tooltip>
     ),
     field: "ACV",
+    name: "$ACV",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

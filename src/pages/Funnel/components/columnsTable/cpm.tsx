@@ -23,6 +23,8 @@ export const cpmColumn = () => {
       </Tooltip>
     ),
     field: "cpm",
+    name: "$CPM",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

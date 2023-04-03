@@ -23,6 +23,8 @@ export const BTSColumn = () => {
       </Tooltip>
     ),
     field: "BTS",
+    name: "%BTS",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

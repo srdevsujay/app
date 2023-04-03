@@ -18,6 +18,8 @@ export const cpatColumn = () => {
       </Tooltip>
     ),
     field: "CPAT",
+    name: "$CPAT",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

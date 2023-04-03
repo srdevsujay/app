@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const SLTCKColumn = () => {
+export const SLTCKColumn = (show: boolean) => {
   return {
     title: (
       <Tooltip
@@ -25,6 +25,8 @@ export const SLTCKColumn = () => {
       </Tooltip>
     ),
     field: "SLTCK",
+    name: "%SLTCK",
+    checkbox: show ? true : false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

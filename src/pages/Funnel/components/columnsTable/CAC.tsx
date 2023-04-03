@@ -23,6 +23,8 @@ export const CACColumn = () => {
       </Tooltip>
     ),
     field: "CAC",
+    name: "$CAC",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

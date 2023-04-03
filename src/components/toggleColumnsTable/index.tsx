@@ -65,15 +65,6 @@ export const ToggleColumnsTable = ({
       >
         {dataFunnelToggle.map((column: any) => (
           <div key={column.field} className="column-container">
-            {/* <input
-              type="checkbox"
-              checked={
-                !!columnsToSet.find((selectedColumn: any) => {
-                  return column ? selectedColumn.field === column.field : false;
-                })
-              }
-              onChange={() => handleColumnToggle(column)}
-            /> */}
             <Checkbox
               {...label}
               checked={

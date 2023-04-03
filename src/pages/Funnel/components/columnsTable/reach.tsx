@@ -19,6 +19,8 @@ export const reachColumn = () => {
       </Tooltip>
     ),
     field: "reach",
+    name: "#Reach",
+    checkbox: false,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

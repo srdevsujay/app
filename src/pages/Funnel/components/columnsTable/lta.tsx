@@ -24,6 +24,8 @@ export const LTAColumn = () => {
       </Tooltip>
     ),
     field: "LTA",
+    name: "%LTA",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -23,6 +23,8 @@ export const CKLColumn = () => {
       </Tooltip>
     ),
     field: "CKL",
+    name: "#CKL",
+    checkbox: true,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

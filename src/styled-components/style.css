@@ -11,6 +11,18 @@
   content: none !important;
 }
 
+.MuiTableRow-root {
+  z-index: 0 !important;
+  position: relative !important;
+}
+
+.filter-scroll {
+  height: auto;
+  max-height: 300px;
+  overflow: auto;
+  display: block !important;
+}
+
 .column-container {
   height: 30px;
   width: auto;
