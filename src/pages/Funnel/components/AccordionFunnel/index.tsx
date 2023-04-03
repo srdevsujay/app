@@ -83,7 +83,7 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
     (state) => state.dashboard.dataTracking
   );
   console.log("dataTracking", dataTracking);
-  const { data: dataFunnel }: any = useAppSelector(
+  const { data: dataFunnel, filters }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
@@ -141,6 +141,9 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
 
   useEffect(() => {
     if (dataFunnel?.length > 0 && dataTracking.length > 0) {
+      // console.log("filters1", filters);
+      // const obj = JSON.parse(filters);
+      // console.log("filters2", obj);
       const getDataColumns = dataFunnel.map((funnel: any) => {
         return TypeDashboardDataTableColumns(
           funnel,
