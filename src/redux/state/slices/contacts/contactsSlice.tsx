@@ -4,6 +4,7 @@ export const contactState: any = {
   isLoading: false,
   dataLead: [],
   registerLead: [],
+  dataBooking: [],
 };
 
 export const contactSlice = createSlice({
@@ -25,8 +26,13 @@ export const contactSlice = createSlice({
       state.isLoading = false;
       // state.registerLead = action.payload;
     },
+    setBooking: (state, action) => {
+      state.isLoading = false;
+      state.dataBooking = action.payload;
+    },
   },
 });
 
-export const { starLoading, setLeads, setCreateLead } = contactSlice.actions;
+export const { starLoading, setLeads, setCreateLead, setBooking } =
+  contactSlice.actions;
 export default contactSlice.reducer;

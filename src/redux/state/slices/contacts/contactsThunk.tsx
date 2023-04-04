@@ -1,9 +1,10 @@
 import { AppThunk } from "../../../store";
-import { setLeads, starLoading } from "./contactsSlice";
+import { setBooking, setLeads, starLoading } from "./contactsSlice";
 import {
   createLeadService,
   deleteLeadService,
   editLeadService,
+  getDataBooking,
   getDataLeads,
 } from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
@@ -103,5 +104,19 @@ export const deleteLead = (id: number): AppThunk => {
         } catch (error) {}
       }
     });
+  };
+};
+
+export const obtainApiBooking = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataBooking();
+      console.log("resultBooking", result);
+      const currentDataLead: any = _.orderBy(result.data, "id", "desc");
+      dispatch(setBooking(currentDataLead));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

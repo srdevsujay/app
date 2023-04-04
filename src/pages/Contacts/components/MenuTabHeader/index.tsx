@@ -8,39 +8,25 @@ import Modal from "../../../../components/modal/Modal.component";
 import FormLead from "../FormLead/index";
 
 const TabMenuLeads = ({
+  nameTab,
   columns,
   setDataFunnelToggle,
-  setColumnsToSet,
   dataFunnelToggle,
   columnsToSet,
   updateData,
   setSearchString,
   currentEdit,
   setCurrentEdit,
+  openModal,
 }: any) => {
-  const [isModalOpen, setModalState] = useState<boolean>(false);
-  const toggleModal = () => setModalState(!isModalOpen);
-  useEffect(() => {
-    if (currentEdit) {
-      toggleModal();
-    }
-  }, [currentEdit]);
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      setCurrentEdit();
-    }
-  }, [isModalOpen]);
-
   return (
     <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
-      <ButtonCreate className="btn" onClick={toggleModal}>
-        Añadir Lead
+      <ButtonCreate className="btn" onClick={openModal}>
+        {nameTab}
       </ButtonCreate>
       <ToggleColumnsTable
         columns={columns}
         setDataFunnelToggle={setDataFunnelToggle}
-        setColumnsToSet={setColumnsToSet}
         dataFunnelToggle={dataFunnelToggle}
         columnsToSet={columnsToSet}
         updateData={updateData}
@@ -54,22 +40,6 @@ const TabMenuLeads = ({
           onChange={(e: any) => setSearchString(e)}
         />
       </div>
-      <Modal
-        title={"Crear Lead"}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        width="450px"
-        padding="10px 32px"
-        bottom="14px"
-        height="480px"
-        btnClose={1}
-      >
-        <FormLead
-          onClose={toggleModal}
-          currentEdit={currentEdit}
-          setCurrentEdit={setCurrentEdit}
-        />
-      </Modal>
     </div>
   );
 };

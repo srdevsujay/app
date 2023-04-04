@@ -33,3 +33,11 @@ export const deleteLeadService = async (id: any) => {
     }
   });
 };
+
+export const getDataBooking = async () => {
+  return clientAxios.get("/booking", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

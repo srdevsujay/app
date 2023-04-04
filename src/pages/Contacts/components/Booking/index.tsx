@@ -1,25 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
+
 import {
   deleteLead,
-  obtainApiContacts,
+  obtainApiBooking,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
 import GeneralTable from "../../../../utilities/Table/index";
-import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
 import MenuTabHeader from "../MenuTabHeader/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
+import { TableContacts } from "../Leads/ColumnsLeads";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
+import { ColumnTableBooking } from "./ColumnsBokking";
 import Modal from "../../../../components/modal/Modal.component";
-import FormLead from "../FormLead/index";
+import FormBooking from "../FormBooking/index";
 
 setAutoFreeze(false);
 
-const Leads = () => {
+const Booking = () => {
   const dispatch = useAppDispatch();
-  const { dataLead } = useAppSelector((state) => state.contact);
+  const { dataBooking } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
-  const [nameTab, setNameTab] = useState("Añadir Lead");
+  const [nameTab, setNameTab] = useState("Añadir Booking");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
@@ -29,7 +31,7 @@ const Leads = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiContacts());
+    dispatch(obtainApiBooking());
   }, []);
 
   const [currentEdit, setCurrentEdit] = useState();
@@ -37,18 +39,18 @@ const Leads = () => {
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
-    if (dataLead.length > 0) {
-      const columns = TableContacts(
-        dataLead,
+    if (dataBooking.length > 0) {
+      const columns = ColumnTableBooking(
+        dataBooking,
         time_Zone,
         setCurrentEdit,
         setIdEditCurrent
       );
       setCurrentColumns(columns as any);
-      setOriginalData(dataLead);
-      setFilteredData(dataLead);
+      setOriginalData(dataBooking);
+      setFilteredData(dataBooking);
     }
-  }, [dataLead]);
+  }, [dataBooking]);
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
@@ -110,7 +112,7 @@ const Leads = () => {
         openModal={openModal}
       />
       <Modal
-        title={"Crear Lead"}
+        title={"Crear Booking"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"
@@ -119,7 +121,7 @@ const Leads = () => {
         height="480px"
         btnClose={1}
       >
-        <FormLead
+        <FormBooking
           onClose={toggleModal}
           currentEdit={currentEdit}
           setCurrentEdit={setCurrentEdit}
@@ -136,4 +138,4 @@ const Leads = () => {
   );
 };
 
-export default Leads;
+export default Booking;
