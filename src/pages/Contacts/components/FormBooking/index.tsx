@@ -16,6 +16,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { stateBooking } from "../../models/routes";
+import SelectStateBooking from "../SelectStateBooking/index";
 
 interface IFormInput {
   fullName: String;
@@ -114,6 +116,8 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   console.log("today", today);
   console.log("currentEdit?.call_date", currentEdit?.call_date);
+  console.log("funnels--", funnels);
+  console.log("stateBooking--", stateBooking);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -154,15 +158,6 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             error={String(errors["email"]?.message)}
           />
         </div>
-        <div className="form-group col-sm-12">
-          <SelectWithValidation
-            label="Seleccionar Funnel"
-            options={funnels}
-            name="selectFunnel"
-            register={register}
-            error={String(errors["selectFunnel"]?.message)}
-          />
-        </div>
         <div className="form-group col-sm-12 date-width">
           <label className="title-label-popup w-100">
             Fecha y Hora de Creación
@@ -199,6 +194,24 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               />
             </DemoContainer>
           </LocalizationProvider>
+        </div>
+        <div className="form-group col-sm-12">
+          <SelectStateBooking
+            label="Seleccionar Estado"
+            options={stateBooking as any}
+            name="selectState"
+            register={register}
+            error={String(errors["selectFunnel"]?.message)}
+          />
+        </div>
+        <div className="form-group col-sm-12">
+          <SelectWithValidation
+            label="Seleccionar Funnel"
+            options={funnels}
+            name="selectFunnel"
+            register={register}
+            error={String(errors["selectFunnel"]?.message)}
+          />
         </div>
       </div>
       <div className="row">
