@@ -1,9 +1,9 @@
 import MaterialTable from "material-table";
 import { useEffect } from "react";
-import { Table } from "../../styled-components/Table/index";
-import "../../styled-components/style.css";
+import { Table } from "../../../../styled-components/Table/index";
+import "../../../../styled-components/style.css";
 
-const GeneralTable = ({
+const FunnelTable = ({
   data,
   columns,
   pageSizeOptions,
@@ -15,7 +15,7 @@ const GeneralTable = ({
   }, [data]);
 
   return (
-    <Table className="tables" position="relative">
+    <Table className="tables" position="sticky">
       <MaterialTable
         title=""
         data={data}
@@ -41,4 +41,4 @@ const GeneralTable = ({
   );
 };
 
-export default GeneralTable;
+export default FunnelTable;

@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
-export const schema = () =>
-  yup.object().shape({
+export const schema = () => {
+  return yup.object().shape({
     fullName: yup.string().required("El nombre completo es requerido"),
     email: yup
       .string()
@@ -15,3 +15,4 @@ export const schema = () =>
       .required("El numero de telefono es requerido"),
     selectFunnel: yup.string().required(),
   });
+};

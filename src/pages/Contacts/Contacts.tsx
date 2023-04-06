@@ -6,6 +6,9 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Leads from "./components/Leads/index";
+import Booking from "./components/Booking";
+import Sales from "./components/Sales/index";
+import "./styled-components/style.css";
 
 const Contacts = () => {
   const [value, setValue] = useState("1");
@@ -33,10 +36,10 @@ const Contacts = () => {
               <Leads />
             </TabPanel>
             <TabPanel value="2">
-              <h1>Bookings</h1>
+              <Booking />
             </TabPanel>
             <TabPanel value="3">
-              <h1>Ventas</h1>
+              <Sales />
             </TabPanel>
           </TabContext>
         </Box>

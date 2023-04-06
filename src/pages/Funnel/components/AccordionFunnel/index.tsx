@@ -30,7 +30,6 @@ import Vector from "../../../../assets/images/Vector.png";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import GeneralTable from "../../../../utilities/Table";
 import { TypeDashboardDataTableColumns } from "../TypeDasboardFunnelData";
 import { AppStore } from "../../../../redux/store";
 import { CampaignData } from "../../../Dashboard/models/dashboard.model";
@@ -38,6 +37,7 @@ import InputComponent from "../../../../components/input/Input.component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import "../../../../styled-components/style.css";
 import { ContainerFilter } from "../../../../styled-components/input/index";
+import FunnelTable from "../tableFunnel/index";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -472,7 +472,7 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
                       <BeatLoader color="#3997FF" />
                     </div>
                   ) : ( */}
-                  <GeneralTable
+                  <FunnelTable
                     data={dataFunnel}
                     columns={columnsToSet}
                     pageSizeOptions={[7, 15, 31, 31]}

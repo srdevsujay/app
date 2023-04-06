@@ -1,25 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
-import {
-  deleteLead,
-  obtainApiContacts,
-} from "../../../../redux/state/slices/contacts/contactsThunk";
 import GeneralTable from "../../../../utilities/Table/index";
-import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
 import MenuTabHeader from "../MenuTabHeader/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
+import { TableContacts } from "../Leads/ColumnsLeads";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
+import { ColumnTableSale } from "./ColumnsSale";
 import Modal from "../../../../components/modal/Modal.component";
-import FormLead from "../FormLead/index";
+import {
+  obtainApiSale,
+  obtainApiProduct,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
+import FormSale from "../FormSale";
+import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
 
 setAutoFreeze(false);
 
-const Leads = () => {
+const Sales = () => {
   const dispatch = useAppDispatch();
-  const { dataLead } = useAppSelector((state) => state.contact);
+  const { dataSale } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
-  const [nameTab, setNameTab] = useState("Añadir Lead");
+  const [nameTab, setNameTab] = useState("Añadir Venta");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
@@ -29,30 +31,33 @@ const Leads = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiContacts());
+    dispatch(obtainApiSale());
+    dispatch(obtainApiProduct());
   }, []);
+  console.log("dataSale", dataSale);
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
-  const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  // console.log("currentEdit--", currentEdit);
 
   useEffect(() => {
-    if (dataLead.length > 0) {
-      const columns = TableContacts(
-        dataLead,
+    if (dataSale.length > 0) {
+      const columns = ColumnTableSale(
+        dataSale,
         time_Zone,
         setCurrentEdit,
         setIdEditCurrent
       );
       setCurrentColumns(columns as any);
-      setOriginalData(dataLead);
-      setFilteredData(dataLead);
+      setOriginalData(dataSale);
+      setFilteredData(dataSale);
     }
-  }, [dataLead]);
+  }, [dataSale]);
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteLead(idEditCurrent));
+      dispatch(deleteSale(idEditCurrent));
       setIdEditCurrent(0);
     }
     console.log("idEditCurrent", idEditCurrent);
@@ -110,7 +115,7 @@ const Leads = () => {
         openModal={openModal}
       />
       <Modal
-        title={currentEdit !== null ? "Editar Lead" : "Crear Lead"}
+        title={currentEdit !== null ? "Editar Sale" : "Crear Sale"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"
@@ -119,7 +124,7 @@ const Leads = () => {
         height="480px"
         btnClose={1}
       >
-        <FormLead
+        <FormSale
           onClose={toggleModal}
           currentEdit={currentEdit}
           setCurrentEdit={setCurrentEdit}
@@ -136,4 +141,4 @@ const Leads = () => {
   );
 };
 
-export default Leads;
+export default Sales;

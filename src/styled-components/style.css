@@ -11,10 +11,10 @@
   content: none !important;
 }
 
-.MuiTableRow-root {
+/* .MuiTableRow-root {
   z-index: 0 !important;
-  position: relative !important;
-}
+  position: sticky;
+} */
 
 .filter-scroll {
   height: auto;

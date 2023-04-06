@@ -8,20 +8,14 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export const ToggleColumnsTable = ({
   columns,
   setDataFunnelToggle,
-  setColumnsToSet,
   dataFunnelToggle,
   columnsToSet,
   updateData,
 }: any) => {
-  // Arrastar estos state al componente principal lead y el toogle esta en columnsToSet---
-  // const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
-  // const [columnsToSet, setColumnsToSet] = useState<any>([]);
-
   useEffect(() => {
     if (columns) {
       console.log("columns---columns---");
       setDataFunnelToggle(columns);
-      // setColumnsToSet(columns);
       updateData(columns);
     }
   }, [columns]);
@@ -43,7 +37,6 @@ export const ToggleColumnsTable = ({
       newColumns = [...columnsToSet, column];
       console.log("newColumns else", newColumns);
     }
-    // setColumnsToSet(newColumns);
     updateData(newColumns);
   };
 
