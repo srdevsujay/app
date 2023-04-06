@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { cursorStyleTable } from "./types";
+import { cursorStyleTable, Position } from "./types";
 
-export const Table = styled.div`
+export const Table = styled.div<Position>`
   div {
     box-shadow: none !important;
   }
@@ -17,6 +17,10 @@ export const Table = styled.div`
   }
   .widthDateLead {
     width: max-content;
+  }
+
+  .MuiTableRow-root {
+    position: ${(props) => props.position};
   }
 `;
 

@@ -1,9 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-
-import {
-  obtainApiBooking,
-  deleteBooking,
-} from "../../../../redux/state/slices/contacts/contactsThunk";
 import GeneralTable from "../../../../utilities/Table/index";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
@@ -11,19 +6,22 @@ import MenuTabHeader from "../MenuTabHeader/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { TableContacts } from "../Leads/ColumnsLeads";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
-import { ColumnTableBooking } from "./ColumnsBokking";
+import { ColumnTableSale } from "./ColumnsSale";
 import Modal from "../../../../components/modal/Modal.component";
-import FormBooking from "../FormBooking/index";
-import { editStateBooking } from "../../../../redux/state/slices/contacts/contactsThunk";
-import moment from "moment";
+import {
+  obtainApiSale,
+  obtainApiProduct,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
+import FormSale from "../FormSale";
+import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
 
 setAutoFreeze(false);
 
-const Booking = () => {
+const Sales = () => {
   const dispatch = useAppDispatch();
-  const { dataBooking } = useAppSelector((state) => state.contact);
+  const { dataSale } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
-  const [nameTab, setNameTab] = useState("Añadir Booking");
+  const [nameTab, setNameTab] = useState("Añadir Venta");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
@@ -33,42 +31,33 @@ const Booking = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiBooking());
+    dispatch(obtainApiSale());
+    dispatch(obtainApiProduct());
   }, []);
+  console.log("dataSale", dataSale);
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
-  const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
-  console.log("currentEdit--", currentEdit);
-
-  const onChangeStatus = (e: any, paramBooking: any) => {
-    const currentState = e.target.value;
-    const form: any = {
-      status: currentState,
-      id: paramBooking.id,
-    };
-    dispatch(editStateBooking(form));
-  };
+  // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  // console.log("currentEdit--", currentEdit);
 
   useEffect(() => {
-    if (dataBooking.length > 0) {
-      console.log("dataBooking.length > 0", dataBooking);
-      const columns = ColumnTableBooking(
-        dataBooking,
+    if (dataSale.length > 0) {
+      const columns = ColumnTableSale(
+        dataSale,
         time_Zone,
         setCurrentEdit,
-        setIdEditCurrent,
-        onChangeStatus
+        setIdEditCurrent
       );
       setCurrentColumns(columns as any);
-      setOriginalData(dataBooking);
-      setFilteredData(dataBooking);
+      setOriginalData(dataSale);
+      setFilteredData(dataSale);
     }
-  }, [dataBooking]);
+  }, [dataSale]);
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteBooking(idEditCurrent));
+      dispatch(deleteSale(idEditCurrent));
       setIdEditCurrent(0);
     }
     console.log("idEditCurrent", idEditCurrent);
@@ -126,7 +115,7 @@ const Booking = () => {
         openModal={openModal}
       />
       <Modal
-        title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}
+        title={currentEdit !== null ? "Editar Sale" : "Crear Sale"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"
@@ -135,7 +124,7 @@ const Booking = () => {
         height="480px"
         btnClose={1}
       >
-        <FormBooking
+        <FormSale
           onClose={toggleModal}
           currentEdit={currentEdit}
           setCurrentEdit={setCurrentEdit}
@@ -152,4 +141,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default Sales;

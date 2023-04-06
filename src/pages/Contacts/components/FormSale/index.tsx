@@ -6,9 +6,8 @@ import SelectComponent from "../../../../components/Select/index";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import SelectWithValidation from "../../../../components/Select/SelectWithValidation.component";
 import {
-  createBooking,
-  editBooking,
-  editLead,
+  createSale,
+  editSale,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 // import { schema } from "./yupSchemaLead";
@@ -17,7 +16,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { stateBooking } from "../../models/routes";
 import SelectStateBooking from "../SelectStateBooking/index";
 import moment from "moment";
 
@@ -30,48 +28,53 @@ type Option = {
   label: string;
 };
 
-const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
+const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
-  const [idEditBooking, setIdEditBooking] = useState<number>(0);
-  const [name, setName] = useState();
+  const { dataProduct } = useAppSelector((state) => state.contact);
+  console.log("dataProduct", dataProduct);
+  const [idEditSale, setIdEditSale] = useState<number>(0);
+  const [phone, setPhone] = useState();
   const [nameDate, setNameDate] = useState();
   const [email, setEmail] = useState();
-  const [callDate, setCallDate] = useState<Date>(today);
-  const [appoimentDate, setAppoimentDate] = useState<Date>(today);
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
-  const [selectState, setSelectState] = useState(stateBooking[0]?.value);
+  const [price, setPrice] = useState();
+  const [dateSale, setDateSale] = useState<Date>(today);
+
   const schema = yup.object().shape({
-    fullName: yup.string().required("El nombre completo es requerido"),
-    nameDate: yup.string().required("El nombre del booking es requerid"),
     email: yup
       .string()
       .email("El correo electrónico debe ser un correo electrónico válido")
       .required("El correo electronico es requerido"),
+    phone: yup
+      .number()
+      .positive()
+      .integer()
+      .min(10)
+      .required("El numero de telefono es requerido"),
+    // date: yup.date().required("La fecha es obligatoria"),
     selectFunnel: yup.string().required(),
-    selectState: yup.string().required(),
+    selectProduct: yup.string(),
+    price: yup.number().positive().integer().required("El precio es requerido"),
   });
 
   const initForm = () => {
     if (currentEdit) {
-      console.log("currentEdit", currentEdit);
+      console.log("currentEdit---", currentEdit);
       const {
-        name: nameParam,
-        name_date,
         email: emailParam,
-        call_date,
-        appoiment_date,
+        phone,
+        date,
         funnel_id,
-        status,
+        price: priceParam,
       } = currentEdit;
-      setName(nameParam);
-      setNameDate(name_date);
       setEmail(emailParam);
-      setCallDate(new Date(call_date));
-      setAppoimentDate(new Date(appoiment_date));
+      setPhone(phone);
       setSelectFunnel(funnel_id);
-      setSelectState(status);
+      setPrice(priceParam);
+      // setNameDate(name_date);
+      setDateSale(new Date(date));
     }
   };
 
@@ -87,19 +90,18 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   useEffect(() => {
     if (currentEdit) {
       initForm();
-      // setValue("callDate", currentEdit.call_date);
-      // setValue("appoimentDate", currentEdit.appoiment_date);
-      setIdEditBooking(currentEdit.id);
+      // setValue("dateSale", currentEdit.appoiment_date);
+      setIdEditSale(currentEdit.id);
     }
   }, [currentEdit, setValue]);
 
   useEffect(() => {
-    setValue("fullName", name);
-  }, [name]);
+    setValue("phone", phone);
+  }, [phone]);
 
-  useEffect(() => {
-    setValue("nameDate", nameDate);
-  }, [nameDate]);
+  // useEffect(() => {
+  //   setValue("nameDate", nameDate);
+  // }, [nameDate]);
 
   useEffect(() => {
     setValue("email", email);
@@ -110,84 +112,50 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   }, [selectFunnel]);
 
   useEffect(() => {
-    setValue("selectState", selectState);
-  }, [selectState]);
+    setValue("price", price);
+  }, [price]);
 
   useEffect(() => {
-    setValue("appoimentDate", appoimentDate);
-  }, [appoimentDate]);
-
-  useEffect(() => {
-    setValue("callDate", callDate);
-  }, [callDate]);
+    setValue("dateSale", dateSale);
+  }, [dateSale]);
 
   const onSubmit = (data: any) => {
-    console.log("data--", data);
-    console.log("callDate", callDate);
-    console.log("appoimentDate", appoimentDate);
-    const currentCallDate = moment(callDate).format("YYYY-MM-DD hh:mm:ss");
-    const currentAppoimentDate = moment(appoimentDate).format(
-      "YYYY-MM-DD hh:mm:ss"
-    );
+    console.log("dataSale--", data);
+    const currentDateSale = moment(dateSale).format("YYYY-MM-DD hh:mm:ss");
     const form: any = {
-      appoiment_date: currentAppoimentDate,
-      call_date: currentCallDate,
+      date: currentDateSale,
       email: data.email,
       funnel_id: data.selectFunnel,
-      name: data.fullName,
-      name_date: data.nameDate,
-      status: data.selectState,
+      phone: data.phone,
+      price: data.price,
+      product: data.selectProduct,
+      ts: "",
+      refaund: 0,
     };
-    if (idEditBooking !== 0) {
+    if (idEditSale !== 0) {
       form.id = currentEdit.id;
-      dispatch(editBooking(form));
+      form.id_traffic = currentEdit.id_traffic;
+      dispatch(editSale(form));
       setCurrentEdit();
-      setIdEditBooking(0);
+      setIdEditSale(0);
     } else {
-      dispatch(createBooking(form));
+      dispatch(createSale(form));
     }
     onClose();
   };
 
-  console.log("callDate", callDate);
-  console.log("appoimentDate", appoimentDate);
-
   console.log("today", today);
   console.log("currentEdit?.call_date", currentEdit?.call_date);
   console.log("funnels--", funnels);
-  console.log("stateBooking--", stateBooking);
+  console.log("currentEdit---?", currentEdit);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
         <div className="form-group col-sm-12">
           <InputRegister
-            placeholder="Ingresa tu nombre completo"
-            label="Nombre completo"
-            id="0"
-            type="text"
-            min={3}
-            name="fullName"
-            register={register}
-            error={String(errors["fullName"]?.message)}
-          />
-        </div>
-        <div className="form-group col-sm-12">
-          <InputRegister
-            placeholder="Ingresa el nombre del Booking"
-            label="Nombre del Booking"
-            id="0"
-            type="text"
-            min={3}
-            name="nameDate"
-            register={register}
-            error={String(errors["nameDate"]?.message)}
-          />
-        </div>
-        <div className="form-group col-sm-12">
-          <InputRegister
-            placeholder="Ingresa tu correo electronico"
-            label="E-mail Adress"
+            placeholder="Ingrese e-mail de reserva"
+            label="Correo electrónico de cita (Booking)"
             id="0"
             type="text"
             min={3}
@@ -196,41 +164,29 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             error={String(errors["email"]?.message)}
           />
         </div>
-        <div className="form-group col-sm-12 date-width">
-          <label className="title-label-popup w-100">
-            Fecha y Hora de Creación
-          </label>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateTimePicker
-              value={appoimentDate}
-              disabled
-              label="Ingresa Fecha y Hora"
-            />
-          </LocalizationProvider>
+        <div className="form-group col-sm-12">
+          <InputRegister
+            placeholder="Ingresa tu numero de telefono"
+            label="Teléfono del cliente"
+            id="0"
+            type="number"
+            min={3}
+            name="phone"
+            register={register}
+            error={String(errors["phone"]?.message)}
+          />
         </div>
         <div className="form-group col-sm-12 date-width">
-          <label className="title-label-popup w-100">
-            Fecha y Hora de la cita
-          </label>
+          <label className="title-label-popup w-100">Fecha y Hora</label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
-              value={callDate}
+              value={dateSale}
               minDate={today}
               onChange={(newValue: any) => {
-                setCallDate(newValue);
+                setDateSale(newValue);
               }}
             />
           </LocalizationProvider>
-        </div>
-        <div className="form-group col-sm-12">
-          <SelectStateBooking
-            label="Seleccionar Estado"
-            options={stateBooking as any}
-            name="selectState"
-            register={register}
-            error={String(errors["selectState"]?.message)}
-            currentEdit={currentEdit}
-          />
         </div>
         <div className="form-group col-sm-12">
           <SelectWithValidation
@@ -242,6 +198,27 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             disabled={currentEdit ? true : false}
           />
         </div>
+        <div className="form-group col-sm-12">
+          <SelectWithValidation
+            label="Seleccionar Producto"
+            options={dataProduct}
+            name="selectProduct"
+            register={register}
+            error={String(errors["selectProduct"]?.message)}
+          />
+        </div>
+        <div className="form-group col-sm-12">
+          <InputRegister
+            placeholder="Ingresa el precio"
+            label="Precio"
+            id="0"
+            type="number"
+            min={3}
+            name="price"
+            register={register}
+            error={String(errors["price"]?.message)}
+          />
+        </div>
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
@@ -251,7 +228,7 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
         </div>
         <div className="form-group col-sm-6">
           <ButtonsModal className="btn btn-add" type="submit">
-            {idEditBooking !== 0 ? "Editar" : "Guardar"}
+            {idEditSale !== 0 ? "Editar" : "Guardar"}
           </ButtonsModal>
         </div>
       </div>
@@ -259,4 +236,4 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   );
 };
 
-export default FormBooking;
+export default FormSale;

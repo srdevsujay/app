@@ -6,3 +6,11 @@
   display: none !important;
   margin-top: 5px;
 }
+
+.MuiTextField-root {
+  width: 100%;
+}
+
+/* .MuiTableRow-root {
+  position: relative;
+} */

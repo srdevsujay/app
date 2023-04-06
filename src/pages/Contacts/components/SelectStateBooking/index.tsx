@@ -15,12 +15,21 @@ type SelectProps = {
   name: string;
   error?: string;
   register: UseFormRegister<any>;
+  currentEdit: any;
 } & Omit<SelectHTMLAttributes<HTMLSelectElement>, "onChange">;
 
 const SelectStateBooking = (props: SelectProps) => {
   // const { label, onChange, options, ...otherPros } = props;
-  const { label, onChange, name, options, register, error, ...otherProps } =
-    props;
+  const {
+    label,
+    onChange,
+    name,
+    options,
+    register,
+    error,
+    currentEdit,
+    ...otherProps
+  } = props;
 
   // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
   //   onChange && onChange(target.value);
@@ -28,6 +37,8 @@ const SelectStateBooking = (props: SelectProps) => {
   console.log("funnels1", Object.keys(options));
   console.log("funnels2", Object.keys(options));
   console.log("funnels3", options);
+  console.log("currentEdit-<<", currentEdit);
+
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}

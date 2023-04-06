@@ -15,7 +15,7 @@ const GeneralTable = ({
   }, [data]);
 
   return (
-    <Table className="tables">
+    <Table className="tables" position="relative">
       <MaterialTable
         title=""
         data={data}

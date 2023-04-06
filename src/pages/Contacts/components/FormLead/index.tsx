@@ -24,8 +24,9 @@ type Option = {
 
 const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
-  const funnels = useAppSelector((state) => state.dashboard.dataTracking);
+  const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
   const [idEditLead, setIdEditLead] = useState<number>(0);
+  const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const schema = yup.object().shape({
     fullName: yup.string().required("El nombre completo es requerido"),
     email: yup
@@ -34,8 +35,8 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       .required("El correo electronico es requerido"),
     telephone: yup
       .number()
-      .positive()
-      .integer()
+      .positive("This field must contain a positive number")
+      .integer("This field should contain an integer")
       .min(10)
       .required("El numero de telefono es requerido"),
     selectFunnel: yup.string().required(),
@@ -52,9 +53,12 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   useEffect(() => {
     if (currentEdit) {
+      console.log("currentEditLead", currentEdit);
+
       setValue("fullName", currentEdit.name);
       setValue("email", currentEdit.email);
       setValue("telephone", currentEdit.phone);
+      setValue("selectFunnel", currentEdit.funnel_id);
       setIdEditLead(currentEdit.id);
     }
   }, [currentEdit, setValue]);
@@ -117,6 +121,7 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             name="selectFunnel"
             register={register}
             error={String(errors["selectFunnel"]?.message)}
+            disabled={currentEdit ? true : false}
           />
         </div>
       </div>

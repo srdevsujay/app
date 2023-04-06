@@ -110,7 +110,7 @@ const Leads = () => {
         openModal={openModal}
       />
       <Modal
-        title={"Crear Lead"}
+        title={currentEdit !== null ? "Editar Lead" : "Crear Lead"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"

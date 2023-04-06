@@ -1,14 +1,33 @@
 import { AppThunk } from "../../../store";
-import { setBooking, setLeads, starLoading } from "./contactsSlice";
 import {
+  setBooking,
+  setLeads,
+  setProduct,
+  setSale,
+  starLoading,
+} from "./contactsSlice";
+import {
+  createBookingService,
   createLeadService,
   deleteLeadService,
   editLeadService,
   getDataBooking,
   getDataLeads,
+  editBookingService,
+  deleteBookingService,
+  editSaleService,
 } from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
 import Swal from "sweetalert2";
+import {
+  createSaleService,
+  deleteSaleService,
+  editBookingStateService,
+} from "../../../../pages/Contacts/services/index";
+import {
+  getDataSales,
+  getDataProduct,
+} from "../../../../pages/Contacts/services/index";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -75,35 +94,39 @@ export const editLead = (data: any, id: number): AppThunk => {
 export const deleteLead = (id: number): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
-    Swal.fire({
-      title: "¿Estas seguro?",
-      text: "Esta acción va a eliminar toda la información de tracking relacionado con este  lead. Tenga en cuenta que esta acción es permanente y no se podrá deshacer.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#109cf1",
-      cancelButtonColor: "#E71D36",
-      confirmButtonText: "Sí, Borrar!",
-    }).then(async (result) => {
-      console.log("result", result);
-      console.log("resultid", id);
-      if (result.isConfirmed) {
-        try {
-          const objId = {
-            id,
-          };
-          const resultData = await deleteLeadService(objId);
-          console.log("resultData", resultData);
-          if (resultData.data.message === "Delete lead successfully!") {
-            dispatch(obtainApiContacts());
-            Swal.fire(
-              "Eliminado!",
-              "El Lead se ha eliminado correctamente.",
-              "success"
-            );
-          }
-        } catch (error) {}
-      }
-    });
+    try {
+      Swal.fire({
+        title: "¿Estas seguro?",
+        text: "Esta acción va a eliminar toda la información de tracking relacionado con este  lead. Tenga en cuenta que esta acción es permanente y no se podrá deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#109cf1",
+        cancelButtonColor: "#E71D36",
+        confirmButtonText: "Sí, Borrar!",
+      }).then(async (result) => {
+        console.log("result", result);
+        console.log("resultid", id);
+        if (result.isConfirmed) {
+          try {
+            const objId = {
+              id,
+            };
+            const resultData = await deleteLeadService(objId);
+            console.log("resultData", resultData);
+            if (resultData.data.message === "Delete lead successfully!") {
+              dispatch(obtainApiContacts());
+              Swal.fire(
+                "Eliminado!",
+                "El Lead se ha eliminado correctamente.",
+                "success"
+              );
+            }
+          } catch (error) {}
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -113,10 +136,202 @@ export const obtainApiBooking = (): AppThunk => {
     try {
       const result = await getDataBooking();
       console.log("resultBooking", result);
-      const currentDataLead: any = _.orderBy(result.data, "id", "desc");
+      const currentDataLead: any = _.orderBy(result.data, "id", "asc");
       dispatch(setBooking(currentDataLead));
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const createBooking = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await createBookingService(data);
+      if (result.data.message === "Create Booking successfully!") {
+        dispatch(obtainApiBooking());
+        Swal.fire("Correcto", "Booking Creado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editBooking = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await editBookingService(data);
+      if (result.data.message === "Edit Booking successfully!") {
+        dispatch(obtainApiBooking());
+        Swal.fire("Correcto", "Booking Editado correctamente!!", "success");
+      }
+      // setCreateLead
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editStateBooking = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await editBookingStateService(data);
+      if (result.data.message === "Edit Booking successfully!") {
+        dispatch(obtainApiBooking());
+        Swal.fire(
+          "Correcto",
+          "El estado del booking ha sido editado correctamente!!",
+          "success"
+        );
+      }
+      // setCreateLead
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteBooking = (id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("entra al Delete");
+
+      Swal.fire({
+        title: "¿Estas seguro?",
+        text: "Esta seguro que quiere borrar el Booking.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#109cf1",
+        cancelButtonColor: "#E71D36",
+        confirmButtonText: "Sí, Borrar!",
+      }).then(async (result) => {
+        console.log("result", result);
+        console.log("resultid", id);
+        if (result.isConfirmed) {
+          try {
+            const objId = {
+              id,
+            };
+            const resultData = await deleteBookingService(objId);
+            console.log("resultData", resultData);
+            if (resultData.data.message === "Delete Booking successfully!") {
+              dispatch(obtainApiBooking());
+              Swal.fire(
+                "Eliminado!",
+                "El Booking se ha eliminado correctamente.",
+                "success"
+              );
+            }
+          } catch (error) {}
+        }
+      });
+    } catch (error) {}
+  };
+};
+
+export const obtainApiProduct = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataProduct();
+      console.log("resultProduct", result);
+      const currentDataProduct: any = _.orderBy(result.data, "id", "desc");
+      dispatch(setProduct(currentDataProduct));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainApiSale = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataSales();
+      console.log("resultSale", result);
+      const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
+      dispatch(setSale(currentDataLead));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createSale = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await createSaleService(data);
+      console.log("resultSale", result);
+      if (
+        result.data.message === "Create Sale and device successfully!" ||
+        result.data.message === "Create Sale successfully!"
+      ) {
+        dispatch(obtainApiSale());
+        Swal.fire("Correcto", "Venta Creada correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editSale = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await editSaleService(data);
+      if (result.data.message === "Edit Sale successfully!") {
+        dispatch(obtainApiSale());
+        Swal.fire("Correcto", "Venta Editada correctamente!!", "success");
+      }
+      // setCreateLead
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteSale = (id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("entra al Delete");
+
+      Swal.fire({
+        title: "¿Estas seguro?",
+        text: "Esta seguro que quiere eliminar la venta.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#109cf1",
+        cancelButtonColor: "#E71D36",
+        confirmButtonText: "Sí, Borrar!",
+      }).then(async (result) => {
+        console.log("result", result);
+        console.log("resultid", id);
+        if (result.isConfirmed) {
+          try {
+            const objId = {
+              id_event: id,
+            };
+            const resultData = await deleteSaleService(objId);
+            console.log("resultData", resultData);
+            if (resultData.data.message === "Delete Sale successfully!") {
+              dispatch(obtainApiSale());
+              Swal.fire(
+                "Eliminado!",
+                "La venta se ha eliminado correctamente.",
+                "success"
+              );
+            }
+          } catch (error) {}
+        }
+      });
+    } catch (error) {}
   };
 };
