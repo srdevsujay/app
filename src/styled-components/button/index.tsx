@@ -76,6 +76,43 @@ export const ButtonsModal = styled.button`
   }
 `;
 
+export const ButtonDeleteWithIcon = styled.button`
+  font-family: "Helvetica-NeueL-Title";
+  border-radius: 5px;
+  padding-left: 10px !important;
+  font-size: 14px;
+  background: rgb(231 29 54 / 13%);
+  color: #e71d36;
+
+  img {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background: rgb(231 29 54 / 8%);
+    color: #e71d36;
+  }
+`;
+
+export const ButtonEditWithIcon = styled.button`
+  background: rgb(91 147 255 / 13%);
+  color: #5b93ff;
+  font-family: "Helvetica-NeueL-Title";
+  border-radius: 5px;
+  padding-left: 10px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+
+  img {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background: rgb(91 147 255 / 8%);
+    color: #5b93ff;
+  }
+`;
+
 // const theme = {
 //   main: "mediumseagreen"
 // };

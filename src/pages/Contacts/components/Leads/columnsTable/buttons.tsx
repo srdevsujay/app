@@ -1,4 +1,10 @@
 import ellipsisOff from "../../../../../assets/images/ellipsisOff.svg";
+import deleted from "../../../../../assets/images/Delete.svg";
+import edit from "../../../../../assets/images/Edit.svg";
+import {
+  ButtonDeleteWithIcon,
+  ButtonEditWithIcon,
+} from "../../../../../styled-components/button/index";
 
 export const buttonEditColumn = (
   setCurrentEdit: any,
@@ -30,21 +36,22 @@ export const buttonEditColumn = (
         <div
           className="dropdown-menu dropdown-style"
           aria-labelledby="btnGroupDrop1"
+          style={{ padding: "10px" }}
         >
-          <button
+          <ButtonEditWithIcon
             className="dropdown-item dropdown-style-button"
             onClick={() => editLead(param)}
           >
-            {/* <img src={edit} height="12" className="" /> */}
+            <img src={edit} height="12" className="" />
             Editar
-          </button>
-          <button
+          </ButtonEditWithIcon>
+          <ButtonDeleteWithIcon
             className="dropdown-item dropdown-style-button"
             onClick={() => handleDeleteLead(param.id)}
           >
-            {/* <img src={deleted} height="12" className="" /> */}
+            <img src={deleted} height="12" className="" />
             Eliminar
-          </button>
+          </ButtonDeleteWithIcon>
           {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
         </div>
       </div>
