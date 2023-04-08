@@ -30,7 +30,6 @@ import Vector from "../../../../assets/images/Vector.png";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import GeneralTable from "../../../../utilities/Table";
 import { TypeDashboardDataTableColumns } from "../TypeDasboardFunnelData";
 import { AppStore } from "../../../../redux/store";
 import { CampaignData } from "../../../Dashboard/models/dashboard.model";
@@ -38,6 +37,7 @@ import InputComponent from "../../../../components/input/Input.component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import "../../../../styled-components/style.css";
 import { ContainerFilter } from "../../../../styled-components/input/index";
+import FunnelTable from "../tableFunnel/index";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -83,7 +83,7 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
     (state) => state.dashboard.dataTracking
   );
   console.log("dataTracking", dataTracking);
-  const { data: dataFunnel }: any = useAppSelector(
+  const { data: dataFunnel, filters }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
@@ -141,6 +141,9 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
 
   useEffect(() => {
     if (dataFunnel?.length > 0 && dataTracking.length > 0) {
+      // console.log("filters1", filters);
+      // const obj = JSON.parse(filters);
+      // console.log("filters2", obj);
       const getDataColumns = dataFunnel.map((funnel: any) => {
         return TypeDashboardDataTableColumns(
           funnel,
@@ -148,6 +151,9 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
           time_Zone
         );
       });
+      const activeColumns = getDataColumns[0]?.filter(
+        (column: any) => column.checkbox
+      );
       // const columnsToShow = getDataColumns[0].filter((column: any) =>
       // condición para mostrar y ocultar comunas
       // const columnsToShow = (getDataColumns[0] as any).filter((column: any) =>
@@ -155,7 +161,7 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
       // );
       // console.log("columnsToShow", columnsToShow);
       console.log("getDataColumns", getDataColumns);
-      setColumnsToSet(getDataColumns[0]);
+      setColumnsToSet(activeColumns);
       setDataFunnelToggle(getDataColumns[0]);
       setOriginalData(getDataColumns[0]);
       // setFilteredData(getDataColumns[0]);
@@ -329,26 +335,26 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
     );
   };
 
-  const handleColumnToggle = (column: any) => {
+  const handleColumnToggle = (e: any, column: any) => {
+    console.log("e", e);
     console.log("column--", column);
-    const isChecked = columnsToSet.find(
-      (selectedColumn: any) => selectedColumn.name === column.name
+    const updatedColumns = originalData.map((originalColumn: any) => {
+      if (originalColumn.field === column.field) {
+        return {
+          ...originalColumn,
+          checkbox: !originalColumn.checkbox,
+        };
+      }
+      return originalColumn;
+    });
+    console.log("updatedColumns", updatedColumns);
+    const activeColumns = updatedColumns.filter(
+      (column: any) => column.checkbox
     );
-    let newColumns = columnsToSet;
-    console.log("isChecked", isChecked);
-    if (isChecked) {
-      newColumns = columnsToSet.filter(
-        (selectedColumn: any) => selectedColumn.name !== column.name
-      );
-    } else {
-      newColumns = [...columnsToSet, column];
-    }
-    setColumnsToSet(newColumns);
-    // setCurrentToggleTotal(newColumns);
+    setColumnsToSet(activeColumns);
+    setDataFunnelToggle(updatedColumns);
+    setOriginalData(updatedColumns);
   };
-
-  console.log("dataFunnelToggle", dataFunnelToggle);
-  console.log("dataTrackingState", dataTrackingState);
 
   useEffect(() => {
     if (searchStringDebounced.trim()) {
@@ -363,15 +369,11 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
 
   useEffect(() => {
     if (columnsToSet?.length > 0) {
-      let currentFunnel: any = [];
-      columnsToSet.map((funnel: any) => {
-        const dataFunnel = {
-          field: funnel.field,
-          name: funnel.name,
-          checkbox: funnel.checkbox,
-        };
-        currentFunnel.push(dataFunnel);
-      });
+      const currentFunnel: any = columnsToSet.map((funnel: any) => ({
+        field: funnel.field,
+        name: funnel.name,
+        checkbox: funnel.checkbox,
+      }));
       console.log("currentFunnel", currentFunnel);
       setFilteredData(currentFunnel);
     }
@@ -426,20 +428,11 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
                 </ContainerFilter>
                 <div className="filter-scroll">
                   {dataFunnelToggle?.map((column: any) => (
-                    // {dataFunnelToggle?.map((column: any) => (
                     <div key={column.name} className="column-container">
                       <Checkbox
                         {...label}
-                        checked={
-                          !!columnsToSet.find((selectedColumn: any) => {
-                            // !!filteredData.find((selectedColumn: any) => {
-                            return column
-                              ? selectedColumn.name === column.name
-                              : false;
-                          })
-                          // column.checkbox
-                        }
-                        onChange={() => handleColumnToggle(column)}
+                        checked={column.checkbox}
+                        onChange={(e) => handleColumnToggle(e, column)}
                       />
                       <label>{column.name}</label>
                     </div>
@@ -479,7 +472,7 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
                       <BeatLoader color="#3997FF" />
                     </div>
                   ) : ( */}
-                  <GeneralTable
+                  <FunnelTable
                     data={dataFunnel}
                     columns={columnsToSet}
                     pageSizeOptions={[7, 15, 31, 31]}
