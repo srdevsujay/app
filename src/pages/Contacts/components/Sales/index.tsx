@@ -2,18 +2,16 @@ import React, { useEffect, useState, useCallback } from "react";
 import GeneralTable from "../../../../utilities/Table/index";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
-import MenuTabHeader from "../MenuTabHeader/index";
+import TabMenuLeads from "../TabMenuLeads/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { TableContacts } from "../Leads/ColumnsLeads";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { ColumnTableSale } from "./ColumnsSale";
 import Modal from "../../../../components/modal/Modal.component";
-import {
-  obtainApiSale,
-  obtainApiProduct,
-} from "../../../../redux/state/slices/contacts/contactsThunk";
+import { obtainApiSale } from "../../../../redux/state/slices/contacts/contactsThunk";
 import FormSale from "../FormSale";
 import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
+import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
 
 setAutoFreeze(false);
 
@@ -100,7 +98,7 @@ const Sales = () => {
 
   return (
     <>
-      <MenuTabHeader
+      <TabMenuLeads
         nameTab={nameTab}
         columns={currentColumns}
         setDataFunnelToggle={setDataFunnelToggle}

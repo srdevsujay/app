@@ -36,7 +36,7 @@ export const ButtonLogout = styled.div`
 export const ButtonCreate = styled.button`
   color: #fff !important;
   background-color: #109cf1 !important;
-  width: 118px;
+  width: auto;
   border-radius: 5px !important;
   font-family: "Helvetica-NeueL-Title" !important;
   box-shadow: 0 4px 10px rgba(16, 156, 241, 0.24);

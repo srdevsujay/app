@@ -24,10 +24,7 @@ import {
   deleteSaleService,
   editBookingStateService,
 } from "../../../../pages/Contacts/services/index";
-import {
-  getDataSales,
-  getDataProduct,
-} from "../../../../pages/Contacts/services/index";
+import { getDataSales } from "../../../../pages/Contacts/services/index";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -231,20 +228,6 @@ export const deleteBooking = (id: number): AppThunk => {
         }
       });
     } catch (error) {}
-  };
-};
-
-export const obtainApiProduct = (): AppThunk => {
-  return async (dispatch) => {
-    dispatch(starLoading);
-    try {
-      const result = await getDataProduct();
-      console.log("resultProduct", result);
-      const currentDataProduct: any = _.orderBy(result.data, "id", "desc");
-      dispatch(setProduct(currentDataProduct));
-    } catch (error) {
-      console.log(error);
-    }
   };
 };
 

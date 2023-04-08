@@ -20,12 +20,15 @@ import dashboardSlice from "./state/slices/dashboard/dashboardSlice";
 import logger from "redux-logger";
 import contactSlice from "./state/slices/contacts/contactsSlice";
 import { logoutUser } from "./state/slices/login/authSlice";
+import { trackingState } from "./state/slices/tracking/trackingSlice";
+import trackingSlice from "./state/slices/tracking/trackingSlice";
 
 export interface AppStore {
   authApi: any;
   user: UserInfo;
   dashboard: DashboardInfo;
   contact: any;
+  tracking: any;
 }
 
 const persistConfig = {
@@ -39,6 +42,7 @@ const reducer = combineReducers<AppStore>({
   user: authSlice,
   dashboard: dashboardSlice,
   contact: contactSlice,
+  tracking: trackingSlice,
 });
 
 const resettableRootReducer = (state: any, action: PayloadAction<UserInfo>) => {

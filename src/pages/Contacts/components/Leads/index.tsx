@@ -8,7 +8,7 @@ import GeneralTable from "../../../../utilities/Table/index";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
-import MenuTabHeader from "../MenuTabHeader/index";
+import TabMenuLeads from "../TabMenuLeads/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import Modal from "../../../../components/modal/Modal.component";
 import FormLead from "../FormLead/index";
@@ -95,7 +95,7 @@ const Leads = () => {
 
   return (
     <>
-      <MenuTabHeader
+      <TabMenuLeads
         nameTab={nameTab}
         columns={currentColumns}
         setDataFunnelToggle={setDataFunnelToggle}

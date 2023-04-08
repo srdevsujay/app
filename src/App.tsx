@@ -15,6 +15,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const Funnel = lazy(() => import("./pages/Funnel"));
 const Contacts = lazy(() => import("./pages/Contacts/Contacts"));
+const Tracking = lazy(() => import("./pages/Tracking/index"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
 
 function App() {
@@ -46,7 +47,8 @@ function App() {
             <Route element={<AuthGuard />}>
               <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
               <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-              <Route path={privateRoutes.LEAD} element={<Contacts />} />
+              <Route path={privateRoutes.CONTACT} element={<Contacts />} />
+              <Route path={privateRoutes.TRACKING} element={<Tracking />} />
             </Route>
             <Route path="/signun" element={<CreateAccount />} />
           </RoutesWithNotFound>

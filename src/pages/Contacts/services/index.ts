@@ -82,14 +82,6 @@ export const getDataSales = async () => {
   });
 };
 
-export const getDataProduct = async () => {
-  return clientAxios.get("/product", {
-    headers: {
-      "x-access-tokens": <string>getJwt(),
-    }
-  });
-};
-
 export const createSaleService = async (data: any) => {
   return clientAxios.post("/create_sale", data, {
     headers: {

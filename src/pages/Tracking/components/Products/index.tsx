@@ -1,29 +1,24 @@
 import React, { useEffect, useState, useCallback } from "react";
-
-import {
-  obtainApiBooking,
-  deleteBooking,
-} from "../../../../redux/state/slices/contacts/contactsThunk";
-import GeneralTable from "../../../../utilities/Table/index";
 import { setAutoFreeze } from "immer";
-import "../../styled-components/style.css";
-import TabMenuLeads from "../TabMenuLeads/index";
+// import "../../styled-components/style.css";
+import "../../../Contacts/styled-components/style.css";
+
 import { useDebounce } from "../../../../hooks/useDebounce";
-import { TableContacts } from "../Leads/ColumnsLeads";
+import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
+import GeneralTable from "../../../../utilities/Table/index";
+import TabMenuLeads from "../../../Contacts/components/TabMenuLeads/index";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
-import { ColumnTableBooking } from "./ColumnsBokking";
+import { ColumnsProduct } from "./ColumnsProduct";
 import Modal from "../../../../components/modal/Modal.component";
-import FormBooking from "../FormBooking/index";
-import { editStateBooking } from "../../../../redux/state/slices/contacts/contactsThunk";
-import moment from "moment";
+import FormProducts from "../FormProduct";
 
 setAutoFreeze(false);
 
-const Booking = () => {
+const Products = () => {
   const dispatch = useAppDispatch();
-  const { dataBooking } = useAppSelector((state) => state.contact);
+  const { dataProduct } = useAppSelector((state) => state.tracking);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
-  const [nameTab, setNameTab] = useState("Añadir Booking");
+  const [nameTab, setNameTab] = useState("Añadir Productos");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([] || null);
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
@@ -33,46 +28,34 @@ const Booking = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiBooking());
+    dispatch(obtainApiProduct());
   }, []);
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
-  const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
-  console.log("currentEdit--", currentEdit);
-
-  const onChangeStatus = (e: any, paramBooking: any) => {
-    const currentState = e.target.value;
-    const form: any = {
-      status: currentState,
-      id: paramBooking.id,
-    };
-    dispatch(editStateBooking(form));
-  };
+  // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
-    if (dataBooking.length > 0) {
-      console.log("dataBooking.length > 0", dataBooking);
-      const columns = ColumnTableBooking(
-        dataBooking,
+    if (dataProduct.length > 0) {
+      const columns = ColumnsProduct(
+        dataProduct,
         time_Zone,
         setCurrentEdit,
-        setIdEditCurrent,
-        onChangeStatus
+        setIdEditCurrent
       );
       setCurrentColumns(columns as any);
-      setOriginalData(dataBooking);
-      setFilteredData(dataBooking);
+      setOriginalData(dataProduct);
+      setFilteredData(dataProduct);
     }
-  }, [dataBooking]);
+  }, [dataProduct]);
 
-  useEffect(() => {
-    if (idEditCurrent !== 0) {
-      dispatch(deleteBooking(idEditCurrent));
-      setIdEditCurrent(0);
-    }
-    console.log("idEditCurrent", idEditCurrent);
-  }, [idEditCurrent]);
+  // useEffect(() => {
+  //   if (idEditCurrent !== 0) {
+  //     // dispatch(deleteLead(idEditCurrent));
+  //     setIdEditCurrent(0);
+  //   }
+  //   console.log("idEditCurrent", idEditCurrent);
+  // }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {
     setColumnsToSet(newData);
@@ -126,7 +109,7 @@ const Booking = () => {
         openModal={openModal}
       />
       <Modal
-        title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}
+        title={currentEdit !== null ? "Editar Producto" : "Crear Producto"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"
@@ -135,7 +118,7 @@ const Booking = () => {
         height="480px"
         btnClose={1}
       >
-        <FormBooking
+        <FormProducts
           onClose={toggleModal}
           currentEdit={currentEdit}
           setCurrentEdit={setCurrentEdit}
@@ -152,4 +135,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default Products;
