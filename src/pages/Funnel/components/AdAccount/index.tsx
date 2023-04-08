@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AdAccountType } from "../../../Dashboard/models";
 import AdAccountFunnel from "../../../Dashboard/components/AdAccountFunnel";
 import { Option } from "../../../../components/Select";
+import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 
 const AdAccount = () => {
   const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([
@@ -169,19 +170,9 @@ const AdAccount = () => {
     <>
       <div className="row">
         <div className="col-md-10">
-          <h4 className="title-popup font-helvetica">Cuenta Publicitaria</h4>
-        </div>
-        <div className="col-md-2">
-          <div className="addIcon" onClick={addAdAccount}>
-            {/* <AddCircleOutlineIcon
-              aria-label="delete"
-              color="primary"
-              className="mr-1"
-            >
-              <AddCircleIcon onClick={addSteps} fontSize="medium" />
-            </AddCircleOutlineIcon> */}
-            (+)
-          </div>
+          <Title fontSize="17px" color="#123249">
+            Cuenta Publicitaria
+          </Title>
         </div>
       </div>
       <button
@@ -200,6 +191,18 @@ const AdAccount = () => {
           handleSetAdAccountConfig={handleSetAdAccountConfig}
         />
       ))}
+      <div className="col-md-2">
+        <div className="addIcon" onClick={addAdAccount}>
+          {/* <AddCircleOutlineIcon
+            aria-label="delete"
+            color="primary"
+            className="mr-1"
+          >
+            <AddCircleIcon onClick={addSteps} fontSize="medium" />
+          </AddCircleOutlineIcon> */}
+          (+)
+        </div>
+      </div>
     </>
   );
 };

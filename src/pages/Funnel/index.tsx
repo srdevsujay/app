@@ -11,20 +11,26 @@ import "../../styled-components/Table/style.css";
 import { NewFunnel, ButtonFunnel } from "./styled-components/funnel-styled";
 import { useAppSelector } from "../../hooks/appDispatch";
 import { totalFunnel } from "./components/TotalTableFunnel";
+import {
+  ButtonsModal,
+  ContainerSticky,
+} from "../../styled-components/button/index";
 
 const Funnel = () => {
-  const [isModalOpen, setModalState] = useState<boolean>(false);
-  const toggleModal = () => setModalState(!isModalOpen);
   const { data: dataFunnel }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
-  const [currentToggleTotal, setCurrentToggleTotal] = useState();
+  const [isModalOpen, setModalState] = useState<boolean>(false);
+  const [currentColumnsTotal, setCurrentColumnsTotal] = useState();
+
+  const toggleModal = () => setModalState(!isModalOpen);
+  console.log("currentColumnsTotal", currentColumnsTotal);
 
   useEffect(() => {
-    if (dataFunnel?.length > 0 || currentToggleTotal !== undefined) {
-      totalFunnel(dataFunnel, currentToggleTotal);
+    if (dataFunnel?.length > 0) {
+      totalFunnel(dataFunnel, currentColumnsTotal);
     }
-  }, [dataFunnel, currentToggleTotal]);
+  }, [dataFunnel, currentColumnsTotal]);
 
   return (
     <Main>
@@ -35,7 +41,7 @@ const Funnel = () => {
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
-            <AccordionFunnel setCurrentToggleTotal={setCurrentToggleTotal} />
+            <AccordionFunnel setCurrentColumnsTotal={setCurrentColumnsTotal} />
           </div>
         </div>
       </Card>
@@ -43,16 +49,31 @@ const Funnel = () => {
         <ButtonFunnel onClick={toggleModal}>+</ButtonFunnel>
       </NewFunnel>
       <Modal
-        title={"Agregar Funnel"}
+        title={"Crear Funnel"}
         isOpen={isModalOpen}
         onClose={toggleModal}
-        width="55vw"
-        padding="50px"
+        width="60%"
+        height="543px"
+        padding="12px 2.25rem 16px"
         btnClose={1}
       >
         <AddFunnelInput />
         <StepsFunnel />
         <AdAccount />
+        <ContainerSticky className="row">
+          <Bar className="mb-3"></Bar>
+          <div className="form-group col-sm-6">
+            <ButtonsModal className="btn btn-close" onClick={toggleModal}>
+              Cerrar
+            </ButtonsModal>
+          </div>
+          <div className="form-group col-sm-6">
+            <ButtonsModal className="btn btn-add" type="submit">
+              {/* {idEditBooking !== 0 ? "Editar" : "Guardar"} */}
+              Guardar
+            </ButtonsModal>
+          </div>
+        </ContainerSticky>
       </Modal>
       <FooterMenu />
     </Main>

@@ -77,7 +77,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
+const AccordionFunnel = ({ setCurrentColumnsTotal }: any) => {
   const dispatch = useAppDispatch();
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
@@ -379,6 +379,13 @@ const AccordionFunnel = ({ setCurrentToggleTotal }: any) => {
     }
   }, [columnsToSet]);
   console.log("filteredData", filteredData);
+
+  useEffect(() => {
+    if (columnsToSet) {
+      console.log("columnsToSetcolumnsToSet", columnsToSet);
+      setCurrentColumnsTotal(columnsToSet);
+    }
+  }, [columnsToSet]);
 
   return (
     <div className="mt-3">
