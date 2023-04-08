@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
+import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 
 const StepsFunnel = () => {
   const step1: FunnelStep = {
@@ -30,7 +31,9 @@ const StepsFunnel = () => {
     <>
       <div className="row">
         <div className="col-md-10">
-          <h4 className="title-popup font-helvetica">Pasos</h4>
+          <Title fontSize="17px" color="#123249">
+            Pasos
+          </Title>
         </div>
         <div className="col-md-2">
           <div className="addIcon" onClick={addStep}>

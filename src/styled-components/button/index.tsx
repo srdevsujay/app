@@ -76,6 +76,12 @@ export const ButtonsModal = styled.button`
   }
 `;
 
+export const ContainerSticky = styled.div`
+  position: sticky;
+  bottom: -0.9rem;
+  background: white;
+`;
+
 // const theme = {
 //   main: "mediumseagreen"
 // };
