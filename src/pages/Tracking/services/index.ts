@@ -17,16 +17,16 @@ export const createProductService = async (data: any) => {
   });
 };
 
-export const editSaleService = async (data: any) => {
-  return clientAxios.put("/edit_sale", data, {
+export const editProductService = async (data: any) => {
+  return clientAxios.put("/product", data, {
     headers: {
       "x-access-tokens": <string>getJwt(),
     }
   });
 };
 
-export const deleteSaleService = async (id: any) => {
-  return clientAxios.post("/sales", id, {
+export const deleteProductService = async (id: any) => {
+  return clientAxios.post("/deleteproduct", id, {
     headers: {
       "x-access-tokens": <string>getJwt(),
     }

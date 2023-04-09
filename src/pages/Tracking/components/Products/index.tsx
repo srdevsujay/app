@@ -4,7 +4,10 @@ import { setAutoFreeze } from "immer";
 import "../../../Contacts/styled-components/style.css";
 
 import { useDebounce } from "../../../../hooks/useDebounce";
-import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
+import {
+  obtainApiProduct,
+  deleteProducto,
+} from "../../../../redux/state/slices/tracking/trackingThunk";
 import GeneralTable from "../../../../utilities/Table/index";
 import TabMenuLeads from "../../../Contacts/components/TabMenuLeads/index";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
@@ -33,7 +36,7 @@ const Products = () => {
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
-  // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
     if (dataProduct.length > 0) {
@@ -49,13 +52,13 @@ const Products = () => {
     }
   }, [dataProduct]);
 
-  // useEffect(() => {
-  //   if (idEditCurrent !== 0) {
-  //     // dispatch(deleteLead(idEditCurrent));
-  //     setIdEditCurrent(0);
-  //   }
-  //   console.log("idEditCurrent", idEditCurrent);
-  // }, [idEditCurrent]);
+  useEffect(() => {
+    if (idEditCurrent !== 0) {
+      dispatch(deleteProducto(idEditCurrent));
+      setIdEditCurrent(0);
+    }
+    console.log("idEditCurrent", idEditCurrent);
+  }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {
     setColumnsToSet(newData);

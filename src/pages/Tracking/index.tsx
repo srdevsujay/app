@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Main } from "../../styled-components/main";
 import FooterMenu from "../../components/Footer/index";
 import { Box, Tab } from "@mui/material";
@@ -13,6 +13,18 @@ const Tracking = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  let localStorageChangeTab: string | null | number =
+    localStorage.getItem("CreateProduct");
+
+  useEffect(() => {
+    console.log("localStorageChangeTab", localStorageChangeTab);
+    if (localStorageChangeTab == 3) {
+      console.log("localStorageChangeTab232", localStorageChangeTab);
+      setValue("3");
+      localStorage.setItem("CreateProduct", "0");
+    }
+  }, [localStorageChangeTab]);
 
   return (
     <Main>

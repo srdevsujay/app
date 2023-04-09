@@ -5,14 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import SelectComponent from "../../../../components/Select/index";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import SelectWithValidation from "../../../../components/Select/SelectWithValidation.component";
-import {
-  createLead,
-  editLead,
-} from "../../../../redux/state/slices/contacts/contactsThunk";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 // import { schema } from "./yupSchemaLead";
 import * as yup from "yup";
-import { createProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
+import {
+  createProduct,
+  editProduct,
+} from "../../../../redux/state/slices/tracking/trackingThunk";
 
 const FormProducts = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
@@ -43,12 +42,10 @@ const FormProducts = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   useEffect(() => {
     if (currentEdit) {
-      console.log("currentEditLead", currentEdit);
-
       setValue("name", currentEdit.name);
-      setValue("email", currentEdit.email);
-      setValue("telephone", currentEdit.phone);
-      setValue("selectFunnel", currentEdit.funnel_id);
+      setValue("category", currentEdit.category);
+      setValue("price", currentEdit.price);
+      setValue("sku", currentEdit.sku);
       setIdEditLead(currentEdit.id);
     }
   }, [currentEdit, setValue]);
@@ -57,7 +54,8 @@ const FormProducts = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     data.tag = `$${data.name}`;
     console.log(data);
     if (idEditLead !== 0) {
-      dispatch(editLead(data, idEditLead));
+      data.id = idEditLead;
+      dispatch(editProduct(data));
       setCurrentEdit();
       setIdEditLead(0);
     } else {

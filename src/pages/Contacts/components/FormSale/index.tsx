@@ -18,6 +18,9 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import SelectStateBooking from "../SelectStateBooking/index";
 import moment from "moment";
+import SelectOnlyForProduct from "../SelectProduct/index";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 interface IFormInput {
   fullName: String;
@@ -30,17 +33,19 @@ type Option = {
 
 const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const today = new Date();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
-  const { dataProduct } = useAppSelector((state) => state.contact);
+  const { dataProduct } = useAppSelector((state) => state.tracking);
   console.log("dataProduct", dataProduct);
   const [idEditSale, setIdEditSale] = useState<number>(0);
   const [phone, setPhone] = useState();
-  const [nameDate, setNameDate] = useState();
   const [email, setEmail] = useState();
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
-  const [price, setPrice] = useState();
+  const [selectProduct, setSelectProduct] = useState(dataProduct[0]?.name);
+  const [price, setPrice] = useState(dataProduct[0]?.price);
   const [dateSale, setDateSale] = useState<Date>(today);
+  const [selectProductOnchange, setSelectProductOnchange] = useState();
 
   const schema = yup.object().shape({
     email: yup
@@ -55,7 +60,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       .required("El numero de telefono es requerido"),
     // date: yup.date().required("La fecha es obligatoria"),
     selectFunnel: yup.string().required(),
-    selectProduct: yup.string(),
+    // selectProduct: yup.string().required("La fecha es obligatoria"),
     price: yup.number().positive().integer().required("El precio es requerido"),
   });
 
@@ -67,13 +72,14 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
         phone,
         date,
         funnel_id,
+        product,
         price: priceParam,
       } = currentEdit;
       setEmail(emailParam);
       setPhone(phone);
       setSelectFunnel(funnel_id);
+      setSelectProduct(product);
       setPrice(priceParam);
-      // setNameDate(name_date);
       setDateSale(new Date(date));
     }
   };
@@ -99,27 +105,71 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     setValue("phone", phone);
   }, [phone]);
 
-  // useEffect(() => {
-  //   setValue("nameDate", nameDate);
-  // }, [nameDate]);
-
   useEffect(() => {
     setValue("email", email);
   }, [email]);
+
+  useEffect(() => {
+    setValue("dateSale", dateSale);
+  }, [dateSale]);
 
   useEffect(() => {
     setValue("selectFunnel", selectFunnel);
   }, [selectFunnel]);
 
   useEffect(() => {
+    setValue("selectProduct", selectProduct);
+  }, [selectProduct]);
+
+  useEffect(() => {
     setValue("price", price);
   }, [price]);
 
   useEffect(() => {
-    setValue("dateSale", dateSale);
-  }, [dateSale]);
+    if (dataProduct.length === 0) {
+      Swal.fire({
+        title:
+          "Para crear un Funnel debes crear un producto. Por favor ir a crear un producto para continuar.",
+        confirmButtonText: "Ir a producto",
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          navigate("/tracking");
+          // addFunnels();
+          localStorage.setItem("CreateProduct", "3");
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+    }
+  }, [dataProduct]);
+
+  useEffect(() => {
+    if (!selectProductOnchange) return;
+    const { price } = dataProduct.find(
+      (data: any) => data.name === selectProductOnchange
+    );
+    setPrice(price);
+  }, [selectProductOnchange]);
 
   const onSubmit = (data: any) => {
+    if (dataProduct.length === 0) {
+      Swal.fire({
+        title:
+          "Para crear un Funnel debes crear un producto. Por favor ir a crear un producto para continuar.",
+        confirmButtonText: "Ir a producto",
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          navigate("/tracking");
+          // addFunnels();
+          localStorage.setItem("CreateProduct", "3");
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+      return;
+    }
     console.log("dataSale--", data);
     const currentDateSale = moment(dateSale).format("YYYY-MM-DD hh:mm:ss");
     const form: any = {
@@ -143,11 +193,6 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
     onClose();
   };
-
-  console.log("today", today);
-  console.log("currentEdit?.call_date", currentEdit?.call_date);
-  console.log("funnels--", funnels);
-  console.log("currentEdit---?", currentEdit);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -199,12 +244,13 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           />
         </div>
         <div className="form-group col-sm-12">
-          <SelectWithValidation
+          <SelectOnlyForProduct
             label="Seleccionar Producto"
             options={dataProduct}
             name="selectProduct"
             register={register}
             error={String(errors["selectProduct"]?.message)}
+            setSelectProductOnchange={setSelectProductOnchange}
           />
         </div>
         <div className="form-group col-sm-12">
