@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const EPLColumn = () => {
+export const EPLColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -24,7 +24,7 @@ export const EPLColumn = () => {
     ),
     field: "EPL",
     name: "$EPL",
-    checkbox: false,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

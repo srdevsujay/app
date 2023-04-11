@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const cohortColumn = (show: boolean) => {
+export const cohortColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -25,7 +25,7 @@ export const cohortColumn = (show: boolean) => {
     ),
     field: "cohort",
     name: "#Cohort",
-    checkbox: show ? true : false,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -1,11 +1,12 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const AccountCurrencyColumn = () => {
+export const AccountCurrencyColumn = (funnelData: any) => {
   return {
     title: "$Cuenta de dinero",
     field: "account_currency",
     name: "$Cuenta de dinero",
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

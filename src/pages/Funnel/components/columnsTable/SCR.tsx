@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const SCRColumn = () => {
+export const SCRColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -27,7 +27,7 @@ export const SCRColumn = () => {
     ),
     field: "SCR",
     name: "%SCR",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

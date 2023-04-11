@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
+import { ButtonsModal } from "../../../../styled-components/button/index";
 
-const StepsFunnel = () => {
+const StepsFunnel = ({ register, errors }: any) => {
   const step1: FunnelStep = {
     id: 0,
     stepName: "",
@@ -30,22 +31,10 @@ const StepsFunnel = () => {
   return (
     <>
       <div className="row">
-        <div className="col-md-10">
+        <div className="col-md-12">
           <Title fontSize="17px" color="#123249">
             Pasos
           </Title>
-        </div>
-        <div className="col-md-2">
-          <div className="addIcon" onClick={addStep}>
-            {/* <AddCircleOutlineIcon
-              aria-label="delete"
-              color="primary"
-              className="mr-1"
-            >
-              <AddCircleIcon onClick={addSteps} fontSize="medium" />
-            </AddCircleOutlineIcon> */}
-            (+)
-          </div>
         </div>
       </div>
       <button
@@ -60,8 +49,19 @@ const StepsFunnel = () => {
           setStepFunnel={handleChangeStep}
           step={step}
           idFunnel={i}
+          register={register}
+          errors={errors}
         />
       ))}
+      <div className="d-flex justify-content-center">
+        <ButtonsModal
+          className="btn btn-add w-25"
+          type="button"
+          onClick={addStep}
+        >
+          Agregar Paso
+        </ButtonsModal>
+      </div>
     </>
   );
 };

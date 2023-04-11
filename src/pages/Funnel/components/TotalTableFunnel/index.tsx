@@ -1,8 +1,7 @@
 import _ from "lodash";
 
-export const totalFunnel = (tempGroup: any, currentColumnsTotal: any) => {
+export const totalFunnel = (tempGroup: any, filters: any) => {
   console.log("tempGroup--", tempGroup);
-  console.log("currentColumnsTotal--", currentColumnsTotal);
 
   const dataTotal: any = {
     spend: _.sumBy(tempGroup, "spend"),
@@ -51,20 +50,49 @@ export const totalFunnel = (tempGroup: any, currentColumnsTotal: any) => {
     EPL: _.sumBy(tempGroup, "EPL"),
     EPA: _.sumBy(tempGroup, "EPA"),
     EPB: _.sumBy(tempGroup, "EPB"),
+    CKL: _.sumBy(tempGroup, "CKL"),
+    SLTCK: _.sumBy(tempGroup, "SLTCK"),
+    CPCKL: _.sumBy(tempGroup, "CPCKL"),
+    CAC: _.sumBy(tempGroup, "CAC"),
+    SPCR: _.sumBy(tempGroup, "SPCR"),
+    CKCR: _.sumBy(tempGroup, "CKCR"),
+    us: _.sumBy(tempGroup, "us"),
+    UCR: _.sumBy(tempGroup, "UCR"),
     account_currency: _.sumBy(tempGroup, "account_currency"),
   };
+
+  // {field: 'date_start', name: 'FECHA', checkbox: true}
+
+  // {field: 'CPCKL', name: '#CPCKL', checkbox: false}
+  // 15
+  // :
+  // {field: '', name: '$CAC', checkbox: true}
+  // 18
+  // :
+  // {field: '', name: '%SPCR', checkbox: true}
+  // 20
+  // :
+  // {field: '', name: '%CKCR', checkbox: true}
+  // 21
+  // :
+  // {field: '', name: '#US', checkbox: true}
+  // 23
+  // :
+  // {field: '', name: '%UCR', checkbox: true}
+
   const arrDataTotal = [];
   arrDataTotal.push(dataTotal);
   console.log("arrDataTotal", arrDataTotal);
   console.log("dataTotalFunnel", dataTotal);
 
   const currentFunnel: any = {};
-  if (currentColumnsTotal?.length > 0) {
-    currentColumnsTotal.forEach(({ field, name }: any) => {
+  if (filters?.length > 0) {
+    filters.map(({ field, name, checkbox }: any) => {
       if (field in dataTotal) {
         currentFunnel[field] = {
           field,
           name,
+          checkbox,
           total: dataTotal[field],
         };
       }
@@ -73,167 +101,6 @@ export const totalFunnel = (tempGroup: any, currentColumnsTotal: any) => {
     console.log("currentFunnel", currentFunnel);
   }
 
-  // console.log("tbody-", tbody);
-  // const currentTotal = Object.values(currentFunnel).map((data: any) => {
-  //   console.log("data-", data.field);
-  //   tbody.innerHTML = `
-  //     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${data.total.toFixed(
-  //       2
-  //     )}</td>
-  //   `;
-  //   return tbody;
-  // });
-  // console.log("currentTotal-", currentTotal);
-
-  // let tbody = document.createElement("tr");
-  // tbody.className =
-  //   "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgroundTotal";
-
-  // tbody.innerHTML = `
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">Total</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.spend.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     currentFunnel?.impressions?.total
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.cpm.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.reach
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.frequency
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.clicks
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.clicks_organic
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.cpc.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.ctr.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.views
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.leeds
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.CPL.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.LCR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.AT
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.CPAT.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.ATR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.CTA
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.LTA.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.CKOR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.Aps
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.CPAp.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.Apr.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.LTAp.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.B
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.CPB.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.BR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.LTB.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.ltbd
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.sales
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.SCR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.FCR.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.BTS.toFixed(
-  //     2
-  //   )}%</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.cohort
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.btsd
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.sutds
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.revenue.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.cash.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.ACV.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.profit.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.PPB.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">#${
-  //     dataTotal.dws
-  //   }</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.EPC.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.EPV.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.EPL.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.EPA.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.EPB.toFixed(
-  //     2
-  //   )}</td>
-  //   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.account_currency.toFixed(
-  //     2
-  //   )}</td>
-
-  // `;
   const tbody = document.createElement("tr");
   tbody.classList.add(
     "MuiTableBody-root",
@@ -252,50 +119,212 @@ export const totalFunnel = (tempGroup: any, currentColumnsTotal: any) => {
     td.textContent = text;
     return td;
   };
-  console.log("currentFunnel?.impressions", currentFunnel?.impressions);
+  console.log("currentFunnel?.impressions", currentFunnel);
+  console.log(
+    "currentFunnel?.cpm?.checkbox && currentFunnel?.cpm?.total",
+    currentFunnel?.leeds
+  );
 
   tbody.appendChild(createTableCell("Total"));
-  currentFunnel?.spend
+  currentFunnel?.date_start?.checkbox
+    ? tbody.appendChild(createTableCell(`$${currentFunnel?.date_start}`))
+    : "";
+  currentFunnel?.spend?.checkbox && currentFunnel?.spend?.total >= 0
     ? tbody.appendChild(
         createTableCell(`$${currentFunnel?.spend?.total.toFixed(2)}`)
       )
     : "";
-  currentFunnel?.impressions
+  currentFunnel?.impressions?.checkbox && currentFunnel?.impressions?.total >= 0
     ? tbody.appendChild(createTableCell(`${currentFunnel?.impressions?.total}`))
     : "";
-  tbody.appendChild(createTableCell(`$${dataTotal.cpm.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.reach}`));
-  tbody.appendChild(createTableCell(`${dataTotal.frequency}`));
-  tbody.appendChild(createTableCell(`${dataTotal.clicks}`));
-  tbody.appendChild(createTableCell(`${dataTotal.clicks_organic}`));
-  tbody.appendChild(createTableCell(`$${dataTotal.cpc.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.ctr.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.views}`));
-  tbody.appendChild(createTableCell(`${dataTotal.leeds}`));
-  tbody.appendChild(createTableCell(`$${dataTotal.CPL.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.LCR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.AT}`));
-  tbody.appendChild(createTableCell(`$${dataTotal.CPAT.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.ATR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.CTA}`));
-  tbody.appendChild(createTableCell(`${dataTotal.LTA.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.CKOR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.Aps}`));
-  tbody.appendChild(createTableCell(`$${dataTotal.CPAp.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.Apr.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.LTAp.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.B}`));
-  tbody.appendChild(createTableCell(`$${dataTotal.CPB.toFixed(2)}`));
-  tbody.appendChild(createTableCell(`${dataTotal.BR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.LTB.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.ltbd}`));
-  tbody.appendChild(createTableCell(`${dataTotal.sales}`));
-  tbody.appendChild(createTableCell(`${dataTotal.SCR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.FCR.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.BTS.toFixed(2)}%`));
-  tbody.appendChild(createTableCell(`${dataTotal.cohort}`));
-  tbody.appendChild(createTableCell(`${dataTotal.btsd}`));
-  console.log("tbody", tbody);
+  currentFunnel?.cpm?.checkbox && currentFunnel?.cpm?.total
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.cpm?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.reach?.checkbox && currentFunnel?.reach?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.reach?.total}`))
+    : "";
+  currentFunnel?.frequency?.checkbox && currentFunnel?.frequency?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.frequency?.total}`))
+    : "";
+  currentFunnel?.clicks?.checkbox && currentFunnel?.clicks?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.clicks?.total}`))
+    : "";
+  currentFunnel?.clicks_organic?.checkbox &&
+  currentFunnel?.clicks_organic?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.clicks_organic?.total}`)
+      )
+    : "";
+  currentFunnel?.cpc?.checkbox && currentFunnel?.cpc?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.cpc?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.ctr?.checkbox && currentFunnel?.ctr?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.ctr?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.views?.checkbox && currentFunnel?.views?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.views?.total}`))
+    : "";
+  currentFunnel?.leeds?.checkbox && currentFunnel?.leeds?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.leeds?.total}`))
+    : "";
+  currentFunnel?.CPL?.checkbox && currentFunnel?.CPL?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.CPL?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.LCR?.checkbox && currentFunnel?.LCR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.LCR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.AT?.checkbox && currentFunnel?.AT?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.AT?.total}`))
+    : "";
+  currentFunnel?.CPAT?.checkbox && currentFunnel?.CPAT?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.CPAT?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.ATR?.checkbox && currentFunnel?.ATR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.ATR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.CTA?.checkbox && currentFunnel?.CTA?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.CTA?.total}`))
+    : "";
+  currentFunnel?.LTA?.checkbox && currentFunnel?.LTA?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.LTA?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.CKOR?.checkbox && currentFunnel?.CKOR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.CKOR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.Aps?.checkbox && currentFunnel?.Aps?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.Aps?.total}`))
+    : "";
+  currentFunnel?.CPAp?.checkbox && currentFunnel?.CPAp?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.CPAp?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.Apr?.checkbox && currentFunnel?.Apr?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.Apr?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.LTAp?.checkbox && currentFunnel?.LTAp?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.LTAp?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.B?.checkbox && currentFunnel?.B?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.B?.total}`))
+    : "";
+  currentFunnel?.CPB?.checkbox && currentFunnel?.CPB?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`$${currentFunnel?.CPB?.total.toFixed(2)}`)
+      )
+    : "";
+  currentFunnel?.BR?.checkbox && currentFunnel?.BR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.BR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.LTB?.checkbox && currentFunnel?.LTB?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.LTB?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.ltbd?.checkbox && currentFunnel?.ltbd?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.ltbd?.total}`))
+    : "";
+  currentFunnel?.sales?.checkbox && currentFunnel?.sales?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.sales?.total}`))
+    : "";
+  currentFunnel?.SCR?.checkbox && currentFunnel?.SCR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.SCR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.FCR?.checkbox && currentFunnel?.FCR?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.FCR?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.BTS?.checkbox && currentFunnel?.BTS?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.BTS?.total.toFixed(2)}%`)
+      )
+    : "";
+  currentFunnel?.cohort?.checkbox && currentFunnel?.cohort?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.cohort?.total}`))
+    : "";
+  currentFunnel?.btsd?.checkbox && currentFunnel?.btsd?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.btsd?.total}`))
+    : "";
+
+  currentFunnel?.CPCKL?.checkbox && currentFunnel?.CPCKL?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.CPCKL?.total}`))
+    : "";
+  currentFunnel?.CAC?.checkbox && currentFunnel?.CAC?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.CAC?.total}`))
+    : "";
+  currentFunnel?.SPCR?.checkbox && currentFunnel?.SPCR?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.SPCR?.total}`))
+    : "";
+  currentFunnel?.CKCR?.checkbox && currentFunnel?.CKCR?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.CKCR?.total}`))
+    : "";
+  currentFunnel?.us?.checkbox && currentFunnel?.us?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.us?.total}`))
+    : "";
+  currentFunnel?.UCR?.checkbox && currentFunnel?.UCR?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.UCR?.total}`))
+    : "";
+  currentFunnel?.account_currency?.checkbox &&
+  currentFunnel?.account_currency?.total >= 0
+    ? tbody.appendChild(
+        createTableCell(`${currentFunnel?.account_currency?.total}`)
+      )
+    : "";
+
+  currentFunnel?.sutds?.checkbox && currentFunnel?.sutds?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.sutds?.total}`))
+    : "";
+
+  currentFunnel?.revenue?.checkbox && currentFunnel?.revenue?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.revenue?.total}`))
+    : "";
+
+  currentFunnel?.cash?.checkbox && currentFunnel?.cash?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.cash?.total}`))
+    : "";
+
+  currentFunnel?.ACV?.checkbox && currentFunnel?.ACV?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.ACV?.total}`))
+    : "";
+
+  currentFunnel?.profit?.checkbox && currentFunnel?.profit?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.profit?.total}`))
+    : "";
+
+  currentFunnel?.EPA?.checkbox && currentFunnel?.EPA?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.EPA?.total}`))
+    : "";
+
+  currentFunnel?.EPB?.checkbox && currentFunnel?.EPB?.total >= 0
+    ? tbody.appendChild(createTableCell(`${currentFunnel?.EPB?.total}`))
+    : "";
 
   return document.querySelector(".MuiTableHead-root")?.prepend(tbody);
 };

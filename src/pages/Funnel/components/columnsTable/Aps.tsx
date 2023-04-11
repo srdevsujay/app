@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { NumericFormat } from "react-number-format";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const ApsColumn = () => {
+export const ApsColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -20,7 +20,7 @@ export const ApsColumn = () => {
     ),
     field: "Aps",
     name: "#Aps.",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

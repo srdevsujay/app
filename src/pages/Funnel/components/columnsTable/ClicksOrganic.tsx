@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const ClicksOrganicColumn = () => {
+export const ClicksOrganicColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -28,6 +28,7 @@ export const ClicksOrganicColumn = () => {
     ),
     field: "clicks_organic",
     name: "#Clicks Organicos",
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

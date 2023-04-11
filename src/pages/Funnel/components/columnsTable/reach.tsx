@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const reachColumn = () => {
+export const reachColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -20,7 +20,7 @@ export const reachColumn = () => {
     ),
     field: "reach",
     name: "#Reach",
-    checkbox: false,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

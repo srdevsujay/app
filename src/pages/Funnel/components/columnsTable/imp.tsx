@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const ImpColumn = () => {
+export const ImpColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -25,7 +25,7 @@ export const ImpColumn = () => {
     ),
     field: "impressions",
     name: "#Imp.",
-    checkbox: false,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

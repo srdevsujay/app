@@ -1,6 +1,6 @@
 import { TableStyle } from "../../../../styled-components/Table";
 
-export const dateColumn = (time_Zone: string) => {
+export const dateColumn = (time_Zone: string, funnelData: any) => {
   return {
     title: "FECHA",
     value: "FECHA",

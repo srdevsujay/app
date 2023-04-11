@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const LTApColumn = () => {
+export const LTApColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -23,7 +23,7 @@ export const LTApColumn = () => {
     ),
     field: "LTAp",
     name: "%LTAp.",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

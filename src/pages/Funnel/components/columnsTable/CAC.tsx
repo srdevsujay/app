@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const CACColumn = () => {
+export const CACColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -24,7 +24,7 @@ export const CACColumn = () => {
     ),
     field: "CAC",
     name: "$CAC",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

@@ -11,6 +11,7 @@ import {
   getDataPnl,
   getDataFunnel,
   getDashboardFunnel,
+  createFilterFunnelService,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import _ from "lodash";
 import { setDate } from "date-fns";
@@ -109,6 +110,30 @@ export const obtainApiDashboardFunnel = (
       // );
       console.log("dataFunnel-", resultAction);
       dispatch(setDataFunnel(resultAction.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createFilterFunnel = (
+  data: any,
+  id: number,
+  typeDashboard: any,
+  i: number
+): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("dataresultFunnel", data);
+      const result: any = await createFilterFunnelService(data);
+      console.log("resultFunnel", result);
+      if (
+        result.data.message === "Update filter dashboard user successfully!"
+      ) {
+        dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+        // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      }
     } catch (error) {
       console.log(error);
     }

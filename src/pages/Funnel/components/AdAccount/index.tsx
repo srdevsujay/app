@@ -3,6 +3,7 @@ import { AdAccountType } from "../../../Dashboard/models";
 import AdAccountFunnel from "../../../Dashboard/components/AdAccountFunnel";
 import { Option } from "../../../../components/Select";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
+import { ButtonsModal } from "../../../../styled-components/button/index";
 
 const AdAccount = () => {
   const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([
@@ -191,17 +192,14 @@ const AdAccount = () => {
           handleSetAdAccountConfig={handleSetAdAccountConfig}
         />
       ))}
-      <div className="col-md-2">
-        <div className="addIcon" onClick={addAdAccount}>
-          {/* <AddCircleOutlineIcon
-            aria-label="delete"
-            color="primary"
-            className="mr-1"
-          >
-            <AddCircleIcon onClick={addSteps} fontSize="medium" />
-          </AddCircleOutlineIcon> */}
-          (+)
-        </div>
+      <div className="d-flex justify-content-center">
+        <ButtonsModal
+          className="btn btn-add w-25 mb-3"
+          type="submit"
+          onClick={addAdAccount}
+        >
+          Agregar Cuenta
+        </ButtonsModal>
       </div>
     </>
   );

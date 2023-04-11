@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 
-export const cpcColumn = () => {
+export const cpcColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -25,7 +25,7 @@ export const cpcColumn = () => {
     ),
     field: "cpc",
     name: "$CPC",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

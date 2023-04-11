@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const DWSColumn = () => {
+export const DWSColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -22,7 +22,7 @@ export const DWSColumn = () => {
     ),
     field: "dws",
     name: "#DWS",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

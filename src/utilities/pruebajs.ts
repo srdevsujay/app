@@ -35,7 +35,7 @@ export const SalesLetter = [
   { field: 'account_currency', name: '$Cuenta de dinero', checkbox: true },
 ]
 
-const SalesCall = [
+export const SalesCall = [
   { field: 'date_start', name: 'FECHA', checkbox: true },
   { field: 'spend', name: '$Inv.', checkbox: true },
   { field: 'impressions', name: '#Imp.', checkbox: false },
@@ -71,6 +71,7 @@ const SalesCall = [
   { field: 'FCR', name: '%FCR', checkbox: true },
   { field: 'BTS', name: '%BTS', checkbox: true },
   { field: 'Cohort', name: '#Cohort', checkbox: false },
+  { field: 'us', name: '#US', checkbox: true },
   { field: 'BTSD', name: '#BTSD', checkbox: false },
   { field: 'sutds', name: '#SUTSD', checkbox: false },
   { field: 'revenue', name: '$Revenue', checkbox: true },
@@ -204,3 +205,5 @@ const Ecommerce = [
   { field: 'EPV', name: '$EPV', checkbox: false },
   { field: 'account_currency', name: '$Cuenta de dinero', checkbox: true },
 ]
+
+"[{\"field\":\"date_start\",\"name\":\"FECHA\",\"checkbox\":true},{\"field\":\"spend\",\"name\":\"$Inv.\",\"checkbox\":true},{\"field\":\"impressions\",\"name\":\"#Imp.\",\"checkbox\":false},{\"field\":\"cpm\",\"name\":\"$CPM\",\"checkbox\":false},{\"field\":\"reach\",\"name\":\"#Reach\",\"checkbox\":false},{\"field\":\"frequency\",\"name\":\"#Frec.\",\"checkbox\":false},{\"field\":\"clicks\",\"name\":\"#Clics\",\"checkbox\":true},{\"field\":\"clicks_organic\",\"name\":\"#Clicks Organicos\",\"checkbox\":true},{\"field\":\"cpc\",\"name\":\"$CPC\",\"checkbox\":true},{\"field\":\"ctr\",\"name\":\"%CTR\",\"checkbox\":true},{\"field\":\"views\",\"name\":\"#LV\",\"checkbox\":true},{\"field\":\"CTA\",\"name\":\"#CTA\",\"checkbox\":true},{\"field\":\"CKL\",\"name\":\"#CKL\",\"checkbox\":true},{\"field\":\"SLTCK\",\"name\":\"%SLTCK\",\"checkbox\":true},{\"field\":\"CPCKL\",\"name\":\"#CPCKL\",\"checkbox\":false},{\"field\":\"CKOR\",\"name\":\"%CKOR\",\"checkbox\":true},{\"field\":\"sales\",\"name\":\"#Sales\",\"checkbox\":true},{\"field\":\"CAC\",\"name\":\"$CAC\",\"checkbox\":true},{\"field\":\"FCR\",\"name\":\"%FCR\",\"checkbox\":true},{\"field\":\"SPCR\",\"name\":\"%SPCR\",\"checkbox\":true},{\"field\":\"CKCR\",\"name\":\"%CKCR\",\"checkbox\":true},{\"field\":\"Cohort\",\"name\":\"#Cohort\",\"checkbox\":true},{\"field\":\"US\",\"name\":\"#US\",\"checkbox\":true},{\"field\":\"UCR\",\"name\":\"%UCR\",\"checkbox\":true},{\"field\":\"dws\",\"name\":\"#DWS\",\"checkbox\":true},{\"field\":\"B\",\"name\":\"#B\",\"checkbox\":true},{\"field\":\"BR\",\"name\":\"%BR\",\"checkbox\":true},{\"field\":\"revenue\",\"name\":\"$Revenue\",\"checkbox\":true},{\"field\":\"cash\",\"name\":\"$Cash\",\"checkbox\":true},{\"field\":\"ACV\",\"name\":\"$ACV\",\"checkbox\":true},{\"field\":\"profit\",\"name\":\"$Profit\",\"checkbox\":true},{\"field\":\"EPC\",\"name\":\"$EPC\",\"checkbox\":true},{\"field\":\"EPV\",\"name\":\"$EPV\",\"checkbox\":false},{\"field\":\"account_currency\",\"name\":\"$Cuenta de dinero\",\"checkbox\":true}]"

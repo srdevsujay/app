@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const BTSDColumn = () => {
+export const BTSDColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -28,7 +28,7 @@ export const BTSDColumn = () => {
     ),
     field: "btsd",
     name: "#BTSD",
-    checkbox: false,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

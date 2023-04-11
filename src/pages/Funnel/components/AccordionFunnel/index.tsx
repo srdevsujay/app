@@ -38,6 +38,8 @@ import { useDebounce } from "../../../../hooks/useDebounce";
 import "../../../../styled-components/style.css";
 import { ContainerFilter } from "../../../../styled-components/input/index";
 import FunnelTable from "../tableFunnel/index";
+import { createFilterFunnel } from "../../../../redux/state/slices/dashboard/dashboardThunk";
+import { SalesCall } from "../../../../utilities/pruebajs";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -77,13 +79,13 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const AccordionFunnel = ({ setCurrentColumnsTotal }: any) => {
+const AccordionFunnel = () => {
   const dispatch = useAppDispatch();
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
   console.log("dataTracking", dataTracking);
-  const { data: dataFunnel, filters }: any = useAppSelector(
+  const { data: dataFunnel, filters: objFilter }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
@@ -136,37 +138,48 @@ const AccordionFunnel = ({ setCurrentColumnsTotal }: any) => {
       dispatch(
         obtainApiDashboardFunnel(dataTrackingState.id as any, dataTracking, 0)
       );
+      // const currentColumnsJSON = JSON.stringify(SalesCall);
+      // console.log("currentColumnsJSON", currentColumnsJSON);
+      // const obj = {
+      //   filter_json: currentColumnsJSON,
+      //   id: 2,
+      // };
+      // dispatch(
+      //   createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)
+      // );
     }
   }, [dataTrackingState]);
 
   useEffect(() => {
-    if (dataFunnel?.length > 0 && dataTracking.length > 0) {
-      // console.log("filters1", filters);
-      // const obj = JSON.parse(filters);
-      // console.log("filters2", obj);
-      const getDataColumns = dataFunnel.map((funnel: any) => {
+    if (objFilter) {
+      const filter = JSON.parse(objFilter);
+      console.log("filters2", filter);
+      const getDataColumns = filter.map((funnel: any) => {
+        console.log("funnelfunnel", funnel);
         return TypeDashboardDataTableColumns(
           funnel,
           dataTrackingState.type_dashboard,
           time_Zone
         );
       });
-      const activeColumns = getDataColumns[0]?.filter(
+      console.log("getDataColumns", getDataColumns[0]);
+      let getDataColumns2: any = [];
+      if (getDataColumns[0]) {
+        for (let i = 0; i < getDataColumns.length; i++) {
+          getDataColumns2.push(getDataColumns[i][i]);
+        }
+      }
+      console.log("getDataColumns2", getDataColumns2);
+      const activeColumns = getDataColumns2?.filter(
         (column: any) => column.checkbox
       );
-      // const columnsToShow = getDataColumns[0].filter((column: any) =>
-      // condición para mostrar y ocultar comunas
-      // const columnsToShow = (getDataColumns[0] as any).filter((column: any) =>
-      //   visibleColumns.includes(column.field)
-      // );
-      // console.log("columnsToShow", columnsToShow);
-      console.log("getDataColumns", getDataColumns);
+      console.log("filters3", filter);
+      console.log("activeColumns", activeColumns);
       setColumnsToSet(activeColumns);
-      setDataFunnelToggle(getDataColumns[0]);
-      setOriginalData(getDataColumns[0]);
-      // setFilteredData(getDataColumns[0]);
+      setDataFunnelToggle(getDataColumns2);
+      setOriginalData(getDataColumns2);
     }
-  }, [dataFunnel, dataTracking]);
+  }, [objFilter, dataTrackingState]);
 
   const handleChange = (panel: any) => (event: any, newExpanded: any) => {
     setExpanded(newExpanded ? panel : false);
@@ -348,6 +361,21 @@ const AccordionFunnel = ({ setCurrentColumnsTotal }: any) => {
       return originalColumn;
     });
     console.log("updatedColumns", updatedColumns);
+    const currentFunnel: any = updatedColumns.map((funnel: any) => ({
+      field: funnel.field,
+      name: funnel.name,
+      checkbox: funnel.checkbox,
+    }));
+    console.log("currentFunnel", currentFunnel);
+    const currentColumnsJSON = JSON.stringify(currentFunnel);
+    console.log("currentColumnsJSON", currentColumnsJSON);
+    const obj = {
+      filter_json: currentColumnsJSON,
+      id: 2,
+    };
+    dispatch(
+      createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)
+    );
     const activeColumns = updatedColumns.filter(
       (column: any) => column.checkbox
     );
@@ -367,25 +395,18 @@ const AccordionFunnel = ({ setCurrentColumnsTotal }: any) => {
     }
   }, [searchStringDebounced]);
 
-  useEffect(() => {
-    if (columnsToSet?.length > 0) {
-      const currentFunnel: any = columnsToSet.map((funnel: any) => ({
-        field: funnel.field,
-        name: funnel.name,
-        checkbox: funnel.checkbox,
-      }));
-      console.log("currentFunnel", currentFunnel);
-      setFilteredData(currentFunnel);
-    }
-  }, [columnsToSet]);
-  console.log("filteredData", filteredData);
-
-  useEffect(() => {
-    if (columnsToSet) {
-      console.log("columnsToSetcolumnsToSet", columnsToSet);
-      setCurrentColumnsTotal(columnsToSet);
-    }
-  }, [columnsToSet]);
+  // useEffect(() => {
+  //   if (columnsToSet?.length > 0) {
+  //     const currentFunnel: any = columnsToSet.map((funnel: any) => ({
+  //       field: funnel.field,
+  //       name: funnel.name,
+  //       checkbox: funnel.checkbox,
+  //     }));
+  //     console.log("currentFunnel", currentFunnel);
+  //     setFilteredData(currentFunnel);
+  //   }
+  // }, [columnsToSet]);
+  // console.log("filteredData", filteredData);
 
   return (
     <div className="mt-3">

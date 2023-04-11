@@ -32,7 +32,7 @@ const SelectWithValidation = (props: SelectProps) => {
       <Select {...register(name)} {...otherProps}>
         {options.map((option: any, idx: number) => (
           <option key={idx} value={option.id}>
-            {option.funnel_name}
+            {option.funnel_name || option.name}
           </option>
         ))}
       </Select>

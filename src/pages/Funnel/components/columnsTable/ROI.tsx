@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const ROIColumn = () => {
+export const ROIColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -26,6 +26,7 @@ export const ROIColumn = () => {
     ),
     field: "ROI",
     name: "#ROI",
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

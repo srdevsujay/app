@@ -1,8 +1,8 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
-import { NumericFormat } from "react-number-format";
 
-export const InvColumn = () => {
+export const InvColumn = (funnelData: any) => {
+  console.log("funnelData.checkboxfunnelData.checkbox", funnelData.checkbox);
   return {
     title: (
       <Tooltip
@@ -20,7 +20,7 @@ export const InvColumn = () => {
     ),
     field: "spend",
     name: "$Inv.",
-    checkbox: true,
+    checkbox: funnelData?.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

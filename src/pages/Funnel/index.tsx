@@ -9,28 +9,107 @@ import StepsFunnel from "./components/Steps/index";
 import AdAccount from "./components/AdAccount/index";
 import "../../styled-components/Table/style.css";
 import { NewFunnel, ButtonFunnel } from "./styled-components/funnel-styled";
-import { useAppSelector } from "../../hooks/appDispatch";
+import { useAppSelector, useAppDispatch } from "../../hooks/appDispatch";
 import { totalFunnel } from "./components/TotalTableFunnel";
+import { useForm } from "react-hook-form";
 import {
   ButtonsModal,
   ContainerSticky,
 } from "../../styled-components/button/index";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { obtainApiProduct } from "../../redux/state/slices/tracking/trackingThunk";
 
 const Funnel = () => {
-  const { data: dataFunnel }: any = useAppSelector(
+  const dispatch = useAppDispatch();
+  const { data: dataFunnel, filters: filterJSON }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
-  const [isModalOpen, setModalState] = useState<boolean>(false);
-  const [currentColumnsTotal, setCurrentColumnsTotal] = useState();
+  const [currentEdit, setCurrentEdit] = useState();
+  const [idEditCurrent, setIdEditCurrent] = useState(0);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
-  const toggleModal = () => setModalState(!isModalOpen);
-  console.log("currentColumnsTotal", currentColumnsTotal);
+  const toggleModal = () => setModalOpen(!isModalOpen);
+
+  useEffect(() => {
+    dispatch(obtainApiProduct());
+  }, []);
+
+  useEffect(() => {
+    if (currentEdit) {
+      toggleModal();
+    }
+  }, [currentEdit]);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setCurrentEdit(null as any);
+    }
+  }, [isModalOpen]);
+
+  const openModal = () => {
+    if (!isModalOpen) {
+      setModalOpen(true);
+    }
+  };
 
   useEffect(() => {
     if (dataFunnel?.length > 0) {
-      totalFunnel(dataFunnel, currentColumnsTotal);
+      const filters = JSON.parse(filterJSON);
+      console.log("filterJSON", filters);
+      totalFunnel(dataFunnel, filters);
     }
-  }, [dataFunnel, currentColumnsTotal]);
+  }, [dataFunnel]);
+
+  const schema = yup.object().shape({
+    funnelName: yup.string().required("El nombre del Funnel es requerido"),
+    funnelURL: yup.string().required("La URL del Funnel es requerida"),
+    stepName: yup.string().required("El nombre del paso es requerido"),
+    stepUrl: yup.string().required("La URL del paso es requerido"),
+    // email: yup
+    //   .string()
+    //   .email("El correo electrónico debe ser un correo electrónico válido")
+    //   .required("El correo electronico es requerido"),
+    // telephone: yup
+    //   .number()
+    //   .positive("This field must contain a positive number")
+    //   .integer("This field should contain an integer")
+    //   .min(10)
+    //   .required("El numero de telefono es requerido"),
+    selectFunnel: yup.string().required(),
+    selectProduct: yup.string().required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // useEffect(() => {
+  //   if (currentEdit) {
+  //     console.log("currentEditLead", currentEdit);
+  //     setValue("funnelName", currentEdit.name);
+  //     setValue("funnelURL", currentEdit.funnelURL);
+  //     setValue("selectFunnel", currentEdit.funnel_id);
+  //     // setIdEditLead(currentEdit.id);
+  //   }
+  // }, [currentEdit, setValue]);
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    // if (idEditLead !== 0) {
+    //   dispatch(editLead(data, idEditLead));
+    //   setCurrentEdit();
+    //   setIdEditLead(0);
+    // } else {
+    //   dispatch(createLead(data));
+    // }
+    toggleModal();
+  };
 
   return (
     <Main>
@@ -41,7 +120,7 @@ const Funnel = () => {
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
-            <AccordionFunnel setCurrentColumnsTotal={setCurrentColumnsTotal} />
+            <AccordionFunnel />
           </div>
         </div>
       </Card>
@@ -57,23 +136,25 @@ const Funnel = () => {
         padding="12px 2.25rem 16px"
         btnClose={1}
       >
-        <AddFunnelInput />
-        <StepsFunnel />
-        <AdAccount />
-        <ContainerSticky className="row">
-          <Bar className="mb-3"></Bar>
-          <div className="form-group col-sm-6">
-            <ButtonsModal className="btn btn-close" onClick={toggleModal}>
-              Cerrar
-            </ButtonsModal>
-          </div>
-          <div className="form-group col-sm-6">
-            <ButtonsModal className="btn btn-add" type="submit">
-              {/* {idEditBooking !== 0 ? "Editar" : "Guardar"} */}
-              Guardar
-            </ButtonsModal>
-          </div>
-        </ContainerSticky>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <AddFunnelInput register={register} errors={errors} />
+          <StepsFunnel register={register} errors={errors} />
+          <AdAccount />
+          <ContainerSticky className="row">
+            <Bar className="mb-3"></Bar>
+            <div className="form-group col-sm-6">
+              <ButtonsModal className="btn btn-close" onClick={toggleModal}>
+                Cerrar
+              </ButtonsModal>
+            </div>
+            <div className="form-group col-sm-6">
+              <ButtonsModal className="btn btn-add" type="submit">
+                {/* {idEditBooking !== 0 ? "Editar" : "Guardar"} */}
+                Guardar
+              </ButtonsModal>
+            </div>
+          </ContainerSticky>
+        </form>
       </Modal>
       <FooterMenu />
     </Main>

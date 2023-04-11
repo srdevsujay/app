@@ -2,7 +2,7 @@ import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
 import { NumericFormat } from "react-number-format";
 
-export const viewColumn = () => {
+export const viewColumn = (funnelData: any) => {
   return {
     title: (
       <Tooltip
@@ -20,7 +20,7 @@ export const viewColumn = () => {
     ),
     field: "views",
     name: "#LV",
-    checkbox: true,
+    checkbox: funnelData.checkbox,
     render: (funnelData: any) => (
       <BackColorsTable
         className={`${

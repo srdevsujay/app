@@ -15,7 +15,7 @@ type SelectProps = {
   name: string;
   error?: string;
   register: UseFormRegister<any>;
-  currentEdit: any;
+  currentEdit?: any;
 } & Omit<SelectHTMLAttributes<HTMLSelectElement>, "onChange">;
 
 const SelectStateBooking = (props: SelectProps) => {
