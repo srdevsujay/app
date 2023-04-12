@@ -129,7 +129,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     if (dataProduct.length === 0) {
       Swal.fire({
         title:
-          "Para crear un Funnel debes crear un producto. Por favor ir a crear un producto para continuar.",
+          "Para crear una venta debes crear un producto. Por favor ir a crear un producto para continuar.",
         confirmButtonText: "Ir a producto",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
@@ -156,7 +156,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     if (dataProduct.length === 0) {
       Swal.fire({
         title:
-          "Para crear un Funnel debes crear un producto. Por favor ir a crear un producto para continuar.",
+          "Para crear una venta debes crear un producto. Por favor ir a crear un producto para continuar.",
         confirmButtonText: "Ir a producto",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
