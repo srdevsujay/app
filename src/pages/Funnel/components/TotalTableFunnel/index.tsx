@@ -126,14 +126,13 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
   );
 
   tbody.appendChild(createTableCell("Total"));
-  currentFunnel?.date_start?.checkbox
-    ? tbody.appendChild(createTableCell(`$${currentFunnel?.date_start}`))
-    : "";
-  currentFunnel?.spend?.checkbox && currentFunnel?.spend?.total >= 0
-    ? tbody.appendChild(
-        createTableCell(`$${currentFunnel?.spend?.total.toFixed(2)}`)
-      )
-    : "";
+  currentFunnel?.date_start?.checkbox &&
+    tbody.appendChild(createTableCell(`$${currentFunnel?.date_start}`));
+  currentFunnel?.spend?.checkbox &&
+    currentFunnel?.spend?.total >= 0 &&
+    tbody.appendChild(
+      createTableCell(`$${currentFunnel?.spend?.total.toFixed(2)}`)
+    );
   currentFunnel?.impressions?.checkbox && currentFunnel?.impressions?.total >= 0
     ? tbody.appendChild(createTableCell(`${currentFunnel?.impressions?.total}`))
     : "";
