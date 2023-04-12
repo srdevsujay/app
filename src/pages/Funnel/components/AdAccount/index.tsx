@@ -5,33 +5,23 @@ import { Option } from "../../../../components/Select";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 
-const AdAccount = () => {
-  const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([
-    {
-      id: 0,
-      trafficSource: "facebook",
-      connectionType: "adAccount",
-      adAccountName: "",
-      adAccountIdentification: "",
-    },
-  ]);
-
+const AdAccount = ({ adAccounts, setAdAccounts }: any) => {
   const configOptions = [
     {
       label: "Facebook",
-      value: "facebook",
+      value: "1",
       disabled: false,
       connectionTypes: [
-        { label: "Cuenta Publicitaria", value: "adAccount", disabled: false },
-        { label: "Campaña", value: "campaign", disabled: false },
+        { label: "Cuenta Publicitaria", value: "1", disabled: false },
+        { label: "Campaña", value: "2", disabled: false },
       ],
     },
     {
       label: "Google",
-      value: "google",
+      value: "2",
       disabled: false,
       connectionTypes: [
-        { label: "Cuenta Publicitaria", value: "adAccount", disabled: false },
+        { label: "Cuenta Publicitaria", value: "1", disabled: false },
       ],
     },
   ];
@@ -48,14 +38,11 @@ const AdAccount = () => {
     let bloquearGoogle = false;
     let bloquearCampana = false;
     let bloquearPublicitaria = false;
-    adAccounts.map((elem) => {
+    adAccounts.map((elem: any) => {
       const facebookTraffic = adAccounts.filter(
-        (elem) => elem.trafficSource === "facebook"
+        (elem: any) => elem.trafficSource === "1"
       );
-      if (
-        elem.trafficSource === "facebook" &&
-        elem.connectionType === "adAccount"
-      ) {
+      if (elem.trafficSource === "1" && elem.connectionType === "1") {
         //bloquear facebook
         bloquearFacebook = true;
         if (facebookTraffic.length > 1) {
@@ -63,16 +50,13 @@ const AdAccount = () => {
           bloquearCampana = true;
         }
       }
-      if (
-        elem.trafficSource === "facebook" &&
-        elem.connectionType === "campaign"
-      ) {
+      if (elem.trafficSource === "1" && elem.connectionType === "2") {
         if (facebookTraffic.length > 1) {
           //bloquear cuenta publicitaria para facebook
           bloquearPublicitaria = true;
         }
       }
-      if (elem.trafficSource === "google") {
+      if (elem.trafficSource === "2") {
         //bloquear google
         bloquearGoogle = true;
       }
@@ -80,22 +64,22 @@ const AdAccount = () => {
     setAdAccountConfig([
       {
         label: "Facebook",
-        value: "facebook",
+        value: "1",
         disabled: bloquearFacebook,
         connectionTypes: [
           {
             label: "Cuenta Publicitaria",
-            value: "adAccount",
+            value: "1",
             disabled: bloquearPublicitaria,
           },
-          { label: "Campaña", value: "campaign", disabled: bloquearCampana },
+          { label: "Campaña", value: "2", disabled: bloquearCampana },
         ],
       },
       {
         label: "Google",
-        value: "google",
+        value: "2",
         disabled: bloquearGoogle,
-        connectionTypes: [{ label: "Cuenta Publicitaria", value: "adAccount" }],
+        connectionTypes: [{ label: "Cuenta Publicitaria", value: "1" }],
       },
     ]);
   };
@@ -110,48 +94,44 @@ const AdAccount = () => {
       adAccountIdentification: "",
     };
     let canContinue = true;
-    adAccounts.forEach((adAccount) => {
+    adAccounts.forEach((adAccount: any) => {
       if (!adAccount.trafficSource || !adAccount.connectionType) {
         canContinue = false;
       }
     });
     if (!canContinue) return;
-    const facebookSet = adAccountConfig.find(
-      (elem: any) => elem.value === "facebook"
-    );
+    const facebookSet = adAccountConfig.find((elem: any) => elem.value === "1");
     // const cuentaPublicitaria = facebookSet.connectionTypes.find(
     //   (elem: any) => elem.value === "adAccount"
     // );
     // const campana = facebookSet.connectionTypes.find(
     //   (elem: any) => elem.value === "campaign"
     // );
-    const googleSet = adAccountConfig.find(
-      (elem: any) => elem.value === "google"
-    );
+    const googleSet = adAccountConfig.find((elem: any) => elem.value === "2");
     if (googleSet.disabled) {
       if (facebookSet.disabled) {
         console.log("NO PODEMOS CREAR NADA MAS");
         return;
       } else {
-        newAdAccount.trafficSource = "facebook";
+        newAdAccount.trafficSource = "1";
         const adAccountsFacebook = adAccounts.filter(
-          (elem: any) => elem.trafficSource === "facebook"
+          (elem: any) => elem.trafficSource === "1"
         );
         const campaignExists = adAccountsFacebook.find(
-          (elem: any) => elem.connectionType === "campaign"
+          (elem: any) => elem.connectionType === "2"
         );
         const adAccountExists = adAccountsFacebook.find(
-          (elem: any) => elem.connectionType === "adAccount"
+          (elem: any) => elem.connectionType === "1"
         );
         if (campaignExists) {
-          newAdAccount.connectionType = "campaign";
+          newAdAccount.connectionType = "2";
         } else if (adAccountExists) {
           return;
         }
       }
     } else {
-      newAdAccount.trafficSource = "google";
-      newAdAccount.connectionType = "adAccount";
+      newAdAccount.trafficSource = "2";
+      newAdAccount.connectionType = "1";
     }
     setAdAccounts([...adAccounts, newAdAccount]);
   };
@@ -195,7 +175,7 @@ const AdAccount = () => {
       <div className="d-flex justify-content-center">
         <ButtonsModal
           className="btn btn-add w-25 mb-3"
-          type="submit"
+          type="button"
           onClick={addAdAccount}
         >
           Agregar Cuenta

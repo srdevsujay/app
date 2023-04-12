@@ -1,7 +1,8 @@
 export interface FunnelStep {
   id: number;
-  stepName: string;
-  stepUrl: string
+  step_name: string,
+  step_url: string,
+  step_description: string,
 }
 
 export interface StepFunnelProps {

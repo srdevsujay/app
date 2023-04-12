@@ -12,6 +12,7 @@ import {
   getDataFunnel,
   getDashboardFunnel,
   createFilterFunnelService,
+  createFunnelService,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import _ from "lodash";
 import { setDate } from "date-fns";
@@ -118,22 +119,22 @@ export const obtainApiDashboardFunnel = (
 
 export const createFilterFunnel = (
   data: any,
-  id: number,
+  id: any,
   typeDashboard: any,
-  i: number
+  i: any
 ): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       console.log("dataresultFunnel", data);
-      const result: any = await createFilterFunnelService(data);
+      const result: any = await createFunnelService(data);
       console.log("resultFunnel", result);
-      if (
-        result.data.message === "Update filter dashboard user successfully!"
-      ) {
-        dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
-        // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
-      }
+      // if (
+      //   result.data.message === "Create funnel successfully!"
+      // ) {
+      //   dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+      //   // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      // }
     } catch (error) {
       console.log(error);
     }

@@ -15,9 +15,9 @@ const AddFunnelInput = ({ register, errors }: any) => {
           <SelectStateBooking
             label="Tipo de Funnel"
             options={TypeFunnel as any}
-            name="selectFunnel"
+            name="funnel_status"
             register={register}
-            error={String(errors["selectFunnel"]?.message)}
+            error={String(errors["funnel_status"]?.message)}
             // currentEdit={currentEdit}
           />
         </div>
@@ -25,9 +25,9 @@ const AddFunnelInput = ({ register, errors }: any) => {
           <SelectWithValidation
             label="Selecciona el Producto"
             options={dataProduct as any}
-            name="selectProduct"
+            name="product_id"
             register={register}
-            error={String(errors["selectProduct"]?.message)}
+            error={String(errors["product_id"]?.message)}
             // currentEdit={currentEdit}
           />
         </div>
@@ -40,9 +40,9 @@ const AddFunnelInput = ({ register, errors }: any) => {
             id="0"
             type="text"
             min={3}
-            name="funnelName"
+            name="funnel_name"
             register={register}
-            error={String(errors["funnelName"]?.message)}
+            error={String(errors["funnel_name"]?.message)}
           />
         </div>
         <div className="col-sm-6">
@@ -52,9 +52,9 @@ const AddFunnelInput = ({ register, errors }: any) => {
             id="0"
             type="text"
             min={3}
-            name="funnelURL"
+            name="funnel_url"
             register={register}
-            error={String(errors["funnelURL"]?.message)}
+            error={String(errors["funnel_url"]?.message)}
           />
         </div>
       </div>

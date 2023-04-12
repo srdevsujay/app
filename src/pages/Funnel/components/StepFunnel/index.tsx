@@ -4,20 +4,25 @@ import { InputComponent } from "../../../../components/input";
 import { StepFunnelProps } from "../../../Dashboard/models";
 import InputRegister from "../../../../components/input/InputRegister.component";
 
-const StepFunnel = ({
-  setStepFunnel,
-  step,
-  idFunnel,
-  register,
-  errors,
-}: StepFunnelProps) => {
+const StepFunnel = ({ setStepFunnel, step, idFunnel }: StepFunnelProps) => {
   const [stepObject, setStepObject] = useState(step);
-  const handleChangeStepName = (stepName: string) => {
-    setStepObject({ id: idFunnel, stepName, stepUrl: stepObject.stepUrl });
+  const handleChangeStepName = (step_name: string) => {
+    console.log("step_name", step_name);
+    setStepObject({
+      id: idFunnel,
+      step_name,
+      step_url: stepObject.step_url,
+      step_description: "",
+    });
   };
 
-  const handleChangeStepUrl = (stepUrl: string) => {
-    setStepObject({ id: idFunnel, stepName: stepObject.stepName, stepUrl });
+  const handleChangeStepUrl = (step_url: string) => {
+    setStepObject({
+      id: idFunnel,
+      step_name: stepObject.step_name,
+      step_url,
+      step_description: "",
+    });
   };
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const StepFunnel = ({
     <>
       <div className="row">
         <div className="col-sm-6">
-          <InputRegister
+          {/* <InputRegister
             placeholder="Ingresa el nombre del paso"
             label="Nombre del paso"
             id="0"
@@ -36,21 +41,23 @@ const StepFunnel = ({
             min={3}
             name="stepName"
             register={register}
+            defaultValue={stepObject.stepName}
+            onChange={handleChangeStepName}
             error={String(errors["stepName"]?.message)}
-          />
-          {/* <InputComponent
+          /> */}
+          <InputComponent
             max={5}
-            placeholder="Ingresa la url del paso"
+            placeholder="Ingresa el nombre del paso"
             label="Url del paso"
             id="3"
             type="text"
             min={3}
-            value={stepObject.stepName}
+            value={stepObject.step_name}
             onChange={handleChangeStepName}
-          /> */}
+          />
         </div>
         <div className="col-sm-6">
-          <InputRegister
+          {/* <InputRegister
             placeholder="Ingresa la url del paso"
             label="Url del paso"
             id="0"
@@ -59,17 +66,17 @@ const StepFunnel = ({
             name="stepUrl"
             register={register}
             error={String(errors["stepUrl"]?.message)}
-          />
-          {/* <InputComponent
+          /> */}
+          <InputComponent
             max={5}
-            placeholder="Url del Paso"
-            label="Escribe Url del Paso"
+            placeholder="Ingresa la url del paso"
+            label="Url del paso"
             id="4"
             type="text"
             min={3}
-            value={stepObject.stepUrl}
+            value={stepObject.step_url}
             onChange={handleChangeStepUrl}
-          /> */}
+          />
         </div>
       </div>
       <hr />

@@ -44,3 +44,12 @@ export const createFilterFunnelService = async (data: any) => {
     }
   });
 };
+
+export const createFunnelService = async (data: any) => {
+  return clientAxios.post("/funnel", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+

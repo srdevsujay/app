@@ -4,29 +4,30 @@ import StepFunnel from "../StepFunnel";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 
-const StepsFunnel = ({ register, errors }: any) => {
-  const step1: FunnelStep = {
-    id: 0,
-    stepName: "",
-    stepUrl: "",
-  };
-
-  const [steps, setSteps] = useState([step1]);
-
+const StepsFunnel = ({ currentSteps, setCurrentSteps }: any) => {
   const addStep = () => {
-    setSteps([...steps, { id: steps.length, stepName: "", stepUrl: "" }]);
+    setCurrentSteps([
+      ...currentSteps,
+      {
+        id: currentSteps.length,
+        stepName: "",
+        stepUrl: "",
+        step_description: "",
+      },
+    ]);
   };
 
   const handleChangeStep = (step: any) => {
-    const newSteps = steps.map((elem: any) => {
+    const newSteps = currentSteps.map((elem: any) => {
       if (elem.id === step.id) {
         return step;
       } else {
         return elem;
       }
     });
-    setSteps(newSteps);
+    setCurrentSteps(newSteps);
   };
+  console.log("stepsstepssteps", currentSteps);
 
   return (
     <>
@@ -37,20 +38,12 @@ const StepsFunnel = ({ register, errors }: any) => {
           </Title>
         </div>
       </div>
-      <button
-        className="btn btn succes"
-        onClick={() => alert(JSON.stringify(steps))}
-      >
-        Ver
-      </button>
-      {steps.map((step: FunnelStep, i: number) => (
+      {currentSteps?.map((step: FunnelStep, i: number) => (
         <StepFunnel
           key={i}
           setStepFunnel={handleChangeStep}
           step={step}
           idFunnel={i}
-          register={register}
-          errors={errors}
         />
       ))}
       <div className="d-flex justify-content-center">
