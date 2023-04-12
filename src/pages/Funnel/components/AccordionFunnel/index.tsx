@@ -373,7 +373,9 @@ const AccordionFunnel = () => {
       filter_json: currentColumnsJSON,
       id: 2,
     };
-    dispatch(createFilterFunnel(obj, dataTrackingState.id, dataTracking, 0));
+    dispatch(
+      createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)
+    );
     const activeColumns = updatedColumns.filter(
       (column: any) => column.checkbox
     );

@@ -12,12 +12,13 @@ import {
   getDataFunnel,
   getDashboardFunnel,
   createFilterFunnelService,
-  createFunnelService,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import _ from "lodash";
 import { setDate } from "date-fns";
 import { AppThunk } from "@/redux/store";
 import { Pnl } from "../../../../pages/Dashboard/models/dashboard.model";
+import { createFunnelService } from "../../../../pages/Dashboard/services/pnlApi";
+import Swal from "sweetalert2";
 
 export const getMetricFunnel = (date?: DateFormat): AppThunk => {
   return async (dispatch) => {
@@ -119,22 +120,39 @@ export const obtainApiDashboardFunnel = (
 
 export const createFilterFunnel = (
   data: any,
-  id: any,
+  id: number,
   typeDashboard: any,
-  i: any
+  i: number
 ): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("dataresultFunnel", data);
+      const result: any = await createFilterFunnelService(data);
+      console.log("resultFunnel", result);
+      if (
+        result.data.message === "Update filter dashboard user successfully!"
+      ) {
+        dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+        // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createFunnel = (data: any): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       console.log("dataresultFunnel", data);
       const result: any = await createFunnelService(data);
       console.log("resultFunnel", result);
-      // if (
-      //   result.data.message === "Create funnel successfully!"
-      // ) {
-      //   dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
-      //   // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
-      // }
+      if (result.data.message === "Create funnel successfully!") {
+        // dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+        Swal.fire("Correcto", "Funnel Creado correctamente!!", "success");
+      }
     } catch (error) {
       console.log(error);
     }

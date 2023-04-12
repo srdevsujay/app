@@ -21,7 +21,7 @@ import * as yup from "yup";
 import { obtainApiProduct } from "../../redux/state/slices/tracking/trackingThunk";
 import { FunnelStep } from "../Dashboard/models/steps.model";
 import { AdAccountType } from "../Dashboard/models/adAccount.model";
-import { createFilterFunnel } from "../../redux/state/slices/dashboard/dashboardThunk";
+import { createFunnel } from "../../redux/state/slices/dashboard/dashboardThunk";
 
 const Funnel = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ const Funnel = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const step1: FunnelStep = {
-    id: 0,
+    id: 1,
     step_name: "",
     step_url: "",
     step_description: "",
@@ -151,7 +151,7 @@ const Funnel = () => {
     //   setCurrentEdit();
     //   setIdEditLead(0);
     // } else {
-    dispatch(createFilterFunnel(form));
+    dispatch(createFunnel(form));
     // }
     toggleModal();
   };

@@ -156,13 +156,6 @@ const AdAccount = ({ adAccounts, setAdAccounts }: any) => {
           </Title>
         </div>
       </div>
-      <button
-        className="btn btn succes"
-        onClick={() => alert(JSON.stringify(adAccounts))}
-      >
-        Ver
-      </button>
-
       {adAccounts.map((adAccount: any, i: number) => (
         <AdAccountFunnel
           key={i}
