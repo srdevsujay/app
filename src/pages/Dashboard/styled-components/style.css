@@ -103,3 +103,22 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
 .check-toggle-graphic > span > svg {
   height: 20px;
 }
+
+.MuiTableRow-head  > .MuiTableCell-paddingNone:first-of-type {
+  display: none;
+}
+
+.MuiTableRow-hover > .MuiTableCell-paddingNone:first-of-type {
+  display: none;
+}
+
+.font-Title-Helvetica {
+  font-family: "Helvetica-NeueL-Title" !important;
+}
+
+
+/* .MuiTableCell-paddingNone {
+  display: none !important;
+}
+
+MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone */

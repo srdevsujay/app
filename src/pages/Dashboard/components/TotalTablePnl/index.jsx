@@ -15,14 +15,14 @@ export const totalPnl = (tempGroup) => {
   const tbody = document.createElement('tr');
   tbody.className = "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgroundTotal";
   tbody.innerHTML = `
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">Total</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.ingresos.toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${dataTotal.gastos.toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">$${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${(dataTotal.ingresos.toFixed(2)/(dataTotal.ingresos.toFixed(2)-dataTotal.gastos.toFixed(2))).toFixed(2)}%</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.ingresos/dataTotal.gastos == Infinity ? 0 : (dataTotal.ingresos/dataTotal.gastos).toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.leeds.toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">${dataTotal.bookings.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">Total</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.ingresos.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.gastos.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${(dataTotal.ingresos.toFixed(2)/(dataTotal.ingresos.toFixed(2)-dataTotal.gastos.toFixed(2))).toFixed(2)}%</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.ingresos/dataTotal.gastos == Infinity ? 0 : (dataTotal.ingresos/dataTotal.gastos).toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.leeds.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.bookings.toFixed(2)}</td>
   `;
   return document.querySelector(".MuiTableHead-root")?.prepend(tbody);
 }

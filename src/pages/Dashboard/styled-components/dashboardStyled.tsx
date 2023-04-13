@@ -86,3 +86,27 @@ export const HeaderTitleGraphic = styled.div`
   display: flex;
   border-bottom: 1px solid #ebeff2;
 `;
+
+export const TableExpanded = styled.table`
+  width: 100%;
+  display: "inline-table";
+
+  thead {
+    width: 100%;
+    display: inline-table;
+  }
+
+  td {
+    width: 20%;
+  }
+
+  .font-Title-Helvetica {
+    font-family: "Helvetica-NeueL-Title";
+  }
+
+  .font-body-Helvetica {
+    font-family: "Helvetica-NeueL";
+    font-size: 13px !important;
+    color: #464646 !important;
+  }
+`;
