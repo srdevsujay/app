@@ -39,14 +39,16 @@ const Funnel = () => {
     step_description: "",
   };
   const [currentSteps, setCurrentSteps] = useState([step1]);
+  const [initialSteps, setInitialSteps] = useState([step1]);
   const adAccounts1: AdAccountType = {
-    id: 0,
+    id: 1,
     trafficSource: "1",
     connectionType: "1",
     adAccountName: "",
     adAccountIdentification: "",
   };
   const [adAccounts, setAdAccounts] = useState([adAccounts1]);
+  const [initialAccounts, setInitialAccounts] = useState([adAccounts1]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   const toggleModal = () => setModalOpen(!isModalOpen);
@@ -103,6 +105,7 @@ const Funnel = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -110,9 +113,8 @@ const Funnel = () => {
   // useEffect(() => {
   //   if (currentEdit) {
   //     console.log("currentEditLead", currentEdit);
-  //     setValue("funnel_name", currentEdit.name);
+  //     setValue("funnel_name", currentEdit.funnel_name);
   //     setValue("funnel_url", currentEdit.funnel_url);
-  //     setValue("funnel_status", currentEdit.funnel_id);
   //     // setIdEditLead(currentEdit.id);
   //   }
   // }, [currentEdit, setValue]);
@@ -132,7 +134,6 @@ const Funnel = () => {
         },
       ];
     });
-    console.log("campaings.", campaings[0]);
     const steps = currentSteps;
     const form: any = {
       funnel_name: data.funnel_name,
@@ -145,16 +146,21 @@ const Funnel = () => {
       user_funel,
       id: null,
     };
-    console.log("formDataFunnel", form);
     // if (idEditLead !== 0) {
     //   dispatch(editLead(data, idEditLead));
     //   setCurrentEdit();
     //   setIdEditLead(0);
     // } else {
-    dispatch(createFunnel(form));
+    // dispatch(createFunnel(form));
     // }
     toggleModal();
   };
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+    setCurrentSteps(initialSteps);
+    reset();
+  }, [isModalOpen]);
 
   console.log("currentSteps", currentSteps);
   console.log("adAccounts", adAccounts);
@@ -185,12 +191,23 @@ const Funnel = () => {
         btnClose={1}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <AddFunnelInput register={register} errors={errors} />
+          <AddFunnelInput
+            register={register}
+            errors={errors}
+            isModalOpen={isModalOpen}
+          />
           <StepsFunnel
             currentSteps={currentSteps}
             setCurrentSteps={setCurrentSteps}
+            isModalOpen={isModalOpen}
+            initialSteps={initialSteps}
           />
-          <AdAccount adAccounts={adAccounts} setAdAccounts={setAdAccounts} />
+          <AdAccount
+            adAccounts={adAccounts}
+            setAdAccounts={setAdAccounts}
+            isModalOpen={isModalOpen}
+            initialAccounts={initialAccounts}
+          />
           <ContainerSticky className="row">
             <Bar className="mb-3"></Bar>
             <div className="form-group col-sm-6">

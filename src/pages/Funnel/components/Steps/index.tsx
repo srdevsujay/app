@@ -4,7 +4,12 @@ import StepFunnel from "../StepFunnel";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 
-const StepsFunnel = ({ currentSteps, setCurrentSteps }: any) => {
+const StepsFunnel = ({
+  currentSteps,
+  setCurrentSteps,
+  isModalOpen,
+  initialSteps,
+}: any) => {
   const addStep = () => {
     setCurrentSteps([
       ...currentSteps,
@@ -44,6 +49,8 @@ const StepsFunnel = ({ currentSteps, setCurrentSteps }: any) => {
           setStepFunnel={handleChangeStep}
           step={step}
           idFunnel={i}
+          isModalOpen
+          initialSteps
         />
       ))}
       <div className="d-flex justify-content-center">

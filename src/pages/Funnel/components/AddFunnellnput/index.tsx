@@ -6,8 +6,9 @@ import { TypeFunnel } from "../../models/routes";
 import SelectStateBooking from "../../../Contacts/components/SelectStateBooking/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const AddFunnelInput = ({ register, errors }: any) => {
+const AddFunnelInput = ({ register, errors, isModalOpen }: any) => {
   const { dataProduct } = useAppSelector((state) => state.tracking);
+
   return (
     <>
       <div className="row">

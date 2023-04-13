@@ -5,7 +5,12 @@ import { Option } from "../../../../components/Select";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 
-const AdAccount = ({ adAccounts, setAdAccounts }: any) => {
+const AdAccount = ({
+  adAccounts,
+  setAdAccounts,
+  isModalOpen,
+  initialAccounts,
+}: any) => {
   const configOptions = [
     {
       label: "Facebook",
@@ -163,6 +168,8 @@ const AdAccount = ({ adAccounts, setAdAccounts }: any) => {
           adAccount={adAccount}
           adAccountConfig={adAccountConfig}
           handleSetAdAccountConfig={handleSetAdAccountConfig}
+          isModalOpen
+          initialAccounts
         />
       ))}
       <div className="d-flex justify-content-center">

@@ -8,6 +8,8 @@ const AdAccountFunnel = ({
   adAccount,
   adAccountConfig,
   handleSetAdAccountConfig,
+  isModalOpen,
+  initialAccounts,
 }: any) => {
   const [select, setSelect] = useState(adAccount);
 
@@ -15,6 +17,11 @@ const AdAccountFunnel = ({
     setAdAccounts(select);
     console.log("select", select);
   }, [select]);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+    setSelect(initialAccounts);
+  }, [isModalOpen]);
 
   const handleChangeTrafficSource = (trafficSource: any) => {
     setSelect({
@@ -77,7 +84,7 @@ const AdAccountFunnel = ({
           <SelectComponent
             label="Tipo de conexión"
             options={
-              select.trafficSource === "google"
+              select.trafficSource === "2"
                 ? adAccountConfig[1].connectionTypes
                 : adAccountConfig[0].connectionTypes
             }

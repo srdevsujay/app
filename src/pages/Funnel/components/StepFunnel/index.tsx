@@ -4,8 +4,20 @@ import { InputComponent } from "../../../../components/input";
 import { StepFunnelProps } from "../../../Dashboard/models";
 import InputRegister from "../../../../components/input/InputRegister.component";
 
-const StepFunnel = ({ setStepFunnel, step, idFunnel }: StepFunnelProps) => {
+const StepFunnel = ({
+  setStepFunnel,
+  step,
+  idFunnel,
+  isModalOpen,
+  initialSteps,
+}: StepFunnelProps) => {
   const [stepObject, setStepObject] = useState(step);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+    setStepObject(initialSteps);
+  }, [isModalOpen]);
+
   const handleChangeStepName = (step_name: string) => {
     console.log("step_name", step_name);
     setStepObject({

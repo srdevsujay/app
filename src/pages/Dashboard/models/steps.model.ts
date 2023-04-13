@@ -11,4 +11,6 @@ export interface StepFunnelProps {
   idFunnel: number;
   register?: any;
   errors?: any;
+  isModalOpen?: boolean;
+  initialSteps?: any;
 }
