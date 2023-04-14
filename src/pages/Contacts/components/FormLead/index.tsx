@@ -53,8 +53,6 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   useEffect(() => {
     if (currentEdit) {
-      console.log("currentEditLead", currentEdit);
-
       setValue("fullName", currentEdit.name);
       setValue("email", currentEdit.email);
       setValue("telephone", currentEdit.phone);
@@ -64,7 +62,6 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   }, [currentEdit, setValue]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
     if (idEditLead !== 0) {
       dispatch(editLead(data, idEditLead));
       setCurrentEdit();

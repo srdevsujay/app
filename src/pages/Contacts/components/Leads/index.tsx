@@ -55,7 +55,6 @@ const Leads = () => {
       dispatch(deleteLead(idEditCurrent));
       setIdEditCurrent(0);
     }
-    console.log("idEditCurrent", idEditCurrent);
   }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {

@@ -55,7 +55,6 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   const initForm = () => {
     if (currentEdit) {
-      console.log("currentEdit", currentEdit);
       const {
         name: nameParam,
         name_date,
@@ -122,9 +121,6 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   }, [callDate]);
 
   const onSubmit = (data: any) => {
-    console.log("data--", data);
-    console.log("callDate", callDate);
-    console.log("appoimentDate", appoimentDate);
     const currentCallDate = moment(callDate).format("YYYY-MM-DD hh:mm:ss");
     const currentAppoimentDate = moment(appoimentDate).format(
       "YYYY-MM-DD hh:mm:ss"
@@ -148,14 +144,6 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
     onClose();
   };
-
-  console.log("callDate", callDate);
-  console.log("appoimentDate", appoimentDate);
-
-  console.log("today", today);
-  console.log("currentEdit?.call_date", currentEdit?.call_date);
-  console.log("funnels--", funnels);
-  console.log("stateBooking--", stateBooking);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

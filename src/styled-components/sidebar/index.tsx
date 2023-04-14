@@ -24,7 +24,7 @@ export const SidebarMenu = styled.div<SidebarMenuProps>(({ close }) => ({
   height: "100vh",
   backgroundColor: "#fff",
   top: "0",
-  width: close ? "50px" : "165px",
+  width: close ? "165px" : "50px",
   transition: "0.6s",
 }));
 

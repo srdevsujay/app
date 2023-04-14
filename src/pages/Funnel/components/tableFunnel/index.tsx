@@ -10,10 +10,6 @@ const FunnelTable = ({
   maxBodyHeight,
   pageSize,
 }: any) => {
-  useEffect(() => {
-    console.log("dataTable--", data);
-  }, [data]);
-
   return (
     <Table className="tables" position="sticky">
       <MaterialTable

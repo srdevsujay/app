@@ -15,7 +15,6 @@ const AdAccountFunnel = ({
 
   useEffect(() => {
     setAdAccounts(select);
-    console.log("select", select);
   }, [select]);
 
   useEffect(() => {

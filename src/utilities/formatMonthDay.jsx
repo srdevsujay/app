@@ -1,9 +1,7 @@
 export function formatMonthDay(date) {
-  console.log("itemMesActual", typeof date);
 
   if (typeof date === "string") {
     const now = new Date(date);
-    console.log("dateNow", now);
 
     const mesActual = new Date(date);
     const meses = [
@@ -34,16 +32,10 @@ export function formatMonthDay(date) {
         acc[part.type] = part.value;
         return acc;
       }, {});
-    console.log(
-      "mesews",
-      `${meses[mesActual.getMonth()].substring(3, 0)}-${p.day}`
-    );
     return `${p.day}-${meses[mesActual.getMonth()].substring(3, 0)}-${p.year}`;
   } else {
     const dataMap = date.map((item) => {
       const now = new Date(item);
-      console.log("dateNow", now);
-
       const mesActual = new Date(item);
       const meses = [
         "Enero",

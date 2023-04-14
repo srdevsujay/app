@@ -84,7 +84,6 @@ const AccordionFunnel = () => {
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
-  console.log("dataTracking", dataTracking);
   const { data: dataFunnel, filters: objFilter }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
@@ -118,13 +117,11 @@ const AccordionFunnel = () => {
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
   const searchStringDebounced = useDebounce(searchString, 100);
-  console.log("columnsToSet", columnsToSet);
 
   useEffect(() => {
     const tracking =
       dataTracking.length > 0 ? dataTracking : [dataTrackingInitialState];
     const typeDashboard = tracking[0];
-    console.log("typeDashboard", typeDashboard);
 
     setDataTrakingState(typeDashboard);
   }, [dataTracking]);
@@ -139,7 +136,6 @@ const AccordionFunnel = () => {
         obtainApiDashboardFunnel(dataTrackingState.id as any, dataTracking, 0)
       );
       // const currentColumnsJSON = JSON.stringify(SalesCall);
-      // console.log("currentColumnsJSON", currentColumnsJSON);
       // const obj = {
       //   filter_json: currentColumnsJSON,
       //   id: 2,
@@ -153,28 +149,22 @@ const AccordionFunnel = () => {
   useEffect(() => {
     if (objFilter) {
       const filter = JSON.parse(objFilter);
-      console.log("filters2", filter);
       const getDataColumns = filter.map((funnel: any) => {
-        console.log("funnelfunnel", funnel);
         return TypeDashboardDataTableColumns(
           funnel,
           dataTrackingState.type_dashboard,
           time_Zone
         );
       });
-      console.log("getDataColumns", getDataColumns[0]);
       let getDataColumns2: any = [];
       if (getDataColumns[0]) {
         for (let i = 0; i < getDataColumns.length; i++) {
           getDataColumns2.push(getDataColumns[i][i]);
         }
       }
-      console.log("getDataColumns2", getDataColumns2);
       const activeColumns = getDataColumns2?.filter(
         (column: any) => column.checkbox
       );
-      console.log("filters3", filter);
-      console.log("activeColumns", activeColumns);
       setColumnsToSet(activeColumns);
       setDataFunnelToggle(getDataColumns2);
       setOriginalData(getDataColumns2);
@@ -184,8 +174,6 @@ const AccordionFunnel = () => {
   const handleChange = (panel: any) => (event: any, newExpanded: any) => {
     setExpanded(newExpanded ? panel : false);
   };
-
-  console.log("columnsFunnelHideShow", columnsFunnelHideShow);
 
   const handleDateDashboardMain = () => {
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");
@@ -349,8 +337,6 @@ const AccordionFunnel = () => {
   };
 
   const handleColumnToggle = (e: any, column: any) => {
-    console.log("e", e);
-    console.log("column--", column);
     const updatedColumns = originalData.map((originalColumn: any) => {
       if (originalColumn.field === column.field) {
         return {
@@ -360,15 +346,12 @@ const AccordionFunnel = () => {
       }
       return originalColumn;
     });
-    console.log("updatedColumns", updatedColumns);
     const currentFunnel: any = updatedColumns.map((funnel: any) => ({
       field: funnel.field,
       name: funnel.name,
       checkbox: funnel.checkbox,
     }));
-    console.log("currentFunnel", currentFunnel);
     const currentColumnsJSON = JSON.stringify(currentFunnel);
-    console.log("currentColumnsJSON", currentColumnsJSON);
     const obj = {
       filter_json: currentColumnsJSON,
       id: 2,
@@ -389,6 +372,7 @@ const AccordionFunnel = () => {
       const currentData = originalData.filter((item: any) =>
         item.name.toLowerCase().includes(searchStringDebounced.toLowerCase())
       );
+
       setDataFunnelToggle(currentData);
     } else {
       setDataFunnelToggle(originalData);
@@ -402,15 +386,13 @@ const AccordionFunnel = () => {
   //       name: funnel.name,
   //       checkbox: funnel.checkbox,
   //     }));
-  //     console.log("currentFunnel", currentFunnel);
   //     setFilteredData(currentFunnel);
   //   }
   // }, [columnsToSet]);
-  // console.log("filteredData", filteredData);
 
   return (
     <div className="mt-3">
-      <Title fontSize="14px" color="#192a3e">{`Funnels (${funnelDays})`}</Title>
+      {/* <Title fontSize="14px" color="#192a3e">{`Funnels (${funnelDays})`}</Title> */}
       {dataTracking.map((tracking: any, index: number) => (
         <div key={index} style={{ borderBottom: "1px solid #80808026" }}>
           <ContainerFiltersFunnel>
@@ -484,7 +466,7 @@ const AccordionFunnel = () => {
             >
               <Typography>
                 <span className="title-accordeon-funnel">
-                  {tracking.funnel_name}
+                  {tracking.funnel_name} ({funnelDays})
                 </span>
               </Typography>
             </AccordionSummary>

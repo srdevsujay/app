@@ -32,7 +32,6 @@ const StepsFunnel = ({
     });
     setCurrentSteps(newSteps);
   };
-  console.log("stepsstepssteps", currentSteps);
 
   return (
     <>

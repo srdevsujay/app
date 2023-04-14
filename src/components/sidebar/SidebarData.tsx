@@ -1,5 +1,7 @@
 import { SidebarItem, SidebarTitle } from "../../models";
 import Rectangle4 from "../../assets/images/Rectangle4.svg";
+import tracking from "../../assets/images/tracking.svg";
+import leads from "../../assets/images/leads.svg";
 
 export const SidebarData: SidebarItem[] = [
   {
@@ -9,6 +11,19 @@ export const SidebarData: SidebarItem[] = [
     // iconClosed: <AiFillCaretDown />,
     // iconOpened: <AiFillCaretUp />,
   },
+  // {
+  //   title: SidebarTitle.DASHBOARD,
+  //   path: "/pnl",
+  //   exact: true,
+  //   icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+  //   subRoutes: [
+  //     {
+  //       title: "PNL",
+  //       path: "/pnl",
+  //       icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+  //     },
+  //   ],
+  // },
   {
     title: SidebarTitle.FUNNEL,
     path: "/funnel",
@@ -17,12 +32,12 @@ export const SidebarData: SidebarItem[] = [
   {
     title: SidebarTitle.CONTACTS,
     path: "/contactos",
-    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+    icon: <img src={leads} alt="" height="12" width="12" />,
   },
   {
     title: SidebarTitle.TRACKING,
     path: "/tracking",
-    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+    icon: <img src={tracking} alt="" height="12" width="12" />,
   },
   // {
   //     title: 'History',

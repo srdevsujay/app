@@ -2,7 +2,6 @@ import { Select } from "../../../../../styled-components/select/index";
 import { stateBooking } from "../../../models/routes";
 
 export const stateColumn = (dataContacts: any, onChangeStatus: any) => {
-  console.log("dataContacts", dataContacts);
   return {
     title: "Estado",
     field: "status",

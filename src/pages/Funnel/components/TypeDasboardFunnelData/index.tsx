@@ -69,11 +69,7 @@ export const TypeDashboardDataTableColumns = (
   typeDashboard: any,
   time_Zone: string
 ) => {
-  let columnsToSet: any = [];
-  console.log("columnsToSet--", columnsToSet);
-
   if (typeDashboard === 1) {
-    console.log("entra al case 1");
     // return [
     //   dateColumn(time_Zone),
     //   InvColumn(funnelData),
@@ -112,7 +108,6 @@ export const TypeDashboardDataTableColumns = (
     //   EPVColumn(),
     // ];
   } else if (typeDashboard === 2) {
-    console.log("entra al case 2", funnelData);
     return [
       dateColumn(time_Zone, funnelData),
       InvColumn(funnelData),
@@ -169,7 +164,6 @@ export const TypeDashboardDataTableColumns = (
     ];
     // return columnsToSet;
   } else if (typeDashboard === 3) {
-    console.log("entra al case 3");
     // return [
     //   dateColumn(time_Zone),
     //   InvColumn(funnelData),
@@ -214,7 +208,6 @@ export const TypeDashboardDataTableColumns = (
     //   AccountCurrencyColumn(),
     // ];
   } else if (typeDashboard === 4) {
-    console.log("entra al case 4");
     // return [
     //   dateColumn(time_Zone),
     //   InvColumn(funnelData),
@@ -259,7 +252,6 @@ export const TypeDashboardDataTableColumns = (
     //   AccountCurrencyColumn(),
     // ];
   } else if (typeDashboard === 5) {
-    console.log("entra al case 5");
     // return [
     //   dateColumn(time_Zone),
     //   InvColumn(funnelData),

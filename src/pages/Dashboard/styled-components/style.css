@@ -116,6 +116,9 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
   font-family: "Helvetica-NeueL-Title" !important;
 }
 
+td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-paddingNone {
+  background: #e5e2e24a;
+}
 
 /* .MuiTableCell-paddingNone {
   display: none !important;

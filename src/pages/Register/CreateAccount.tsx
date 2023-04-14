@@ -45,7 +45,6 @@ const CreateAccount = () => {
         time_zone,
         type_currency,
       };
-      console.log("register");
 
       dispatch(registerUserThunk(data));
       // dispatch(starLoading());

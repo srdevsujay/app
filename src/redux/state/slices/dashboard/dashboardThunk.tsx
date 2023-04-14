@@ -24,10 +24,8 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
-      console.log("datedate", date);
       const dateFormat = getDate(date);
       const resultAction = await getDataPnl(!date ? dateFormat : date);
-      console.log("resultActionStatus", resultAction);
       const currentDataPNL: any = _.orderBy(
         resultAction.data.data,
         "id",
@@ -62,7 +60,6 @@ export const getTrackingFunnel = (idUser: number): AppThunk => {
   return async (dispatch) => {
     try {
       const resultAction = await getDataFunnel(idUser);
-      console.log("resultAction", resultAction.data);
       const currentDataTracking: any = _.orderBy(
         resultAction.data,
         "id",
@@ -92,9 +89,6 @@ export const obtainApiDashboardFunnel = (
       //       dataTracking: dataTracking,
       //     } as any)
       //   );
-      console.log("id", id);
-      console.log("typeDashboard--", typeDashboard);
-      console.log("i", i);
       let type_dashboard = typeDashboard[i]?.type_dashboard;
       let dateFormat = getDate(date);
       let objFacebook = {
@@ -104,13 +98,11 @@ export const obtainApiDashboardFunnel = (
         type_dashboard,
       };
       const resultAction: any = await getDashboardFunnel(objFacebook);
-      console.log("resultAction", resultAction);
       // const currentDataFunnel: any = _.orderBy(
       //   resultAction.data,
       //   "id",
       //   "asc"
       // );
-      console.log("dataFunnel-", resultAction);
       dispatch(setDataFunnel(resultAction.data));
     } catch (error) {
       console.log(error);
@@ -127,9 +119,7 @@ export const createFilterFunnel = (
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("dataresultFunnel", data);
       const result: any = await createFilterFunnelService(data);
-      console.log("resultFunnel", result);
       if (
         result.data.message === "Update filter dashboard user successfully!"
       ) {
@@ -146,9 +136,7 @@ export const createFunnel = (data: any): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("dataresultFunnel", data);
       const result: any = await createFunnelService(data);
-      console.log("resultFunnel", result);
       if (result.data.message === "Create funnel successfully!") {
         // dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
         Swal.fire("Correcto", "Funnel Creado correctamente!!", "success");

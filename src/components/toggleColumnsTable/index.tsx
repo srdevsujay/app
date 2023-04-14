@@ -14,34 +14,29 @@ export const ToggleColumnsTable = ({
 }: any) => {
   useEffect(() => {
     if (columns) {
-      console.log("columns---columns---");
       setDataFunnelToggle(columns);
       updateData(columns);
     }
   }, [columns]);
 
   const handleColumnToggle = (column: any) => {
-    console.log("column", column);
     const isChecked = columnsToSet.find(
       (selectedColumn: any) => selectedColumn.field === column.field
     );
 
     let newColumns = columnsToSet;
-    console.log("isChecked", isChecked);
     if (isChecked) {
       newColumns = columnsToSet.filter(
         (selectedColumn: any) => selectedColumn.field !== column.field
       );
-      console.log("newColumns if", newColumns);
     } else {
       newColumns = [...columnsToSet, column];
-      console.log("newColumns else", newColumns);
     }
     updateData(newColumns);
   };
 
   return (
-    <div className="dropdown mr-2">
+    <div className="dropdown mr-2 hidden-last-cell">
       <button
         className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
         type="button"

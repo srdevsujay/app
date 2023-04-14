@@ -6,9 +6,7 @@ export const hadleLogin = (date: any): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
-      console.log("datedate", date);
       const resultAction = await loginHandle(date);
-      console.log("resultActionStatus", resultAction);
       if (resultAction.status === 200) {
         dispatch(
           setUser({

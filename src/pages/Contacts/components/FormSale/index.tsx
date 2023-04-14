@@ -37,7 +37,6 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const today = new Date();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
   const { dataProduct } = useAppSelector((state) => state.tracking);
-  console.log("dataProduct", dataProduct);
   const [idEditSale, setIdEditSale] = useState<number>(0);
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
@@ -66,7 +65,6 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   const initForm = () => {
     if (currentEdit) {
-      console.log("currentEdit---", currentEdit);
       const {
         email: emailParam,
         phone,
@@ -170,7 +168,6 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       });
       return;
     }
-    console.log("dataSale--", data);
     const currentDateSale = moment(dateSale).format("YYYY-MM-DD hh:mm:ss");
     const form: any = {
       date: currentDateSale,

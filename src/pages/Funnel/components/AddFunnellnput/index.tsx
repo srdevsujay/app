@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputComponent } from "../../../../components/input";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import SelectWithValidation from "../../../../components/Select/SelectWithValidation.component";
 import { TypeFunnel } from "../../models/routes";
 import SelectStateBooking from "../../../Contacts/components/SelectStateBooking/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { ProductAlert } from "../../../../components/alerts/Product";
 
 const AddFunnelInput = ({ register, errors, isModalOpen }: any) => {
   const { dataProduct } = useAppSelector((state) => state.tracking);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (dataProduct.length === 0) {
+      ProductAlert(navigate, "un Funnel");
+    }
+  }, [dataProduct]);
 
   return (
     <>

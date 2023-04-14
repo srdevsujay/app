@@ -23,7 +23,7 @@ export const ClicksOrganicColumn = (funnelData: any) => {
         }
         placement="top"
       >
-        <span>#Clicks Organicos</span>
+        <span>#Clics Org.</span>
       </Tooltip>
     ),
     field: "clicks_organic",

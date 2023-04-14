@@ -48,7 +48,7 @@ any) => {
   return (
     <div className="">
       <ButtonTitlePicker
-        className="btn btn-export btn-calendar mr-2"
+        className="btn btn-export btn-calendar"
         onClick={handleOpen}
       >
         <span className="btn-calendar-title">{titleDatePickerPNL}</span>

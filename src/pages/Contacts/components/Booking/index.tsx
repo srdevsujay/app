@@ -39,7 +39,6 @@ const Booking = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
-  console.log("currentEdit--", currentEdit);
 
   const onChangeStatus = (e: any, paramBooking: any) => {
     const currentState = e.target.value;
@@ -52,7 +51,6 @@ const Booking = () => {
 
   useEffect(() => {
     if (dataBooking.length > 0) {
-      console.log("dataBooking.length > 0", dataBooking);
       const columns = ColumnTableBooking(
         dataBooking,
         time_Zone,
@@ -71,7 +69,6 @@ const Booking = () => {
       dispatch(deleteBooking(idEditCurrent));
       setIdEditCurrent(0);
     }
-    console.log("idEditCurrent", idEditCurrent);
   }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {

@@ -10,10 +10,6 @@ const GeneralTable = ({
   maxBodyHeight,
   pageSize,
 }: any) => {
-  useEffect(() => {
-    console.log("dataTable--", data);
-  }, [data]);
-
   return (
     <Table className="tables" position="relative">
       <MaterialTable

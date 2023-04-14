@@ -89,16 +89,17 @@ export const HeaderTitleGraphic = styled.div`
 
 export const TableExpanded = styled.table`
   width: 100%;
-  display: "inline-table";
+  display: inline-table;
+  /* background: red; */
 
   thead {
     width: 100%;
     display: inline-table;
   }
 
-  td {
-    width: 20%;
-  }
+  /* td {
+    width: 10%;
+  } */
 
   .font-Title-Helvetica {
     font-family: "Helvetica-NeueL-Title";
@@ -109,4 +110,8 @@ export const TableExpanded = styled.table`
     font-size: 13px !important;
     color: #464646 !important;
   }
+
+  /* td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-paddingNone {
+    background: #e5e2e24a;
+  } */
 `;

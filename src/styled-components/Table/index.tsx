@@ -13,7 +13,7 @@ export const Table = styled.div<Position>`
     text-align: left;
   }
   .MuiTableCell-root {
-    padding: 7px !important;
+    padding: 7px;
   }
   .widthDateLead {
     width: max-content;

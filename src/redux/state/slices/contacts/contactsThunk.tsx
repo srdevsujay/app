@@ -31,7 +31,6 @@ export const obtainApiContacts = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataLeads();
-      console.log("resultPnl", result);
       const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
       dispatch(setLeads(currentDataLead));
     } catch (error) {
@@ -101,15 +100,12 @@ export const deleteLead = (id: number): AppThunk => {
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
       }).then(async (result) => {
-        console.log("result", result);
-        console.log("resultid", id);
         if (result.isConfirmed) {
           try {
             const objId = {
               id,
             };
             const resultData = await deleteLeadService(objId);
-            console.log("resultData", resultData);
             if (resultData.data.message === "Delete lead successfully!") {
               dispatch(obtainApiContacts());
               Swal.fire(
@@ -132,7 +128,6 @@ export const obtainApiBooking = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataBooking();
-      console.log("resultBooking", result);
       const currentDataLead: any = _.orderBy(result.data, "id", "asc");
       dispatch(setBooking(currentDataLead));
     } catch (error) {
@@ -196,8 +191,6 @@ export const deleteBooking = (id: number): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("entra al Delete");
-
       Swal.fire({
         title: "¿Estas seguro?",
         text: "Esta seguro que quiere borrar el Booking.",
@@ -207,15 +200,12 @@ export const deleteBooking = (id: number): AppThunk => {
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
       }).then(async (result) => {
-        console.log("result", result);
-        console.log("resultid", id);
         if (result.isConfirmed) {
           try {
             const objId = {
               id,
             };
             const resultData = await deleteBookingService(objId);
-            console.log("resultData", resultData);
             if (resultData.data.message === "Delete Booking successfully!") {
               dispatch(obtainApiBooking());
               Swal.fire(
@@ -236,7 +226,6 @@ export const obtainApiSale = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataSales();
-      console.log("resultSale", result);
       const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
       dispatch(setSale(currentDataLead));
     } catch (error) {
@@ -250,7 +239,6 @@ export const createSale = (data: any): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await createSaleService(data);
-      console.log("resultSale", result);
       if (
         result.data.message === "Create Sale and device successfully!" ||
         result.data.message === "Create Sale successfully!"
@@ -284,8 +272,6 @@ export const deleteSale = (id: number): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("entra al Delete");
-
       Swal.fire({
         title: "¿Estas seguro?",
         text: "Esta seguro que quiere eliminar la venta.",
@@ -295,15 +281,12 @@ export const deleteSale = (id: number): AppThunk => {
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
       }).then(async (result) => {
-        console.log("result", result);
-        console.log("resultid", id);
         if (result.isConfirmed) {
           try {
             const objId = {
               id_event: id,
             };
             const resultData = await deleteSaleService(objId);
-            console.log("resultData", resultData);
             if (resultData.data.message === "Delete Sale successfully!") {
               dispatch(obtainApiSale());
               Swal.fire(

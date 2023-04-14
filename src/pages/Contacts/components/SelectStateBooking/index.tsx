@@ -34,10 +34,6 @@ const SelectStateBooking = (props: SelectProps) => {
   // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
   //   onChange && onChange(target.value);
   // };
-  console.log("funnels1", Object.keys(options));
-  console.log("funnels2", Object.keys(options));
-  console.log("funnels3", options);
-  console.log("currentEdit-<<", currentEdit);
 
   return (
     <>

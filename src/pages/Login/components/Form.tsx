@@ -36,7 +36,6 @@ const Form = () => {
       error: loginError,
     },
   ] = useLoginUserMutation();
-  console.log("useLoginUserMutation", useLoginUserMutation());
   const hadleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserForm({
       ...userForm,
@@ -48,7 +47,6 @@ const Form = () => {
     e.preventDefault();
     if (email && password) {
       dispatch(hadleLogin({ email, password }));
-      // await loginUser({ email, password });
     } else {
       toast.error("ingrese correo o contraseña");
     }
@@ -56,9 +54,6 @@ const Form = () => {
 
   useEffect(() => {
     if (isLoginSuccess) {
-      // toast.success("Usuario logeado");
-      console.log("user", loginData.user);
-      console.log("toekn", loginData.token);
       dispatch(
         setUser({
           user: loginData.user,
@@ -104,7 +99,7 @@ const Form = () => {
         <div className="form-group">
           <label className="title-email">Contraseña</label>
           <input
-            type="text"
+            type="password"
             className="form-control"
             placeholder="Contraseña"
             name="password"

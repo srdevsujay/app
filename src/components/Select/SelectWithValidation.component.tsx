@@ -25,7 +25,6 @@ const SelectWithValidation = (props: SelectProps) => {
   // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
   //   onChange && onChange(target.value);
   // };
-  console.log("funnels", options);
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}

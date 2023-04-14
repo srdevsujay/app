@@ -78,7 +78,6 @@ const Funnel = () => {
   useEffect(() => {
     if (dataFunnel?.length > 0) {
       const filters = JSON.parse(filterJSON);
-      console.log("filterJSON", filters);
       totalFunnel(dataFunnel, filters);
     }
   }, [dataFunnel]);
@@ -86,18 +85,8 @@ const Funnel = () => {
   const schema = yup.object().shape({
     funnel_name: yup.string().required("El nombre del Funnel es requerido"),
     funnel_url: yup.string().required("La URL del Funnel es requerida"),
-    // email: yup
-    //   .string()
-    //   .email("El correo electrónico debe ser un correo electrónico válido")
-    //   .required("El correo electronico es requerido"),
-    // telephone: yup
-    //   .number()
-    //   .positive("This field must contain a positive number")
-    //   .integer("This field should contain an integer")
-    //   .min(10)
-    //   .required("El numero de telefono es requerido"),
-    funnel_status: yup.string().required(),
-    product_id: yup.string().required(),
+    funnel_status: yup.string().required("El tipo del Funnel es requerida"),
+    product_id: yup.string().required("El producto es requerida"),
   });
 
   const {
@@ -120,7 +109,6 @@ const Funnel = () => {
   // }, [currentEdit, setValue]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
     const campaings = adAccounts.map((accounts) => {
       return [
         {
@@ -161,9 +149,6 @@ const Funnel = () => {
     setCurrentSteps(initialSteps);
     reset();
   }, [isModalOpen]);
-
-  console.log("currentSteps", currentSteps);
-  console.log("adAccounts", adAccounts);
 
   return (
     <Main>

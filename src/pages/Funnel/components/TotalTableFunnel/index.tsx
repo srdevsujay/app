@@ -1,8 +1,6 @@
 import _ from "lodash";
 
 export const totalFunnel = (tempGroup: any, filters: any) => {
-  console.log("tempGroup--", tempGroup);
-
   const dataTotal: any = {
     spend: _.sumBy(tempGroup, "spend"),
     impressions: _.sumBy(tempGroup, "impressions"),
@@ -82,8 +80,6 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
 
   const arrDataTotal = [];
   arrDataTotal.push(dataTotal);
-  console.log("arrDataTotal", arrDataTotal);
-  console.log("dataTotalFunnel", dataTotal);
 
   const currentFunnel: any = {};
   if (filters?.length > 0) {
@@ -97,8 +93,6 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
         };
       }
     });
-
-    console.log("currentFunnel", currentFunnel);
   }
 
   const tbody = document.createElement("tr");
@@ -119,11 +113,6 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
     td.textContent = text;
     return td;
   };
-  console.log("currentFunnel?.impressions", currentFunnel);
-  console.log(
-    "currentFunnel?.cpm?.checkbox && currentFunnel?.cpm?.total",
-    currentFunnel?.leeds
-  );
 
   tbody.appendChild(createTableCell("Total"));
   currentFunnel?.date_start?.checkbox &&

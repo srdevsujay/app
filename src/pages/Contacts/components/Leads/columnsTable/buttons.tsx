@@ -11,8 +11,6 @@ export const buttonEditColumn = (
   setIdEditCurrent: any
 ) => {
   const editLead = (param: any) => {
-    console.log("param", param);
-
     setCurrentEdit(param);
   };
 

@@ -32,12 +32,10 @@ const Sales = () => {
     dispatch(obtainApiSale());
     dispatch(obtainApiProduct());
   }, []);
-  console.log("dataSale", dataSale);
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
-  // console.log("currentEdit--", currentEdit);
 
   useEffect(() => {
     if (dataSale.length > 0) {
@@ -58,7 +56,6 @@ const Sales = () => {
       dispatch(deleteSale(idEditCurrent));
       setIdEditCurrent(0);
     }
-    console.log("idEditCurrent", idEditCurrent);
   }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {

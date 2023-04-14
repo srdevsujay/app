@@ -55,7 +55,6 @@ const SourceFilter = ({
   const [personName, setPersonName] = React.useState<string[]>([]);
   const [uniquePlataform, setUniquePlataform] = useState<string[]>([]);
   const [canCallTotalTable, setCanCallTotalTable] = useState(true);
-  console.log("dashboardMainFunnel", dashboardMain);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -72,7 +71,6 @@ const SourceFilter = ({
     if (dashboardMain.length > 0 && canCallTotalTable) {
       groupByPNL();
       getPlataform();
-      console.log("dashboardMainEffect", dashboardMain);
       setCanCallTotalTable(false);
     }
   }, [dashboardMain]);
@@ -92,7 +90,6 @@ const SourceFilter = ({
   }, [personName]);
 
   const funnelfilter = (name: any) => {
-    console.log("personName", name);
     const tempSelectPlatform = groupPlataform.filter((platform: any) =>
       name.includes(platform.plataform)
     );
@@ -117,7 +114,6 @@ const SourceFilter = ({
         .value();
       setGroupPlataform(tempGroup);
       totalPnl(tempGroup);
-      console.log("dataTotal", tempGroup);
       return;
     }
   };

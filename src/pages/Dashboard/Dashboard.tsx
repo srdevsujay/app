@@ -47,7 +47,6 @@ const Dashboard = () => {
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
   const dataFunnelData = useAppSelector((state) => state.dashboard);
-  console.log("dataFunnelData", dataFunnelData);
 
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
@@ -98,7 +97,6 @@ const Dashboard = () => {
     setPnlDays(1);
     setFlagModal(1);
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
-    console.log("item...", item);
     return dispatch(getMetricFunnel(item));
   };
 
@@ -193,15 +191,15 @@ const Dashboard = () => {
     <Main>
       <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
-          Dashboard
+          Dashboard PNL ({pnlDays})
         </Title>
         <div className="row">
           <Bar></Bar>
-          <div className="col-sm-7">
-            <div className="d-flex justify-content-between">
-              <Title fontSize="14px" color="#192a3e">
+          <div className="col-sm-12">
+            <div className="d-flex justify-content-end">
+              {/* <Title fontSize="14px" color="#192a3e">
                 {`PNL (${pnlDays})`}
-              </Title>
+              </Title> */}
               <div className="d-flex mt-2">
                 <SourceFilter
                   groupPlataform={groupPlataform}
@@ -232,7 +230,7 @@ const Dashboard = () => {
               selectPlatform={selectPlatform}
             />
           </div>
-          <div className="col-sm-5">
+          <div className="col-sm-12">
             <Graphics />
           </div>
         </div>

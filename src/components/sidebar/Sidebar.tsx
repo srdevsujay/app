@@ -16,11 +16,14 @@ import { useAppDispatch } from "../../hooks/appDispatch";
 import { logoutUser } from "../../redux/state/slices/login/authSlice";
 import { stateUser } from "../../utilities/stateUser.utilities";
 import { ButtonLogout } from "../../styled-components/button";
+import SidebarSubMenu from "./SidebarSubMenu";
 
 const Sidebar: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [close, setClose] = useState(false);
+  const [close, setClose] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const showSidebar = () => setClose(!close);
 
   const handleLogout = () => {
@@ -32,21 +35,37 @@ const Sidebar: FC = () => {
   return (
     <SidebarMenu close={close}>
       <MenuIconClose to="#">
-        <img src={close ? "" : logo} alt="" height="25" />
+        <img src={close ? logo : ""} alt="" height="25" />
         <MenuIcon onClick={showSidebar} />
       </MenuIconClose>
       <div style={{ marginTop: "15px" }}>
         {SidebarData.map((item, index) => {
+          if (item.subRoutes) {
+            return (
+              <SidebarSubMenu
+                setClose={setClose}
+                route={item}
+                close={close}
+                isMenuOpen={isMenuOpen}
+                setIsMenuOpen={setIsMenuOpen}
+              />
+            );
+          }
           return (
             <MenuItems key={index}>
               <MenuItemLinks to={item.path}>
                 {item.icon}
-                <span style={{ marginLeft: "16px" }}>{item.title}</span>
+                <span
+                  style={{ marginLeft: "16px" }}
+                  onClick={(e) => setIsMenuOpen(false)}
+                >
+                  {item.title}
+                </span>
               </MenuItemLinks>
             </MenuItems>
           );
         })}
-        {close === false ? (
+        {close === true ? (
           <ButtonLogout>
             <button className="btn handleLogout" onClick={handleLogout}>
               {/* <img src={edit} height="12" className="" /> */}

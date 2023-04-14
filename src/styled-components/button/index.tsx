@@ -58,7 +58,7 @@ export const ButtonsModal = styled.button`
   text-align: center;
   border-radius: 5px;
   color: #3997ff;
-  width: 100% !important;
+  width: 100%;
   box-shadow: -14px 30px 20px rgba(0, 0, 0, 0.05);
 
   &.btn-close {

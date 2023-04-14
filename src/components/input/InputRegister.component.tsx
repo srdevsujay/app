@@ -13,7 +13,6 @@ type InputProps = {
 
 const InputRegister = (props: InputProps) => {
   const { label, onChange, name, register, error, ...otherProps } = props;
-  console.log("errorerror", error);
 
   return (
     <>

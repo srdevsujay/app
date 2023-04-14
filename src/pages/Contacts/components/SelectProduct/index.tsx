@@ -32,8 +32,6 @@ const SelectOnlyForProduct = (props: SelectProps) => {
     ...otherProps
   } = props;
 
-  console.log("ProductosSelect", options);
-
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}

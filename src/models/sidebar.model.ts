@@ -4,6 +4,8 @@ export interface SidebarItem {
   icon: any;
   iconOpened?: boolean;
   iconClosed?: boolean;
+  subRoutes?: any;
+  exact?: boolean;
 }
 
 export enum SidebarTitle {

@@ -18,7 +18,6 @@ export const todayDay = () => {
   const dayInitial = new Date();
   dayInitial.setDate(dayInitial.getDate());
   let firstDay = moment(dayInitial).format("YYYY-MM-DD");
-  console.log(firstDay);
   const dateFormat = {
     fecha_inicial: firstDay,
     fecha_final: firstDay,
@@ -52,7 +51,6 @@ export const currentWeek = () => {
 
 export const lastWeek = () => {
   const day = new Date().getDay();
-  console.log("day", day);
   let dayInitial = new Date();
   let dayFinal = new Date();
   let xDayInitial = 0;

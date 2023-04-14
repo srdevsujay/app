@@ -14,15 +14,19 @@ import { bookingColumn } from "../ColumnTable/booking";
 import _ from "lodash";
 import { click } from "@testing-library/user-event/dist/click";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
+import { percentageIncomeColumn } from "../ColumnTable/percentageIncome";
+import { percentageExpenseColumn } from "../ColumnTable/percentageExpense";
 
 const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [currentTotal, setCurrentTotal] = useState<any>(null);
 
   const columnsTablePNL = [
     platformColumn(dashboardMain),
     incomeColumn(dashboardMain),
+    percentageIncomeColumn(dashboardMain, currentTotal, selectPlatform),
     expenseColumn(dashboardMain),
+    percentageExpenseColumn(dashboardMain, currentTotal, selectPlatform),
     profitabilityColumn(dashboardMain),
     percentageProfitabilityColumn(dashboardMain),
     roiColumn(dashboardMain),
@@ -30,24 +34,29 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     bookingColumn(dashboardMain),
   ];
 
+  useEffect(() => {
+    if (!tablePnl) return;
+    const dataTotal = {
+      gastos: _.sumBy(tablePnl, "gastos"),
+      ingresos: _.sumBy(tablePnl, "ingresos"),
+    };
+    setCurrentTotal(dataTotal);
+  }, [tablePnl]);
+
   const currentDetailPanel = (dataExpandedPNL: any) => {
-    console.log("rowData", dataExpandedPNL);
-    console.log("dashboardMain", dashboardMain);
     const currentExpanded: any[] = dashboardMain.filter((elem: any) => {
       return elem.plataform === dataExpandedPNL.plataform;
     });
-    console.log("currentExpanded", currentExpanded);
-    console.log("selectPlatform", selectPlatform);
     const dataTotal = {
       plataform: "Total",
       gastos: _.sumBy(selectPlatform, "gastos"),
       ingresos: _.sumBy(selectPlatform, "ingresos"),
     };
-    console.log("dataTotal", dataTotal);
+
     return (
       <>
         <TableExpanded>
-          <thead>
+          {/* <thead>
             <tr className="backgroundTotal">
               <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-Title-Helvetica">
                 Fuente
@@ -65,7 +74,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                 %Gastos
               </td>
             </tr>
-          </thead>
+          </thead> */}
           <tbody
             style={{
               fontSize: 20,
@@ -81,22 +90,64 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                 className="MuiTableRow-root expanded-column css-1gqug66"
                 key={idx}
               >
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "10%" }}
+                >
                   {tableCT.ct}
                 </td>
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "10%" }}
+                >
                   <FormatNumber number={tableCT.ingresos} />
                 </td>
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "10%" }}
+                >
                   {`${((tableCT.ingresos * 100) / dataTotal.ingresos).toFixed(
                     2
                   )}%`}
                 </td>
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "10%" }}
+                >
                   <FormatNumber number={tableCT.gastos} />
                 </td>
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ paddingLeft: "0px", width: "8.3%" }}
+                >
                   {`${((tableCT.gastos * 100) / dataTotal.gastos).toFixed(2)}%`}
+                </td>
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "12.9%" }}
+                >
+                  {`${tableCT?.rentabilidad.toFixed(2)}`}
+                </td>
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "12.8%" }}
+                >
+                  {`${tableCT?.porcentajerentabilidad.toFixed(2)}`}
+                </td>
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "7%" }}
+                >
+                  {`${tableCT?.roi.toFixed(2)}`}
+                </td>
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "9%" }}
+                >
+                  {`${tableCT?.leeds.toFixed(2)}`}
+                </td>
+                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                  {`${tableCT?.bookings.toFixed(2)}`}
                 </td>
               </tr>
             ))}

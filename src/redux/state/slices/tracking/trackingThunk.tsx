@@ -14,7 +14,6 @@ export const obtainApiProduct = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataProduct();
-      console.log("resultProduct", result);
       const currentDataProduct: any = _.orderBy(result.data, "id", "desc");
       dispatch(setProduct(currentDataProduct));
     } catch (error) {
@@ -28,7 +27,6 @@ export const createProduct = (data: any): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await createProductService(data);
-      console.log("resultProduct", result);
       if (result.data.message === "Create product successfully!") {
         dispatch(obtainApiProduct());
         Swal.fire("Correcto", "Producto Creado correctamente!!", "success");
@@ -67,15 +65,12 @@ export const deleteProducto = (id: number): AppThunk => {
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
       }).then(async (result) => {
-        console.log("result", result);
-        console.log("resultid", id);
         if (result.isConfirmed) {
           try {
             const objId = {
               id,
             };
             const resultData = await deleteProductService(objId);
-            console.log("resultData", resultData);
             if (resultData.data.message === "Delete product successfully!") {
               dispatch(obtainApiProduct());
               Swal.fire(

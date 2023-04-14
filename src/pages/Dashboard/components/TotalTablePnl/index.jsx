@@ -9,15 +9,17 @@ export const totalPnl = (tempGroup) => {
     rentabilidad: _.sumBy(tempGroup, 'rentabilidad'),
     roi: _.sumBy(tempGroup, 'roi'),
     leeds: _.sumBy(tempGroup, 'leeds'),
-    bookings: _.sumBy(tempGroup, 'bookings'),
+    bookings: _.sumBy(tempGroup, 'bookings'), 
   }
-  
+
   const tbody = document.createElement('tr');
   tbody.className = "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgroundTotal";
   tbody.innerHTML = `
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">Total</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.ingresos.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">100%</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.gastos.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">100%</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${(dataTotal.ingresos.toFixed(2)/(dataTotal.ingresos.toFixed(2)-dataTotal.gastos.toFixed(2))).toFixed(2)}%</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.ingresos/dataTotal.gastos == Infinity ? 0 : (dataTotal.ingresos/dataTotal.gastos).toFixed(2)}</td>

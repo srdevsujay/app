@@ -18,9 +18,7 @@ const Tracking = () => {
     localStorage.getItem("CreateProduct");
 
   useEffect(() => {
-    console.log("localStorageChangeTab", localStorageChangeTab);
     if (localStorageChangeTab == 3) {
-      console.log("localStorageChangeTab232", localStorageChangeTab);
       setValue("3");
       localStorage.setItem("CreateProduct", "0");
     }
