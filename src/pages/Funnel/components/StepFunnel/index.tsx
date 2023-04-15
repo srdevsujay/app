@@ -10,6 +10,7 @@ const StepFunnel = ({
   idFunnel,
   isModalOpen,
   initialSteps,
+  currentDataEditFunnel,
 }: StepFunnelProps) => {
   const [stepObject, setStepObject] = useState(step);
 
@@ -39,6 +40,7 @@ const StepFunnel = ({
 
   useEffect(() => {
     setStepFunnel(stepObject);
+    console.log("stepObject", stepObject);
   }, [stepObject]);
 
   return (
@@ -64,7 +66,7 @@ const StepFunnel = ({
             id="3"
             type="text"
             min={3}
-            value={stepObject.step_name}
+            defaultValue={stepObject?.step_name}
             onChange={handleChangeStepName}
           />
         </div>

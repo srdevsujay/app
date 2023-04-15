@@ -9,7 +9,12 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { ProductAlert } from "../../../../components/alerts/Product";
 
-const AddFunnelInput = ({ register, errors, isModalOpen }: any) => {
+const AddFunnelInput = ({
+  register,
+  errors,
+  isModalOpen,
+  currentDataEditFunnel,
+}: any) => {
   const { dataProduct } = useAppSelector((state) => state.tracking);
   const navigate = useNavigate();
 
@@ -51,6 +56,7 @@ const AddFunnelInput = ({ register, errors, isModalOpen }: any) => {
             id="0"
             type="text"
             min={3}
+            defaultValue={currentDataEditFunnel?.funnel_name}
             name="funnel_name"
             register={register}
             error={String(errors["funnel_name"]?.message)}
@@ -63,6 +69,7 @@ const AddFunnelInput = ({ register, errors, isModalOpen }: any) => {
             id="0"
             type="text"
             min={3}
+            defaultValue={currentDataEditFunnel?.funnel_url}
             name="funnel_url"
             register={register}
             error={String(errors["funnel_url"]?.message)}

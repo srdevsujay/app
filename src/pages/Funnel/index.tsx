@@ -109,6 +109,7 @@ const Funnel = () => {
   // }, [currentEdit, setValue]);
 
   const onSubmit = (data: any) => {
+    console.log("data", data);
     const campaings = adAccounts.map((accounts) => {
       return [
         {
@@ -144,11 +145,20 @@ const Funnel = () => {
     toggleModal();
   };
 
+  const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
+
   useEffect(() => {
     if (!isModalOpen) return;
     setCurrentSteps(initialSteps);
     reset();
+    setCurrentDataEditFunnel("");
   }, [isModalOpen]);
+
+  const obtainFunnelEdit = (editDataTracking: any) => {
+    console.log("editDataTracking", editDataTracking);
+    setCurrentDataEditFunnel(editDataTracking);
+    toggleModal();
+  };
 
   return (
     <Main>
@@ -159,7 +169,7 @@ const Funnel = () => {
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
-            <AccordionFunnel />
+            <AccordionFunnel obtainFunnelEdit={obtainFunnelEdit} />
           </div>
         </div>
       </Card>
@@ -180,12 +190,14 @@ const Funnel = () => {
             register={register}
             errors={errors}
             isModalOpen={isModalOpen}
+            currentDataEditFunnel={currentDataEditFunnel}
           />
           <StepsFunnel
             currentSteps={currentSteps}
             setCurrentSteps={setCurrentSteps}
             isModalOpen={isModalOpen}
             initialSteps={initialSteps}
+            currentDataEditFunnel={currentDataEditFunnel}
           />
           <AdAccount
             adAccounts={adAccounts}

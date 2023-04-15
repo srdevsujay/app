@@ -79,7 +79,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const AccordionFunnel = () => {
+const AccordionFunnel = ({ obtainFunnelEdit }: any) => {
   const dispatch = useAppDispatch();
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
@@ -390,6 +390,12 @@ const AccordionFunnel = () => {
   //   }
   // }, [columnsToSet]);
 
+  const editFunnel = (index: number) => {
+    console.log("indice+++", index);
+    console.log("dataTracking", dataTracking[index]);
+    obtainFunnelEdit(dataTracking[index]);
+  };
+
   return (
     <div className="mt-3">
       {/* <Title fontSize="14px" color="#192a3e">{`Funnels (${funnelDays})`}</Title> */}
@@ -448,6 +454,38 @@ const AccordionFunnel = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+            <div className="btn-group" role="group">
+              <button
+                id="btnGroupDrop1"
+                type="button"
+                className="btn mr-2 dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {/* <img src={ellipsisOff} alt="" className="" /> */}
+              </button>
+              <div
+                className="dropdown-menu dropdown-style top-menu-dropdown"
+                aria-labelledby="btnGroupDrop1"
+              >
+                <button
+                  className="dropdown-item dropdown-style-button"
+                  onClick={() => editFunnel(index)}
+                >
+                  {/* <img src={edit} height="12" className="" /> */}
+                  Editar
+                </button>
+                <button
+                  className="dropdown-item dropdown-style-button"
+                  // onClick={() => deleteFunnel(index)}
+                >
+                  {/* <img src={deleted} height="12" className="" /> */}
+                  Eliminar
+                </button>
+                {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
               </div>
             </div>
           </ContainerFiltersFunnel>
