@@ -7,6 +7,7 @@ import {
   ModalTitle,
   ModalContent,
   ModalClose,
+  ModalSubTitle,
 } from "../../styled-components";
 
 const Modal: FC<ModalProps> = ({
@@ -19,6 +20,7 @@ const Modal: FC<ModalProps> = ({
   bottom,
   height,
   btnClose,
+  subTitle,
 }) => {
   const outsideRef = useRef(null);
 
@@ -42,6 +44,7 @@ const Modal: FC<ModalProps> = ({
           </ModalClose>
         )}
         <ModalTitle>{title}</ModalTitle>
+        <ModalSubTitle>{subTitle}</ModalSubTitle>
         <ModalContent>{children}</ModalContent>
       </ModalBox>
     </ModalContainer>

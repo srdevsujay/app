@@ -7,6 +7,7 @@ export const contactState: any = {
   dataBooking: [],
   dataSale: [],
   dataProduct: [],
+  dataUser: [],
 };
 
 export const contactSlice = createSlice({
@@ -40,6 +41,10 @@ export const contactSlice = createSlice({
       state.isLoading = false;
       state.dataProduct = action.payload;
     },
+    setUser: (state, action) => {
+      state.isLoading = false;
+      state.dataUser = action.payload;
+    },
   },
 });
 
@@ -50,5 +55,6 @@ export const {
   setBooking,
   setSale,
   setProduct,
+  setUser,
 } = contactSlice.actions;
 export default contactSlice.reducer;

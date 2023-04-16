@@ -8,10 +8,12 @@ import GeneralTable from "../../../../utilities/Table/index";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
-import TabMenuLeads from "../TabMenuLeads/index";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import Modal from "../../../../components/modal/Modal.component";
 import FormLead from "../FormLead/index";
+import TabMenuLeads from "../TabMenuLeads/index";
+import CustomerDetails from "../CustomerDetails/index";
+import { obtainUserProfile } from "../../../../redux/state/slices/contacts/contactsThunk";
 
 setAutoFreeze(false);
 
@@ -35,6 +37,10 @@ const Leads = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
+  const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
 
   useEffect(() => {
     if (dataLead.length > 0) {
@@ -72,8 +78,8 @@ const Leads = () => {
     }
   }, [searchStringDebounced]);
 
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const toggleModal = () => setModalOpen(!isModalOpen);
+
   useEffect(() => {
     if (currentEdit) {
       toggleModal();
@@ -90,6 +96,16 @@ const Leads = () => {
     if (!isModalOpen) {
       setModalOpen(true);
     }
+  };
+
+  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+
+  const getUserProfile = (data: any) => {
+    console.log("data", data);
+    const currentEmail = { email: data.email };
+    toggleModalUser();
+    setEmailCustomerDetail(data.email);
+    dispatch(obtainUserProfile(currentEmail));
   };
 
   return (
@@ -124,12 +140,26 @@ const Leads = () => {
           setCurrentEdit={setCurrentEdit}
         />
       </Modal>
+      <Modal
+        title="Detalles del cliente potencial"
+        isOpen={isModalOpenUser}
+        onClose={toggleModalUser}
+        width="130vh"
+        padding="10px 32px"
+        bottom="14px"
+        height="480px"
+        btnClose={1}
+        subTitle={emailCustomerDetail}
+      >
+        <CustomerDetails />
+      </Modal>
       <GeneralTable
         data={filteredData}
         columns={columnsToSet}
         pageSizeOptions={[7, 15, 31, 31]}
         maxBodyHeight={"60vh"}
         pageSize={7}
+        getUserProfile={getUserProfile}
       />
     </>
   );

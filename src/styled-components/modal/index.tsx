@@ -62,8 +62,16 @@ export const ModalTitle = styled.div`
   margin-top: 20px;
 `;
 
+export const ModalSubTitle = styled.div`
+  font-family: "Helvetica-NeueL";
+  font-size: 15px;
+  color: #030229;
+  line-height: 21px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
 export const ModalContent = styled.div`
-  margin-top: 30px;
   color: #6b6b6b;
   font-size: 16px;
 `;

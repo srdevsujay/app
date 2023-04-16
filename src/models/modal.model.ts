@@ -8,4 +8,5 @@ export interface ModalProps {
   btnClose: number
   bottom?: string;
   height?: string;
+  subTitle?: string;
 }

@@ -1,15 +1,13 @@
 import MaterialTable from "material-table";
-import { useEffect } from "react";
 import { Table } from "../../styled-components/Table/index";
 import "../../styled-components/style.css";
 
-const GeneralTable = ({
+const NormalTable = ({
   data,
   columns,
   pageSizeOptions,
   maxBodyHeight,
   pageSize,
-  getUserProfile,
 }: any) => {
   return (
     <Table className="tables" position="relative">
@@ -33,10 +31,9 @@ const GeneralTable = ({
             emptyDataSourceMessage: "No hay Datos...",
           },
         }}
-        onRowClick={(e, rowData) => getUserProfile(rowData)}
       />
     </Table>
   );
 };
 
-export default GeneralTable;
+export default NormalTable;

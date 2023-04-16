@@ -105,3 +105,11 @@ export const deleteSaleService = async (id: any) => {
     }
   });
 };
+
+export const getUserProfile = async (data: any) => {
+  return clientAxios.post("/user_profile", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

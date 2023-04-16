@@ -14,3 +14,112 @@
 /* .MuiTableRow-root {
   position: relative;
 } */
+
+.tabs {
+  width: 25%;
+  font-family: 'Helvetica-NeueL-Title' !important;
+}
+
+/* .active-tabs {
+  background-color: red !important;
+} */
+
+.active-tabs-recorrido:before {
+  content: "RECORRIDO";
+  display: block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: calc(80% + 2px);
+  height: 32px;
+  background: #3997ff;
+  z-index: 999;
+  border-radius: 10px;
+  color: white;
+  padding-top: 7px;
+  font-family: 'Helvetica-NeueL-Title';
+}
+
+.active-tabs-compras:before {
+  content: "COMPRAS";
+  display: block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: calc(80% + 2px);
+  height: 32px;
+  background: #3997ff;
+  z-index: 999;
+  border-radius: 10px;
+  color: white;
+  padding-top: 7px;
+  font-family: 'Helvetica-NeueL-Title';
+}
+
+.active-tabs-booking:before {
+  content: "BOOKING";
+  display: block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: calc(80% + 2px);
+  height: 32px;
+  background: #3997ff;
+  z-index: 999;
+  border-radius: 10px;
+  color: white;
+  padding-top: 7px;
+  font-family: 'Helvetica-NeueL-Title';
+}
+
+.active-tabs-datos:before {
+  content: "DATOS";
+  display: block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: calc(80% + 2px);
+  height: 32px;
+  background: #3997ff;
+  z-index: 999;
+  border-radius: 10px;
+  color: white;
+  padding-top: 7px;
+  font-family: 'Helvetica-NeueL-Title';
+}
+
+.title-ips {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000;
+  margin-left: 20px;
+  font-family: 'Helvetica-NeueL';
+}
+
+.ips {
+  font-size: 16px;
+  font-weight: 300;
+  color: #85662b;
+  margin-bottom: 0!important;
+  color: #000!important;
+  font-family: 'Helvetica-NeueL';
+  margin-left: 20px;
+}
+
+.ip-empty {
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Helvetica-NeueL-Title';
+}

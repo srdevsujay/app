@@ -4,6 +4,7 @@ import {
   setLeads,
   setProduct,
   setSale,
+  setUser,
   starLoading,
 } from "./contactsSlice";
 import {
@@ -24,7 +25,10 @@ import {
   deleteSaleService,
   editBookingStateService,
 } from "../../../../pages/Contacts/services/index";
-import { getDataSales } from "../../../../pages/Contacts/services/index";
+import {
+  getDataSales,
+  getUserProfile,
+} from "../../../../pages/Contacts/services/index";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -299,5 +303,19 @@ export const deleteSale = (id: number): AppThunk => {
         }
       });
     } catch (error) {}
+  };
+};
+
+export const obtainUserProfile = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getUserProfile(data);
+      console.log("resultProfile", result);
+      const currentDataLead: any = result.data.data;
+      dispatch(setUser(currentDataLead));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
