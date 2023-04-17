@@ -7,6 +7,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 // import "./styled-components/style.css";
 import Products from "./components/Products/index";
+import TagTracking from "./components/Tag";
 
 const Tracking = () => {
   const [value, setValue] = useState("1");
@@ -45,7 +46,9 @@ const Tracking = () => {
             <TabPanel value="3">
               <Products />
             </TabPanel>
-            <TabPanel value="4"></TabPanel>
+            <TabPanel value="4">
+              <TagTracking />
+            </TabPanel>
           </TabContext>
         </Box>
       </Card>

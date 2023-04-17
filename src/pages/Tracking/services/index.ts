@@ -32,3 +32,11 @@ export const deleteProductService = async (id: any) => {
     }
   });
 };
+
+export const getDataTag = async () => {
+  return clientAxios.get("/get_etiquetas", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
