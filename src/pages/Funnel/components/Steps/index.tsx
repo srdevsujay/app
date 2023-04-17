@@ -7,8 +7,6 @@ import { ButtonsModal } from "../../../../styled-components/button/index";
 const StepsFunnel = ({
   currentSteps,
   setCurrentSteps,
-  isModalOpen,
-  initialSteps,
   currentDataEditFunnel,
 }: any) => {
   const addStep = () => {
@@ -24,6 +22,8 @@ const StepsFunnel = ({
   };
 
   const handleChangeStep = (step: any) => {
+    console.log("etep", step);
+
     const newSteps = currentSteps.map((elem: any) => {
       if (elem.id === step.id) {
         return step;
@@ -55,9 +55,6 @@ const StepsFunnel = ({
           setStepFunnel={handleChangeStep}
           step={step}
           idFunnel={i}
-          isModalOpen
-          initialSteps
-          currentDataEditFunnel={currentDataEditFunnel}
         />
       ))}
       <div className="d-flex justify-content-center">

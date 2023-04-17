@@ -38,8 +38,7 @@ const Funnel = () => {
     step_url: "",
     step_description: "",
   };
-  const [currentSteps, setCurrentSteps] = useState([step1]);
-  const [initialSteps, setInitialSteps] = useState([step1]);
+  const [currentSteps, setCurrentSteps] = useState<FunnelStep[]>([]);
   const adAccounts1: AdAccountType = {
     id: 1,
     trafficSource: "1",
@@ -47,7 +46,7 @@ const Funnel = () => {
     adAccountName: "",
     adAccountIdentification: "",
   };
-  const [adAccounts, setAdAccounts] = useState([adAccounts1]);
+  const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([]);
   const [initialAccounts, setInitialAccounts] = useState([adAccounts1]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -107,7 +106,7 @@ const Funnel = () => {
   //     // setIdEditLead(currentEdit.id);
   //   }
   // }, [currentEdit, setValue]);
-
+  console.log("currentSteps", currentSteps);
   const onSubmit = (data: any) => {
     console.log("data", data);
     const campaings = adAccounts.map((accounts) => {
@@ -123,6 +122,8 @@ const Funnel = () => {
         },
       ];
     });
+    console.log("currentSteps handre", currentSteps);
+
     const steps = currentSteps;
     const form: any = {
       funnel_name: data.funnel_name,
@@ -135,6 +136,8 @@ const Funnel = () => {
       user_funel,
       id: null,
     };
+    console.log("form", form);
+
     // if (idEditLead !== 0) {
     //   dispatch(editLead(data, idEditLead));
     //   setCurrentEdit();
@@ -149,7 +152,6 @@ const Funnel = () => {
 
   useEffect(() => {
     if (!isModalOpen) return;
-    setCurrentSteps(initialSteps);
     reset();
     setCurrentDataEditFunnel("");
   }, [isModalOpen]);
@@ -157,6 +159,12 @@ const Funnel = () => {
   const obtainFunnelEdit = (editDataTracking: any) => {
     console.log("editDataTracking", editDataTracking);
     setCurrentDataEditFunnel(editDataTracking);
+    toggleModal();
+  };
+
+  const addNewFunnel = () => {
+    setCurrentSteps([step1]);
+    setAdAccounts([adAccounts1]);
     toggleModal();
   };
 
@@ -169,12 +177,15 @@ const Funnel = () => {
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
-            <AccordionFunnel obtainFunnelEdit={obtainFunnelEdit} />
+            <AccordionFunnel
+              obtainFunnelEdit={obtainFunnelEdit}
+              setCurrentSteps={setCurrentSteps}
+            />
           </div>
         </div>
       </Card>
       <NewFunnel>
-        <ButtonFunnel onClick={toggleModal}>+</ButtonFunnel>
+        <ButtonFunnel onClick={addNewFunnel}>+</ButtonFunnel>
       </NewFunnel>
       <Modal
         title={"Crear Funnel"}
@@ -195,8 +206,6 @@ const Funnel = () => {
           <StepsFunnel
             currentSteps={currentSteps}
             setCurrentSteps={setCurrentSteps}
-            isModalOpen={isModalOpen}
-            initialSteps={initialSteps}
             currentDataEditFunnel={currentDataEditFunnel}
           />
           <AdAccount
@@ -204,6 +213,7 @@ const Funnel = () => {
             setAdAccounts={setAdAccounts}
             isModalOpen={isModalOpen}
             initialAccounts={initialAccounts}
+            currentDataEditFunnel={currentDataEditFunnel}
           />
           <ContainerSticky className="row">
             <Bar className="mb-3"></Bar>

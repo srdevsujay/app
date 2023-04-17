@@ -79,7 +79,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const AccordionFunnel = ({ obtainFunnelEdit }: any) => {
+const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
   const dispatch = useAppDispatch();
   const dataTracking: [] = useAppSelector(
     (state) => state.dashboard.dataTracking
@@ -393,6 +393,7 @@ const AccordionFunnel = ({ obtainFunnelEdit }: any) => {
   const editFunnel = (index: number) => {
     console.log("indice+++", index);
     console.log("dataTracking", dataTracking[index]);
+    setCurrentSteps([]);
     obtainFunnelEdit(dataTracking[index]);
   };
 

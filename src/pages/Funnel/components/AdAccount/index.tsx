@@ -10,6 +10,7 @@ const AdAccount = ({
   setAdAccounts,
   isModalOpen,
   initialAccounts,
+  currentDataEditFunnel,
 }: any) => {
   const configOptions = [
     {
@@ -151,6 +152,12 @@ const AdAccount = ({
     });
     setAdAccounts(newAdAccounts);
   };
+
+  useEffect(() => {
+    if (!currentDataEditFunnel) return;
+    console.log("currentDataEditFunnel", currentDataEditFunnel);
+    setAdAccounts(currentDataEditFunnel?.campaings);
+  }, [currentDataEditFunnel]);
 
   return (
     <>

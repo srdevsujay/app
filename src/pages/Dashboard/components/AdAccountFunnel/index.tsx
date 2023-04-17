@@ -67,6 +67,7 @@ const AdAccountFunnel = ({
   useEffect(() => {
     setAdAccounts(select);
   }, [select]);
+  console.log("select", select);
 
   return (
     <>
@@ -75,7 +76,11 @@ const AdAccountFunnel = ({
           <SelectComponent
             label="Fuente de tráfico"
             options={adAccountConfig}
-            value={select.trafficSource}
+            value={
+              select.campaing_plataform
+                ? select.campaing_plataform
+                : select.trafficSource
+            }
             onChange={handleChangeTrafficSource}
           />
         </div>
@@ -87,7 +92,11 @@ const AdAccountFunnel = ({
                 ? adAccountConfig[1].connectionTypes
                 : adAccountConfig[0].connectionTypes
             }
-            value={select.connectionType}
+            value={
+              select.campaing_type
+                ? select.campaing_type
+                : select.connectionType
+            }
             onChange={handleChangeConnectionType}
           />
         </div>
@@ -101,7 +110,9 @@ const AdAccountFunnel = ({
             id="5"
             type="text"
             min={3}
-            value={select.adAccountName}
+            value={
+              select.campaing_name ? select.campaing_name : select.adAccountName
+            }
             onChange={handleChangeAdAccountName}
           />
         </div>
@@ -113,7 +124,11 @@ const AdAccountFunnel = ({
             id="6"
             type="text"
             min={3}
-            value={select.adAccountIdentification}
+            value={
+              select.campaing_identify
+                ? select.campaing_identify
+                : select.adAccountIdentification
+            }
             onChange={handleChangeAdAccountIdentification}
           />
         </div>
