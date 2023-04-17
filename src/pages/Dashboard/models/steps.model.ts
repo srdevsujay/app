@@ -13,4 +13,5 @@ export interface StepFunnelProps {
   errors?: any;
   isModalOpen?: boolean;
   initialSteps?: any;
+  currentDataEditFunnel?: any;
 }

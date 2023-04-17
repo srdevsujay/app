@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
 import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
@@ -9,6 +9,7 @@ const StepsFunnel = ({
   setCurrentSteps,
   isModalOpen,
   initialSteps,
+  currentDataEditFunnel,
 }: any) => {
   const addStep = () => {
     setCurrentSteps([
@@ -33,6 +34,12 @@ const StepsFunnel = ({
     setCurrentSteps(newSteps);
   };
 
+  useEffect(() => {
+    if (!currentDataEditFunnel) return;
+    console.log("currentDataEditFunnel", currentDataEditFunnel);
+    setCurrentSteps(currentDataEditFunnel?.steps);
+  }, [currentDataEditFunnel]);
+
   return (
     <>
       <div className="row">
@@ -50,6 +57,7 @@ const StepsFunnel = ({
           idFunnel={i}
           isModalOpen
           initialSteps
+          currentDataEditFunnel={currentDataEditFunnel}
         />
       ))}
       <div className="d-flex justify-content-center">
