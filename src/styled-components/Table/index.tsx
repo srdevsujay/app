@@ -98,6 +98,11 @@ export const BackColorsTableOrigin = styled.div`
     color: #f08303;
   }
 
+  &.back-orange > svg {
+    height: 15px;
+    margin-left: -6px;
+  }
+
   &.back-green {
     background: #2bb59642;
     border: 0.7px solid #2bb596;

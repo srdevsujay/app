@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const trackingState: any = {
   isLoading: false,
   dataProduct: [],
+  dataTag: [],
 };
 
 export const trackingSlice = createSlice({
@@ -16,8 +17,12 @@ export const trackingSlice = createSlice({
       state.isLoading = false;
       state.dataProduct = action.payload;
     },
+    setTag: (state, action) => {
+      state.isLoading = false;
+      state.dataTag = action.payload;
+    },
   },
 });
 
-export const { starLoading, setProduct } = trackingSlice.actions;
+export const { starLoading, setProduct, setTag } = trackingSlice.actions;
 export default trackingSlice.reducer;

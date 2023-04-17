@@ -5,9 +5,10 @@ import {
   deleteProductService,
 } from "../../../../pages/Tracking/services/index";
 import { AppThunk } from "../../../store";
-import { setProduct, starLoading } from "./trackingSlice";
+import { setProduct, setTag, starLoading } from "./trackingSlice";
 import _ from "lodash";
 import Swal from "sweetalert2";
+import { getDataTag } from "../../../../pages/Tracking/services/index";
 
 export const obtainApiProduct = (): AppThunk => {
   return async (dispatch) => {
@@ -82,6 +83,19 @@ export const deleteProducto = (id: number): AppThunk => {
           } catch (error) {}
         }
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainApiTag = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataTag();
+      const currentDataTag: any = _.orderBy(result.data.data, "id", "desc");
+      dispatch(setTag(currentDataTag));
     } catch (error) {
       console.log(error);
     }

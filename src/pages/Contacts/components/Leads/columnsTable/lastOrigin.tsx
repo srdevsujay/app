@@ -24,9 +24,9 @@ export const lastOriginColumn = () => {
           {dataContacts?.last_origentag.substr(0, 1) === "@" ? (
             <img src={click} alt="" className="iconos-table-origin" />
           ) : dataContacts?.last_origentag.substr(0, 1) === "!" ? (
-            <img src={venta} alt="" className="iconos-table-origin" />
-          ) : (
             <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
+          ) : (
+            <img src={venta} alt="" className="iconos-table-origin" />
           )}
           {dataContacts?.last_origentag.substr(1)}
         </BackColorsTableOrigin>
