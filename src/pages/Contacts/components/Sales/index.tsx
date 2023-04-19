@@ -12,8 +12,27 @@ import { obtainApiSale } from "../../../../redux/state/slices/contacts/contactsT
 import FormSale from "../FormSale";
 import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
 import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
+import FormTrafficSource from "../FormTrafficSource";
 
 setAutoFreeze(false);
+
+// interface IData {
+//   email: string;
+//   first_origin: string;
+//   first_origintag: string;
+//   funnel_id: number;
+//   id: number;
+//   joined: string;
+//   last_origen: string;
+//   last_origentag: string | null;
+//   name: string;
+//   payments: number;
+//   phone: string;
+// }
+
+// interface ISelectProps {
+//   data: IData[];
+// }
 
 const Sales = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +44,10 @@ const Sales = () => {
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
+  // const [filter, setFilter] = useState("");
+  // const [selected, setSelected] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
@@ -48,6 +70,7 @@ const Sales = () => {
       setCurrentColumns(columns as any);
       setOriginalData(dataSale);
       setFilteredData(dataSale);
+      setFilteredDataDos(dataSale);
     }
   }, [dataSale]);
 
@@ -74,7 +97,11 @@ const Sales = () => {
   }, [searchStringDebounced]);
 
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isSubModalOpen, setSubModalOpen] = useState<boolean>(false);
+
   const toggleModal = () => setModalOpen(!isModalOpen);
+  const toggleSubModal = () => setSubModalOpen(!isSubModalOpen);
+
   useEffect(() => {
     if (currentEdit) {
       toggleModal();
@@ -93,6 +120,26 @@ const Sales = () => {
     }
   };
 
+  // const filterData = (data: any, filter: string) => {
+  //   return data.filter(
+  //     (item: any) =>
+  //       item.email.toLowerCase().includes(filter.toLowerCase()) ||
+  //       item.first_origin.toLowerCase().includes(filter.toLowerCase()) ||
+  //       item.first_origintag.toLowerCase().includes(filter.toLowerCase()) ||
+  //       item.last_origen.toLowerCase().includes(filter.toLowerCase()) ||
+  //       (item.last_origentag &&
+  //         item.last_origentag.toLowerCase().includes(filter.toLowerCase()))
+  //   );
+  // };
+
+  // const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFilter(e.target.value);
+  // };
+
+  // const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setSelected(e.target.value);
+  // };
+
   return (
     <>
       <TabMenuLeads
@@ -108,6 +155,8 @@ const Sales = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
+        dataLead={dataSale}
+        setFilteredDataDos={setFilteredDataDos}
       />
       <Modal
         title={currentEdit !== null ? "Editar Sale" : "Crear Sale"}
@@ -123,10 +172,23 @@ const Sales = () => {
           onClose={toggleModal}
           currentEdit={currentEdit}
           setCurrentEdit={setCurrentEdit}
+          onCloseSubModal={toggleSubModal}
         />
       </Modal>
+      <Modal
+        title="Atribuir Venta"
+        isOpen={isSubModalOpen}
+        onClose={toggleSubModal}
+        width="450px"
+        padding="10px 32px"
+        bottom="14px"
+        height="480px"
+        btnClose={1}
+      >
+        <FormTrafficSource onClose={toggleSubModal} currentEdit={currentEdit} />
+      </Modal>
       <GeneralTable
-        data={filteredData}
+        data={filteredDataDos}
         columns={columnsToSet}
         pageSizeOptions={[7, 15, 31, 31]}
         maxBodyHeight={"60vh"}

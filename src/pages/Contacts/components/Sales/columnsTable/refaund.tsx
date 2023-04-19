@@ -8,15 +8,9 @@ export const refaundColumn = () => {
       dataSale?.refaund === null ? (
         ""
       ) : (
-        <TextColors
-          className={`${
-            dataSale?.refaund == 0
-              ? "text-grey"
-              : dataSale?.refaund > 0
-              ? "text-green"
-              : "text-danger"
-          }`}
-        >{`$${dataSale?.refaund.toFixed(2)}`}</TextColors>
+        <TextColors className="text-danger">
+          {`$${dataSale?.refaund.toFixed(2)}`}
+        </TextColors>
       ),
   };
 };

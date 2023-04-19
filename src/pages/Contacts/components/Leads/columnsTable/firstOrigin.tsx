@@ -13,6 +13,8 @@ export const firstOriginColumn = () => {
         ""
       ) : (
         <BackColorsTableOrigin
+          width="max-content"
+          marginBottom="5px"
           className={`${
             dataContacts?.first_origintag.substr(0, 1) === "@"
               ? "back-lila"

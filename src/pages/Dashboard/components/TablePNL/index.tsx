@@ -168,7 +168,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
           search: false,
           pageSizeOptions: [10, 25, 50, 100, 100],
           headerStyle: { position: "sticky", top: 0 },
-          maxBodyHeight: "40vh",
+          maxBodyHeight: "30vh",
         }}
         localization={{
           pagination: {

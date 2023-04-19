@@ -5,3 +5,10 @@ export type cursorStyleTable = {
 export type Position = {
   position?: string;
 }
+
+export type SelectTag = {
+  width?: string;
+  marginBottom?: string;
+  paddingLeft?: string;
+  opacity?: string;
+}

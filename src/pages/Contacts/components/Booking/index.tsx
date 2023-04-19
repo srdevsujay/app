@@ -29,6 +29,7 @@ const Booking = () => {
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
 
@@ -61,6 +62,7 @@ const Booking = () => {
       setCurrentColumns(columns as any);
       setOriginalData(dataBooking);
       setFilteredData(dataBooking);
+      setFilteredDataDos(dataBooking);
     }
   }, [dataBooking]);
 
@@ -121,6 +123,8 @@ const Booking = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
+        dataLead={dataBooking}
+        setFilteredDataDos={setFilteredDataDos}
       />
       <Modal
         title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}
@@ -139,7 +143,7 @@ const Booking = () => {
         />
       </Modal>
       <GeneralTable
-        data={filteredData}
+        data={filteredDataDos}
         columns={columnsToSet}
         pageSizeOptions={[7, 15, 31, 31]}
         maxBodyHeight={"60vh"}

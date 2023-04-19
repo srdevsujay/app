@@ -17,6 +17,7 @@ import {
   editBookingService,
   deleteBookingService,
   editSaleService,
+  createTrafficSourceService,
 } from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
 import Swal from "sweetalert2";
@@ -314,6 +315,22 @@ export const obtainUserProfile = (data: any): AppThunk => {
       console.log("resultProfile", result);
       const currentDataLead: any = result.data.data;
       dispatch(setUser(currentDataLead));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createTrafficSource = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await createTrafficSourceService(data);
+      console.log("resultTraficc", result);
+      if (result.data.message === "Attribution Of Sale successfully!") {
+        // dispatch(obtainApiBooking());
+        Swal.fire("Correcto", "Trafico Editado correctamente!!", "success");
+      }
     } catch (error) {
       console.log(error);
     }

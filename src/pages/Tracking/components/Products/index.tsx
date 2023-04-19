@@ -9,11 +9,11 @@ import {
   deleteProducto,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
 import GeneralTable from "../../../../utilities/Table/index";
-import TabMenuLeads from "../../../Contacts/components/TabMenuLeads/index";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { ColumnsProduct } from "./ColumnsProduct";
 import Modal from "../../../../components/modal/Modal.component";
 import FormProducts from "../FormProduct";
+import TabMenuTracking from "../TabMenuTracking";
 
 setAutoFreeze(false);
 
@@ -28,7 +28,7 @@ const Products = () => {
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
-  const searchStringDebounced = useDebounce(searchString, 3000);
+  const searchStringDebounced = useDebounce(searchString, 1000);
 
   useEffect(() => {
     dispatch(obtainApiProduct());
@@ -97,14 +97,14 @@ const Products = () => {
 
   return (
     <>
-      <TabMenuLeads
+      <TabMenuTracking
         nameTab={nameTab}
         columns={currentColumns}
         setDataFunnelToggle={setDataFunnelToggle}
         dataFunnelToggle={dataFunnelToggle}
         columnsToSet={columnsToSet}
-        updateData={updateData}
         setSearchString={setSearchString}
+        updateData={updateData}
         currentEdit={currentEdit}
         setCurrentEdit={setCurrentEdit}
         idEditCurrent={idEditCurrent}

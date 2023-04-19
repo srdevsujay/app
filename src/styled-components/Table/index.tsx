@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cursorStyleTable, Position } from "./types";
+import { cursorStyleTable, Position, SelectTag } from "./types";
 
 export const Table = styled.div<Position>`
   div {
@@ -37,6 +37,7 @@ export const TableStyle = styled.span<cursorStyleTable>(({ cursor }) => ({
 export const TextColors = styled.span`
   font-size: 13px !important;
   font-family: "Helvetica-NeueL-Title" !important;
+
   &.text-danger {
     color: #e3507a !important;
   }
@@ -75,37 +76,45 @@ export const BackColorsTable = styled.div`
   }
 `;
 
-export const BackColorsTableOrigin = styled.div`
-  font-size: 13px !important;
-  font-family: "Helvetica-NeueL" !important;
-  margin-bottom: 5px;
-  border-radius: 2px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  height: auto;
-  width: max-content;
+export const BackColorsTableOrigin = styled.div<SelectTag>(
+  ({ width, marginBottom, paddingLeft, opacity }) => ({
+    fontSize: "13px",
+    fontFamily: "Helvetica-NeueL",
+    marginBottom: marginBottom,
+    borderRadius: "2px",
+    padding: "8px",
+    display: "flex",
+    // justifyContent: "center",
+    // alignItems: "center",
+    height: "auto",
+    width: width,
+    paddingLeft: paddingLeft,
 
-  &.back-lila {
-    background: #4e14dd42;
-    border: 0.7px solid #4e14dd;
-    color: #4e14dd;
-  }
+    "&.back-lila": {
+      background: "#4e14dd42",
+      border: "0.7px solid #4e14dd",
+      color: "#4e14dd",
+    },
 
-  &.back-orange {
-    background: #f0830342;
-    border: 0.7px solid #f08303;
-    color: #f08303;
-  }
+    "&.back-orange": {
+      background: "#f0830342",
+      border: "0.7px solid #f08303",
+      color: "#f08303,",
+    },
 
-  &.back-orange > svg {
-    height: 15px;
-    margin-left: -6px;
-  }
+    "&.back-orange > svg": {
+      height: "15px",
+      marginLeft: "-6px",
+    },
 
-  &.back-green {
-    background: #2bb59642;
-    border: 0.7px solid #2bb596;
-    color: #2bb596;
-  }
-`;
+    "&.back-green": {
+      background: "#2bb59642",
+      border: "0.7px solid #2bb596",
+      color: "#2bb596",
+    },
+    ":hover": {
+      opacity: opacity,
+      cursor: "pointer",
+    },
+  })
+);

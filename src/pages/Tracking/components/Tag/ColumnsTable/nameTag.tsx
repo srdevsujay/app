@@ -13,6 +13,8 @@ export const nameTagColumn = () => {
         ""
       ) : (
         <BackColorsTableOrigin
+          width="max-content"
+          marginBottom="5px"
           className={`${
             dataTag?.tag.substr(0, 1) === "@"
               ? "back-lila"

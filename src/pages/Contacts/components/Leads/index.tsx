@@ -14,6 +14,8 @@ import FormLead from "../FormLead/index";
 import TabMenuLeads from "../TabMenuLeads/index";
 import CustomerDetails from "../CustomerDetails/index";
 import { obtainUserProfile } from "../../../../redux/state/slices/contacts/contactsThunk";
+import InputComponent from "../../../../components/input/Input.component";
+import SelectTag from "../SelectTag";
 
 setAutoFreeze(false);
 
@@ -28,6 +30,9 @@ const Leads = () => {
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
+
+  const [filter, setFilter] = useState("");
+  const [selected, setSelected] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
@@ -41,6 +46,7 @@ const Leads = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
 
   useEffect(() => {
     if (dataLead.length > 0) {
@@ -53,6 +59,7 @@ const Leads = () => {
       setCurrentColumns(columns as any);
       setOriginalData(dataLead);
       setFilteredData(dataLead);
+      setFilteredDataDos(dataLead);
     }
   }, [dataLead]);
 
@@ -69,6 +76,8 @@ const Leads = () => {
 
   useEffect(() => {
     if (searchStringDebounced.trim()) {
+      console.log("searchStringDebounced", searchStringDebounced);
+
       const currentData = originalData.filter((item: any) =>
         item.name.toLowerCase().includes(searchStringDebounced.toLowerCase())
       );
@@ -108,8 +117,14 @@ const Leads = () => {
     dispatch(obtainUserProfile(currentEmail));
   };
 
+  // const handleFilteredData = (e: any) => {
+  //   console.log("exxx", e);
+  //   setFilteredData(e);
+  // };
+
   return (
     <>
+      {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
       <TabMenuLeads
         nameTab={nameTab}
         columns={currentColumns}
@@ -117,13 +132,21 @@ const Leads = () => {
         dataFunnelToggle={dataFunnelToggle}
         columnsToSet={columnsToSet}
         updateData={updateData}
-        setSearchString={setSearchString}
         currentEdit={currentEdit}
         setCurrentEdit={setCurrentEdit}
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
+        dataLead={dataLead}
+        setFilteredDataDos={setFilteredDataDos}
       />
+      {/* <div style={{ width: "25%" }}>
+          <SelectTag
+            dataLead={dataLead}
+            setFilteredDataDos={setFilteredDataDos}
+          />
+        </div> */}
+      {/* </div> */}
       <Modal
         title={currentEdit !== null ? "Editar Lead" : "Crear Lead"}
         isOpen={isModalOpen}
@@ -154,7 +177,7 @@ const Leads = () => {
         <CustomerDetails />
       </Modal>
       <GeneralTable
-        data={filteredData}
+        data={filteredDataDos}
         columns={columnsToSet}
         pageSizeOptions={[7, 15, 31, 31]}
         maxBodyHeight={"60vh"}

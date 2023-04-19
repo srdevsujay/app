@@ -10,7 +10,11 @@ export const tagColumn = () => {
       dataContacts?.tag === null ? (
         ""
       ) : (
-        <BackColorsTableOrigin className="back-green">
+        <BackColorsTableOrigin
+          width="max-content"
+          marginBottom="5px"
+          className="back-green"
+        >
           <img src={venta} alt="" className="iconos-table-origin" />
           {dataContacts?.tag.substr(1)}
         </BackColorsTableOrigin>

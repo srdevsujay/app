@@ -21,6 +21,8 @@ import moment from "moment";
 import SelectOnlyForProduct from "../SelectProduct/index";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
+import { FormControlLabel } from "@mui/material";
 
 interface IFormInput {
   fullName: String;
@@ -31,7 +33,12 @@ type Option = {
   label: string;
 };
 
-const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
+const FormSale = ({
+  onClose,
+  currentEdit,
+  setCurrentEdit,
+  onCloseSubModal,
+}: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const today = new Date();
@@ -43,6 +50,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const [selectProduct, setSelectProduct] = useState(dataProduct[0]?.name);
   const [price, setPrice] = useState(dataProduct[0]?.price);
+  const [originalPrice, setOriginalPrice] = useState();
   const [dateSale, setDateSale] = useState<Date>(today);
   const [selectProductOnchange, setSelectProductOnchange] = useState();
 
@@ -60,7 +68,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     // date: yup.date().required("La fecha es obligatoria"),
     selectFunnel: yup.string().required(),
     // selectProduct: yup.string().required("La fecha es obligatoria"),
-    price: yup.number().positive().integer().required("El precio es requerido"),
+    price: yup.number().integer().required("El precio es requerido"),
   });
 
   const initForm = () => {
@@ -78,6 +86,7 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       setSelectFunnel(funnel_id);
       setSelectProduct(product);
       setPrice(priceParam);
+      setOriginalPrice(priceParam);
       setDateSale(new Date(date));
     }
   };
@@ -150,6 +159,8 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     setPrice(price);
   }, [selectProductOnchange]);
 
+  const [refaund, setRefaund] = useState(false);
+
   const onSubmit = (data: any) => {
     if (dataProduct.length === 0) {
       Swal.fire({
@@ -169,16 +180,21 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       return;
     }
     const currentDateSale = moment(dateSale).format("YYYY-MM-DD hh:mm:ss");
+    const currentRefaundPrice = !refaund ? data.price : 0;
+    const currentRefaund = refaund ? originalPrice : 0;
+
     const form: any = {
       date: currentDateSale,
       email: data.email,
       funnel_id: data.selectFunnel,
       phone: data.phone,
-      price: data.price,
+      price: currentRefaundPrice,
       product: data.selectProduct,
       ts: "",
-      refaund: 0,
+      refaund: currentRefaund,
     };
+    console.log("formprice..", form);
+
     if (idEditSale !== 0) {
       form.id = currentEdit.id;
       form.id_traffic = currentEdit.id_traffic;
@@ -191,91 +207,134 @@ const FormSale = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     onClose();
   };
 
+  console.log("refaund", refaund);
+  console.log("price", price);
+
+  const handleChangePrice = () => {
+    setRefaund(!refaund);
+    const currentPriceRefaund = !refaund ? 0 : originalPrice;
+    setPrice(currentPriceRefaund);
+  };
+
+  // useEffect(() => {
+  //   console.log("originalPrice", originalPrice);
+
+  //   const currentPriceRefaund = refaund ? 0 : originalPrice;
+  //   setPrice(currentPriceRefaund);
+  // }, [refaund]);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="row">
-        <div className="form-group col-sm-12">
-          <InputRegister
-            placeholder="Ingrese e-mail de reserva"
-            label="Correo electrónico de cita (Booking)"
-            id="0"
-            type="text"
-            min={3}
-            name="email"
-            register={register}
-            error={String(errors["email"]?.message)}
-          />
-        </div>
-        <div className="form-group col-sm-12">
-          <InputRegister
-            placeholder="Ingresa tu numero de telefono"
-            label="Teléfono del cliente"
-            id="0"
-            type="number"
-            min={3}
-            name="phone"
-            register={register}
-            error={String(errors["phone"]?.message)}
-          />
-        </div>
-        <div className="form-group col-sm-12 date-width">
-          <label className="title-label-popup w-100">Fecha y Hora</label>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateTimePicker
-              value={dateSale}
-              minDate={today}
-              onChange={(newValue: any) => {
-                setDateSale(newValue);
-              }}
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="row">
+          <div className="form-group col-sm-12">
+            <InputRegister
+              placeholder="Ingrese e-mail de reserva"
+              label="Correo electrónico de cita (Booking)"
+              id="0"
+              type="text"
+              min={3}
+              name="email"
+              register={register}
+              error={String(errors["email"]?.message)}
             />
-          </LocalizationProvider>
+          </div>
+          <div className="form-group col-sm-12">
+            <InputRegister
+              placeholder="Ingresa tu numero de telefono"
+              label="Teléfono del cliente"
+              id="0"
+              type="number"
+              min={3}
+              name="phone"
+              register={register}
+              error={String(errors["phone"]?.message)}
+            />
+          </div>
+          <div className="form-group col-sm-12 date-width">
+            <label className="title-label-popup w-100">Fecha y Hora</label>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DateTimePicker
+                value={dateSale}
+                minDate={today}
+                onChange={(newValue: any) => {
+                  setDateSale(newValue);
+                }}
+              />
+            </LocalizationProvider>
+          </div>
+          <div className="form-group col-sm-12">
+            <SelectWithValidation
+              label="Seleccionar Funnel"
+              options={funnels}
+              name="selectFunnel"
+              register={register}
+              error={String(errors["selectFunnel"]?.message)}
+              disabled={currentEdit ? true : false}
+            />
+          </div>
+          <div className="form-group col-sm-12">
+            <SelectOnlyForProduct
+              label="Seleccionar Producto"
+              options={dataProduct}
+              name="selectProduct"
+              register={register}
+              error={String(errors["selectProduct"]?.message)}
+              setSelectProductOnchange={setSelectProductOnchange}
+            />
+          </div>
+          <div
+            className={`${
+              currentEdit ? "form-group col-sm-7" : "form-group col-sm-12"
+            }`}
+          >
+            <InputRegister
+              placeholder="Ingresa el precio"
+              label="Precio"
+              id="0"
+              type="number"
+              min={0}
+              disabled={refaund}
+              name="price"
+              register={register}
+              defaultValue={price}
+              // onChange={(e) => handleChangePrice(e)}
+              error={String(errors["price"]?.message)}
+            />
+          </div>
+          <div
+            className={`${currentEdit ? "form-group col-sm-5" : "d-none"}`}
+            style={{ paddingTop: "39px" }}
+          >
+            <FormControlLabel
+              control={
+                <Checkbox value={refaund} onClick={() => handleChangePrice()} />
+              }
+              label="Reembolso"
+            />
+          </div>
         </div>
-        <div className="form-group col-sm-12">
-          <SelectWithValidation
-            label="Seleccionar Funnel"
-            options={funnels}
-            name="selectFunnel"
-            register={register}
-            error={String(errors["selectFunnel"]?.message)}
-            disabled={currentEdit ? true : false}
-          />
+        <div className="row">
+          <div className="form-group col-sm-6">
+            <ButtonsModal className="btn btn-close" onClick={onClose}>
+              Cerrar
+            </ButtonsModal>
+          </div>
+          <div className="form-group col-sm-6">
+            <ButtonsModal className="btn btn-add" type="submit">
+              {idEditSale !== 0 ? "Editar" : "Guardar"}
+            </ButtonsModal>
+          </div>
         </div>
-        <div className="form-group col-sm-12">
-          <SelectOnlyForProduct
-            label="Seleccionar Producto"
-            options={dataProduct}
-            name="selectProduct"
-            register={register}
-            error={String(errors["selectProduct"]?.message)}
-            setSelectProductOnchange={setSelectProductOnchange}
-          />
-        </div>
-        <div className="form-group col-sm-12">
-          <InputRegister
-            placeholder="Ingresa el precio"
-            label="Precio"
-            id="0"
-            type="number"
-            min={3}
-            name="price"
-            register={register}
-            error={String(errors["price"]?.message)}
-          />
-        </div>
-      </div>
+      </form>
       <div className="row">
-        <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
-            Cerrar
-          </ButtonsModal>
-        </div>
-        <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-add" type="submit">
-            {idEditSale !== 0 ? "Editar" : "Guardar"}
+        <div className="form-group col-sm-12">
+          <ButtonsModal className="btn btn-close" onClick={onCloseSubModal}>
+            Fuene de trafico
           </ButtonsModal>
         </div>
       </div>
-    </form>
+    </>
   );
 };
 

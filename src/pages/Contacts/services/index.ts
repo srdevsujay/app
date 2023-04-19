@@ -113,3 +113,11 @@ export const getUserProfile = async (data: any) => {
     }
   });
 };
+
+export const createTrafficSourceService = async (data: any) => {
+  return clientAxios.post("/sales_attribution", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
