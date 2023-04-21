@@ -8,6 +8,8 @@ import TabPanel from "@mui/lab/TabPanel";
 // import "./styled-components/style.css";
 import Products from "./components/Products/index";
 import TagTracking from "./components/Tag";
+import Attribution from "./components/Attribution/index";
+import FormAttribution from "./components/Attribution/FormAttribution";
 
 const Tracking = () => {
   const [value, setValue] = useState("1");
@@ -39,6 +41,7 @@ const Tracking = () => {
                 <Tab label="Reglas de URL" value="2" />
                 <Tab label="Productos" value="3" />
                 <Tab label="Etiquetas" value="4" />
+                <Tab label="Atribución de venta" value="5" />
               </TabList>
             </Box>
             <TabPanel value="1">{/* <Leads /> */}</TabPanel>
@@ -48,6 +51,9 @@ const Tracking = () => {
             </TabPanel>
             <TabPanel value="4">
               <TagTracking />
+            </TabPanel>
+            <TabPanel value="5">
+              <FormAttribution />
             </TabPanel>
           </TabContext>
         </Box>

@@ -5,10 +5,19 @@ import {
   deleteProductService,
 } from "../../../../pages/Tracking/services/index";
 import { AppThunk } from "../../../store";
-import { setProduct, setTag, starLoading } from "./trackingSlice";
+import {
+  setAttribution,
+  setProduct,
+  setTag,
+  starLoading,
+} from "./trackingSlice";
 import _ from "lodash";
 import Swal from "sweetalert2";
-import { getDataTag } from "../../../../pages/Tracking/services/index";
+import { createAttributionService } from "../../../../pages/Tracking/services/index";
+import {
+  getDataTag,
+  getDataAttribution,
+} from "../../../../pages/Tracking/services/index";
 
 export const obtainApiProduct = (): AppThunk => {
   return async (dispatch) => {
@@ -96,6 +105,41 @@ export const obtainApiTag = (): AppThunk => {
       const result = await getDataTag();
       const currentDataTag: any = _.orderBy(result.data.data, "id", "desc");
       dispatch(setTag(currentDataTag));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainApiAttribution = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataAttribution();
+      const DataAttribution: any = _.orderBy(result.data.data, "id", "asc");
+      dispatch(setAttribution(DataAttribution));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createAttribution = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await createAttributionService(data);
+      console.log("resultAttribution", result);
+      if (
+        result.data.message === "Update rule attribution user successfully!"
+      ) {
+        // dispatch(obtainApiProduct());
+        Swal.fire(
+          "Correcto",
+          "Regla de Atribución creada correctamente!!",
+          "success"
+        );
+      }
     } catch (error) {
       console.log(error);
     }

@@ -15,12 +15,21 @@ type SelectProps = {
   name: string;
   error?: string;
   register: UseFormRegister<any>;
+  setSelectAttribute?: any;
 } & Omit<SelectHTMLAttributes<HTMLSelectElement>, "onChange">;
 
 const SelectWithValidation = (props: SelectProps) => {
   // const { label, onChange, options, ...otherPros } = props;
-  const { label, onChange, name, options, register, error, ...otherProps } =
-    props;
+  const {
+    label,
+    onChange,
+    name,
+    options,
+    register,
+    error,
+    setSelectAttribute,
+    ...otherProps
+  } = props;
 
   // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
   //   onChange && onChange(target.value);
@@ -28,7 +37,13 @@ const SelectWithValidation = (props: SelectProps) => {
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}
-      <Select {...register(name)} {...otherProps}>
+      <Select
+        {...register(name)}
+        {...otherProps}
+        onChange={(newValue: any) => {
+          setSelectAttribute(newValue.target.value);
+        }}
+      >
         {options.map((option: any, idx: number) => (
           <option key={idx} value={option.id}>
             {option.funnel_name || option.name}

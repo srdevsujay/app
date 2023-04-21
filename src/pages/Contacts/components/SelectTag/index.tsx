@@ -8,12 +8,13 @@ import InputComponent from "../../../../components/input/Input.component";
 
 const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   const [selectedTag, setSelectedTag] = useState("");
+  const [currentSelectedTag, setCurrentSelectedTag] = useState<any>();
 
-  const uniqueTags = dataLead?.reduce((acc: any, cur: any) => {
-    if (cur.first_origin !== null) {
-      if (!acc.includes(cur.first_origintag)) {
-        acc.push(cur.first_origintag);
-      }
+  const uniqueTags = currentSelectedTag?.reduce((acc: any, cur: any) => {
+    // console.log("acc", acc.length);
+    // console.log("cur.first_origintag", cur.first_origintag);
+    if (!acc.includes(cur.first_origintag)) {
+      acc.push(cur.first_origintag);
     }
     return acc;
   }, []);
@@ -49,6 +50,17 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
     }, 90);
   };
 
+  useEffect(() => {
+    if (!dataLead) return;
+    const currentDataLead = dataLead.filter(
+      (data: any) => data.first_origintag !== null
+    );
+    setCurrentSelectedTag(currentDataLead);
+    console.log("currentDataLead", currentDataLead);
+  }, [dataLead]);
+
+  console.log("dataLead-", dataLead);
+
   // useEffect(() => {
   //   if (!dataLead) return;
   //   setFilteredDataDos(dataLead);
@@ -75,23 +87,9 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
         onBlur={(e) => toggleSelectTag(e)}
         className="w-100"
       />
-      <div
-        className={onFocused ? "d-block" : "d-none"}
-        style={{
-          border: "1px solid grey",
-          marginTop: "5px",
-          borderRadius: "5px",
-          maxHeight: "120px",
-          overflowY: "auto",
-          position: "absolute",
-          zIndex: "999",
-          width: "30%",
-          maxWidth: "250px",
-          background: "#fff",
-        }}
-      >
+      <div className={onFocused ? "d-block onFocused" : "d-none onFocused"}>
         {uniqueTags?.map((tag: any) => (
-          <div style={{ padding: "5px 10px" }}>
+          <div style={{ padding: "8px 10px" }}>
             <BackColorsTableOrigin
               width="initial"
               marginBottom="0px"

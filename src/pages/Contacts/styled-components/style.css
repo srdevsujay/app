@@ -123,3 +123,16 @@
   align-items: center;
   font-family: 'Helvetica-NeueL-Title';
 }
+
+.form-display-columns {
+  height: 300px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+#react-select-3-listbox {
+  height: 180px;
+  max-height: 180px;
+  overflow-y: scroll;
+}

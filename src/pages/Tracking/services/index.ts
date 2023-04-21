@@ -40,3 +40,19 @@ export const getDataTag = async () => {
     }
   });
 };
+
+export const getDataAttribution = async () => {
+  return clientAxios.get("/rule_attribution", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const createAttributionService = async (data: any) => {
+  return clientAxios.post("/rule_attribution", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

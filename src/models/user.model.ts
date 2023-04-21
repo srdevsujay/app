@@ -23,6 +23,7 @@ export interface UserState {
   tokens: Token[];
   user_type: number;
   time_zone: string;
+  userattributionrule?: any[];
 }
 
 export interface UserInfo {

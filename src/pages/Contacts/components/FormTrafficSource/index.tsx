@@ -7,6 +7,7 @@ import * as yup from "yup";
 import Select from "react-select";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import { createTrafficSource } from "../../../../redux/state/slices/contacts/contactsThunk";
+import "../../styled-components/style.css";
 
 interface IData {
   email: string;
@@ -26,6 +27,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
   const dispatch = useAppDispatch();
   const { dataLead } = useAppSelector((state) => state.contact);
   const [selectedOption, setSelectedOption] = useState<any>(null);
+  const [optionDataLead, setOptionDataLead] = useState<any>();
 
   const schema = yup.object().shape({
     email: yup
@@ -71,7 +73,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
     onClose();
   };
 
-  const options = dataLead.map((d: IData) => ({
+  const options = optionDataLead?.map((d: IData) => ({
     value: d.id,
     label: d.email,
   }));
@@ -80,10 +82,21 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
     setSelectedOption(selectedOption);
   };
 
+  useEffect(() => {
+    if (!dataLead) return;
+    const currentDataLead = dataLead.filter(
+      (data: any) => data.email !== currentEdit.email
+    );
+    setOptionDataLead(currentDataLead);
+    console.log("currentDataLead", currentDataLead);
+  }, [dataLead]);
+
+  console.log("options", options);
   console.log("selectedOption", selectedOption);
+  console.log("currentEdit", currentEdit);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="form-display-columns">
       <div className="row">
         <div className="form-group col-sm-12 mt-5">
           <label>Atributo de fuente de tráfico</label>
@@ -95,7 +108,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
             isClearable
           />
         </div>
-        <div className="form-group col-sm-12">
+        <div className="form-group col-sm-12 d-none">
           <InputRegister
             placeholder="Ingrese e-mail de reserva"
             label="Correo electrónico"
@@ -108,7 +121,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
             error={String(errors["email"]?.message)}
           />
         </div>
-        <div className="form-group col-sm-12">
+        <div className="form-group col-sm-12 d-none">
           <InputRegister
             placeholder="Ingresa tu numero de telefono"
             label="Fuente de trafico"

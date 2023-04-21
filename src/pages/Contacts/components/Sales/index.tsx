@@ -182,7 +182,7 @@ const Sales = () => {
         width="450px"
         padding="10px 32px"
         bottom="14px"
-        height="480px"
+        height="380px"
         btnClose={1}
       >
         <FormTrafficSource onClose={toggleSubModal} currentEdit={currentEdit} />

@@ -71,6 +71,11 @@ export const ButtonsModal = styled.button`
     background-color: #109cf1 !important;
   }
 
+  &.btn-close:hover {
+    color: #3997ff;
+    background-color: hsl(0deg 0% 96.41% / 54%);
+  }
+
   &.btn-add:hover {
     background-color: rgba(16, 156, 241, 0.7019607843137254) !important;
   }

@@ -7,3 +7,17 @@
 .MuiTableCell-root .MuiTableCell-head {
   z-index: inherit !important;
 }
+
+.onFocused {
+  border: 1px solid #80808059;
+  margin-top: 5px;
+  border-radius: 5px;
+  max-height: 120px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 999;
+  width: 30%;
+  max-width: 250px;
+  background: rgb(255, 255, 255);
+  box-shadow:rgba(149, 157, 165, 0.2) 0px 8px 20px
+}
