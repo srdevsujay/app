@@ -13,8 +13,16 @@ import BookingPopup from "../popupCustomerDetail/Booking";
 import Data from "../popupCustomerDetail/Data";
 
 const CustomerDetails = () => {
-  const { clicks, phonesandips, purchase, source, funnels, journey, booking } =
-    useAppSelector((state) => state.contact.dataUser);
+  const {
+    clicks,
+    phonesandips,
+    purchase,
+    source,
+    funnels,
+    journey,
+    booking,
+    emails,
+  } = useAppSelector((state) => state.contact.dataUser);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [value, setValue] = useState("1");
   const [currentJourney, setCurrentJourney] = useState<any>();
@@ -98,7 +106,7 @@ const CustomerDetails = () => {
             <BookingPopup booking={booking} time_Zone={time_Zone} />
           </TabPanel>
           <TabPanel value="4">
-            <Data phonesandips={phonesandips} />
+            <Data phonesandips={phonesandips} emails={emails} />
           </TabPanel>
         </TabContext>
       </Box>

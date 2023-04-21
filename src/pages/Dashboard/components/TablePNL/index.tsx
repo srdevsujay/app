@@ -53,6 +53,8 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
       ingresos: _.sumBy(selectPlatform, "ingresos"),
     };
 
+    console.log("dataTotal", dataTotal);
+
     return (
       <>
         <TableExpanded>

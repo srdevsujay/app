@@ -3,9 +3,10 @@ import IPs from "../../../../assets/images/IPs.svg";
 import emailIcon from "../../../../assets/images/email.svg";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const Data = ({ phonesandips }: any) => {
+const Data = ({ phonesandips, emails }: any) => {
   const { email } = useAppSelector((state) => state.user.user);
   console.log("entra?", phonesandips.length);
+  console.log("emails", emails);
   return (
     <div className="accordion2 nt-child-ips">
       {phonesandips?.map((traffic: any, index: any) => (
@@ -33,6 +34,11 @@ const Data = ({ phonesandips }: any) => {
               <div className="col-sm-12">
                 <span className="titleAccordeon2 ips">{email}</span>
               </div>
+              {emails.map((email: any) => (
+                <div className="col-sm-12">
+                  <span className="titleAccordeon2 ips">{email.email}</span>
+                </div>
+              ))}
             </div>
             <div className="row mb-3">
               <div className="12">

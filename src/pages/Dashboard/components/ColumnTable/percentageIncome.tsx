@@ -10,7 +10,11 @@ export const percentageIncomeColumn = (
     // field: "ingresos",
     render: (dashboardMain: any) => (
       <TableStyle>
-        {`${((dashboardMain.ingresos * 100) / dataTotal.ingresos).toFixed(2)}%`}
+        {`${
+          dataTotal.ingresos === 0
+            ? 0
+            : ((dashboardMain.ingresos * 100) / dataTotal.ingresos).toFixed(2)
+        }%`}
       </TableStyle>
     ),
   };
