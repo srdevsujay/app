@@ -31,6 +31,7 @@ const dataAttributionMajorMinor: any = [
 const dataAttributionOrigen: any = [
   { id: 0, value: 0, name: "Primer clic" },
   { id: 1, value: 1, name: "Ultimo clic" },
+  { id: 2, value: 2, name: "Condicional" },
 ];
 
 const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
@@ -173,7 +174,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           >
             <InputRegister
               placeholder="ingresa los días de atribución"
-              label="Días de atribución"
+              label="Fuente de origen mas antiguo de"
               id="0"
               type="number"
               min={1}
