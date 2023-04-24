@@ -87,3 +87,16 @@ export interface CampaignData {
   CPCKL: number,
 
 }
+
+export interface DataType {
+  bookings: number;
+  ct: string;
+  date: string;
+  gastos: number;
+  ingresos: number;
+  leeds: number;
+  plataform: string;
+  porcentajerentabilidad: number;
+  rentabilidad: number;
+  roi: number;
+}

@@ -16,6 +16,7 @@ import { click } from "@testing-library/user-event/dist/click";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { percentageIncomeColumn } from "../ColumnTable/percentageIncome";
 import { percentageExpenseColumn } from "../ColumnTable/percentageExpense";
+import { useData } from "../../hooks/useUnifiedData.hook";
 
 const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
@@ -43,10 +44,30 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     setCurrentTotal(dataTotal);
   }, [tablePnl]);
 
+  // const unifiedByCt = useData(dashboardMain);
+  // console.log("unifiedByCt", unifiedByCt);
+
   const currentDetailPanel = (dataExpandedPNL: any) => {
-    const currentExpanded: any[] = dashboardMain.filter((elem: any) => {
+    const expanded: any[] = dashboardMain.filter((elem: any) => {
       return elem.plataform === dataExpandedPNL.plataform;
     });
+    console.log("expanded", expanded);
+    const unifiedByCt = _(expanded)
+      .groupBy("ct")
+      .map((platform, ct) => ({
+        ct: ct,
+        bookings: _.sumBy(platform, "bookings"),
+        gastos: _.sumBy(platform, "gastos"),
+        ingresos: _.sumBy(platform, "ingresos"),
+        leeds: _.sumBy(platform, "leeds"),
+        porcentajerentabilidad: _.sumBy(platform, "porcentajerentabilidad"),
+        rentabilidad: _.sumBy(platform, "rentabilidad"),
+        roi: _.sumBy(platform, "roi"),
+      }))
+      .value();
+    console.log("unifiedByCt", unifiedByCt);
+    console.log("selectPlatform", selectPlatform);
+
     const dataTotal = {
       plataform: "Total",
       gastos: _.sumBy(selectPlatform, "gastos"),
@@ -81,13 +102,13 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
             style={{
               fontSize: 20,
               textAlign: "center",
-              height: 100,
+              // height: 100,
               width: "100%",
               display: "inline-table",
             }}
             className="MuiTableBody-root css-1xnox0e"
           >
-            {currentExpanded.map((tableCT: any, idx: number) => (
+            {unifiedByCt.map((tableCT: any, idx: number) => (
               <tr
                 className="MuiTableRow-root expanded-column css-1gqug66"
                 key={idx}
@@ -108,21 +129,31 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
                   style={{ width: "10%" }}
                 >
-                  {`${((tableCT.ingresos * 100) / dataTotal.ingresos).toFixed(
-                    2
-                  )}%`}
+                  {`${
+                    dataTotal.ingresos === 0
+                      ? 0
+                      : ((tableCT.ingresos * 100) / dataTotal.ingresos).toFixed(
+                          2
+                        )
+                  }%
+                  `}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
                   style={{ width: "10%" }}
                 >
-                  <FormatNumber number={tableCT.gastos} />
+                  {`${tableCT?.gastos.toFixed(2)}`}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
                   style={{ paddingLeft: "0px", width: "8.3%" }}
                 >
-                  {`${((tableCT.gastos * 100) / dataTotal.gastos).toFixed(2)}%`}
+                  {`${
+                    dataTotal.gastos === 0
+                      ? 0
+                      : ((tableCT.gastos * 100) / dataTotal.gastos).toFixed(2)
+                  }%
+                  `}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
@@ -134,7 +165,12 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
                   style={{ width: "12.8%" }}
                 >
-                  {`${tableCT?.porcentajerentabilidad.toFixed(2)}`}
+                  {`${
+                    tableCT.porcentajerentabilidad === 0
+                      ? 0
+                      : tableCT?.porcentajerentabilidad.toFixed(2)
+                  }%
+                  `}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
@@ -185,14 +221,6 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
         // }}
         onRowClick={(event, rowData, togglePanel: any) => togglePanel()}
         detailPanel={currentDetailPanel}
-
-        // detailPanel={[
-        //   {
-        //     render: () => currentDetailPanel as any,
-        //     onClick: (rowData: any) => {
-        //       console.log('e.g.', rowData)
-        //     },
-        // }]}
       />
     </Table>
   );

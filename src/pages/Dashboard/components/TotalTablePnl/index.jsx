@@ -1,17 +1,27 @@
 import _ from "lodash";
 
 export const totalPnl = (tempGroup) => {
+  console.log('tempGroup', tempGroup);
   const dataTotal = {
     plataform: "Total",
     gastos: _.sumBy(tempGroup, 'gastos'),
     ingresos: _.sumBy(tempGroup, 'ingresos'),
     porcentajerentabilidad: _.sumBy(tempGroup, 'porcentajerentabilidad'),
     rentabilidad: _.sumBy(tempGroup, 'rentabilidad'),
-    roi: _.sumBy(tempGroup, 'roi'),
+    roi: _.sumBy(tempGroup, 'roi'), 
     leeds: _.sumBy(tempGroup, 'leeds'),
     bookings: _.sumBy(tempGroup, 'bookings'), 
   }
-
+  // let porcentajeIngreso;
+  // tempGroup.map((tableCT, idx) => {
+  //   console.log('tableCT',tableCT)
+  //   if(tableCT.gastos === 0) {
+  //     porcentajeIngreso = 0;
+  //   } else {
+  //     porcentajeIngreso += ((tableCT.gastos * 100) / dataTotal.gastos).toFixed(2);
+  //   }
+  // })
+  // console.log('porcentajeIngreso', porcentajeIngreso);
   const tbody = document.createElement('tr');
   tbody.className = "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgroundTotal";
   tbody.innerHTML = `
