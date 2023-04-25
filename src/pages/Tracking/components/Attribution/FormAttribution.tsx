@@ -14,10 +14,8 @@ import {
   obtainApiAttribution,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
 import { FormAttributionSale } from "../../../../styled-components/Form/index";
-import {
-  Title,
-  Bar,
-} from "../../../Dashboard/styled-components/dashboardStyled";
+import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
+import { Title } from "../../../../styled-components/Title/index";
 import {
   createProduct,
   editProduct,
@@ -48,7 +46,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [days, setDays] = useState<any>(7);
   const [click, setClick] = useState<any>(0);
   const schema = yup.object().shape({
-    selectAttribute: yup.string().required(),
+    // selectAttribute: yup.string().required(),
     // days: yup.number().notRequired(),
     // name: yup.string().required("El nombre del producto es requerido"),
     // category: yup.string().required("La Categoria es requerido"),
@@ -61,12 +59,12 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
   };
 
-  useEffect(() => {
-    console.log("dataAttribution", dataAttribution);
+  // useEffect(() => {
+  //   console.log("dataAttribution", dataAttribution);
 
-    // if (!dataAttribution) return;
-    // setSelectAttribute(dataAttribution[0].id);
-  }, [dataAttribution]);
+  //   // if (!dataAttribution) return;
+  //   // setSelectAttribute(dataAttribution[0].id);
+  // }, [dataAttribution]);
 
   useEffect(() => {
     dispatch(obtainApiAttribution());
@@ -97,21 +95,11 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   }, [selectAttribute]);
 
   const onSubmit = (data: any) => {
-    console.log("dataOperator", data);
-    console.log("clicks", click);
-    console.log("operator", operator);
-    console.log("days", days);
-    console.log("userattributionrule", userattributionrule);
     const dataUserAttributionRule: any = userattributionrule;
     const currentOperator =
-      data.selectAttribute === "1"
-        ? "<="
-        : data.selectAttribute === "2"
-        ? ">="
-        : selectMajorMinor === "1"
-        ? ">="
-        : "<=";
-    const currentclick = selectOrigen === "1" ? "DESC" : "ASC";
+      selectOrigen === "1" ? "?" : selectOrigen === "0" ? "?" : "<=";
+    const currentclick =
+      selectOrigen === "1" ? "ASC" : selectOrigen === "0" ? "ASC" : "DESC";
     const currentDays = data.days === "" ? days : data.days;
     const form = {
       id: dataUserAttributionRule[0].id,
@@ -120,8 +108,6 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       rule_attribution_rule: dataUserAttributionRule[0].rule_attribution_rule,
       click: currentclick,
     };
-    console.log("form", form);
-
     // data.tag = `$${data.name}`;
     // console.log(data);
     // if (idEditLead !== 0) {
@@ -138,17 +124,18 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   // const handleChangeOperator = () => {
   //   setOperator(!operator)
   // };
-  console.log("selectMajorMinor", typeof selectMajorMinor);
 
   return (
     <FormAttributionSale>
-      <Title fontSize="17px" color="#123249">
-        Atribución de venta
-      </Title>
-      <Bar></Bar>
+      <div className="row align-content-center flex-column">
+        <Title fontSize="17px" color="#123249" className="text-center">
+          Atribución de venta
+        </Title>
+        <Bar style={{ width: "25%" }}></Bar>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="row">
-          <div
+        <div className="row align-content-center flex-column">
+          {/* <div
             className={
               selectAttribute === "3"
                 ? "form-group col-sm-6"
@@ -164,12 +151,21 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               disabled={currentEdit ? true : false}
               setSelectAttribute={setSelectAttribute}
             />
+          </div> */}
+          <div className="w-25 mb-3">
+            <SelectWithValidation
+              label="Origen"
+              options={dataAttributionOrigen}
+              name="selectOrigen"
+              register={register}
+              error={String(errors["selectOrigen"]?.message)}
+              disabled={currentEdit ? true : false}
+              setSelectAttribute={setSelectOrigen}
+            />
           </div>
           <div
             className={
-              selectAttribute === "3"
-                ? "form-group col-sm-6 d-block"
-                : "form-group col-sm-6 d-none"
+              selectOrigen === "2" ? "w-25 mb-3 d-block" : "w-25 d-none"
             }
           >
             <InputRegister
@@ -187,7 +183,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               }}
             />
           </div>
-          <div
+          {/* <div
             className={
               selectAttribute === "3"
                 ? "form-group col-sm-6 d-block"
@@ -203,27 +199,8 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               disabled={currentEdit ? true : false}
               setSelectAttribute={setSelectMajorMinor}
             />
-          </div>
-          <div
-            className={
-              selectAttribute === "3"
-                ? "form-group col-sm-6"
-                : "form-group col-sm-12"
-            }
-          >
-            <SelectWithValidation
-              label="Origen"
-              options={dataAttributionOrigen}
-              name="selectOrigen"
-              register={register}
-              error={String(errors["selectOrigen"]?.message)}
-              disabled={currentEdit ? true : false}
-              setSelectAttribute={setSelectOrigen}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="form-group col-sm-6 offset-6">
+          </div> */}
+          <div className="w-25 mb-3">
             <ButtonsModal className="btn btn-add" type="submit">
               {idEditLead !== 0 ? "Editar" : "Guardar"}
             </ButtonsModal>

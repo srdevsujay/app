@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Card, Main } from "../../styled-components/main";
-import { Bar, Title } from "./styled-components/dashboardStyled";
+import { Bar } from "./styled-components/dashboardStyled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   getMetricFunnel,
@@ -15,6 +15,7 @@ import { addDays } from "date-fns";
 import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
 import FooterMenu from "../../components/Footer/index";
+import { Title } from "../../styled-components/Title/index";
 
 import {
   yesterDay,

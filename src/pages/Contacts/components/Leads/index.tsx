@@ -76,8 +76,6 @@ const Leads = () => {
 
   useEffect(() => {
     if (searchStringDebounced.trim()) {
-      console.log("searchStringDebounced", searchStringDebounced);
-
       const currentData = originalData.filter((item: any) =>
         item.name.toLowerCase().includes(searchStringDebounced.toLowerCase())
       );
@@ -110,7 +108,6 @@ const Leads = () => {
   const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
 
   const getUserProfile = (data: any) => {
-    console.log("data", data);
     const currentEmail = { email: data.email };
     toggleModalUser();
     setEmailCustomerDetail(data.email);

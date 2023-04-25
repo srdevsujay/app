@@ -5,8 +5,7 @@ import { useAppSelector } from "../../../../hooks/appDispatch";
 
 const Data = ({ phonesandips, emails }: any) => {
   const { email } = useAppSelector((state) => state.user.user);
-  console.log("entra?", phonesandips.length);
-  console.log("emails", emails);
+
   return (
     <div className="accordion2 nt-child-ips">
       {phonesandips?.map((traffic: any, index: any) => (

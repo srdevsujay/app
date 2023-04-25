@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
-import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
+
 import { ButtonsModal } from "../../../../styled-components/button/index";
+import { Title } from "../../../../styled-components/Title/index";
 
 const StepsFunnel = ({
   currentSteps,

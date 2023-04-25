@@ -17,19 +17,15 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
       status: currentState,
       id: paramBooking.id,
     };
-    console.log("change", form);
     dispatch(editStateBooking(form));
   };
 
   useEffect(() => {
-    console.log("change");
     dispatch(obtainApiBooking());
   }, [booking]);
 
   useEffect(() => {
     if (booking.length > 0) {
-      console.log("BookingPopup", booking);
-
       const columns = ColumnTableBookingPopup(
         booking,
         time_Zone,

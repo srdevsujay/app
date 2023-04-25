@@ -62,7 +62,6 @@ const CustomerDetails = () => {
         .values(),
     ];
 
-    console.log(result);
     setCurrentJourney(result);
   }, [journey]);
 

@@ -56,3 +56,35 @@ export const createAttributionService = async (data: any) => {
     }
   });
 };
+
+export const getDataRuleURL = async () => {
+  return clientAxios.get("/rules", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const createRuleURLService = async (data: any) => {
+  return clientAxios.post("/rules", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const editRuleURLService = async (data: any) => {
+  return clientAxios.put("/rules", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const deleteRuleURLService = async (id: any) => {
+  return clientAxios.post("/deleterule", id, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

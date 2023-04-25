@@ -99,7 +99,7 @@ export const BackColorsTableOrigin = styled.div<SelectTag>(
     "&.back-orange": {
       background: "#f0830342",
       border: "0.7px solid #f08303",
-      color: "#f08303,",
+      color: "#f08303",
     },
 
     "&.back-orange > svg": {

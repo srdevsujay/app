@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { AdAccountType } from "../../../Dashboard/models";
 import AdAccountFunnel from "../../../Dashboard/components/AdAccountFunnel";
 import { Option } from "../../../../components/Select";
-import { Title } from "../../../Dashboard/styled-components/dashboardStyled";
+
 import { ButtonsModal } from "../../../../styled-components/button/index";
+import { Title } from "../../../../styled-components/Title/index";
 
 const AdAccount = ({
   adAccounts,

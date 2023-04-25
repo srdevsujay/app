@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { TitleDashboard } from "./types";
 
 export const Bar = styled.div`
   background: linear-gradient(75.37deg, #0043ff 25.69%, #a370f1 105.3%);
@@ -8,17 +7,6 @@ export const Bar = styled.div`
   width: 100%;
   border: 1px solid;
 `;
-
-export const Title = styled.text<TitleDashboard>(({ fontSize, color }) => ({
-  fontStyle: "normal",
-  fontSize: fontSize,
-  fontWeight: "700",
-  lineHeight: "20px",
-  letterSpacing: ".01em",
-  color: color,
-  margin: "10px 0",
-  fontFamily: "Helvetica-NeueL-Title",
-}));
 
 export const ButtonTitlePicker = styled.button`
   font-size: 10px !important;

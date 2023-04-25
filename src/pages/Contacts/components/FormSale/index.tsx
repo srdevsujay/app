@@ -330,7 +330,7 @@ const FormSale = ({
       <div className="row">
         <div className={`${currentEdit ? "form-group col-sm-12" : "d-none"}`}>
           <ButtonsModal className="btn btn-close" onClick={onCloseSubModal}>
-            Fuene de trafico
+            Atribuir Venta
           </ButtonsModal>
         </div>
       </div>

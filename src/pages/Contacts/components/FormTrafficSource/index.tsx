@@ -62,13 +62,11 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
   }, [currentEdit, setValue]);
 
   const onSubmit = (data: any) => {
-    console.log("data", data);
     const form: any = {
       email: data.email,
       id_traffic_source: data.id_traffic,
       id_traffic_source_attribute: selectedOption.value,
     };
-    console.log("form", form);
     dispatch(createTrafficSource(form));
     onClose();
   };
@@ -88,12 +86,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
       (data: any) => data.email !== currentEdit.email
     );
     setOptionDataLead(currentDataLead);
-    console.log("currentDataLead", currentDataLead);
   }, [dataLead]);
-
-  console.log("options", options);
-  console.log("selectedOption", selectedOption);
-  console.log("currentEdit", currentEdit);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-display-columns">

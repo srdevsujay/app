@@ -56,10 +56,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
       (data: any) => data.first_origintag !== null
     );
     setCurrentSelectedTag(currentDataLead);
-    console.log("currentDataLead", currentDataLead);
   }, [dataLead]);
-
-  console.log("dataLead-", dataLead);
 
   // useEffect(() => {
   //   if (!dataLead) return;

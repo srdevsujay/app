@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 export const totalPnl = (tempGroup) => {
-  console.log('tempGroup', tempGroup);
   const dataTotal = {
     plataform: "Total",
     gastos: _.sumBy(tempGroup, 'gastos'),

@@ -10,6 +10,9 @@ import Products from "./components/Products/index";
 import TagTracking from "./components/Tag";
 import Attribution from "./components/Attribution/index";
 import FormAttribution from "./components/Attribution/FormAttribution";
+import RuleURL from "./components/RuleURL/index";
+import ScriptTab from "./components/ScriptTab/index";
+import "./styled-components/styled.css";
 
 const Tracking = () => {
   const [value, setValue] = useState("1");
@@ -44,8 +47,12 @@ const Tracking = () => {
                 <Tab label="Atribución de venta" value="5" />
               </TabList>
             </Box>
-            <TabPanel value="1">{/* <Leads /> */}</TabPanel>
-            <TabPanel value="2">{/* <Booking /> */}</TabPanel>
+            <TabPanel value="1">
+              <ScriptTab />
+            </TabPanel>
+            <TabPanel value="2">
+              <RuleURL />
+            </TabPanel>
             <TabPanel value="3">
               <Products />
             </TabPanel>

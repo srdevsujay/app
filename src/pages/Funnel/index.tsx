@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Main, Card } from "../../styled-components/main/index";
-import { Title, Bar } from "../Dashboard/styled-components/dashboardStyled";
+import { Bar } from "../Dashboard/styled-components/dashboardStyled";
 import FooterMenu from "../../components/Footer/index";
 import AccordionFunnel from "./components/AccordionFunnel/index";
 import Modal from "../../components/modal/Modal.component";
@@ -22,6 +22,7 @@ import { obtainApiProduct } from "../../redux/state/slices/tracking/trackingThun
 import { FunnelStep } from "../Dashboard/models/steps.model";
 import { AdAccountType } from "../Dashboard/models/adAccount.model";
 import { createFunnel } from "../../redux/state/slices/dashboard/dashboardThunk";
+import { Title } from "../../styled-components/Title/index";
 
 const Funnel = () => {
   const dispatch = useAppDispatch();
@@ -106,9 +107,7 @@ const Funnel = () => {
   //     // setIdEditLead(currentEdit.id);
   //   }
   // }, [currentEdit, setValue]);
-  console.log("currentSteps", currentSteps);
   const onSubmit = (data: any) => {
-    console.log("data", data);
     const campaings = adAccounts.map((accounts) => {
       return [
         {
@@ -122,7 +121,6 @@ const Funnel = () => {
         },
       ];
     });
-    console.log("currentSteps handre", currentSteps);
 
     const steps = currentSteps;
     const form: any = {
@@ -136,7 +134,6 @@ const Funnel = () => {
       user_funel,
       id: null,
     };
-    console.log("form", form);
 
     // if (idEditLead !== 0) {
     //   dispatch(editLead(data, idEditLead));
@@ -157,7 +154,6 @@ const Funnel = () => {
   }, [isModalOpen]);
 
   const obtainFunnelEdit = (editDataTracking: any) => {
-    console.log("editDataTracking", editDataTracking);
     setCurrentDataEditFunnel(editDataTracking);
     toggleModal();
   };

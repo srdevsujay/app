@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Title,
-  ContainerFiltersFunnel,
-} from "../../../Dashboard/styled-components/dashboardStyled";
+import { ContainerFiltersFunnel } from "../../../Dashboard/styled-components/dashboardStyled";
 import MuiAccordion from "@mui/material/Accordion";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
@@ -399,7 +396,6 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
 
   return (
     <div className="mt-3">
-      {/* <Title fontSize="14px" color="#192a3e">{`Funnels (${funnelDays})`}</Title> */}
       {dataTracking.map((tracking: any, index: number) => (
         <div key={index} style={{ borderBottom: "1px solid #80808026" }}>
           <ContainerFiltersFunnel>
