@@ -15,6 +15,12 @@ export const EmptyUserState = {
     tokens: [],
     user_type: 0,
   },
+  dataRegister: {},
+  isLoading: false,
+  userEdit: [],
+  profilePicture: "",
+  pictureTime: Date.now(),
+  deleteProfilePicture: "",
 };
 
 

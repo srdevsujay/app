@@ -59,5 +59,5 @@ export const SelectScript = styled.select`
   padding-right: 10px;
   background-color: #fafafb !important;
   height: 37px !important;
-  width: 280px !important;
+  width: 280px;
 `;

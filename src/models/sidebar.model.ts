@@ -13,6 +13,6 @@ export enum SidebarTitle {
   FUNNEL = 'Funnel',
   CONTACTS = 'Contactos',
   TRACKING = "Tracking",
-  CONFIGURATION = "Configuración",
+  CONFIGURATION = "Configuracion",
   HELP = "Ayuda"
 }

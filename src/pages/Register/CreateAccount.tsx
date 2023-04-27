@@ -16,7 +16,7 @@ const CreateAccount = () => {
     status: 1,
     user_type: 2,
     time_zone: "",
-    type_currency: 0,
+    type_currency: "0",
   });
 
   const {

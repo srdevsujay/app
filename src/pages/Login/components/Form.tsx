@@ -60,6 +60,10 @@ const Form = () => {
           token: loginData.token,
           dataRegister: loginData.dataRegister,
           isLoading: loginData.isLoading,
+          userEdit: loginData.userEdit,
+          profilePicture: loginData.profilePicture,
+          pictureTime: loginData.pictureTime,
+          deleteProfilePicture: loginData.deleteProfilePicture,
         })
       );
       navigate("/dashboard");

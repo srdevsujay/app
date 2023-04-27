@@ -24,13 +24,19 @@ export interface UserState {
   user_type: number;
   time_zone: string;
   userattributionrule?: any[];
+  image_name: string;
+  type_currency: string;
 }
 
 export interface UserInfo {
   token: string;
   user: UserState;
   dataRegister: {};
-  isLoading: boolean
+  isLoading: boolean;
+  userEdit: any;
+  profilePicture: string;
+  pictureTime: any;
+  deleteProfilePicture: string;
 }
 
 export interface RegisterUser {
@@ -42,5 +48,5 @@ export interface RegisterUser {
   status: number;
   user_type: number;
   time_zone: string;
-  type_currency: number;
+  type_currency: string;
 }

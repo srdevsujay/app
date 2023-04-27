@@ -7,5 +7,5 @@ export const privateRoutes = {
   FUNNEL: 'Funnel',
   CONTACT: 'Contactos',
   TRACKING: "Tracking",
-  SETTING: 'Setting'
+  CONFIGURATION: "Configuracion",
 }

@@ -9,5 +9,6 @@ export const stateUser = {
   tokens: [],
   user_type: 0,
   time_zone: "",
-  type_currency: 0,
+  type_currency: "0",
+  image_name: "",
 };

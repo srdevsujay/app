@@ -12,6 +12,10 @@ export const EmptyUserState: UserInfo = {
   user: stateUser,
   dataRegister: {},
   isLoading: false,
+  userEdit: [],
+  profilePicture: "",
+  pictureTime: Date.now(),
+  deleteProfilePicture: "",
 };
 
 export const authSlice = createSlice({
@@ -31,6 +35,10 @@ export const authSlice = createSlice({
       setJwt(action.payload.token);
       state.token = action.payload.token;
       state.user = action.payload.user;
+      state.userEdit = [];
+      state.profilePicture = "";
+      state.pictureTime = Date.now();
+      state.deleteProfilePicture = "";
     },
     registerUser: (state, action: PayloadAction<UserInfo>) => {
       state.isLoading = false;
@@ -40,12 +48,33 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.user = null;
     },
+    setUserEdit: (state, action: PayloadAction<UserInfo>) => {
+      state.isLoading = false;
+      state.userEdit = action.payload.userEdit;
+    },
+    setProfilePicture: (state, action: PayloadAction<UserInfo>) => {
+      state.isLoading = false;
+      state.profilePicture = action.payload.profilePicture;
+      state.user = action.payload.user;
+      state.pictureTime = Date.now();
+    },
+    setDeleteProfilePicture: (state, action: PayloadAction<UserInfo>) => {
+      state.isLoading = false;
+      state.deleteProfilePicture = action.payload.deleteProfilePicture;
+    },
   },
 });
 
 // export const selectAuth = (state: RootState) => state.auth;
 
-export const { starLoading, setUser, registerUser, logoutUser } =
-  authSlice.actions;
+export const {
+  starLoading,
+  setUser,
+  registerUser,
+  logoutUser,
+  setUserEdit,
+  setProfilePicture,
+  setDeleteProfilePicture,
+} = authSlice.actions;
 
 export default authSlice.reducer;

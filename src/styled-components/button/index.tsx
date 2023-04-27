@@ -127,3 +127,23 @@ export const ButtonEditWithIcon = styled.button`
 // const theme = {
 //   main: "mediumseagreen"
 // };
+
+export const ButtonsProfile = styled.button`
+  background: rgba(91, 147, 243, 0.2) !important;
+  color: #3997ff !important;
+  font-size: 13px !important;
+  height: 31px !important;
+  font-family: "Helvetica-NeueL-Title";
+  font-weight: 600;
+`;
+
+export const ButtonDelete = styled.button`
+  background: #fef4f5 !important;
+  color: #e71d36 !important;
+  border-radius: 5px !important;
+  width: 132px !important;
+  height: 31px !important;
+  font-size: 13px !important;
+  font-family: "Helvetica-NeueL-Title";
+  font-weight: 600;
+`;

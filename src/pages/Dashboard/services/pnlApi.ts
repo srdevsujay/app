@@ -53,3 +53,20 @@ export const createFunnelService = async (data: any) => {
   });
 };
 
+export const editUserService = async (data: any) => {
+  return clientAxios.put("/user", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const createDeleteImageProfileService = async (id: any) => {
+  return clientAxios.post(`/delete_image/${id}`, {
+    headers: {
+      "Accept": "*/*",
+      "Content-Type": "application/json",
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+}

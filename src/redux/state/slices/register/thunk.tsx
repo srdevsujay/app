@@ -15,6 +15,10 @@ export const registerUserThunk = (dataUser: RegisterUser) => {
           token: "",
           dataRegister: data,
           isLoading: false,
+          userEdit: [],
+          profilePicture: "",
+          pictureTime: Date.now(),
+          deleteProfilePicture: "",
         })
       );
     } catch (error) {

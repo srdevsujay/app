@@ -2,6 +2,7 @@ import { SidebarItem, SidebarTitle } from "../../models";
 import Rectangle4 from "../../assets/images/Rectangle4.svg";
 import tracking from "../../assets/images/tracking.svg";
 import leads from "../../assets/images/leads.svg";
+import configuration from "../../assets/images/configuracion.svg";
 
 export const SidebarData: SidebarItem[] = [
   {
@@ -38,6 +39,11 @@ export const SidebarData: SidebarItem[] = [
     title: SidebarTitle.TRACKING,
     path: "/tracking",
     icon: <img src={tracking} alt="" height="12" width="12" />,
+  },
+  {
+    title: SidebarTitle.CONFIGURATION,
+    path: "/configuracion",
+    icon: <img src={configuration} alt="" height="12" width="12" />,
   },
   // {
   //     title: 'History',
