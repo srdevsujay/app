@@ -175,7 +175,7 @@ export const createRuleURL = (data: any): AppThunk => {
       const result = await createRuleURLService(data);
       if (result.data.message === "Create rule successfully!") {
         dispatch(obtainApiRuleURL());
-        Swal.fire("Correcto", "Producto Creado correctamente!!", "success");
+        Swal.fire("Correcto", "Regla Creado correctamente!!", "success");
       }
     } catch (error) {
       console.log(error);

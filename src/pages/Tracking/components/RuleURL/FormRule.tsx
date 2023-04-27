@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +15,7 @@ import {
   createRuleURL,
   editRuleURL,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
+import Swal from "sweetalert2";
 
 const dataTypeTag: any = [
   { id: 0, value: 0, name: "Origen" },
@@ -25,6 +26,7 @@ const dataTypeTag: any = [
 const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
+  const { dataRule } = useAppSelector((state) => state.tracking);
   const [idEditLead, setIdEditLead] = useState<number>(0);
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const [exception, setException] = useState<any>([]);
@@ -49,6 +51,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       setValue("name", currentEdit.name);
       const tagEdit = currentEdit.tag.substring(1);
       setValue("tag", tagEdit);
+      console.log("tagEdit", tagEdit);
       setIdEditLead(currentEdit.id);
       setException(JSON.parse(currentEdit.exeptions));
       setWords(JSON.parse(currentEdit.words));
@@ -62,6 +65,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           : "Venta";
       setValue("selectTypeTag", tag);
       setSelectTypeTagOnchange(tag);
+      console.log("currentEdit", currentEdit);
     }
   }, [currentEdit, setValue]);
 
@@ -72,27 +76,42 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       apply_to: apply,
       exeptions: exceptionJSON,
       name: data.name,
-      tag: data.tag,
       words: wordsJSON,
     };
-
     if (idEditLead !== 0) {
       form.id = idEditLead;
-      console.log("form", form);
+      const selectTag =
+        selectTypeTagOnchange === "Origen"
+          ? `@${data.tag}`
+          : selectTypeTagOnchange === "Acción"
+          ? `!${data.tag}`
+          : `$${data.tag}`;
+      form.tag = selectTag;
       dispatch(editRuleURL(form));
       setCurrentEdit();
       setIdEditLead(0);
+      onClose();
     } else {
-      form.tag =
-        data.selectTypeTag === "Origen"
-          ? `@${data.tag}`
-          : data.selectTypeTag === "Accion"
-          ? `!${data.tag}`
-          : `$${data.tag}`;
-      console.log("form", form);
-      dispatch(createRuleURL(form));
+      const currentName = dataRule.find((rule: any) => rule.name === data.name);
+      if (currentName) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "El nombre de la regla ya existe!!",
+        });
+      } else {
+        const selectTag =
+          selectTypeTagOnchange === "Origen"
+            ? `@${data.tag}`
+            : selectTypeTagOnchange === "Acción"
+            ? `!${data.tag}`
+            : `$${data.tag}`;
+        form.tag = selectTag;
+        console.log("form", form);
+        dispatch(createRuleURL(form));
+        onClose();
+      }
     }
-    onClose();
   };
 
   const [apply, setApply] = useState("URL Anterior");
@@ -111,8 +130,8 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     setWords(words.filter((words: any) => words !== elem));
   };
 
-  console.log("selectTypeTagOnchange", selectTypeTagOnchange);
-  console.log("words.tag", words);
+  const exceptionValue = useRef<any>(null);
+  const wordsValue = useRef<any>(null);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -205,7 +224,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             placeholder="Presiona enter para agregar una nueva excepción."
             name="exeptions"
             id="exeptions"
-            // defaultValue={user.password}
+            ref={exceptionValue}
             onKeyDown={(e: any) => {
               if (e.key === "Enter") {
                 e.preventDefault();
@@ -214,7 +233,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
                   ...prevContact,
                   valueException,
                 ]);
-                // document.querySelector("#exeptions").value = '';
+                exceptionValue.current.value = "";
               }
             }}
           />
@@ -254,13 +273,13 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             placeholder="Presiona enter para agregar una nueva coincidencia."
             name="words"
             id="words"
+            ref={wordsValue}
             onKeyDown={(e: any) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-
                 const valueWord = e.target.value;
                 setWords((prevContact: any) => [...prevContact, valueWord]);
-                // document.querySelector("#words").value = '';
+                wordsValue.current.value = "";
               }
             }}
           />
