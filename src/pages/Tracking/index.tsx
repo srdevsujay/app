@@ -8,7 +8,6 @@ import TabPanel from "@mui/lab/TabPanel";
 // import "./styled-components/style.css";
 import Products from "./components/Products/index";
 import TagTracking from "./components/Tag";
-import Attribution from "./components/Attribution/index";
 import FormAttribution from "./components/Attribution/FormAttribution";
 import RuleURL from "./components/RuleURL/index";
 import ScriptTab from "./components/ScriptTab/index";

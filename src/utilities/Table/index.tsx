@@ -33,7 +33,7 @@ const GeneralTable = ({
             emptyDataSourceMessage: "No hay Datos...",
           },
         }}
-        onRowClick={(e, rowData) => getUserProfile(rowData)}
+        onRowClick={(e, rowData) => getUserProfile(rowData, e)}
       />
     </Table>
   );

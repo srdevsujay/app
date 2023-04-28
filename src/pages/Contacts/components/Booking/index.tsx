@@ -14,8 +14,12 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { ColumnTableBooking } from "./ColumnsBokking";
 import Modal from "../../../../components/modal/Modal.component";
 import FormBooking from "../FormBooking/index";
-import { editStateBooking } from "../../../../redux/state/slices/contacts/contactsThunk";
+import {
+  editStateBooking,
+  obtainUserProfile,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
 import moment from "moment";
+import CustomerDetails from "../CustomerDetails/index";
 
 setAutoFreeze(false);
 
@@ -31,6 +35,7 @@ const Booking = () => {
   const [filteredData, setFilteredData] = useState<any[]>();
   const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
+  const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
@@ -108,6 +113,20 @@ const Booking = () => {
     }
   };
 
+  const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
+  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+
+  const getUserProfile = (data: any, e: any) => {
+    const clickColumnEdit = e.target.value;
+    if (clickColumnEdit === "") {
+    } else {
+      const currentEmail = { email: data.email };
+      toggleModalUser();
+      setEmailCustomerDetail(data.email);
+      dispatch(obtainUserProfile(currentEmail));
+    }
+  };
+
   return (
     <>
       <TabMenuLeads
@@ -142,12 +161,26 @@ const Booking = () => {
           setCurrentEdit={setCurrentEdit}
         />
       </Modal>
+      <Modal
+        title="Detalles del cliente potencial"
+        isOpen={isModalOpenUser}
+        onClose={toggleModalUser}
+        width="130vh"
+        padding="10px 32px"
+        bottom="14px"
+        height="480px"
+        btnClose={1}
+        subTitle={emailCustomerDetail}
+      >
+        <CustomerDetails />
+      </Modal>
       <GeneralTable
         data={filteredDataDos}
         columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31, 31]}
-        maxBodyHeight={"60vh"}
+        pageSizeOptions={[7, 15, 31]}
+        maxBodyHeight={"55vh"}
         pageSize={7}
+        getUserProfile={getUserProfile}
       />
     </>
   );

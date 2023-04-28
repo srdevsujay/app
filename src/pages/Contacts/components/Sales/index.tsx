@@ -8,11 +8,15 @@ import { TableContacts } from "../Leads/ColumnsLeads";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { ColumnTableSale } from "./ColumnsSale";
 import Modal from "../../../../components/modal/Modal.component";
-import { obtainApiSale } from "../../../../redux/state/slices/contacts/contactsThunk";
+import {
+  obtainApiSale,
+  obtainUserProfile,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
 import FormSale from "../FormSale";
 import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
 import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
 import FormTrafficSource from "../FormTrafficSource";
+import CustomerDetails from "../CustomerDetails/index";
 
 setAutoFreeze(false);
 
@@ -46,6 +50,8 @@ const Sales = () => {
   const [filteredData, setFilteredData] = useState<any[]>();
   const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
   const [searchString, setSearchString] = useState("");
+  const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
+  const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   // const [filter, setFilter] = useState("");
   // const [selected, setSelected] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
@@ -140,6 +146,19 @@ const Sales = () => {
   //   setSelected(e.target.value);
   // };
 
+  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+
+  const getUserProfile = (data: any, e: any) => {
+    const clickColumnEdit = e.target.value;
+    if (clickColumnEdit === "") {
+    } else {
+      const currentEmail = { email: data.email };
+      toggleModalUser();
+      setEmailCustomerDetail(data.email);
+      dispatch(obtainUserProfile(currentEmail));
+    }
+  };
+
   return (
     <>
       <TabMenuLeads
@@ -187,12 +206,26 @@ const Sales = () => {
       >
         <FormTrafficSource onClose={toggleSubModal} currentEdit={currentEdit} />
       </Modal>
+      <Modal
+        title="Detalles del cliente potencial"
+        isOpen={isModalOpenUser}
+        onClose={toggleModalUser}
+        width="130vh"
+        padding="10px 32px"
+        bottom="14px"
+        height="480px"
+        btnClose={1}
+        subTitle={emailCustomerDetail}
+      >
+        <CustomerDetails />
+      </Modal>
       <GeneralTable
         data={filteredDataDos}
         columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31, 31]}
-        maxBodyHeight={"60vh"}
+        pageSizeOptions={[7, 15, 31]}
+        maxBodyHeight={"55vh"}
         pageSize={7}
+        getUserProfile={getUserProfile}
       />
     </>
   );

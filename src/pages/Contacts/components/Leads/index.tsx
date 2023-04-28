@@ -107,11 +107,15 @@ const Leads = () => {
 
   const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
 
-  const getUserProfile = (data: any) => {
-    const currentEmail = { email: data.email };
-    toggleModalUser();
-    setEmailCustomerDetail(data.email);
-    dispatch(obtainUserProfile(currentEmail));
+  const getUserProfile = (data: any, e: any) => {
+    const clickColumnEdit = e.target.value;
+    if (clickColumnEdit === "") {
+    } else {
+      const currentEmail = { email: data.email };
+      toggleModalUser();
+      setEmailCustomerDetail(data.email);
+      dispatch(obtainUserProfile(currentEmail));
+    }
   };
 
   // const handleFilteredData = (e: any) => {
@@ -176,8 +180,8 @@ const Leads = () => {
       <GeneralTable
         data={filteredDataDos}
         columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31, 31]}
-        maxBodyHeight={"60vh"}
+        pageSizeOptions={[7, 15, 31]}
+        maxBodyHeight={"55vh"}
         pageSize={7}
         getUserProfile={getUserProfile}
       />

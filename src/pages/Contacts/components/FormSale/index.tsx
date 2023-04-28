@@ -73,6 +73,8 @@ const FormSale = ({
 
   const initForm = () => {
     if (currentEdit) {
+      console.log("currentEdit", currentEdit);
+
       const {
         email: emailParam,
         phone,

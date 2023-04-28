@@ -16,7 +16,6 @@ import { click } from "@testing-library/user-event/dist/click";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { percentageIncomeColumn } from "../ColumnTable/percentageIncome";
 import { percentageExpenseColumn } from "../ColumnTable/percentageExpense";
-import { useData } from "../../hooks/useUnifiedData.hook";
 
 const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
@@ -29,7 +28,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     expenseColumn(dashboardMain),
     percentageExpenseColumn(dashboardMain, currentTotal, selectPlatform),
     profitabilityColumn(dashboardMain),
-    percentageProfitabilityColumn(dashboardMain),
+    percentageProfitabilityColumn(dashboardMain, currentTotal),
     roiColumn(dashboardMain),
     leadColumn(dashboardMain),
     bookingColumn(dashboardMain),
@@ -43,9 +42,6 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     };
     setCurrentTotal(dataTotal);
   }, [tablePnl]);
-
-  // const unifiedByCt = useData(dashboardMain);
-  // console.log("unifiedByCt", unifiedByCt);
 
   const currentDetailPanel = (dataExpandedPNL: any) => {
     const expanded: any[] = dashboardMain.filter((elem: any) => {
