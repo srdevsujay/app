@@ -16,6 +16,8 @@ import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
 import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
+import { useNavigate } from "react-router-dom";
+import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
 
 import {
   yesterDay,
@@ -29,6 +31,8 @@ import {
 setAutoFreeze(false);
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
   const [pnlDays, setPnlDays] = useState<number>(7);
   const [currentDayFilter, SetCurrentDayFilter] = useState(7);
   const [flagModal, setFlagModal] = useState<number>(0);
@@ -47,7 +51,9 @@ const Dashboard = () => {
     },
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
-  const dataFunnelData = useAppSelector((state) => state.dashboard);
+  const { tokenfacebook, tokengoogle } = useAppSelector(
+    (state) => state.dashboard
+  );
 
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
@@ -67,6 +73,25 @@ const Dashboard = () => {
       dispatch(getTrackingFunnel(idUser));
     }
   }, [idUser]);
+
+  useEffect(() => {
+    if (tokenfacebook === false || tokengoogle === false) {
+      if (tokenfacebook === false && tokengoogle === false) {
+        setTitle(
+          "Las integaciones tanto de Facebook como Google estan desactivadas"
+        );
+      } else if (tokenfacebook === false && tokengoogle === true) {
+        setTitle("La integacion de Facebook esta desactivada");
+      } else if (tokenfacebook === true && tokengoogle === false) {
+        setTitle("La integacion de Google esta desactivada");
+      }
+    }
+  }, [tokenfacebook, tokengoogle]);
+
+  useEffect(() => {
+    if (title === "") return;
+    IntegrationAlert(title, navigate);
+  }, [title]);
 
   const handleDateDashboardMain = () => {
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");

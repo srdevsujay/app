@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 export const ProductAlert = (navigate: any, word: string) => {
   Swal.fire({

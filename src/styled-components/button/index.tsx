@@ -147,3 +147,27 @@ export const ButtonDelete = styled.button`
   font-family: "Helvetica-NeueL-Title";
   font-weight: 600;
 `;
+
+export const CopyButton = styled.button`
+  color: rgb(255, 255, 255);
+  background-color: rgb(16, 156, 241);
+  box-shadow: rgba(16, 156, 241, 0.24) 0px 4px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: "Helvetica-NeueL-Title";
+
+  :hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(16, 156, 241, 0.7019607843137254);
+  }
+`;
+
+export const ButtonGoogle = styled.button`
+  background: #4285f4 !important;
+  color: #fff !important;
+  border-radius: 0 !important;
+  height: 40px !important;
+  width: 240px !important;
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 14px;
+`;

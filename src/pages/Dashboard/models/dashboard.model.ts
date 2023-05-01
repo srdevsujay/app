@@ -3,6 +3,8 @@ export interface DashboardInfo {
   dataPNL: [];
   dataTracking: [];
   dataFunnel: [],
+  tokenfacebook: boolean,
+  tokengoogle: boolean,
 }
 
 export interface Pnl {

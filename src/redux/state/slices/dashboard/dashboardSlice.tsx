@@ -9,6 +9,8 @@ export const dashboardState: DashboardInfo = {
   dataPNL: [],
   dataTracking: [],
   dataFunnel: [],
+  tokenfacebook: false,
+  tokengoogle: false,
 };
 
 export const dashboardSlice = createSlice({
@@ -30,10 +32,22 @@ export const dashboardSlice = createSlice({
       state.isLoading = false;
       state.dataFunnel = action.payload;
     },
+    setTokenFacebook: (state, action: PayloadAction<boolean>) => {
+      state.tokenfacebook = action.payload;
+    },
+    setTokenGoogle: (state, action: PayloadAction<boolean>) => {
+      state.tokengoogle = action.payload;
+    },
   },
 });
 
-export const { starLoading, setPNL, setDataTracking, setDataFunnel } =
-  dashboardSlice.actions;
+export const {
+  starLoading,
+  setPNL,
+  setDataTracking,
+  setDataFunnel,
+  setTokenFacebook,
+  setTokenGoogle,
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

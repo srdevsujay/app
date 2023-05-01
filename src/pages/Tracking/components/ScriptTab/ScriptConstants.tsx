@@ -2,6 +2,7 @@ import React from "react";
 import ClipboardJS from "clipboard";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { ContainerScript } from "../../styled-components/TableRule";
+import { CopyButton } from "../../../../styled-components/button/index";
 
 const ScriptConstants = ({ funnels }: any) => {
   new ClipboardJS(".btn");
@@ -54,7 +55,7 @@ const ScriptConstants = ({ funnels }: any) => {
           className="col-sm-12 d-flex justify-content-end"
           style={{ paddingRight: "11px" }}
         >
-          <button
+          <CopyButton
             className="btn w-25 btn-copy"
             data-clipboard-text={`<script type="text/javascript">
             var funnel = ${funnels ? funnels : funnelsId[0]?.id}
@@ -65,16 +66,9 @@ const ScriptConstants = ({ funnels }: any) => {
             head.appendChild(script);
             </script>`}
             onClick={handleButton}
-            style={{
-              color: "#fff",
-              backgroundColor: "#109CF1",
-              boxShadow: "0px 4px 10px rgb(16 156 241 / 24%)",
-              borderRadius: "5px",
-              fontSize: "11px",
-            }}
           >
             Copiar Guión
-          </button>
+          </CopyButton>
         </div>
       </div>
     </>

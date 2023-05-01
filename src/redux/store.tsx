@@ -22,6 +22,7 @@ import contactSlice from "./state/slices/contacts/contactsSlice";
 import { logoutUser } from "./state/slices/login/authSlice";
 import { trackingState } from "./state/slices/tracking/trackingSlice";
 import trackingSlice from "./state/slices/tracking/trackingSlice";
+import configurationSlice from "./state/slices/configuration/configurationSlice";
 
 export interface AppStore {
   authApi: any;
@@ -29,6 +30,7 @@ export interface AppStore {
   dashboard: DashboardInfo;
   contact: any;
   tracking: any;
+  configuration: any;
 }
 
 const persistConfig = {
@@ -43,6 +45,7 @@ const reducer = combineReducers<AppStore>({
   dashboard: dashboardSlice,
   contact: contactSlice,
   tracking: trackingSlice,
+  configuration: configurationSlice,
 });
 
 const resettableRootReducer = (state: any, action: PayloadAction<UserInfo>) => {

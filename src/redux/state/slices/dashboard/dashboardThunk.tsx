@@ -3,6 +3,8 @@ import {
   starLoading,
   setDataTracking,
   setDataFunnel,
+  setTokenFacebook,
+  setTokenGoogle,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -33,6 +35,8 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
       );
       if (resultAction.status === 200) {
         dispatch(setPNL(currentDataPNL));
+        dispatch(setTokenFacebook(resultAction.data.tokenfacebook));
+        dispatch(setTokenGoogle(resultAction.data.tokengoogle));
       }
     } catch (error) {
       console.log(error);
