@@ -94,7 +94,7 @@ const IntegrationTab = () => {
       description:
         "Haga clic para integrar con Google Ads Api Informes personalizados",
       active: tokengoogle,
-      urlImg: googleApi,
+      // urlImg: googleApi,
       event: toggleModalGoogle,
     },
     {
@@ -201,15 +201,18 @@ const IntegrationTab = () => {
       >
         <FormGoogle />
       </Modal>
-      <FacebookLogin
-        appId={process.env.REACT_APP_APP_ID_FACEBOOK as any}
-        autoLoad={false}
-        fields="name,email,picture"
-        scope="ads_read,ads_management,pages_show_list"
-        callback={responseFacebook}
-        textButton="Iniciar integración con Facebook"
-        icon="fa-facebook"
-      />
+      <div className="d-none">
+        <FacebookLogin
+          appId={process.env.REACT_APP_APP_ID_FACEBOOK as any}
+          autoLoad={false}
+          fields="name,email,picture"
+          scope="ads_read,ads_management,pages_show_list"
+          callback={responseFacebook}
+          textButton="Iniciar integración con Facebook"
+          icon="fa-facebook"
+          isDisabled={true}
+        />
+      </div>
     </div>
   );
 };
