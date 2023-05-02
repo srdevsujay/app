@@ -12,10 +12,11 @@ import Modal from "../../../../components/modal/Modal.component";
 import FormWebhook from "../FormWebhook/index";
 import FormGoogle from "../FormGoogle/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
-import FacebookLogin from "react-facebook-login";
+
 import Swal from "sweetalert2";
 import { createTokenFacebook } from "../../../../redux/state/slices/configuration/configurationThunk";
 import { useAppDispatch } from "../../../../hooks/appDispatch";
+import FacebookButtonLogin from "./FacebookButtonLogin";
 
 const IntegrationTab = () => {
   const dispatch = useAppDispatch();
@@ -71,12 +72,10 @@ const IntegrationTab = () => {
     setTitleWebhook("https://api.roalytics.com/api/v1/hotmart/");
   };
 
-  const hiddenFileInput = useRef<any>(null);
-  const capturingFile = (e: any) => {
-    e.preventDefault();
-    // document.querySelector('.kep-login-facebook').click() as any;
-    hiddenFileInput.current.click();
-    // document.querySelector(".fileInput").click();
+  const [clickHandle, setClickHandle] = useState(0);
+
+  const handleClickFacebook = () => {
+    setClickHandle(1);
   };
 
   const responseFacebook = (response: any) => {
@@ -118,7 +117,7 @@ const IntegrationTab = () => {
         "Para integrar tus campañas y anuncios de Facebook haz clic debajo e inicia sesión en tu cuenta de Facebook",
       active: tokenfacebook,
       urlImg: Facebook,
-      event: capturingFile,
+      event: handleClickFacebook,
     },
     {
       title: "Paypal IPN",
@@ -210,16 +209,9 @@ const IntegrationTab = () => {
         <FormGoogle />
       </Modal>
       <div className="d-none">
-        <FacebookLogin
-          appId={process.env.REACT_APP_APP_ID_FACEBOOK as any}
-          autoLoad={false}
-          fields="name,email,picture"
-          scope="ads_read,ads_management,pages_show_list"
-          callback={responseFacebook}
-          textButton="Iniciar integración con Facebook"
-          icon="fa-facebook"
-          ref={hiddenFileInput}
-          // isDisabled={true}
+        <FacebookButtonLogin
+          responseFacebook={responseFacebook}
+          clickHandle={clickHandle}
         />
       </div>
     </div>
