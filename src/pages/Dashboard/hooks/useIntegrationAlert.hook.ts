@@ -19,10 +19,11 @@ export const useIntegrationAlert = (tokenfacebook: boolean, tokengoogle: boolean
     title: title,
     text: "Si deseas activarlas haz clic en el boton 'Ir a integraciones'",
     icon: 'warning',
-    showCancelButton: true,
+    showCancelButton: false,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Ir a Integraciones'
+    confirmButtonText: 'Ir a Integraciones',
+    cancelButtonText: 'Cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
       navigate("/configuracion");

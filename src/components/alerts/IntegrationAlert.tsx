@@ -6,7 +6,7 @@ export const IntegrationAlert = (title: string, navigate: any) => {
     title: title,
     text: "Si deseas activarlas haz clic en el boton 'Ir a integraciones'",
     icon: "warning",
-    showCancelButton: true,
+    showCancelButton: false,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Ir a Integraciones",
