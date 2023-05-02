@@ -17,6 +17,7 @@ const Funnel = lazy(() => import("./pages/Funnel"));
 const Contacts = lazy(() => import("./pages/Contacts/Contacts"));
 const Tracking = lazy(() => import("./pages/Tracking/index"));
 const Configuration = lazy(() => import("./pages/Configuration/index"));
+const Auth = lazy(() => import("./pages/Auth"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                 path={privateRoutes.CONFIGURATION}
                 element={<Configuration />}
               />
+              <Route path={privateRoutes.AUTH} element={<Auth />} />
             </Route>
             <Route path="/signun" element={<CreateAccount />} />
           </RoutesWithNotFound>

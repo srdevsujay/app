@@ -8,4 +8,5 @@ export const privateRoutes = {
   CONTACT: 'Contactos',
   TRACKING: "Tracking",
   CONFIGURATION: "Configuracion",
+  AUTH: "Auth",
 }

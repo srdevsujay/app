@@ -7,7 +7,7 @@ import iconPaypal from "../../../../assets/images/iconPaypal.png";
 import FormGroup from "@mui/material/FormGroup";
 import { FormControlLabel, Switch } from "@mui/material";
 import { CardPlatform } from "../../styled-components/Plataform/index";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../../../../components/modal/Modal.component";
 import FormWebhook from "../FormWebhook/index";
 import FormGoogle from "../FormGoogle/index";
@@ -71,6 +71,14 @@ const IntegrationTab = () => {
     setTitleWebhook("https://api.roalytics.com/api/v1/hotmart/");
   };
 
+  const hiddenFileInput = useRef<any>(null);
+  const capturingFile = (e: any) => {
+    e.preventDefault();
+    // document.querySelector('.kep-login-facebook').click() as any;
+    hiddenFileInput.current.click();
+    // document.querySelector(".fileInput").click();
+  };
+
   const responseFacebook = (response: any) => {
     console.log("response", response);
     try {
@@ -110,7 +118,7 @@ const IntegrationTab = () => {
         "Para integrar tus campañas y anuncios de Facebook haz clic debajo e inicia sesión en tu cuenta de Facebook",
       active: tokenfacebook,
       urlImg: Facebook,
-      event: responseFacebook,
+      event: capturingFile,
     },
     {
       title: "Paypal IPN",
@@ -210,7 +218,8 @@ const IntegrationTab = () => {
           callback={responseFacebook}
           textButton="Iniciar integración con Facebook"
           icon="fa-facebook"
-          isDisabled={true}
+          ref={hiddenFileInput}
+          // isDisabled={true}
         />
       </div>
     </div>

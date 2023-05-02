@@ -10,7 +10,7 @@ export const getGoogleLinkToken = async () => {
   });
 };
 
-export const createTokenGoogleService = async (data: any) => {
+export const createTokenService = async (data: any) => {
   return clientAxios.post("/usertoken", data, {
     headers: {
       "x-access-tokens": <string>getJwt(),
