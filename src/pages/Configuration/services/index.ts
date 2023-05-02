@@ -10,6 +10,14 @@ export const getGoogleLinkToken = async () => {
   });
 };
 
+export const getUser = async (id: number) => {
+  return clientAxios.get(`/user/${id}`, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 export const createTokenService = async (data: any) => {
   return clientAxios.post("/usertoken", data, {
     headers: {

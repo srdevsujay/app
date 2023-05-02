@@ -4,7 +4,10 @@ import Swal from "sweetalert2";
 import { getDataLeads } from "../../../../pages/Contacts/services/index";
 import { setLeads } from "../contacts/contactsSlice";
 import { starLoading } from "./configurationSlice";
-import { createTokenService } from "../../../../pages/Configuration/services/index";
+import {
+  createTokenService,
+  getUser,
+} from "../../../../pages/Configuration/services/index";
 import {
   getFacebookToken,
   getGoogleLinkToken,
@@ -92,7 +95,9 @@ export const createTokenFacebook = (
 
           // Alerta
           Swal.fire("Correcto", "Token registrado con exito", "success");
+          const resultUser = await getUser(user.id);
           console.log("result:", result);
+          console.log("resultUser:", resultUser);
           // dispatch(changeDecryptForm(0));
         } else {
           Swal.fire({
