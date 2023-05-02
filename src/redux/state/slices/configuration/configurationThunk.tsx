@@ -89,8 +89,7 @@ export const createTokenFacebook = (
             user_id: user.id,
           };
           const resultFacebook = await createTokenService(facebookToken);
-          // dispatch(obtainApiFacebook());
-          // dispatch(tokenCurrentFacebook(result.data.data.token));
+
           console.log("result.data.data.token", resultFacebook.data.data.token);
 
           // Alerta
@@ -98,7 +97,6 @@ export const createTokenFacebook = (
           const resultUser = await getUser(user.id);
           console.log("result:", result);
           console.log("resultUser:", resultUser);
-          // dispatch(changeDecryptForm(0));
         } else {
           Swal.fire({
             title:
