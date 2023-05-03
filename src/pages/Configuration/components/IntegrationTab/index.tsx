@@ -12,7 +12,7 @@ import Modal from "../../../../components/modal/Modal.component";
 import FormWebhook from "../FormWebhook/index";
 import FormGoogle from "../FormGoogle/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
-
+import "../../styled-components/style.css";
 import Swal from "sweetalert2";
 import { createTokenFacebook } from "../../../../redux/state/slices/configuration/configurationThunk";
 import { useAppDispatch } from "../../../../hooks/appDispatch";
@@ -101,7 +101,7 @@ const IntegrationTab = () => {
       description:
         "Haga clic para integrar con Google Ads Api Informes personalizados",
       active: tokengoogle,
-      // urlImg: googleApi,
+      urlImg: googleApi,
       event: toggleModalGoogle,
     },
     {
@@ -157,8 +157,7 @@ const IntegrationTab = () => {
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
-                  // label={checkedGoogle === false ? "Inactivo" : "Activo"}
-                  label={"Activo"}
+                  label={!integration.active ? "Inactivo" : "Activo"}
                 />
               </FormGroup>
             </div>

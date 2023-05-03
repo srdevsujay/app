@@ -1,0 +1,22 @@
+.MuiSwitch-root.MuiSwitch-sizeMedium {
+  padding-left: 0.5rem!important;
+}
+
+.Mui-checked + .MuiSwitch-track {
+  background-color: #2fca45!important;
+}
+
+.MuiSwitch-thumb {
+  width: 12px!important;
+  height: 12px!important;
+  background: #fff!important;
+  margin-top: 6px;
+  margin-left: 3px;
+}
+
+.MuiSwitch-track {
+  height: 18px!important;
+  background-color: #adb5bd!important;
+  opacity: inherit!important;
+  border-radius: 50px!important;
+}

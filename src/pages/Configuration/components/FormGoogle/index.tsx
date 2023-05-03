@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import btnGoogle from "../../../../assets/images/btn_google_dark_normal_ios.svg";
+import btnGoogle from "../../../../assets/images/btn_google_light_focus_ios.svg";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import { ButtonGoogle } from "../../../../styled-components/button/index";
 import { createTokenGoogle } from "../../../../redux/state/slices/configuration/configurationThunk";
@@ -86,7 +86,6 @@ const FormGoogle = () => {
 
   const submitGoogle = (e: any) => {
     e.preventDefault();
-    console.log("goooooooogle", google);
     if (
       google.developer_token.trim() === "" ||
       google.login_customer_id.trim() === ""
@@ -136,12 +135,7 @@ const FormGoogle = () => {
             className="btn btnGoogle mr-2 font-14"
             onClick={(e) => submitGoogle(e)}
           >
-            <img
-              // src={btnGoogle}
-              alt=""
-              width="45"
-              className="logoGoogle"
-            />
+            <img src={btnGoogle} alt="" width="45" className="logoGoogle" />
             Acceder con Google
           </ButtonGoogle>
         </div>
