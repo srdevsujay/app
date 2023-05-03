@@ -54,7 +54,14 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                 journey.tag.substr(0, 1) === "@" ? (
                   <img src={clickIcon} alt="" className="venta" />
                 ) : journey.tag.substr(0, 1) === "!" ? (
-                  <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
+                  <CheckCircleOutlinedIcon
+                    style={{
+                      color: "#F08303",
+                      fontSize: "17px",
+                      marginTop: "2px",
+                      marginRight: "4px",
+                    }}
+                  />
                 ) : journey.tag.substr(0, 1) === "#" ? (
                   <img src={telephone} alt="" className="venta" />
                 ) : (
@@ -202,7 +209,14 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                     journey.tag.substr(0, 1) === "@" ? (
                       <img src={clickIcon} alt="" className="venta" />
                     ) : journey.tag.substr(0, 1) === "!" ? (
-                      <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
+                      <CheckCircleOutlinedIcon
+                        style={{
+                          color: "#F08303",
+                          fontSize: "17px",
+                          marginTop: "2px",
+                          marginRight: "4px",
+                        }}
+                      />
                     ) : journey.tag.substr(0, 1) === "#" ? (
                       <img src={telephone} alt="" className="venta" />
                     ) : (

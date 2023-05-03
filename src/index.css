@@ -21,3 +21,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiBox-root {
+  border-bottom: 0px !important;
+}
+
+.MuiTab-root.MuiTab-textColorPrimary.Mui-selected {
+  font-family: 'Helvetica-NeueL-Title';
+  text-transform: capitalize!important;
+  color: #192a3e!important;
+  font-weight: 700!important;
+  line-height: 18px;
+}
+
+.MuiTab-root.MuiTab-textColorPrimary {
+  color: #939393!important;
+  font-size: 15px;
+  font-weight: 400!important;
+  line-height: 17px;
+  letter-spacing: .5px;
+  font-style: normal;
+  font-family: 'Helvetica-NeueL-Title';
+  text-transform: capitalize!important;
+}

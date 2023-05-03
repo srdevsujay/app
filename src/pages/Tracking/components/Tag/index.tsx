@@ -4,13 +4,17 @@ import NormalTable from "../../../../utilities/Table/NormalTable";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { obtainApiTag } from "../../../../redux/state/slices/tracking/trackingThunk";
 import { ColumnsTag } from "./ColumnsTable/ColumnsTag";
+import InputComponent from "../../../../components/input/Input.component";
+import { useDebounce } from "../../../../hooks/useDebounce";
 
 const TagTracking = () => {
   const dispatch = useAppDispatch();
   const { dataTag } = useAppSelector((state) => state.tracking);
   const [columnsTag, setsetColumnsTag] = useState<any>();
-  console.log("dataTag", dataTag);
-  console.log("columnsTag", columnsTag);
+  const [originalData, setOriginalData] = useState<any>();
+  const [filteredData, setFilteredData] = useState<any[]>();
+  const [searchString, setSearchString] = useState("");
+  const searchStringDebounced = useDebounce(searchString, 1000);
 
   useEffect(() => {
     dispatch(obtainApiTag());
@@ -20,7 +24,20 @@ const TagTracking = () => {
     if (!dataTag) return;
     const columns = ColumnsTag();
     setsetColumnsTag(columns);
+    setOriginalData(dataTag);
+    setFilteredData(dataTag);
   }, [dataTag]);
+
+  useEffect(() => {
+    if (searchStringDebounced.trim()) {
+      const currentData = originalData.filter((item: any) =>
+        item.tag.toLowerCase().includes(searchStringDebounced.toLowerCase())
+      );
+      setFilteredData(currentData);
+    } else {
+      setFilteredData(originalData);
+    }
+  }, [searchStringDebounced]);
 
   return (
     // <TabMenuLeads
@@ -37,13 +54,26 @@ const TagTracking = () => {
     //   setIdEditCurrent={setIdEditCurrent}
     //   openModal={openModal}
     // />
-    <NormalTable
-      data={dataTag}
-      columns={columnsTag}
-      pageSizeOptions={[7, 15, 31, 31]}
-      maxBodyHeight={"60vh"}
-      pageSize={7}
-    />
+    <>
+      <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
+        <div style={{ width: "25%" }}>
+          <InputComponent
+            // max={5}
+            placeholder="Buscar..."
+            label=""
+            type="text"
+            onChange={(e: any) => setSearchString(e)}
+          />
+        </div>
+      </div>
+      <NormalTable
+        data={filteredData}
+        columns={columnsTag}
+        pageSizeOptions={[7, 15, 31, 31]}
+        maxBodyHeight={"60vh"}
+        pageSize={7}
+      />
+    </>
   );
 };
 

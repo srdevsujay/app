@@ -65,7 +65,7 @@ const FormWebhook = ({ isStripe, titleWebhook }: any) => {
         <div className="row">
           {/* <button type="button" onClick={doSubmit} className="btn w-100 button-login">Iniciar Sesión</button> */}
           <div className="form-group col-sm-12">
-            <button
+            <CopyButton
               // className="btn btnGoogle mr-2 font-14 w-100"
               className="btn mr-2 font-14 w-100"
               // onClick={(e) => submitStripe(e) }
@@ -74,11 +74,10 @@ const FormWebhook = ({ isStripe, titleWebhook }: any) => {
                 backgroundColor: "#109CF1",
                 boxShadow: "0px 4px 10px rgb(16 156 241 / 24%)",
                 borderRadius: "5px",
-                fontSize: "11px",
               }}
             >
               Acceder a Stripe
-            </button>
+            </CopyButton>
           </div>
         </div>
       </div>

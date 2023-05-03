@@ -334,7 +334,13 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               />
             ) : selectTypeTagOnchange === "Acción" ? (
               <CheckCircleOutlinedIcon
-                style={{ color: "#F08303", marginLeft: "0px" }}
+                style={{
+                  color: "#F08303",
+                  marginLeft: "0px",
+                  fontSize: "17px",
+                  marginTop: "2px",
+                  marginRight: "4px",
+                }}
               />
             ) : (
               <img src={venta} alt="" className="iconos-table-origin ml-1" />

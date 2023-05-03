@@ -2,6 +2,17 @@ import styled from "styled-components";
 
 export const FormLogin = styled.form`
   width: 65%;
+
+  .check-recordarme {
+    font-family: "Helvetica-NeueL";
+  }
+
+  .restablecer-contraseña:hover {
+    text-decoration: underline !important;
+    opacity: 0.7 !important;
+    cursor: pointer;
+    color: #3997ff !important;
+  }
 `;
 
 export const FlexColumnLogin = styled.div`
@@ -11,6 +22,21 @@ export const FlexColumnLogin = styled.div`
   align-items: center;
   background: #fff;
   height: 97vh;
+
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000;
+    font-family: "Helvetica-NeueL-Title";
+  }
+
+  b {
+    color: #3997ff !important;
+    font-size: 16px;
+    font-family: "Helvetica-NeueL-Title";
+  }
 `;
 
 export const ButtonLogin = styled.button`
@@ -21,7 +47,7 @@ export const ButtonLogin = styled.button`
   height: 50px !important;
   background: #3997ff !important;
   border-radius: 5px !important;
-  font-family: "HelveticaNeueLTitle" !important;
+  font-family: "Helvetica-NeueL-Title" !important;
   color: #fff !important;
   width: 100% !important;
   border: none;

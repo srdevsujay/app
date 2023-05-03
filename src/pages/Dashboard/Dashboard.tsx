@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Card, Main } from "../../styled-components/main";
 import { Bar } from "./styled-components/dashboardStyled";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
 import {
   getMetricFunnel,
   getTrackingFunnel,

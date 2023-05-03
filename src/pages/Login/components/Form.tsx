@@ -120,9 +120,9 @@ const Form = () => {
               value=""
               id="flexCheckDefault"
             />
-            {/* <label className="form-check-label check-recordarme" for="flexCheckDefault">
-                    Recordarme
-                  </label> */}
+            <label className="form-check-label check-recordarme">
+              Recordarme
+            </label>
           </div>
           <a className="restablecer-contraseña">Restablecer Contraseña</a>
         </div>

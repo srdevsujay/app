@@ -18,6 +18,7 @@
 .tabs {
   width: 25%;
   font-family: 'Helvetica-NeueL-Title' !important;
+  font-size: 12px !important;
 }
 
 /* .active-tabs {
@@ -135,4 +136,13 @@
   height: 180px;
   max-height: 180px;
   overflow-y: scroll;
+}
+
+.tabs>span {
+  z-index: 99999999999;
+  position: inherit;
+}
+
+.tab-detail .MuiTabs-indicator {
+  background-color: inherit !important;
 }

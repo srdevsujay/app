@@ -103,7 +103,14 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
               {tag?.substr(0, 1) === "@" ? (
                 <img src={click} alt="" className="iconos-table-origin" />
               ) : tag?.substr(0, 1) === "!" ? (
-                <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
+                <CheckCircleOutlinedIcon
+                  style={{
+                    color: "#F08303",
+                    fontSize: "17px",
+                    marginTop: "2px",
+                    marginRight: "4px",
+                  }}
+                />
               ) : (
                 <img src={venta} alt="" className="iconos-table-origin" />
               )}

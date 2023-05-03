@@ -24,8 +24,8 @@ export const Recorrido = styled.div`
   }
 
   .venta {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 16px;
   }
 
   .back-source-tag-recorrido {
@@ -223,6 +223,10 @@ export const Recorrido = styled.div`
     color: #605bff;
     font-size: 12px;
     font-family: "Helvetica-NeueL-Title";
+  }
+
+  .content-recorrido {
+    font-size: 14px !important;
   }
 
   .content-recorrido span:first-child {

@@ -36,8 +36,8 @@ const Login = () => {
                 <div className="row mt-4">
                   <div className="col-12 text-center">
                     <p className="text-muted">
-                      ¿Aún no tienes una cuenta?{" "}
-                      <b onClick={onRegister}>Registrarse</b>
+                      <span>¿No tenes una cuenta?</span>{" "}
+                      <b onClick={onRegister}>Crear nueva cuenta</b>
                     </p>
                   </div>
                 </div>

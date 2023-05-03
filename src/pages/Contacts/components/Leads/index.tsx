@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import {
   deleteLead,
@@ -123,6 +123,11 @@ const Leads = () => {
   //   setFilteredData(e);
   // };
 
+  const memoizedUsers = useMemo(() => {
+    console.log("Ejecutando useMemo");
+    return filteredDataDos;
+  }, [filteredDataDos]);
+
   return (
     <>
       {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
@@ -178,7 +183,7 @@ const Leads = () => {
         <CustomerDetails />
       </Modal>
       <GeneralTable
-        data={filteredDataDos}
+        data={memoizedUsers}
         columns={columnsToSet}
         pageSizeOptions={[7, 15, 31]}
         maxBodyHeight={"55vh"}

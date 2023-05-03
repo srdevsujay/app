@@ -26,7 +26,15 @@ export const nameTagColumn = () => {
           {dataTag?.tag.substr(0, 1) === "@" ? (
             <img src={click} alt="" className="iconos-table-origin" />
           ) : dataTag?.tag.substr(0, 1) === "!" ? (
-            <CheckCircleOutlinedIcon style={{ color: "#F08303" }} />
+            <CheckCircleOutlinedIcon
+              style={{
+                color: "#F08303",
+                fontSize: "17px",
+                marginTop: "2px",
+                marginLeft: "-3px",
+                marginRight: "4px",
+              }}
+            />
           ) : (
             <img src={venta} alt="" className="iconos-table-origin" />
           )}
