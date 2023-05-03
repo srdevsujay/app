@@ -135,7 +135,12 @@ const FormGoogle = () => {
             className="btn btnGoogle mr-2 font-14"
             onClick={(e) => submitGoogle(e)}
           >
-            <img src={btnGoogle} alt="" width="45" className="logoGoogle" />
+            <img
+              // src={btnGoogle}
+              alt=""
+              width="45"
+              className="logoGoogle"
+            />
             Acceder con Google
           </ButtonGoogle>
         </div>
