@@ -10,6 +10,7 @@ export const totalPnl = (tempGroup) => {
     roi: _.sumBy(tempGroup, 'roi'), 
     leeds: _.sumBy(tempGroup, 'leeds'),
     bookings: _.sumBy(tempGroup, 'bookings'), 
+    meetings: _.sumBy(tempGroup, 'meetings'), 
   }
   // let porcentajeIngreso;
   // tempGroup.map((tableCT, idx) => {
@@ -34,6 +35,7 @@ export const totalPnl = (tempGroup) => {
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">0.00</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.leeds.toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.bookings.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.meetings.toFixed(2)}</td>
   `;
   return document.querySelector(".MuiTableHead-root")?.prepend(tbody);
 }

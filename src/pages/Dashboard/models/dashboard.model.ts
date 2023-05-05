@@ -17,6 +17,7 @@ export interface Pnl {
   porcentajerentabilidad: number;
   rentabilidad: number;
   roi: number;
+  meetings: number;
 }
 
 export interface CampaignData {

@@ -110,6 +110,7 @@ const SourceFilter = ({
           roi: _.sumBy(platform, "roi"),
           leeds: _.sumBy(platform, "leeds"),
           bookings: _.sumBy(platform, "bookings"),
+          meetings: _.sumBy(platform, "meetings"),
         }))
         .value();
       setGroupPlataform(tempGroup);

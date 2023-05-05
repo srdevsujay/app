@@ -75,14 +75,14 @@ const Dashboard = () => {
   }, [idUser]);
 
   useEffect(() => {
-    if (tokenfacebook === false || tokengoogle === false) {
-      if (tokenfacebook === false && tokengoogle === false) {
+    if (tokenfacebook === true || tokengoogle === true) {
+      if (tokenfacebook === true && tokengoogle === true) {
         setTitle(
           "Las integaciones tanto de Facebook como Google estan desactivadas"
         );
-      } else if (tokenfacebook === false && tokengoogle === true) {
-        setTitle("La integacion de Facebook esta desactivada");
       } else if (tokenfacebook === true && tokengoogle === false) {
+        setTitle("La integacion de Facebook esta desactivada");
+      } else if (tokenfacebook === false && tokengoogle === true) {
         setTitle("La integacion de Google esta desactivada");
       }
     }

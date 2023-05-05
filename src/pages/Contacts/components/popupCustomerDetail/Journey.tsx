@@ -12,6 +12,7 @@ import {
   Recorrido,
   Accordion,
 } from "../../styled-components/customerDetail.Styled";
+import { Tooltip } from "@mui/material";
 
 const Journey = ({ currentJourney, time_Zone }: any) => {
   return (
@@ -172,7 +173,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                 // </span>
                 <span>{journey.tag.substr(1)}</span>
               ) : (
-                <span>{journey.url.substr(8)}</span>
+                <span>{journey.url.substr(7)}</span>
               )}
             </div>
             <div className="tag-recorrido">
@@ -201,7 +202,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                       ? "back_telephone_detail_user"
                       : journey.event_name === "Page View" ||
                         journey.event_name === "Page Checkout"
-                      ? "back_view_detail_user "
+                      ? "back_view_detail_user"
                       : ""
                   }
                 >
@@ -248,6 +249,98 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                     }}
                   >
                     {journey?.tag.substr(1)}
+                  </span>
+                </div>
+              )}
+              {journey.adset_name === "" ? (
+                ""
+              ) : journey.adset_name !== "" ? (
+                <div
+                  className={
+                    // journey?.tag.substring(1,0) === "@" ? "back-source_detail_user" : journey?.tag.substring(1,0) === "$" ? "back-sale_detail_user" : "back-action_detail_user"
+                    journey.tag !== ""
+                      ? journey.tag.substr(0, 1) === "@"
+                        ? "back-source_detail_user ml-2"
+                        : journey.tag.substr(0, 1) === "!"
+                        ? "back-action_detail_user ml-2"
+                        : journey.tag.substr(0, 1) === "#"
+                        ? "back_telephone_detail_user ml-2"
+                        : "back-sale_detail_user ml-2"
+                      : journey.event_name === "Click on Pop Up" ||
+                        journey.event_name === "Click on Video" ||
+                        journey.event_name === "Click on Purchase" ||
+                        journey.event_name === "Click on Reservation"
+                      ? "back-source_detail_user ml-2"
+                      : journey.event_name === "Manual Sale"
+                      ? "back-sale_detail_user ml-2"
+                      : journey.event_name === "Click on schedule"
+                      ? "back_telephone_detail_user ml-2"
+                      : journey.event_name === "Page View" ||
+                        journey.event_name === "Page Checkout"
+                      ? "back_view_detail_user ml-2"
+                      : ""
+                  }
+                >
+                  <Tooltip
+                    title={
+                      <>
+                        <span>{`${journey.ad_name} / ${journey.campaign}`}</span>
+                      </>
+                    }
+                    placement="top"
+                  >
+                    <span
+                      style={{
+                        color: "#000",
+                        fontSize: "12px",
+                        fontFamily: "Helvetica-NeueL-Title",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      {journey?.adset_name}
+                    </span>
+                  </Tooltip>
+                </div>
+              ) : journey.ct === "" ? (
+                ""
+              ) : (
+                <div
+                  className={
+                    // journey?.tag.substring(1,0) === "@" ? "back-source_detail_user" : journey?.tag.substring(1,0) === "$" ? "back-sale_detail_user" : "back-action_detail_user"
+                    journey.tag !== ""
+                      ? journey.tag.substr(0, 1) === "@"
+                        ? "back-source_detail_user"
+                        : journey.tag.substr(0, 1) === "!"
+                        ? "back-action_detail_user"
+                        : journey.tag.substr(0, 1) === "#"
+                        ? "back_telephone_detail_user"
+                        : "back-sale_detail_user"
+                      : journey.event_name === "Click on Pop Up" ||
+                        journey.event_name === "Click on Video" ||
+                        journey.event_name === "Click on Purchase" ||
+                        journey.event_name === "Click on Reservation"
+                      ? "back-source_detail_user"
+                      : journey.event_name === "Manual Sale"
+                      ? "back-sale_detail_user"
+                      : journey.event_name === "Click on schedule"
+                      ? "back_telephone_detail_user"
+                      : journey.event_name === "Page View" ||
+                        journey.event_name === "Page Checkout"
+                      ? "back_view_detail_user "
+                      : ""
+                  }
+                >
+                  <span
+                    // className="hovertext"
+                    // data-hover={`${journey.ad_name} - ${journey.campaign}`}
+                    style={{
+                      color: "#000",
+                      fontSize: "12px",
+                      fontFamily: "Helvetica-NeueL-Title",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    {journey?.ct}
                   </span>
                 </div>
               )}

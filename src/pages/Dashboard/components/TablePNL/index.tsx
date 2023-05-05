@@ -16,6 +16,7 @@ import { click } from "@testing-library/user-event/dist/click";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { percentageIncomeColumn } from "../ColumnTable/percentageIncome";
 import { percentageExpenseColumn } from "../ColumnTable/percentageExpense";
+import { meetingsColumn } from "../ColumnTable/meetings";
 
 const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
@@ -32,6 +33,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     roiColumn(dashboardMain),
     leadColumn(dashboardMain),
     bookingColumn(dashboardMain),
+    meetingsColumn(dashboardMain),
   ];
 
   useEffect(() => {
@@ -59,6 +61,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
         porcentajerentabilidad: _.sumBy(platform, "porcentajerentabilidad"),
         rentabilidad: _.sumBy(platform, "rentabilidad"),
         roi: _.sumBy(platform, "roi"),
+        meetings: _.sumBy(platform, "meetings"),
       }))
       .value();
     console.log("unifiedByCt", unifiedByCt);
@@ -111,19 +114,19 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
               >
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "10%" }}
+                  style={{ width: "9.1%" }}
                 >
                   {tableCT.ct}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "10%" }}
+                  style={{ width: "9%" }}
                 >
                   <FormatNumber number={tableCT.ingresos} />
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "10%" }}
+                  style={{ width: "9%" }}
                 >
                   {`${
                     dataTotal.ingresos === 0
@@ -136,13 +139,13 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "10%" }}
+                  style={{ width: "9%" }}
                 >
                   {`${tableCT?.gastos.toFixed(2)}`}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ paddingLeft: "0px", width: "8.3%" }}
+                  style={{ paddingLeft: "0px", width: "7.7%" }}
                 >
                   {`${
                     dataTotal.gastos === 0
@@ -153,13 +156,13 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "12.9%" }}
+                  style={{ width: "11.6%" }}
                 >
                   {`${tableCT?.rentabilidad.toFixed(2)}`}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "12.8%" }}
+                  style={{ width: "11.5%" }}
                 >
                   {`${
                     tableCT.porcentajerentabilidad === 0
@@ -170,18 +173,24 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "7%" }}
+                  style={{ width: "6.3%" }}
                 >
                   {`${tableCT?.roi.toFixed(2)}`}
                 </td>
                 <td
                   className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
-                  style={{ width: "9%" }}
+                  style={{ width: "7.7%" }}
                 >
                   {`${tableCT?.leeds.toFixed(2)}`}
                 </td>
-                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                <td
+                  className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica"
+                  style={{ width: "10.1%" }}
+                >
                   {`${tableCT?.bookings.toFixed(2)}`}
+                </td>
+                <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone MuiTableCell-sizeMedium css-1361h17 font-body-Helvetica">
+                  {`${tableCT?.meetings.toFixed(2)}`}
                 </td>
               </tr>
             ))}
