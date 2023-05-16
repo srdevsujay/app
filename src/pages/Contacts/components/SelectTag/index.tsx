@@ -85,8 +85,8 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
         className="w-100"
       />
       <div className={onFocused ? "d-block onFocused" : "d-none onFocused"}>
-        {uniqueTags?.map((tag: any) => (
-          <div style={{ padding: "8px 10px" }}>
+        {uniqueTags?.map((tag: any, i: number) => (
+          <div style={{ padding: "8px 10px" }} key={i}>
             <BackColorsTableOrigin
               width="initial"
               marginBottom="0px"

@@ -57,3 +57,18 @@ export const SeeImplementation = styled.a`
   cursor: pointer;
   font-family: "Helvetica-NeueL-Title";
 `;
+
+export const ContainerBilling = styled.div`
+  height: 160px;
+  width: 30vw;
+  margin-top: 30px;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 14px 40px rgb(109 141 173/25%);
+  border-radius: 10px;
+  display: block;
+`;

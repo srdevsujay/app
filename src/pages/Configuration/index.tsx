@@ -8,6 +8,7 @@ import TabPanel from "@mui/lab/TabPanel";
 // import "./styled-components/style.css";
 import ProfileTab from "./components/ProfileTab/index";
 import IntegrationTab from "./components/IntegrationTab/index";
+import BillingTab from "./components/BillingTab/index";
 
 const Configuration = () => {
   const [value, setValue] = useState("1");
@@ -46,7 +47,9 @@ const Configuration = () => {
             <TabPanel value="2">
               <IntegrationTab />
             </TabPanel>
-            <TabPanel value="3">{/* <Products /> */}</TabPanel>
+            <TabPanel value="3">
+              <BillingTab />
+            </TabPanel>
           </TabContext>
         </Box>
       </Card>

@@ -34,6 +34,30 @@ export const getFacebookToken = async (accessToken: any) => {
   });
 };
 
+export const createSubscriptionStripeService = async (data: any) => {
+  return clientAxios.post("/create-customer", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const getDataSubscriptionsPlans = async () => {
+  return clientAxios.get("/subscriptions_plans", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const createSubscriptionUserService = async (data: any) => {
+  return clientAxios.post("/subscription_user", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 ////////////////////////////////////////////////////////////////////////
 
 export const editLeadService = async (data: any) => {

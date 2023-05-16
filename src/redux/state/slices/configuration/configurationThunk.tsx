@@ -3,7 +3,11 @@ import _ from "lodash";
 import Swal from "sweetalert2";
 import { getDataLeads } from "../../../../pages/Contacts/services/index";
 import { setLeads } from "../contacts/contactsSlice";
-import { starLoading } from "./configurationSlice";
+import {
+  setCustomerId,
+  setSubscriptionsPlans,
+  starLoading,
+} from "./configurationSlice";
 import {
   createTokenService,
   getUser,
@@ -14,6 +18,11 @@ import {
 } from "../../../../pages/Configuration/services/index";
 import qs from "qs";
 import { clientAxios } from "../../../../services/axios";
+import { createSubscriptionUserService } from "../../../../pages/Configuration/services/index";
+import {
+  createSubscriptionStripeService,
+  getDataSubscriptionsPlans,
+} from "../../../../pages/Configuration/services/index";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -188,6 +197,54 @@ export const refreshToken = (
       });
     } catch (error) {
       console.log("error registro:", error);
+    }
+  };
+};
+
+export const createSubscriptionStripe = (token: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("token", token);
+      const currentToken = {
+        token: token.id,
+      };
+      const result = await createSubscriptionStripeService(currentToken);
+      console.log("result", result);
+      if (result.status === 200) {
+        dispatch(setCustomerId(result.data.customerId));
+        //   Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainApiStripe = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getDataSubscriptionsPlans();
+      dispatch(setSubscriptionsPlans(result.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createSubscriptionUser = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await createSubscriptionUserService(data);
+      console.log("resultUser", result);
+      if (result.data.message === "Create subscription user succesfully") {
+        // dispatch(obtainApiContacts());
+        Swal.fire("Correcto", "Suscripción creada correctamente", "success");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };

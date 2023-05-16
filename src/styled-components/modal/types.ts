@@ -4,3 +4,8 @@ export type ModalWidthBox = {
   bottom?: string;
   height?: string;
 }
+
+export type ButtonClose = {
+  top?: string;
+  right?: string;
+}

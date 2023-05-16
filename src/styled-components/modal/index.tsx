@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ModalWidthBox } from "./types";
+import { ModalWidthBox, ButtonClose } from "./types";
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -76,25 +76,20 @@ export const ModalContent = styled.div`
   font-size: 16px;
 `;
 
-export const ModalClose = styled.button`
-  /* position: absolute;
-  top: 20px;
-  right: 20px;
-  transition: transform 250ms ease-in-out;
-  transform-origin: 50% 50%; */
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 35px;
-  height: 35px;
-  background: rgba(16, 156, 241, 0.14901960784313725);
-  border-radius: 20px;
-  color: #109cf1;
-  font-size: 17px;
-  cursor: pointer;
-  border: none;
+export const ModalClose = styled.button<ButtonClose>(({ top, right }) => ({
+  position: "absolute",
+  top: `${top ? top : "20px"}`,
+  right: `${right ? right : "20px"}`,
+  width: "35px",
+  height: "35px",
+  background: "rgba(16, 156, 241, 0.14901960784313725)",
+  borderRadius: "20px",
+  color: "#109cf1",
+  fontSize: "17px",
+  cursor: "pointer",
+  border: "none",
 
   /* &:hover {
     transform: rotate(180deg);
   } */
-`;
+}));
