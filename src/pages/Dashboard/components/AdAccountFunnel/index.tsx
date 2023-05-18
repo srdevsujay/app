@@ -16,7 +16,6 @@ const AdAccountFunnel = ({
   removeCampaign,
 }: any) => {
   const [select, setSelect] = useState(adAccount);
-  console.log("adAccount", adAccount);
 
   useEffect(() => {
     setAdAccounts(select);
@@ -70,7 +69,6 @@ const AdAccountFunnel = ({
   useEffect(() => {
     setAdAccounts(select);
   }, [select]);
-  console.log("select", select);
 
   return (
     <>

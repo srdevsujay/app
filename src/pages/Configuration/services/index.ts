@@ -58,6 +58,14 @@ export const createSubscriptionUserService = async (data: any) => {
   });
 };
 
+export const getSubscriptionUserService = async () => {
+  return clientAxios.get("/subscription_user", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 ////////////////////////////////////////////////////////////////////////
 
 export const editLeadService = async (data: any) => {

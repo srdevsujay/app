@@ -18,7 +18,10 @@ import {
 } from "../../../../pages/Configuration/services/index";
 import qs from "qs";
 import { clientAxios } from "../../../../services/axios";
-import { createSubscriptionUserService } from "../../../../pages/Configuration/services/index";
+import {
+  createSubscriptionUserService,
+  getSubscriptionUserService,
+} from "../../../../pages/Configuration/services/index";
 import {
   createSubscriptionStripeService,
   getDataSubscriptionsPlans,
@@ -243,6 +246,19 @@ export const createSubscriptionUser = (data: any): AppThunk => {
         // dispatch(obtainApiContacts());
         Swal.fire("Correcto", "Suscripción creada correctamente", "success");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainSubscriptionUser = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getSubscriptionUserService();
+      console.log("resultSubs", result);
+      // dispatch(setSubscriptionsPlans(result.data));
     } catch (error) {
       console.log(error);
     }

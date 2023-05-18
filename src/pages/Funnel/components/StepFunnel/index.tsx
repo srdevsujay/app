@@ -13,7 +13,6 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
   const [stepObject, setStepObject] = useState(step);
 
   const handleChangeStepName = (step_name: string) => {
-    console.log("step_name", step_name);
     setStepObject({
       id: step.id,
       step_name,
@@ -32,10 +31,9 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
   };
 
   useEffect(() => {
-    console.log("stepObject", stepObject);
     setStepFunnel(stepObject);
   }, [stepObject]);
-  console.log("stepObject", stepObject);
+
   return (
     <>
       <div className="row">
@@ -106,11 +104,6 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
             }}
             onClick={() => removeStep(stepObject.id)}
           />
-          {/* <RemoveIcon
-            fontSize="large"
-            className="mt-3 cursor-pointer"
-            onClick={() => removeStep(stepObject.id)}
-          /> */}
         </div>
       </div>
       <hr />

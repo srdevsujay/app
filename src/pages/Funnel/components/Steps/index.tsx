@@ -23,13 +23,7 @@ const StepsFunnel = ({
     ]);
   };
 
-  useEffect(() => {
-    console.log({ currentSteps });
-  }, [currentSteps]);
-
   const handleChangeStep = (step: any) => {
-    console.log("etep", step);
-
     const newSteps = currentSteps.map((elem: any) => {
       if (elem.id === step.id) {
         return step;
@@ -42,7 +36,6 @@ const StepsFunnel = ({
 
   useEffect(() => {
     if (!currentDataEditFunnel) return;
-    console.log("currentDataEditFunnel", currentDataEditFunnel);
     setCurrentSteps(currentDataEditFunnel?.steps);
   }, [currentDataEditFunnel]);
 

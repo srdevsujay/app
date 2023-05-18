@@ -115,8 +115,6 @@ const Funnel = () => {
   //     // setIdEditLead(currentEdit.id);
   //   }
   // }, [currentEdit, setValue]);
-  console.log("currentEdit", currentEdit);
-  console.log("currentSteps", currentSteps);
 
   const onSubmit = (data: any) => {
     const steps = currentSteps;
@@ -155,14 +153,12 @@ const Funnel = () => {
         };
       });
       form.id = currentEdit;
-      console.log("formFunnelEdit", form);
-      console.log("Entra Editar", currentDataEditFunnel);
       dispatch(editFunnel(form, user_funel));
       setCurrentEdit(0);
       // setIdEditLead(0);
     } else {
       form.steps = currentSteps.map((accounts, i) => {
-        const sumId = 1 + i;
+        const sumId: any = 1 + i;
         return {
           step_description: "",
           step_name: accounts.step_name,
@@ -171,7 +167,7 @@ const Funnel = () => {
         };
       });
       form.campaings = adAccounts.map((accounts, i) => {
-        const sumId = 0 + i;
+        const sumId: any = 0 + i;
         return {
           campaing_plataform: accounts.campaing_plataform,
           campaing_type: accounts.campaing_type,
@@ -183,8 +179,6 @@ const Funnel = () => {
           // funnel_id: currentEdit,
         };
       });
-      console.log("formFunnel", form);
-      console.log("Entra Guardar");
       dispatch(createFunnel(form, user_funel));
     }
     toggleModal();
@@ -198,9 +192,7 @@ const Funnel = () => {
 
   const obtainFunnelEdit = (editDataTracking: any) => {
     setCurrentDataEditFunnel(editDataTracking);
-    console.log("editDataTracking", editDataTracking);
     toggleModal();
-    console.log("Entra al edit");
     setCurrentEdit(editDataTracking.id);
   };
 
@@ -211,10 +203,8 @@ const Funnel = () => {
   };
 
   const removeStep = (id: number) => {
-    console.log({ id });
     const obtainStep = currentSteps.filter((step: any) => step.id !== id);
     setCurrentSteps(obtainStep);
-    // console.log("obtainStep", obtainStep);
     // setCurrentSteps((currentSteps) =>
     //   currentSteps.filter((step: any) => step.id !== id)
     // );
@@ -226,6 +216,7 @@ const Funnel = () => {
     );
     setAdAccounts(currentCampaign);
   };
+  console.log("adAccounts--", adAccounts);
 
   return (
     <Main width="97vw">

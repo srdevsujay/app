@@ -39,9 +39,7 @@ const stripe = new Stripe(
 const BillingTab = () => {
   // const stripe = new Stripe('TU_CLAVE_API_PRIVADA');
   const dispatch = useAppDispatch();
-  const { customerId, subscriptionsPlans } = useAppSelector(
-    (state) => state.configuration
-  );
+  const { customerId } = useAppSelector((state) => state.configuration);
   const [subscription, setSubscription] = useState("");
   const [selectedPayment, setSelectedPayment] = useState("0");
   const [selectedPlanProduct, setSelectedPlanProduct] = useState("0");
@@ -80,12 +78,13 @@ const BillingTab = () => {
       .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
     const data = {
-      status: 1,
+      status: subscription.status,
       payment_gateway: currentFont,
       subscription_gateway: subscription.id,
       start_date: formattedDate,
       id_subscription: idSubscription.id,
       id_subscription_plan: idSubscriptionPlan.id,
+      customer_id: customerId,
     };
 
     dispatch(createSubscriptionUser(data));
@@ -110,7 +109,6 @@ const BillingTab = () => {
       <SelectSubscriptionsPlans
         selectedPayment={selectedPayment}
         handlePlanProduct={handlePlanProduct}
-        subscriptionsPlans={subscriptionsPlans}
         setIdSubscription={setIdSubscription}
         setIdSubscriptionPlan={setIdSubscriptionPlan}
       />

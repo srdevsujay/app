@@ -71,9 +71,8 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   return (
     <div
       style={{
-        width: "250px",
+        width: "100%",
         display: "inline-block",
-        maxWidth: "250px",
       }}
     >
       <InputComponent

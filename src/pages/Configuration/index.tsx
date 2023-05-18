@@ -9,9 +9,17 @@ import TabPanel from "@mui/lab/TabPanel";
 import ProfileTab from "./components/ProfileTab/index";
 import IntegrationTab from "./components/IntegrationTab/index";
 import BillingTab from "./components/BillingTab/index";
+import { useAppDispatch } from "../../hooks/appDispatch";
+import { obtainSubscriptionUser } from "../../redux/state/slices/configuration/configurationThunk";
 
 const Configuration = () => {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState("1");
+
+  useEffect(() => {
+    dispatch(obtainSubscriptionUser());
+  }, []);
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };

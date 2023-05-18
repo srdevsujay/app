@@ -36,10 +36,10 @@ const AdAccount = ({
 
   useEffect(() => {
     handleSetAdAccountConfig();
-    console.log("adAccount", adAccounts);
   }, [adAccounts]);
 
   const [adAccountConfig, setAdAccountConfig] = useState<any>(configOptions);
+  console.log("adAccountConfig", adAccountConfig);
 
   const handleSetAdAccountConfig = () => {
     let bloquearFacebook = false;
@@ -50,7 +50,7 @@ const AdAccount = ({
       const facebookTraffic = adAccounts.filter(
         (elem: any) => elem.campaing_plataform === "1"
       );
-      if (elem.campaing_plataform === "1" && elem.campaing_type === "1") {
+      if (elem.campaing_plataform === "1" && elem.campaing_type === 1) {
         //bloquear facebook
         bloquearFacebook = true;
         if (facebookTraffic.length > 1) {
@@ -58,7 +58,7 @@ const AdAccount = ({
           bloquearCampana = true;
         }
       }
-      if (elem.campaing_plataform === "1" && elem.campaing_type === "2") {
+      if (elem.campaing_plataform === "1" && elem.campaing_type === 2) {
         if (facebookTraffic.length > 1) {
           //bloquear cuenta publicitaria para facebook
           bloquearPublicitaria = true;
@@ -102,10 +102,11 @@ const AdAccount = ({
 
   const [onAlertCampaign, setOnAlertCampaign] = useState(1);
   const [current, setcurrent] = useState<any>({});
+  console.log("adAccounts", adAccounts);
+
   const addAdAccount = () => {
-    console.log("currentDataEditFunnel-", current);
     const currentFlag: any = Object.values(current);
-    console.log("currentFlag", currentFlag.length);
+
     if (currentFlag.length > 0) {
       if (
         current?.campaings[0]?.campaing_type === 1 &&
@@ -118,6 +119,19 @@ const AdAccount = ({
         );
         return;
       }
+    }
+    if (
+      (adAccounts[0]?.campaing_type === 1 ||
+        adAccounts[0]?.campaing_type === "1") &&
+      (adAccounts[1]?.campaing_type === 1 ||
+        adAccounts[1]?.campaing_type === "1")
+    ) {
+      Swal.fire(
+        "",
+        "Recuerda, nada más se puede una cuenta publicitaria por campaña",
+        "info"
+      );
+      return;
     }
     if (onAlertCampaign) {
       Swal.fire("", word, "info");
@@ -134,7 +148,6 @@ const AdAccount = ({
     let canContinue = true;
     adAccounts.forEach((adAccount: any) => {
       if (!adAccount.campaing_plataform || !adAccount.campaing_type) {
-        console.log("entra aca");
         canContinue = false;
       }
     });
@@ -162,10 +175,10 @@ const AdAccount = ({
           (elem: any) => elem.campaing_plataform === "1"
         );
         const campaignExists = adAccountsFacebook.find(
-          (elem: any) => elem.campaing_type === "2"
+          (elem: any) => elem.campaing_type === 2
         );
         const adAccountExists = adAccountsFacebook.find(
-          (elem: any) => elem.campaing_type === "1"
+          (elem: any) => elem.campaing_type === 1
         );
         if (campaignExists) {
           newAdAccount.campaing_type = "2";
@@ -177,7 +190,6 @@ const AdAccount = ({
       newAdAccount.campaing_plataform = "2";
       newAdAccount.campaing_type = "1";
     }
-    console.log("entra a un set 1");
     // Swal.fire("Correcto", "Funnel actualizado correctamente!!", "success");
 
     setAdAccounts([...adAccounts, newAdAccount]);
@@ -191,13 +203,11 @@ const AdAccount = ({
         return elem;
       }
     });
-    console.log("entra a un set 2");
     setAdAccounts(newAdAccounts);
   };
 
   useEffect(() => {
     if (!currentDataEditFunnel) return;
-    console.log("currentDataEditFunnel", currentDataEditFunnel);
     setcurrent(currentDataEditFunnel);
     setAdAccounts(currentDataEditFunnel?.campaings);
   }, [currentDataEditFunnel]);

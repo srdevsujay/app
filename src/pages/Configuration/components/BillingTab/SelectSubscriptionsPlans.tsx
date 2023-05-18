@@ -8,22 +8,28 @@ import { ButtonsProfile } from "../../../../styled-components/button/index";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { FormatNumberSum } from "../../../../utilities/FormatNumberSum";
 import "../../styled-components/style.css";
+import { useAppSelector } from "../../../../hooks/appDispatch";
 
 const SelectSubscriptionsPlans = ({
   selectedPayment,
   handlePlanProduct,
-  subscriptionsPlans,
   setIdSubscription,
   setIdSubscriptionPlan,
 }: any) => {
+  const { subscriptionsPlans } = useAppSelector((state) => state.configuration);
   const { plans, subscriptions } = subscriptionsPlans;
+  console.log("subscriptionsPlans", subscriptionsPlans);
+
   const [dataPlans, setDataPlans] = useState([]);
   const [dataSubscriptions, setDataSubscriptions] = useState([]);
+  console.log("dataPlans", dataPlans);
 
   useEffect(() => {
+    if (!plans) return;
     const plansAddSelect: any = [].concat(plans);
-    plansAddSelect.push({ id: 0, name: "Seleccione", percentage: 0 });
+    plansAddSelect.push({ id: 10, name: "Seleccione", percentage: 0 });
     const currentPlans: any = _.orderBy(plansAddSelect, "id", "asc");
+    console.log("currentPlans", currentPlans);
 
     const subsAddSelect: any = [].concat(subscriptions);
     subsAddSelect.push({
@@ -36,7 +42,7 @@ const SelectSubscriptionsPlans = ({
 
     setDataPlans(currentPlans);
     setDataSubscriptions(currentSubs);
-  }, []);
+  }, [plans]);
 
   const [selectedPlan, setSelectedPlan] = useState("0");
   const [selectedSubs, setSelectedSubs] = useState("0");
@@ -117,7 +123,7 @@ const SelectSubscriptionsPlans = ({
               onChange={handleSubs}
               className="container w-100 d-flex justify-content-center"
             >
-              {dataSubscriptions.map((data: any) => (
+              {dataSubscriptions?.map((data: any) => (
                 <option key={data?.id} value={data?.income}>
                   {data?.income === "Selecciona" ? (
                     "Seleccione"
