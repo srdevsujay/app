@@ -35,8 +35,17 @@ import { useDebounce } from "../../../../hooks/useDebounce";
 import "../../../../styled-components/style.css";
 import { ContainerFilter } from "../../../../styled-components/input/index";
 import FunnelTable from "../tableFunnel/index";
-import { createFilterFunnel } from "../../../../redux/state/slices/dashboard/dashboardThunk";
+import {
+  createFilterFunnel,
+  deleteFunnel,
+} from "../../../../redux/state/slices/dashboard/dashboardThunk";
 import { SalesCall } from "../../../../utilities/pruebajs";
+import {
+  ButtonEditWithIcon,
+  ButtonDeleteWithIcon,
+} from "../../../../styled-components/button/index";
+import deleted from "../../../../assets/images/Delete.svg";
+import edit from "../../../../assets/images/Edit.svg";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -78,9 +87,23 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
   const dispatch = useAppDispatch();
-  const dataTracking: [] = useAppSelector(
+  const dataTracking: any[] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
+  console.log("dataTracking", dataTracking);
+  const { id: user_funel } = useAppSelector((state) => state.user.user);
+
+  // .map((data: any) => ({
+  //   ...data,
+  //   campaigns: data?.campaigns?.map((campaign: any) => ({
+  //     id: campaign.id,
+  //     trafficSource: campaign.campaing_plataform,
+  //     connectionType: campaign.campaing_type,
+  //     adAccountName: campaign.campaing_name,
+  //     adAccountIdentification: campaign.campaing_identify,
+  //   })),
+  // }));
+
   const { data: dataFunnel, filters: objFilter }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
@@ -394,10 +417,21 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
     obtainFunnelEdit(dataTracking[index]);
   };
 
+  const onDeleteFunnel = (i: any) => {
+    console.log("borrarFunnel", dataTracking[i].id);
+    const objId = {
+      id: dataTracking[i].id,
+    };
+    dispatch(deleteFunnel(objId, user_funel));
+  };
+
   return (
     <div className="mt-3">
       {dataTracking.map((tracking: any, index: number) => (
-        <div key={index} style={{ borderBottom: "1px solid #80808026" }}>
+        <div
+          key={index}
+          style={{ borderBottom: "1px solid #80808026", position: "sticky" }}
+        >
           <ContainerFiltersFunnel>
             <DateFilter
               titleDatePickerPNL={titleDatePickerFunnel}
@@ -467,21 +501,22 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
               <div
                 className="dropdown-menu dropdown-style top-menu-dropdown"
                 aria-labelledby="btnGroupDrop1"
+                style={{ padding: "10px" }}
               >
-                <button
+                <ButtonEditWithIcon
                   className="dropdown-item dropdown-style-button"
                   onClick={() => editFunnel(index)}
                 >
-                  {/* <img src={edit} height="12" className="" /> */}
+                  <img src={edit} height="12" className="" />
                   Editar
-                </button>
-                <button
+                </ButtonEditWithIcon>
+                <ButtonDeleteWithIcon
                   className="dropdown-item dropdown-style-button"
-                  // onClick={() => deleteFunnel(index)}
+                  onClick={() => onDeleteFunnel(index)}
                 >
-                  {/* <img src={deleted} height="12" className="" /> */}
+                  <img src={deleted} height="12" className="" />
                   Eliminar
-                </button>
+                </ButtonDeleteWithIcon>
                 {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
               </div>
             </div>
@@ -520,7 +555,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                   <FunnelTable
                     data={dataFunnel}
                     columns={columnsToSet}
-                    pageSizeOptions={[7, 15, 31, 31]}
+                    pageSizeOptions={[7, 15, 31]}
                     maxBodyHeight={"60vh"}
                     pageSize={7}
                   />

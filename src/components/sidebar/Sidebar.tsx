@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   MenuIconClose,
   MenuIconOpen,
@@ -17,6 +17,7 @@ import { logoutUser } from "../../redux/state/slices/login/authSlice";
 import { stateUser } from "../../utilities/stateUser.utilities";
 import { ButtonLogout } from "../../styled-components/button";
 import SidebarSubMenu from "./SidebarSubMenu";
+import { toggleSlider } from "../../redux/state/slices/dashboard/dashboardThunk";
 
 const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -31,6 +32,10 @@ const Sidebar: FC = () => {
     navigate("/login");
     dispatch(logoutUser());
   };
+
+  useEffect(() => {
+    dispatch(toggleSlider(close));
+  }, [close]);
 
   return (
     <SidebarMenu close={close}>
@@ -59,7 +64,7 @@ const Sidebar: FC = () => {
                   style={{ marginLeft: "16px" }}
                   onClick={(e) => setIsMenuOpen(false)}
                 >
-                  {item.title}
+                  {close ? item.title : ""}
                 </span>
               </MenuItemLinks>
             </MenuItems>

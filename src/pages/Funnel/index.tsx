@@ -21,7 +21,10 @@ import * as yup from "yup";
 import { obtainApiProduct } from "../../redux/state/slices/tracking/trackingThunk";
 import { FunnelStep } from "../Dashboard/models/steps.model";
 import { AdAccountType } from "../Dashboard/models/adAccount.model";
-import { createFunnel } from "../../redux/state/slices/dashboard/dashboardThunk";
+import {
+  createFunnel,
+  editFunnel,
+} from "../../redux/state/slices/dashboard/dashboardThunk";
 import { Title } from "../../styled-components/Title/index";
 
 const Funnel = () => {
@@ -31,25 +34,30 @@ const Funnel = () => {
   );
   const { id: user_funel } = useAppSelector((state) => state.user.user);
 
-  const [currentEdit, setCurrentEdit] = useState();
+  const [currentEdit, setCurrentEdit] = useState(0);
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const step1: FunnelStep = {
-    id: 1,
+    id: 0,
     step_name: "",
     step_url: "",
     step_description: "",
   };
   const [currentSteps, setCurrentSteps] = useState<FunnelStep[]>([]);
   const adAccounts1: AdAccountType = {
-    id: 1,
-    trafficSource: "1",
-    connectionType: "1",
-    adAccountName: "",
-    adAccountIdentification: "",
+    id: 0,
+    campaing_plataform: "1",
+    campaing_type: "1",
+    campaing_name: "",
+    campaing_identify: "",
   };
+  // id: campaign.id,
+  //     trafficSource: campaign.campaing_plataform,
+  //     connectionType: campaign.campaing_type,
+  //     adAccountName: campaign.campaing_name,
+  //     adAccountIdentification: campaign.campaing_identify,
   const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([]);
-  const [initialAccounts, setInitialAccounts] = useState([adAccounts1]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
 
   const toggleModal = () => setModalOpen(!isModalOpen);
 
@@ -57,15 +65,15 @@ const Funnel = () => {
     dispatch(obtainApiProduct());
   }, []);
 
-  useEffect(() => {
-    if (currentEdit) {
-      toggleModal();
-    }
-  }, [currentEdit]);
+  // useEffect(() => {
+  //   if (currentEdit) {
+  //     toggleModal();
+  //   }
+  // }, [currentEdit]);
 
   useEffect(() => {
     if (!isModalOpen) {
-      setCurrentEdit(null as any);
+      setCurrentEdit(0);
     }
   }, [isModalOpen]);
 
@@ -107,21 +115,10 @@ const Funnel = () => {
   //     // setIdEditLead(currentEdit.id);
   //   }
   // }, [currentEdit, setValue]);
-  const onSubmit = (data: any) => {
-    const campaings = adAccounts.map((accounts) => {
-      return [
-        {
-          campaing_plataform: accounts.trafficSource,
-          campaing_type: accounts.connectionType,
-          campaing_name: accounts.adAccountName,
-          campaing_identify: accounts.adAccountIdentification,
-          campaing_status: 1,
-          campaing_budget: 0,
-          id: 1,
-        },
-      ];
-    });
+  console.log("currentEdit", currentEdit);
+  console.log("currentSteps", currentSteps);
 
+  const onSubmit = (data: any) => {
     const steps = currentSteps;
     const form: any = {
       funnel_name: data.funnel_name,
@@ -129,23 +126,69 @@ const Funnel = () => {
       funnel_status: 1,
       funnel_url: data.funnel_url,
       product_id: parseInt(data.product_id),
-      campaings: campaings[0],
-      steps,
       user_funel,
       id: null,
     };
 
-    // if (idEditLead !== 0) {
-    //   dispatch(editLead(data, idEditLead));
-    //   setCurrentEdit();
-    //   setIdEditLead(0);
-    // } else {
-    // dispatch(createFunnel(form));
-    // }
+    if (currentEdit !== 0) {
+      form.steps = currentSteps.map((accounts, i) => {
+        const sumId = 1 + i;
+        return {
+          step_description: "",
+          step_name: accounts.step_name,
+          step_url: accounts.step_url,
+          id: sumId,
+          funnel_id: currentEdit,
+        };
+      });
+      form.campaings = adAccounts.map((accounts, i) => {
+        const sumId = 1 + i;
+        return {
+          campaing_plataform: accounts.campaing_plataform,
+          campaing_type: parseInt(accounts.campaing_type),
+          campaing_name: accounts.campaing_name,
+          campaing_identify: accounts.campaing_identify,
+          campaing_status: 1,
+          campaing_budget: 0,
+          id: sumId,
+          funnel_id: currentEdit,
+        };
+      });
+      form.id = currentEdit;
+      console.log("formFunnelEdit", form);
+      console.log("Entra Editar", currentDataEditFunnel);
+      dispatch(editFunnel(form, user_funel));
+      setCurrentEdit(0);
+      // setIdEditLead(0);
+    } else {
+      form.steps = currentSteps.map((accounts, i) => {
+        const sumId = 1 + i;
+        return {
+          step_description: "",
+          step_name: accounts.step_name,
+          step_url: accounts.step_url,
+          id: sumId,
+        };
+      });
+      form.campaings = adAccounts.map((accounts, i) => {
+        const sumId = 0 + i;
+        return {
+          campaing_plataform: accounts.campaing_plataform,
+          campaing_type: accounts.campaing_type,
+          campaing_name: accounts.campaing_name,
+          campaing_identify: accounts.campaing_identify,
+          campaing_status: 1,
+          campaing_budget: 0,
+          id: sumId,
+          // funnel_id: currentEdit,
+        };
+      });
+      console.log("formFunnel", form);
+      console.log("Entra Guardar");
+      dispatch(createFunnel(form, user_funel));
+    }
     toggleModal();
   };
-
-  const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
 
   useEffect(() => {
     if (!isModalOpen) return;
@@ -155,7 +198,10 @@ const Funnel = () => {
 
   const obtainFunnelEdit = (editDataTracking: any) => {
     setCurrentDataEditFunnel(editDataTracking);
+    console.log("editDataTracking", editDataTracking);
     toggleModal();
+    console.log("Entra al edit");
+    setCurrentEdit(editDataTracking.id);
   };
 
   const addNewFunnel = () => {
@@ -164,8 +210,25 @@ const Funnel = () => {
     toggleModal();
   };
 
+  const removeStep = (id: number) => {
+    console.log({ id });
+    const obtainStep = currentSteps.filter((step: any) => step.id !== id);
+    setCurrentSteps(obtainStep);
+    // console.log("obtainStep", obtainStep);
+    // setCurrentSteps((currentSteps) =>
+    //   currentSteps.filter((step: any) => step.id !== id)
+    // );
+  };
+
+  const removeCampaign = (id: number) => {
+    const currentCampaign = adAccounts.filter(
+      (campaign: any) => campaign.id !== id
+    );
+    setAdAccounts(currentCampaign);
+  };
+
   return (
-    <Main>
+    <Main width="97vw">
       <Card height="75vh" borderRadius="16px 16px 0 0">
         <Title fontSize="17px" color="#123249">
           Funnel
@@ -203,13 +266,14 @@ const Funnel = () => {
             currentSteps={currentSteps}
             setCurrentSteps={setCurrentSteps}
             currentDataEditFunnel={currentDataEditFunnel}
+            removeStep={removeStep}
           />
           <AdAccount
             adAccounts={adAccounts}
             setAdAccounts={setAdAccounts}
             isModalOpen={isModalOpen}
-            initialAccounts={initialAccounts}
             currentDataEditFunnel={currentDataEditFunnel}
+            removeCampaign={removeCampaign}
           />
           <ContainerSticky className="row">
             <Bar className="mb-3"></Bar>

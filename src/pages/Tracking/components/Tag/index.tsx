@@ -69,7 +69,7 @@ const TagTracking = () => {
       <NormalTable
         data={filteredData}
         columns={columnsTag}
-        pageSizeOptions={[7, 15, 31, 31]}
+        pageSizeOptions={[7, 15, 31]}
         maxBodyHeight={"60vh"}
         pageSize={7}
       />

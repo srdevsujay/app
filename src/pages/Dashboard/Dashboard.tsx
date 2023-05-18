@@ -51,7 +51,7 @@ const Dashboard = () => {
     },
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
-  const { tokenfacebook, tokengoogle } = useAppSelector(
+  const { tokenfacebook, tokengoogle, toggleSlider } = useAppSelector(
     (state) => state.dashboard
   );
 
@@ -214,7 +214,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Main>
+    <Main width={toggleSlider ? "87vw" : "97vw"}>
       <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
           Dashboard PNL ({pnlDays})

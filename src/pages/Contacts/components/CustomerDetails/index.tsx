@@ -66,7 +66,7 @@ const CustomerDetails = () => {
   }, [journey]);
 
   return (
-    <Main>
+    <Main width="97vw">
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box

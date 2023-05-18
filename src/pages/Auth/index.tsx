@@ -78,7 +78,7 @@ const Auth = () => {
   };
 
   return (
-    <Main>
+    <Main width="97vw">
       <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
           Autenticación Google

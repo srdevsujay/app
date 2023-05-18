@@ -8,6 +8,10 @@ import { useAppSelector } from "../../../../hooks/appDispatch";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { ProductAlert } from "../../../../components/alerts/Product";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const AddFunnelInput = ({
   register,
@@ -26,10 +30,26 @@ const AddFunnelInput = ({
 
   return (
     <>
-      <div className="row">
+      <div className="row mt-3">
         <div className="col-sm-6">
+          <div className="d-flex">
+            <p>Tipo de Funnel</p>
+            <Tooltip anchorSelect=".typeFunnel" place="top">
+              El tipo de Funnel establece las metricas orientadas a su negocio.
+            </Tooltip>
+            <a
+              className="typeFunnel"
+              style={{
+                position: "relative",
+                top: "-12px",
+                left: "10px",
+                color: "#000",
+              }}
+            >
+              <HelpOutlineIcon className="mt-3 color" fontSize="small" />
+            </a>
+          </div>
           <SelectStateBooking
-            label="Tipo de Funnel"
             options={TypeFunnel as any}
             name="funnel_status"
             register={register}
@@ -38,8 +58,24 @@ const AddFunnelInput = ({
           />
         </div>
         <div className="col-sm-6">
+          <div className="d-flex">
+            <p>Selecciona el Producto</p>
+            <Tooltip anchorSelect=".selecctFunnel" place="top">
+              El tipo de Funnel establece las metricas orientadas a su negocio.
+            </Tooltip>
+            <a
+              className="selecctFunnel"
+              style={{
+                position: "relative",
+                top: "-12px",
+                left: "10px",
+                color: "#000",
+              }}
+            >
+              <HelpOutlineIcon className="mt-3 color" fontSize="small" />
+            </a>
+          </div>
           <SelectWithValidation
-            label="Selecciona el Producto"
             options={dataProduct as any}
             name="product_id"
             register={register}
@@ -50,9 +86,25 @@ const AddFunnelInput = ({
       </div>
       <div className="row">
         <div className="col-sm-6">
+          <div className="d-flex" style={{ top: "25px", position: "relative" }}>
+            <p>Nombre del Funnel</p>
+            <Tooltip anchorSelect=".nameFunnel" place="top">
+              Nombre personalizado del Funnel
+            </Tooltip>
+            <a
+              className="nameFunnel"
+              style={{
+                position: "relative",
+                top: "-12px",
+                left: "10px",
+                color: "#000",
+              }}
+            >
+              <HelpOutlineIcon className="mt-3 color" fontSize="small" />
+            </a>
+          </div>
           <InputRegister
             placeholder="Ingresa el nombre del funnel"
-            label="Nombre del Funnel"
             id="0"
             type="text"
             min={3}
@@ -63,9 +115,25 @@ const AddFunnelInput = ({
           />
         </div>
         <div className="col-sm-6">
+          <div className="d-flex" style={{ top: "25px", position: "relative" }}>
+            <p>Url del Funnel</p>
+            <Tooltip anchorSelect=".urlFunnel" place="top">
+              Ingresar la url del landing o del sitio web.
+            </Tooltip>
+            <a
+              className="urlFunnel"
+              style={{
+                position: "relative",
+                top: "-12px",
+                left: "10px",
+                color: "#000",
+              }}
+            >
+              <HelpOutlineIcon className="mt-3 color" fontSize="small" />
+            </a>
+          </div>
           <InputRegister
             placeholder="Ingresa la url del Funnel"
-            label="Url del Funnel"
             id="0"
             type="text"
             min={3}

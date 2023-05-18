@@ -5,6 +5,7 @@ import {
   setDataFunnel,
   setTokenFacebook,
   setTokenGoogle,
+  setToggleSlider,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -19,8 +20,12 @@ import _ from "lodash";
 import { setDate } from "date-fns";
 import { AppThunk } from "@/redux/store";
 import { Pnl } from "../../../../pages/Dashboard/models/dashboard.model";
-import { createFunnelService } from "../../../../pages/Dashboard/services/pnlApi";
+import {
+  createFunnelService,
+  editFunnelService,
+} from "../../../../pages/Dashboard/services/pnlApi";
 import Swal from "sweetalert2";
+import { deleteFunnelService } from "../../../../pages/Dashboard/services/pnlApi";
 
 export const getMetricFunnel = (date?: DateFormat): AppThunk => {
   return async (dispatch) => {
@@ -136,15 +141,81 @@ export const createFilterFunnel = (
   };
 };
 
-export const createFunnel = (data: any): AppThunk => {
+export const createFunnel = (data: any, id: number): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result: any = await createFunnelService(data);
       if (result.data.message === "Create funnel successfully!") {
-        // dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+        dispatch(getTrackingFunnel(id));
         Swal.fire("Correcto", "Funnel Creado correctamente!!", "success");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editFunnel = (data: any, id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result: any = await editFunnelService(data);
+      console.log("resultEdit", result);
+      if (result.data.message === "Update funnel successfully!") {
+        dispatch(getTrackingFunnel(id));
+        Swal.fire("Correcto", "Funnel actualizado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteFunnel = (data: any, id: number): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción va a eliminar toda la información de tracking relacionada con este funnel. Tenga en cuenta que esta acción es permanente y no se podrá deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#109cf1",
+        cancelButtonColor: "#E71D36",
+        confirmButtonText: "Sí, ¡Borrar!",
+      });
+
+      if (result.isConfirmed) {
+        try {
+          const deleteResult: any = await deleteFunnelService(data);
+          console.log("resultEdit", deleteResult);
+          if (deleteResult.data.message === "Delete funnel successfully!") {
+            // dispatch(downloadTypeform(false));
+            dispatch(getTrackingFunnel(id));
+            Swal.fire(
+              "¡Eliminado!",
+              "El Funnel se ha eliminado correctamente.",
+              "success"
+            );
+          }
+        } catch (error) {
+          console.log("error", error);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const toggleSlider = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("dataToggle", data);
+
+      dispatch(setToggleSlider(data));
     } catch (error) {
       console.log(error);
     }

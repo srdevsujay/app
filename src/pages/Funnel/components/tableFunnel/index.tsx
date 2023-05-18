@@ -11,7 +11,7 @@ const FunnelTable = ({
   pageSize,
 }: any) => {
   return (
-    <Table className="tables" position="sticky">
+    <Table className="tables" position="relative">
       <MaterialTable
         title=""
         data={data}

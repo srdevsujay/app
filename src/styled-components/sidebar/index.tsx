@@ -43,6 +43,7 @@ export const MenuItemLinks = styled(Link)`
   text-decoration: none;
   color: #3997ff;
   padding: 5px 18px;
+  height: 40px;
 
   &:hover {
     background-color: #ffffff;

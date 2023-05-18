@@ -53,6 +53,22 @@ export const createFunnelService = async (data: any) => {
   });
 };
 
+export const editFunnelService = async (data: any) => {
+  return clientAxios.put("/funnel", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const deleteFunnelService = async (data: any) => {
+  return clientAxios.post("/deletefunnel", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 export const editUserService = async (data: any) => {
   return clientAxios.put("/user", data, {
     headers: {

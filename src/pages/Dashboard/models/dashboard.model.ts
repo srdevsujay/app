@@ -5,6 +5,7 @@ export interface DashboardInfo {
   dataFunnel: [],
   tokenfacebook: boolean,
   tokengoogle: boolean,
+  toggleSlider: boolean,
 }
 
 export interface Pnl {

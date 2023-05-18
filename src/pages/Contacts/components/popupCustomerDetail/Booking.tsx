@@ -48,7 +48,7 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
               <NormalTable
                 data={booking}
                 columns={columnsBooking}
-                pageSizeOptions={[7, 15, 31, 31]}
+                pageSizeOptions={[7, 15, 31]}
                 maxBodyHeight={"60vh"}
                 pageSize={7}
               />

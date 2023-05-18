@@ -9,6 +9,7 @@ const StepsFunnel = ({
   currentSteps,
   setCurrentSteps,
   currentDataEditFunnel,
+  removeStep,
 }: any) => {
   const addStep = () => {
     setCurrentSteps([
@@ -21,6 +22,10 @@ const StepsFunnel = ({
       },
     ]);
   };
+
+  useEffect(() => {
+    console.log({ currentSteps });
+  }, [currentSteps]);
 
   const handleChangeStep = (step: any) => {
     console.log("etep", step);
@@ -52,10 +57,10 @@ const StepsFunnel = ({
       </div>
       {currentSteps?.map((step: FunnelStep, i: number) => (
         <StepFunnel
-          key={i}
+          key={step.id}
           setStepFunnel={handleChangeStep}
           step={step}
-          idFunnel={i}
+          removeStep={removeStep}
         />
       ))}
       <div className="d-flex justify-content-center">

@@ -231,7 +231,7 @@ export const obtainApiSale = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataSales();
-      const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
+      const currentDataLead: any = _.orderBy(result.data.data, "date", "desc");
       dispatch(setSale(currentDataLead));
     } catch (error) {
       console.log(error);

@@ -130,7 +130,7 @@ const Products = () => {
       <GeneralTable
         data={filteredData}
         columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31, 31]}
+        pageSizeOptions={[7, 15, 31]}
         maxBodyHeight={"60vh"}
         pageSize={7}
       />

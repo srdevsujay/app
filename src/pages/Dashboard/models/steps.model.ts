@@ -8,10 +8,10 @@ export interface FunnelStep {
 export interface StepFunnelProps {
   setStepFunnel: (step: FunnelStep) => void;
   step: FunnelStep;
-  idFunnel: number;
   register?: any;
   errors?: any;
   isModalOpen?: boolean;
   initialSteps?: any;
   currentDataEditFunnel?: any;
+  removeStep?: any;
 }

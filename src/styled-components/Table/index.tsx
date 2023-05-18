@@ -14,6 +14,7 @@ export const Table = styled.div<Position>`
   }
   .MuiTableCell-root {
     padding: 7px;
+    z-index: 1;
   }
   .widthDateLead {
     width: max-content;
