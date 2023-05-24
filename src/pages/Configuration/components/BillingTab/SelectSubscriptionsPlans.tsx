@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { TitleHelvetica } from "../../../../styled-components/Title/index";
+import {
+  TitleHelvetica,
+  Title,
+} from "../../../../styled-components/Title/index";
 import { Select } from "../../../../styled-components/select/index";
 import _ from "lodash";
 import { ContainerBilling } from "../../styled-components/Plataform/index";
@@ -104,6 +107,8 @@ const SelectSubscriptionsPlans = ({
     handlePlanProduct(`${selectedSubs}${selectedPlan}`);
   };
 
+  console.log("selectedPayment", selectedPayment);
+
   return (
     <div
       className={`${
@@ -112,7 +117,15 @@ const SelectSubscriptionsPlans = ({
           : "container mb-3 mt-4 d-none"
       }`}
     >
-      <div className="row d-flex">
+      <div className="d-flex justify-content-center w-100 mt-2">
+        <Title fontSize="35px" color="#123249" className="text-center w-100">
+          Meta
+        </Title>
+      </div>
+      <div className="d-flex justify-content-center w-100 mt-2">
+        <Bar width="7vw"></Bar>
+      </div>
+      <div className="row d-flex mt-5">
         <div className="col-sm-6">
           <div className="row col-sm-12">
             <TitleHelvetica fontSize="16px" className="mt-4 w-100">
@@ -209,7 +222,7 @@ const SelectSubscriptionsPlans = ({
                         marginLeft: "5px",
                       }}
                     >
-                      {selectedSubs}
+                      <FormatNumber number={selectedSubs} />
                     </p>
                   </span>
                 </div>

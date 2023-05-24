@@ -213,7 +213,7 @@ export const createSubscriptionStripe = (token: any): AppThunk => {
         token: token.id,
       };
       const result = await createSubscriptionStripeService(currentToken);
-      console.log("result", result);
+      console.log("resultTokenId", result);
       if (result.status === 200) {
         dispatch(setCustomerId(result.data.customerId));
         //   Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
@@ -258,7 +258,7 @@ export const obtainSubscriptionUser = (): AppThunk => {
     try {
       const result = await getSubscriptionUserService();
       console.log("resultSubs", result);
-      // dispatch(setSubscriptionsPlans(result.data));
+      dispatch(setCustomerId(result.data.data.customer_id));
     } catch (error) {
       console.log(error);
     }

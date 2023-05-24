@@ -2,6 +2,7 @@ import {
   ModalClose,
   ModalBox,
 } from "../../../../styled-components/modal/index";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 const ButtonReturnSelect = ({ onReturnSelect, backStep }: any) => {
   const onClose = (backStep: any) => {
@@ -10,9 +11,7 @@ const ButtonReturnSelect = ({ onReturnSelect, backStep }: any) => {
 
   return (
     <>
-      <ModalClose top="140px" right="180px" onClick={() => onClose(backStep)}>
-        {/* x<img src={iconX} alt={'close'} /> */}x
-      </ModalClose>
+      <ReplyIcon onClick={() => onClose(backStep)} />
     </>
   );
 };

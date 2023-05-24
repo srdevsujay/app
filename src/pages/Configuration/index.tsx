@@ -44,9 +44,21 @@ const Configuration = () => {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="Perfil" value="1" />
-                <Tab label="Integraciones" value="2" />
-                <Tab label="Facturación" value="3" />
+                <Tab
+                  label="Perfil"
+                  value="1"
+                  style={{ padding: "12px 16px" }}
+                />
+                <Tab
+                  label="Integraciones"
+                  value="2"
+                  style={{ padding: "12px 16px" }}
+                />
+                <Tab
+                  label="Facturación"
+                  value="3"
+                  style={{ padding: "12px 16px" }}
+                />
               </TabList>
             </Box>
             <TabPanel value="1">

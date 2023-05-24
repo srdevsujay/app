@@ -8,10 +8,10 @@ export const FormatNumberSum = ({ price, percentage, name }: any) => {
     currency: "MXN",
   }).format(currentSum);
 
-  console.log("sum", sumCurr);
-  console.log("nameSub", name);
+  let sumCurrX = new Intl.NumberFormat("ES-MX", {
+    style: "currency",
+    currency: "MXN",
+  }).format(currentPercentSum);
 
-  return (
-    <>{name + " " + sumCurr + " Ahorro " + currentPercentSum.toFixed(2)}%</>
-  );
+  return <>{name + " " + sumCurr + " Ahorro " + sumCurrX}</>;
 };

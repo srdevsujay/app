@@ -284,7 +284,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                   <Tooltip
                     title={
                       <>
-                        <span>{`${journey.ad_name} / ${journey.campaign}`}</span>
+                        <span>{`CP: ${journey.campaign} / CA: ${journey.adset_name}`}</span>
                       </>
                     }
                     placement="top"
@@ -297,7 +297,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                         marginLeft: "5px",
                       }}
                     >
-                      {journey?.adset_name}
+                      {journey?.ad_name}
                     </span>
                   </Tooltip>
                 </div>

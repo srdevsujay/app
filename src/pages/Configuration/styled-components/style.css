@@ -26,3 +26,21 @@
 .cursor-noDrop {
   cursor: no-drop;
 }
+
+.return-select {
+  top: 116px !important;
+  right: 9vw !important;
+  position: absolute !important;
+  border-radius: 38px !important;
+  border: 2px solid rgb(1, 156, 224) !important;
+  height: 36px !important;
+  width: 38px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  cursor: pointer !important;
+}
+
+.return-select:hover {
+border: none !important
+}

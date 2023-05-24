@@ -2,6 +2,6 @@ import { billingSelectPayment } from "../../../Tracking/models/billingSelectPaym
 
 export const dataSelectPayment: billingSelectPayment[] = [
   { value: 4, name: "Selecciona" },
-  { value: 2, name: "Stripe" },
+  { value: 2, name: "Tarjeta de credito" },
   { value: 3, name: "Paypal" },
 ];

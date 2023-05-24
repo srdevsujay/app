@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { BarHorizontal } from "./types";
 
-export const Bar = styled.div`
-  background: linear-gradient(75.37deg, #0043ff 25.69%, #a370f1 105.3%);
-  border-radius: 1.5px;
-  height: 3px;
-  width: 100%;
-  border: 1px solid;
-`;
+export const Bar = styled.div<BarHorizontal>(({ width }) => ({
+  background: "linear-gradient(75.37deg, #0043ff 25.69%, #a370f1 105.3%)",
+  borderRadius: "1.5px",
+  height: "3px",
+  width: !width ? "100%" : width,
+  // border: "1px solid linear-gradient(75.37deg, #0043ff 25.69%, #a370f1 105.3%)",
+}));
 
 export const ButtonTitlePicker = styled.button`
   font-size: 10px !important;
