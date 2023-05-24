@@ -3,7 +3,7 @@ import { dataSelectPayment } from "./dataSelectPayment";
 import { Select } from "../../../../styled-components/select/index";
 import ButtonReturnSelect from "./ButtonReturnSelect";
 import creditCard from "../../../../assets/images/credit-card.png";
-import paypalCard from "../../../../assets/images/paypal-card.jpg";
+import paypalCard from "../../../../assets/images/paypal-card.png";
 import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
