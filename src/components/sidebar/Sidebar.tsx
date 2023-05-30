@@ -18,8 +18,43 @@ import { stateUser } from "../../utilities/stateUser.utilities";
 import { ButtonLogout } from "../../styled-components/button";
 import SidebarSubMenu from "./SidebarSubMenu";
 import { toggleSlider } from "../../redux/state/slices/dashboard/dashboardThunk";
+import useThemeMode from "../../hooks/useThemeMode";
+import styled from "styled-components";
+
+const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+`;
+
+const ToggleInput = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + span {
+    background-color: #2196f3; /* Color de fondo cuando está activado */
+  }
+
+  &:focus + span {
+    box-shadow: 0 0 1px #2196f3;
+  }
+
+  &:checked + span:before {
+    transform: translateX(26px);
+  }
+`;
+
+const ToggleLabel = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+`;
 
 const Sidebar: FC = () => {
+  const [toggleTheme] = useThemeMode() as any;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [close, setClose] = useState(true);
@@ -71,12 +106,23 @@ const Sidebar: FC = () => {
           );
         })}
         {close === true ? (
-          <ButtonLogout>
-            <button className="btn handleLogout" onClick={handleLogout}>
-              {/* <img src={edit} height="12" className="" /> */}
-              Cerrar Sesión
-            </button>
-          </ButtonLogout>
+          <>
+            {/* <ToggleContainer>
+              <ToggleLabel>
+                <ToggleInput
+                  type="checkbox"
+                  // checked={checked}
+                  // onChange={onChange}
+                />
+              </ToggleLabel>
+            </ToggleContainer> */}
+            <ButtonLogout>
+              <button className="btn handleLogout" onClick={handleLogout}>
+                {/* <img src={edit} height="12" className="" /> */}
+                Cerrar Sesión
+              </button>
+            </ButtonLogout>
+          </>
         ) : (
           <div className="dropMenu-logout" style={{ width: "43px" }}>
             {/* <LogoutIcon

@@ -18,6 +18,7 @@ const SelectSubscriptionsPlans = ({
   handlePlanProduct,
   setIdSubscription,
   setIdSubscriptionPlan,
+  setTotalMonth,
 }: any) => {
   const { subscriptionsPlans } = useAppSelector((state) => state.configuration);
   const { plans, subscriptions } = subscriptionsPlans;
@@ -100,6 +101,7 @@ const SelectSubscriptionsPlans = ({
     // handlePlanProduct(`${selectedSubs}${selectedPlan}`);
     const total = price - (percentage / 100) * price;
     setTotalSub(total);
+    setTotalMonth(total.toFixed(2));
   }, [selectedPlan, selectedSubs]);
 
   const handleNextStep = () => {
@@ -108,6 +110,7 @@ const SelectSubscriptionsPlans = ({
   };
 
   console.log("selectedPayment", selectedPayment);
+  console.log("selectedSubs", selectedSubs);
 
   return (
     <div

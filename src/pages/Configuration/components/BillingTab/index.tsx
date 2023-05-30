@@ -26,6 +26,7 @@ import { createSubscriptionUser } from "../../../../redux/state/slices/configura
 import MaterialTable from "material-table";
 import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
 import { TableStyle } from "../../../../styled-components/Table/index";
+import FontPaypalPay from "./FontPaypalPay";
 
 const stripePromise = loadStripe(
   "pk_test_51Kha17DfKIMhwzEG7hdRFjUIO0soTyO2SAbgTLBOCwOcmXkWqa1m39C4IsHg0tyOMeCHozQGLx8DQSA7Epx5cMDG00Lhb4nYoI"
@@ -110,7 +111,9 @@ const BillingTab = () => {
   const [billingState, setBillingState] = useState({});
   const [currentCreate, setCurrentCreate] = useState<any>();
   const [dataTable, setDataTable] = useState([billingState]);
+  const [totalMonth, setTotalMonth] = useState<any>(0);
   const { balance, create, description }: any = billingState;
+  console.log("totalMonth", totalMonth);
 
   useEffect(() => {
     console.log("entra al efect");
@@ -224,6 +227,7 @@ const BillingTab = () => {
           handlePlanProduct={handlePlanProduct}
           setIdSubscription={setIdSubscription}
           setIdSubscriptionPlan={setIdSubscriptionPlan}
+          setTotalMonth={setTotalMonth}
         />
         <SelectFontPay
           selectedPayment={selectedPayment}
@@ -235,6 +239,13 @@ const BillingTab = () => {
           onReturnSelect={onReturnSelect}
           stripePromise={stripePromise}
           setSubscription={setSubscription}
+        />
+        <FontPaypalPay
+          selectedPayment={selectedPayment}
+          onReturnSelect={onReturnSelect}
+          totalMonth={totalMonth}
+          idSubscription={idSubscription}
+          idSubscriptionPlan={idSubscriptionPlan}
         />
       </div>
       <div className={customerId ? "d-none" : "row d-block"}>

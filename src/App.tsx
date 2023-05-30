@@ -10,6 +10,8 @@ import { Sidebar } from "./components/sidebar";
 import { useAppSelector } from "./hooks";
 import { useSelector } from "react-redux";
 import { AppStore } from "./redux/store";
+import { ThemeProvider } from "styled-components";
+import useThemeMode from "./hooks/useThemeMode";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
@@ -20,7 +22,25 @@ const Configuration = lazy(() => import("./pages/Configuration/index"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
 
+const themes: any = {
+  default: {
+    colors: {
+      body: "#f1f1f1", // Color de fondo
+      title: "#989898", // Color del texto
+      subtitle: "#000", // Color de las cantidades
+    },
+  },
+  dark: {
+    colors: {
+      body: "#23292d",
+      title: "#FFF",
+      subtitle: "#317e94",
+    },
+  },
+};
+
 function App() {
+  // const [theme] = useThemeMode() as any;
   // const user: any = useAppSelector((state) => state.user?.user);
   const user = useSelector((state: AppStore) => state.user.user);
   let hostedpage: any = "";
@@ -34,34 +54,36 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<>Cargando...</>}>
-      <Router>
-        <ToastContainer />
-        <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
-          {user !== null ? <Sidebar /> : ""}
+    <ThemeProvider theme={themes}>
+      <Suspense fallback={<>Cargando...</>}>
+        <Router>
+          <ToastContainer />
+          <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
+            {user !== null ? <Sidebar /> : ""}
 
-          <RoutesWithNotFound>
-            <Route
-              path="/"
-              element={<Navigate to={privateRoutes.DASHBOARD} />}
-            />
-            <Route path={publicRoutes.LOGIN} element={<Login />} />
-            <Route element={<AuthGuard />}>
-              <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
-              <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-              <Route path={privateRoutes.CONTACT} element={<Contacts />} />
-              <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+            <RoutesWithNotFound>
               <Route
-                path={privateRoutes.CONFIGURATION}
-                element={<Configuration />}
+                path="/"
+                element={<Navigate to={privateRoutes.DASHBOARD} />}
               />
-              <Route path={privateRoutes.AUTH} element={<Auth />} />
-            </Route>
-            <Route path="/signun" element={<CreateAccount />} />
-          </RoutesWithNotFound>
-        </div>
-      </Router>
-    </Suspense>
+              <Route path={publicRoutes.LOGIN} element={<Login />} />
+              <Route element={<AuthGuard />}>
+                <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
+                <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+                <Route path={privateRoutes.CONTACT} element={<Contacts />} />
+                <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+                <Route
+                  path={privateRoutes.CONFIGURATION}
+                  element={<Configuration />}
+                />
+                <Route path={privateRoutes.AUTH} element={<Auth />} />
+              </Route>
+              <Route path="/signun" element={<CreateAccount />} />
+            </RoutesWithNotFound>
+          </div>
+        </Router>
+      </Suspense>
+    </ThemeProvider>
   );
 }
 

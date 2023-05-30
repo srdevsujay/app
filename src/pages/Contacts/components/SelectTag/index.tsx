@@ -114,7 +114,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
                 <img src={venta} alt="" className="iconos-table-origin" />
               )}
               <option key={tag} value={tag} onClick={(e) => handleTagChange(e)}>
-                {tag !== null ? tag.substr(1) : null}
+                {tag !== null ? tag?.substr(1) : null}
               </option>
             </BackColorsTableOrigin>
           </div>
