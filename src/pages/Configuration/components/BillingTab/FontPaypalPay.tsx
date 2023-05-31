@@ -30,13 +30,16 @@ const FontPaypalPay = ({
   const [plans, setPlans] = useState([]);
   const [idPaypal, setIdPaypal] = useState(0);
   const [idPlanPaypal, setIdPlanPaypal] = useState("");
-
+  console.log(
+    "process.env.REACT_APP_PAYPAL_MODE",
+    process.env.REACT_APP_PAYPAL_MODE
+  );
   const hadlePlansPaypal = (accessToken: string) => {
     console.log("entra AccesToken");
     const fetchPlans = async () => {
       try {
         const response = await axios.get(
-          "https://api-m.sandbox.paypal.com/v1/billing/plans",
+          `${process.env.REACT_APP_PAYPAL_MODE}/v1/billing/plans`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -74,7 +77,7 @@ const FontPaypalPay = ({
 
     try {
       const response = await axios.post(
-        "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+        `${process.env.REACT_APP_PAYPAL_MODE}/v1/oauth2/token`,
         data,
         { headers }
       );
