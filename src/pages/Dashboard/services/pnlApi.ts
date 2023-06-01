@@ -86,3 +86,11 @@ export const createDeleteImageProfileService = async (id: any) => {
     }
   });
 }
+
+export const loginGoogle = async (data: any) => {
+  return clientAxios.post("/login_google", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

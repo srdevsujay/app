@@ -13,6 +13,11 @@ export const FormLogin = styled.form`
     cursor: pointer;
     color: #3997ff !important;
   }
+
+  .w-google > button {
+    width: 100%;
+    font-family: "Helvetica-NeueL-Title" !important;
+  }
 `;
 
 export const FlexColumnLogin = styled.div`

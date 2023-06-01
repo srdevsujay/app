@@ -221,7 +221,7 @@ const BillingTab = () => {
 
   return (
     <div className="">
-      <div className={!customerId ? "d-none" : "row d-block"}>
+      <div className={customerId ? "d-none" : "row d-block"}>
         <SelectSubscriptionsPlans
           selectedPayment={selectedPayment}
           handlePlanProduct={handlePlanProduct}
@@ -248,7 +248,7 @@ const BillingTab = () => {
           idSubscriptionPlan={idSubscriptionPlan}
         />
       </div>
-      <div className={customerId ? "d-none" : "row d-block"}>
+      <div className={!customerId ? "d-none" : "row d-block"}>
         <h3 className="title-table-billing font-helvetica zIndex mt-3">
           Historial de pagos
         </h3>

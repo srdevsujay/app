@@ -10,6 +10,7 @@ import {
   loginHandle,
   editUserService,
   createDeleteImageProfileService,
+  loginGoogle,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -97,6 +98,26 @@ export const removeFile = (id: any): AppThunk => {
           } as any)
         );
         Swal.fire("Correcto", "Perfil Editado correctamente!!", "success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const hadleLoginGoogle = (date: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading());
+    try {
+      const resultAction = await loginGoogle(date);
+      console.log("resultAction", resultAction);
+      if (resultAction.status === 200) {
+        dispatch(
+          setUser({
+            token: resultAction.data.token,
+            user: resultAction.data.user,
+          } as any)
+        );
       }
     } catch (error) {
       console.log(error);

@@ -8,7 +8,12 @@ import { setUser } from "../../../redux/state/slices/login/authSlice";
 import { useLoginUserMutation } from "../services/userService";
 import { ButtonLogin, FormLogin, TitleH4 } from "../styled-components";
 import logo from "../../../assets/images/logoRoalytics.png";
-import { hadleLogin } from "../../../redux/state/slices/login/loginThunk";
+import {
+  hadleLogin,
+  hadleLoginGoogle,
+} from "../../../redux/state/slices/login/loginThunk";
+import GoogleLoginButton from "./GoogleLoginButton";
+import { registerUserThunk } from "../../../redux/state/slices/register/thunk";
 
 interface FormState {
   user: User;
@@ -50,6 +55,32 @@ const Form = () => {
     } else {
       toast.error("ingrese correo o contraseña");
     }
+  };
+
+  const handleGoogleLoginSuccess = (response: any) => {
+    // Aquí puedes manejar la respuesta exitosa de inicio de sesión con Google
+    console.log("Inicio de sesión exitoso:", response);
+    const dataUser = {
+      name: response.profileObj.givenName,
+      last_name: response.profileObj.familyName,
+      email: response.profileObj.email,
+      password: response.googleId,
+      image_name: "image",
+      status: 1,
+      user_type: 2,
+      time_zone: "",
+      type_currency: "0",
+    };
+    dispatch(registerUserThunk(dataUser));
+    const dataToken = {
+      token: response.tokenId,
+    };
+    dispatch(hadleLoginGoogle(dataToken));
+  };
+
+  const handleGoogleLoginFailure = (error: any) => {
+    // Aquí puedes manejar el error de inicio de sesión con Google
+    console.log("Error en el inicio de sesión:", error);
   };
 
   useEffect(() => {
@@ -131,6 +162,12 @@ const Form = () => {
           <div className="col-12 text-center">
             {/* <p className="text-crear-cuenta">¿No tenes una cuenta?<Link to="editPassword" className="crear-cuenta ml-1"><b>Crear nueva cuenta</b></Link></p> */}
           </div>
+        </div>
+        <div className="w-google">
+          <GoogleLoginButton
+            onSuccess={handleGoogleLoginSuccess}
+            onFailure={handleGoogleLoginFailure}
+          />
         </div>
       </FormLogin>
     </>
