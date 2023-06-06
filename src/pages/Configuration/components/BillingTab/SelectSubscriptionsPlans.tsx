@@ -12,6 +12,7 @@ import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { FormatNumberSum } from "../../../../utilities/FormatNumberSum";
 import "../../styled-components/style.css";
 import { useAppSelector } from "../../../../hooks/appDispatch";
+import { ModalClose } from "../../../../styled-components/modal/index";
 
 const SelectSubscriptionsPlans = ({
   selectedPayment,
@@ -19,6 +20,9 @@ const SelectSubscriptionsPlans = ({
   setIdSubscription,
   setIdSubscriptionPlan,
   setTotalMonth,
+  toggleEditSubscription,
+  hanldeUpdateSubscriptionStripe,
+  setToggleEditSubscription,
 }: any) => {
   const { subscriptionsPlans } = useAppSelector((state) => state.configuration);
   const { plans, subscriptions } = subscriptionsPlans;
@@ -110,152 +114,169 @@ const SelectSubscriptionsPlans = ({
   };
 
   console.log("selectedPayment", selectedPayment);
-  console.log("selectedSubs", selectedSubs);
 
   return (
-    <div
-      className={`${
-        selectedPayment === "0"
-          ? "container mb-3 mt-4 d-block"
-          : "container mb-3 mt-4 d-none"
-      }`}
-    >
-      <div className="d-flex justify-content-center w-100 mt-2">
-        <Title fontSize="35px" color="#123249" className="text-center w-100">
-          Meta
-        </Title>
-      </div>
-      <div className="d-flex justify-content-center w-100 mt-2">
-        <Bar width="7vw"></Bar>
-      </div>
-      <div className="row d-flex mt-5">
-        <div className="col-sm-6">
-          <div className="row col-sm-12">
-            <TitleHelvetica fontSize="16px" className="mt-4 w-100">
-              Seleccionar meta en ventas mensuales
-            </TitleHelvetica>
-            <Select
-              value={selectedSubs}
-              onChange={handleSubs}
-              className="container w-100 d-flex justify-content-center"
-            >
-              {dataSubscriptions?.map((data: any) => (
-                <option key={data?.id} value={data?.income}>
-                  {data?.income === "Selecciona" ? (
-                    "Seleccione"
-                  ) : (
-                    <FormatNumber number={data?.income} />
-                  )}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <div className="row col-sm-12">
-            <TitleHelvetica fontSize="16px" className="mt-4 w-100">
-              Seleccionar plan de permanencia
-            </TitleHelvetica>
-            <Select
-              value={selectedPlan}
-              onChange={handlePlan}
-              disabled={selectedSubs === "0" ? true : false}
-              className={
-                selectedSubs === "0"
-                  ? "cursor-noDrop container w-100 d-flex justify-content-center"
-                  : "container w-100 d-flex justify-content-center"
-              }
-            >
-              {dataPlans?.map(({ id, name, percentage }: any) => (
-                <option key={id} value={name}>
-                  {name === "Seleccione" ? (
-                    "Seleccione"
-                  ) : (
-                    <FormatNumberSum
-                      price={price}
-                      percentage={percentage}
-                      name={name}
-                    />
-                  )}
-                </option>
-              ))}
-            </Select>
-          </div>
+    <>
+      {/* {toggleEditSubscription === 1 || selectedPayment === "0" ? ( */}
+      <div className="container mb-3 mt-4">
+        {toggleEditSubscription === 1 && (
+          <ModalClose
+            top="121px"
+            right="35px"
+            onClick={() => setToggleEditSubscription(0)}
+          >
+            x
+          </ModalClose>
+        )}
+        <div className="d-flex justify-content-center w-100 mt-2">
+          <Title fontSize="35px" color="#123249" className="text-center w-100">
+            Meta
+          </Title>
         </div>
-        <div className="col-sm-6 d-flex justify-content-end">
-          <div className="row">
-            <ContainerBilling className="container">
-              <h3
-                style={{
-                  fontSize: "16px",
-                  fontFamily: "Helvetica-NeueL-Title",
-                  marginTop: "10px",
-                }}
+        <div className="d-flex justify-content-center w-100 mt-2">
+          <Bar width="7vw"></Bar>
+        </div>
+        <div className="row d-flex mt-5">
+          <div className="col-sm-6">
+            <div className="row col-sm-12">
+              <TitleHelvetica fontSize="16px" className="mt-4 w-100">
+                Seleccionar meta en ventas mensuales
+              </TitleHelvetica>
+              <Select
+                value={selectedSubs}
+                onChange={handleSubs}
+                className="container w-100 d-flex justify-content-center"
               >
-                Suscripción
-              </h3>
-              <Bar style={{ width: "100%" }}></Bar>
-              <div className="d-flex mt-5 justify-content-between">
-                <div>
-                  <span
-                    className="d-flex"
-                    style={{ fontFamily: "Helvetica-NeueL-Title" }}
-                  >
-                    Plan:{" "}
-                    <p
+                {dataSubscriptions?.map((data: any) => (
+                  <option key={data?.id} value={data?.income}>
+                    {data?.income === "Selecciona" ? (
+                      "Seleccione"
+                    ) : (
+                      <FormatNumber number={data?.income} />
+                    )}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            <div className="row col-sm-12">
+              <TitleHelvetica fontSize="16px" className="mt-4 w-100">
+                Seleccionar plan de permanencia
+              </TitleHelvetica>
+              <Select
+                value={selectedPlan}
+                onChange={handlePlan}
+                disabled={selectedSubs === "0" ? true : false}
+                className={
+                  selectedSubs === "0"
+                    ? "cursor-noDrop container w-100 d-flex justify-content-center"
+                    : "container w-100 d-flex justify-content-center"
+                }
+              >
+                {dataPlans?.map(({ id, name, percentage }: any) => (
+                  <option key={id} value={name}>
+                    {name === "Seleccione" ? (
+                      "Seleccione"
+                    ) : (
+                      <FormatNumberSum
+                        price={price}
+                        percentage={percentage}
+                        name={name}
+                      />
+                    )}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </div>
+          <div className="col-sm-6 d-flex justify-content-end">
+            <div className="row">
+              <ContainerBilling className="container">
+                <h3
+                  style={{
+                    fontSize: "16px",
+                    fontFamily: "Helvetica-NeueL-Title",
+                    marginTop: "10px",
+                  }}
+                >
+                  Suscripción
+                </h3>
+                <Bar style={{ width: "100%" }}></Bar>
+                <div className="d-flex mt-5 justify-content-between">
+                  <div>
+                    <span
+                      className="d-flex"
+                      style={{ fontFamily: "Helvetica-NeueL-Title" }}
+                    >
+                      Plan:{" "}
+                      <p
+                        style={{
+                          color: "#8f8f8f",
+                          fontFamily: "Helvetica-NeueL",
+                          fontSize: "15px",
+                          marginLeft: "11px",
+                          marginBottom: "5px",
+                        }}
+                      >
+                        {selectedPlan}
+                      </p>
+                    </span>
+                    <span
+                      className="d-flex"
+                      style={{ fontFamily: "Helvetica-NeueL-Title" }}
+                    >
+                      Meta:{" "}
+                      <p
+                        style={{
+                          color: "#8f8f8f",
+                          fontFamily: "Helvetica-NeueL",
+                          fontSize: "15px",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        <FormatNumber number={selectedSubs} />
+                      </p>
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <h1
                       style={{
-                        color: "#8f8f8f",
-                        fontFamily: "Helvetica-NeueL",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        flexDirection: "column",
                         fontSize: "15px",
-                        marginLeft: "11px",
-                        marginBottom: "5px",
+                        fontFamily: "Helvetica-NeueL-Title",
+                        marginBottom: "15px",
                       }}
                     >
-                      {selectedPlan}
-                    </p>
-                  </span>
-                  <span
-                    className="d-flex"
-                    style={{ fontFamily: "Helvetica-NeueL-Title" }}
-                  >
-                    Meta:{" "}
-                    <p
-                      style={{
-                        color: "#8f8f8f",
-                        fontFamily: "Helvetica-NeueL",
-                        fontSize: "15px",
-                        marginLeft: "5px",
-                      }}
-                    >
-                      <FormatNumber number={selectedSubs} />
-                    </p>
-                  </span>
+                      {totalSub.toFixed(2)} US$ / mes
+                    </h1>
+                  </div>
                 </div>
-                <div className="d-flex">
-                  <h1
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      flexDirection: "column",
-                      fontSize: "15px",
-                      fontFamily: "Helvetica-NeueL-Title",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    {totalSub.toFixed(2)} US$ / mes
-                  </h1>
-                </div>
-              </div>
-            </ContainerBilling>
+              </ContainerBilling>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-3 justify-content-end">
+          <div className="form-group col-sm-2 pr-0">
+            {toggleEditSubscription === 1 ? (
+              <ButtonsProfile
+                className="btn w-100"
+                onClick={hanldeUpdateSubscriptionStripe}
+              >
+                Actualizar
+              </ButtonsProfile>
+            ) : (
+              <ButtonsProfile className="btn w-100" onClick={handleNextStep}>
+                Siguiente Paso
+              </ButtonsProfile>
+            )}
           </div>
         </div>
       </div>
-      <div className="row mt-3 justify-content-end">
-        <div className="form-group col-sm-3 pr-0">
-          <ButtonsProfile className="btn w-100" onClick={handleNextStep}>
-            Siguiente Paso
-          </ButtonsProfile>
-        </div>
-      </div>
-    </div>
+      {/* ) : (
+        ""
+      )} */}
+    </>
   );
 };
 

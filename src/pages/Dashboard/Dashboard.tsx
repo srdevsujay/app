@@ -55,6 +55,9 @@ const Dashboard = () => {
     (state) => state.dashboard
   );
 
+  console.log("tokenfacebook", tokenfacebook);
+  console.log("tokengoogle", tokengoogle);
+
   const idUser = useAppSelector((state) => state.user.user.id);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(

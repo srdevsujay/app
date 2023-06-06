@@ -128,6 +128,8 @@ export const createFilterFunnel = (
   return async (dispatch) => {
     dispatch(starLoading);
     try {
+      console.log("dataFilter", data);
+
       const result: any = await createFilterFunnelService(data);
       if (
         result.data.message === "Update filter dashboard user successfully!"

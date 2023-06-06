@@ -4,8 +4,10 @@ import Swal from "sweetalert2";
 import { getDataLeads } from "../../../../pages/Contacts/services/index";
 import { setLeads } from "../contacts/contactsSlice";
 import {
+  setAmount,
   setCustomerId,
   setSubscriptionsPlans,
+  setSubscriptionUser,
   starLoading,
 } from "./configurationSlice";
 import {
@@ -18,6 +20,11 @@ import {
 } from "../../../../pages/Configuration/services/index";
 import qs from "qs";
 import { clientAxios } from "../../../../services/axios";
+import { updateSubscriptionStripeService } from "../../../../pages/Configuration/services/index";
+import {
+  getUserTotalSaleMonthService,
+  getCancelSubscriptionService,
+} from "../../../../pages/Configuration/services/index";
 import {
   createSubscriptionUserService,
   getSubscriptionUserService,
@@ -243,7 +250,8 @@ export const createSubscriptionUser = (data: any): AppThunk => {
       const result = await createSubscriptionUserService(data);
       console.log("resultUser", result);
       if (result.data.message === "Create subscription user succesfully") {
-        // dispatch(obtainApiContacts());
+        console.log("resultUser--", result.data.data);
+        dispatch(setSubscriptionUser(result.data.data));
         Swal.fire("Correcto", "Suscripción creada correctamente", "success");
       }
     } catch (error) {
@@ -259,6 +267,53 @@ export const obtainSubscriptionUser = (): AppThunk => {
       const result = await getSubscriptionUserService();
       console.log("resultSubs", result);
       dispatch(setCustomerId(result.data.data.customer_id));
+      dispatch(setSubscriptionUser(result.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainUserTotalSaleMonth = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getUserTotalSaleMonthService();
+      console.log("resultgetUserTotalSaleMonthService", result.data.data[0]);
+      dispatch(setAmount(result.data.data[0]));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainCancelSubscription = (): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await getCancelSubscriptionService();
+      console.log("getCancelSubscriptionService", result.data.error);
+      Swal.fire(result.data.message, "", "info");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateSubscriptionStripe = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      const result = await updateSubscriptionStripeService(data);
+      console.log("updateSubscriptionStripeService", result.data.data);
+      if (result.data.message === "Update subscription user succesfully") {
+        dispatch(setSubscriptionUser(result.data.data));
+        Swal.fire(
+          "Correcto",
+          "Suscripción Actualizada correctamente",
+          "success"
+        );
+      }
     } catch (error) {
       console.log(error);
     }

@@ -4,7 +4,9 @@ export const configurationState: any = {
   isLoading: false,
   dataTokenGoogle: [],
   customerId: "",
+  subscriptionUser: {},
   subscriptionsPlans: {},
+  amount: {},
 };
 
 export const configurationSlice = createSlice({
@@ -22,9 +24,17 @@ export const configurationSlice = createSlice({
       state.isLoading = false;
       state.customerId = action.payload;
     },
+    setSubscriptionUser: (state, action) => {
+      state.isLoading = false;
+      state.subscriptionUser = action.payload;
+    },
     setSubscriptionsPlans: (state, action) => {
       state.isLoading = false;
       state.subscriptionsPlans = action.payload;
+    },
+    setAmount: (state, action) => {
+      state.isLoading = false;
+      state.amount = action.payload;
     },
   },
 });
@@ -33,6 +43,8 @@ export const {
   starLoading,
   setTokenGoogle,
   setCustomerId,
+  setSubscriptionUser,
   setSubscriptionsPlans,
+  setAmount,
 } = configurationSlice.actions;
 export default configurationSlice.reducer;

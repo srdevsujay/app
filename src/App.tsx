@@ -43,6 +43,12 @@ function App() {
   // const [theme] = useThemeMode() as any;
   // const user: any = useAppSelector((state) => state.user?.user);
   const user = useSelector((state: AppStore) => state.user.user);
+
+  const usersub = useAppSelector((state) => state.user?.user);
+  const subscriptionUser = useAppSelector(
+    (state) => state.configuration?.subscriptionUser
+  );
+
   let hostedpage: any = "";
   useEffect(() => {
     const url = window.location.href;
@@ -68,14 +74,44 @@ function App() {
               />
               <Route path={publicRoutes.LOGIN} element={<Login />} />
               <Route element={<AuthGuard />}>
-                <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
+                {usersub?.usersub.length !== 0 ||
+                Object.keys(subscriptionUser).length !== 0 ||
+                user.user_type === 1 ? (
+                  // console.log("navigate dash");
+                  <>
+                    <Route
+                      path={privateRoutes.DASHBOARD}
+                      element={<Dashboard />}
+                    />
+                    <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+                    <Route
+                      path={privateRoutes.CONTACT}
+                      element={<Contacts />}
+                    />
+                    <Route
+                      path={privateRoutes.TRACKING}
+                      element={<Tracking />}
+                    />
+                    <Route
+                      path={privateRoutes.CONFIGURATION}
+                      element={<Configuration />}
+                    />
+                  </>
+                ) : (
+                  // console.log("navigate conf");
+                  <Route
+                    path={privateRoutes.CONFIGURATION}
+                    element={<Configuration />}
+                  />
+                )}
+                {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
                 <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
                 <Route path={privateRoutes.CONTACT} element={<Contacts />} />
                 <Route path={privateRoutes.TRACKING} element={<Tracking />} />
                 <Route
                   path={privateRoutes.CONFIGURATION}
                   element={<Configuration />}
-                />
+                /> */}
                 <Route path={privateRoutes.AUTH} element={<Auth />} />
               </Route>
               <Route path="/signun" element={<CreateAccount />} />

@@ -30,7 +30,7 @@ const SidebarSubMenu = ({
           <MenuItems>
             <MenuItemLinks to={route.path}>
               {route.icon}
-              <span style={{ marginLeft: "16px" }}>{route.title}</span>
+              <span style={{ marginLeft: "16px" }}>{route.title}.</span>
             </MenuItemLinks>
           </MenuItems>
         </div>

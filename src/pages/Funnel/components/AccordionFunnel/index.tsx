@@ -374,7 +374,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
     const currentColumnsJSON = JSON.stringify(currentFunnel);
     const obj = {
       filter_json: currentColumnsJSON,
-      id: 2,
+      id: dataTracking[0].type_dashboard,
     };
     dispatch(
       createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)

@@ -44,3 +44,60 @@
 .return-select:hover {
 border: none !important
 }
+
+
+.ingresos-rastreados {
+  background: #FFFFFF;
+  box-shadow: 0px 10px 60px rgb(226 236 249 / 50%);
+  border-radius: 30px;
+  height: 151px;
+  align-items: center;
+}
+
+.ingresos-rastreados > .col-sm-8 > span:nth-child(1) { 
+  color: #192A3E;
+  font-size: 25px;
+  font-weight: 700;
+  fontFamily: "Helvetica-NeueL-Title",
+}
+
+.ingresos-rastreados > .col-sm-8 > span:nth-child(3) { 
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  color: #2BB596;
+}
+
+.ingresos-rastreados > .col-sm-8 > span:nth-child(4) { 
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  color: #192A3E;
+}
+
+.ingresos-rastreados > .col-sm-4  { 
+  text-align: right;
+}
+
+.ingresos-rastreados > .col-sm-4 > span:nth-child(1) { 
+  color: #2BB596;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+  fontFamily: "Helvetica-NeueL-Title",
+}
+
+.ingresos-rastreados > .col-sm-4 > span:nth-child(3) {  
+  color: #2BB596;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+}

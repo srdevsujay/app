@@ -56,3 +56,21 @@ export const SidebarData: SidebarItem[] = [
   //     icon: <FaCog />
   // }
 ];
+
+export const SidebarDataStatusCancel: SidebarItem[] = [
+  {
+    title: SidebarTitle.CONFIGURATION,
+    path: "/configuracion",
+    icon: <img src={configuration} alt="" height="12" width="12" />,
+  },
+  // {
+  //     title: 'History',
+  //     path: '/history',
+  //     icon: <AiOutlineHistory />
+  // },
+  // {
+  //     title: 'Configurations',
+  //     path: '/configurations',
+  //     icon: <FaCog />
+  // }
+];

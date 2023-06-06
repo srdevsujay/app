@@ -23,6 +23,10 @@ const Form = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   // const dispatch = useDispatch();
+  const usersub = useAppSelector((state) => state.user?.user);
+  const subscriptionUser = useAppSelector(
+    (state) => state.configuration?.subscriptionUser
+  );
   const [userForm, setUserForm] = useState<FormState["user"]>({
     email: "",
     password: "",
@@ -97,13 +101,31 @@ const Form = () => {
           deleteProfilePicture: loginData.deleteProfilePicture,
         })
       );
-      navigate("/dashboard");
+      if (
+        usersub.usersub.length !== 0 ||
+        Object.keys(subscriptionUser).length !== 0
+      ) {
+        console.log("navigate dash");
+        navigate("/dashboard");
+      } else {
+        console.log("navigate conf");
+        navigate("/configuracion");
+      }
     }
   }, [isLoginSuccess]);
 
   useEffect(() => {
     if (login !== null) {
-      navigate("/dashboard");
+      if (
+        usersub?.usersub.length !== 0 ||
+        Object.keys(subscriptionUser).length !== 0
+      ) {
+        console.log("navigate dash");
+        navigate("/dashboard");
+      } else {
+        console.log("navigate conf");
+        navigate("/configuracion");
+      }
     }
   }, [login]);
 

@@ -20,12 +20,23 @@ export const hadleLogin = (date: any): AppThunk => {
     dispatch(starLoading());
     try {
       const resultAction = await loginHandle(date);
+      console.log("resultAction", resultAction);
       if (resultAction.status === 200) {
         dispatch(
           setUser({
             token: resultAction.data.token,
             user: resultAction.data.user,
           } as any)
+        );
+      } else if (
+        resultAction.data.response === 401 ||
+        resultAction.data.request === "could not verify!"
+      ) {
+        console.log("entra al error");
+        Swal.fire(
+          "Correcto",
+          "Error al iniciar sesión, intente nuevamente",
+          "error"
         );
       }
     } catch (error) {

@@ -7,12 +7,12 @@ import {
   SidebarMenu,
 } from "../../styled-components/sidebar";
 import { useState } from "react";
-import { SidebarData } from "./SidebarData";
+import { SidebarData, SidebarDataStatusCancel } from "./SidebarData";
 import logo from "../../assets/images/logoRoalytics.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { signOut } from "../../utilities/localstorage.utility";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/appDispatch";
+import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
 import { logoutUser } from "../../redux/state/slices/login/authSlice";
 import { stateUser } from "../../utilities/stateUser.utilities";
 import { ButtonLogout } from "../../styled-components/button";
@@ -20,6 +20,7 @@ import SidebarSubMenu from "./SidebarSubMenu";
 import { toggleSlider } from "../../redux/state/slices/dashboard/dashboardThunk";
 import useThemeMode from "../../hooks/useThemeMode";
 import styled from "styled-components";
+import { SidebarItem } from "../../models/sidebar.model";
 
 const ToggleContainer = styled.div`
   display: flex;
@@ -54,6 +55,12 @@ const ToggleLabel = styled.label`
 `;
 
 const Sidebar: FC = () => {
+  const usersub = useAppSelector((state) => state.user?.user);
+  const subscriptionUser = useAppSelector(
+    (state) => state.configuration?.subscriptionUser
+  );
+  // console.log("statusUser", usersub.usersub.length);
+  // console.log("subscriptionUser", Object.keys(subscriptionUser).length);
   const [toggleTheme] = useThemeMode() as any;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -72,6 +79,29 @@ const Sidebar: FC = () => {
     dispatch(toggleSlider(close));
   }, [close]);
 
+  const [handleSlider, setHandleSlider] = useState<SidebarItem[]>([]);
+
+  useEffect(() => {
+    if (
+      usersub?.usersub.length !== 0 ||
+      Object.keys(subscriptionUser).length !== 0 ||
+      usersub.user_type === 1
+    ) {
+      console.log("entra al aaray 0 sideBar");
+      setHandleSlider(SidebarData);
+
+      // if (usersub === "canceled") {
+      //   console.log("Status Cancel");
+      // } else {
+      // }
+    } else {
+      console.log("entra al aaray + sideBar");
+      setHandleSlider(SidebarDataStatusCancel);
+    }
+  }, [usersub, subscriptionUser]);
+
+  console.log("SidebarDataStatusCancel", SidebarDataStatusCancel);
+
   return (
     <SidebarMenu close={close}>
       <MenuIconClose to="#">
@@ -79,7 +109,10 @@ const Sidebar: FC = () => {
         <MenuIcon onClick={showSidebar} />
       </MenuIconClose>
       <div style={{ marginTop: "15px" }}>
-        {SidebarData.map((item, index) => {
+        {handleSlider.map((item, index) => {
+          {
+            /* {SidebarData.map((item, index) => { */
+          }
           if (item.subRoutes) {
             return (
               <SidebarSubMenu

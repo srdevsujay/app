@@ -26,6 +26,7 @@ export interface UserState {
   userattributionrule?: any[];
   image_name: string;
   type_currency: string;
+  usersub: any[];
 }
 
 export interface UserInfo {

@@ -66,6 +66,29 @@ export const getSubscriptionUserService = async () => {
   });
 };
 
+export const getUserTotalSaleMonthService = async () => {
+  return clientAxios.get("/user_total_sales_month", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const getCancelSubscriptionService = async () => {
+  return clientAxios.get("/cancel_subscription_user", {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
+export const updateSubscriptionStripeService = async (data: any) => {
+  return clientAxios.post("/subscription_update_stripe", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
 ////////////////////////////////////////////////////////////////////////
 
 export const editLeadService = async (data: any) => {

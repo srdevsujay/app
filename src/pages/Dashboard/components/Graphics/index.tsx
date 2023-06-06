@@ -64,7 +64,7 @@ const Graphics = () => {
       itemGap: 30,
       textStyle: {
         fontSize: 10,
-        fontFamily: "HelveticaNeueLTitle",
+        fontFamily: "Helvetica-NeueL-Title",
         fontWeight: 400,
       },
       itemWidth: 6,

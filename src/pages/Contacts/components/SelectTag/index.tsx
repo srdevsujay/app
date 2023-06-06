@@ -19,8 +19,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
     return acc;
   }, []);
 
-  const handleTagChange = (event: any) => {
-    const tag = event.target.value;
+  const handleTagChange = (tag: string) => {
     setSelectedTag(tag);
     if (tag === "") {
       setFilteredDataDos(dataLead);
@@ -98,6 +97,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
                   ? "back-orange"
                   : "back-green"
               }`}
+              onClick={() => handleTagChange(tag)}
             >
               {tag?.substr(0, 1) === "@" ? (
                 <img src={click} alt="" className="iconos-table-origin" />
@@ -113,7 +113,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
               ) : (
                 <img src={venta} alt="" className="iconos-table-origin" />
               )}
-              <option key={tag} value={tag} onClick={(e) => handleTagChange(e)}>
+              <option key={tag} value={tag}>
                 {tag !== null ? tag?.substr(1) : null}
               </option>
             </BackColorsTableOrigin>

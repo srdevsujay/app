@@ -101,7 +101,7 @@ const ProfileTab = () => {
                   className="font-text-Configuracion"
                   style={{ color: "#939393" }}
                 >
-                  {userEdit.length !== 0 ? userEdit?.name : perfil.name}
+                  {userEdit?.length !== 0 ? userEdit?.name : perfil.name}
                 </TitleHelvetica>
               </>
             )}
@@ -115,7 +115,7 @@ const ProfileTab = () => {
                   className="font-text-Configuracion"
                   style={{ color: "#939393" }}
                 >
-                  {userEdit.length !== 0
+                  {userEdit?.length !== 0
                     ? userEdit.last_name
                     : perfil.last_name}
                 </TitleHelvetica>
@@ -133,7 +133,7 @@ const ProfileTab = () => {
                   className="font-text-Configuracion"
                   style={{ color: "#939393" }}
                 >
-                  {userEdit.length !== 0 ? userEdit.email : perfil.email}
+                  {userEdit?.length !== 0 ? userEdit.email : perfil.email}
                 </TitleHelvetica>
               </>
             )}
@@ -167,7 +167,7 @@ const ProfileTab = () => {
                   className="font-text-Configuracion"
                   style={{ color: "#939393" }}
                 >
-                  {userEdit.length !== 0
+                  {userEdit?.length !== 0
                     ? userEdit.time_zone
                     : perfil.time_zone}
                 </TitleHelvetica>

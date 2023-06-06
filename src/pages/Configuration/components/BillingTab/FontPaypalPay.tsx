@@ -22,81 +22,97 @@ const FontPaypalPay = ({
   totalMonth,
   idSubscription,
   idSubscriptionPlan,
+  plans,
 }: any) => {
   // const [{ isPending }] = usePayPalScriptReducer();
   // console.log("isPending", isPending);
   const dispatch = useAppDispatch();
   const { customerId } = useAppSelector((state) => state.configuration);
-  const [plans, setPlans] = useState([]);
   const [idPaypal, setIdPaypal] = useState(0);
   const [idPlanPaypal, setIdPlanPaypal] = useState("");
-  console.log(
-    "process.env.REACT_APP_PAYPAL_MODE",
-    process.env.REACT_APP_PAYPAL_MODE
-  );
-  const hadlePlansPaypal = (accessToken: string) => {
-    console.log("entra AccesToken");
-    const fetchPlans = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_PAYPAL_MODE}/v1/billing/plans`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-        console.log("responsePlans", response);
-        setPlans(response.data.plans);
-      } catch (error) {
-        console.error("Error al obtener los planes de PayPal", error);
-      }
-    };
 
-    fetchPlans();
-  };
+  // const hadlePlansPaypal = (accessToken: string) => {
+  //   console.log("entra AccesToken");
+  //   const fetchPlans = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_PAYPAL_MODE}/v1/billing/plans`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+  //       console.log("responsePlans", response);
+  //       setPlans(response.data.plans);
+  //     } catch (error) {
+  //       console.error("Error al obtener los planes de PayPal", error);
+  //     }
+  //   };
 
-  useEffect(() => {
-    if (selectedPayment !== "3") return;
-    obtainAccessToken();
-  }, [selectedPayment]);
+  //   const fetchPayPalTransactions = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_PAYPAL_MODE}/v1/reporting/transactions?fields=transaction_info,payer_info,shipping_info,auction_info,cart_info,incentive_info,store_info&start_date=2023-04-30T23:59:59.999Z&end_date=2023-05-30T00:00:00.000Z`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
 
-  const getAccessToken = async () => {
-    const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
-    const secret = process.env.REACT_APP_PAYPAL_SECRET_ID;
+  //       console.log("responsePlans", response.data.transaction_details);
+  //       setTransactionDetails(response.data.transaction_details);
+  //     } catch (error) {
+  //       console.error("Error retrieving PayPal transactions:", error);
+  //     }
+  //   };
 
-    const authString = `${clientId}:${secret}`;
-    const encodedAuthString = Buffer.from(authString).toString("base64");
+  //   fetchPlans();
+  //   fetchPayPalTransactions();
+  // };
 
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded;charset=ISO-8859-1",
-      Authorization: `Basic ${encodedAuthString}`,
-    };
+  // useEffect(() => {
+  //   if (selectedPayment !== "3") return;
+  //   obtainAccessToken();
+  // }, [selectedPayment]);
 
-    const data = "grant_type=client_credentials";
+  // const getAccessToken = async () => {
+  //   const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
+  //   const secret = process.env.REACT_APP_PAYPAL_SECRET_ID;
 
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_PAYPAL_MODE}/v1/oauth2/token`,
-        data,
-        { headers }
-      );
-      console.log("responseToken", response);
+  //   const authString = `${clientId}:${secret}`;
+  //   const encodedAuthString = Buffer.from(authString).toString("base64");
 
-      const accessToken = response.data.access_token;
-      console.log("Token de acceso de PayPal:", accessToken);
-      return accessToken;
-    } catch (error) {
-      console.error("Error al obtener el token de acceso de PayPal", error);
-      return null;
-    }
-  };
+  //   const headers = {
+  //     "Content-Type": "application/x-www-form-urlencoded;charset=ISO-8859-1",
+  //     Authorization: `Basic ${encodedAuthString}`,
+  //   };
 
-  // Llama a la función para obtener el token de acceso dentro de una función async
-  const obtainAccessToken = async () => {
-    const accessToken = await getAccessToken();
-    hadlePlansPaypal(accessToken);
-  };
+  //   const data = "grant_type=client_credentials";
+
+  //   try {
+  //     const response = await axios.post(
+  //       `${process.env.REACT_APP_PAYPAL_MODE}/v1/oauth2/token`,
+  //       data,
+  //       { headers }
+  //     );
+  //     console.log("responseToken", response);
+
+  //     const accessToken = response.data.access_token;
+  //     console.log("Token de acceso de PayPal:", accessToken);
+  //     return accessToken;
+  //   } catch (error) {
+  //     console.error("Error al obtener el token de acceso de PayPal", error);
+  //     return null;
+  //   }
+  // };
+
+  // // Llama a la función para obtener el token de acceso dentro de una función async
+  // const obtainAccessToken = async () => {
+  //   const accessToken = await getAccessToken();
+  //   hadlePlansPaypal(accessToken);
+  // };
 
   useEffect(() => {
     if (plans.length === 0) return;
@@ -119,14 +135,14 @@ const FontPaypalPay = ({
       .toString()
       .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
-    const data = {
+    const data: any = {
       status: "APPROVAL_PENDING",
       payment_gateway: currentFont,
       subscription_gateway: idPaypal,
       start_date: formattedDate,
       id_subscription: idSubscription.id,
       id_subscription_plan: idSubscriptionPlan.id,
-      customer_id: customerId,
+      customer_id: idPaypal,
     };
     console.log("dataStatusPaypal", data);
 

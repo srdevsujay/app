@@ -114,6 +114,9 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
     return td;
   };
 
+  console.log("currentFunnel", currentFunnel);
+  console.log("currentFunnel?.spend?.checkbox", currentFunnel?.spend?.checkbox);
+
   tbody.appendChild(createTableCell("Total"));
   currentFunnel?.date_start?.checkbox &&
     tbody.appendChild(createTableCell(`$${currentFunnel?.date_start}`));
