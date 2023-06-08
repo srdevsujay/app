@@ -301,7 +301,9 @@ const Dashboard = () => {
           </div>
         </div>
       </Card>
-      <ToggleButton theme={theme} toggleTheme={toggleTheme} />
+      <div className="d-none">
+        <ToggleButton theme={theme} toggleTheme={toggleTheme} />
+      </div>
       <FooterMenu />
     </Main>
     // </ThemeProvider>
