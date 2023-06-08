@@ -17,6 +17,7 @@ import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThun
 import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
 import FormTrafficSource from "../FormTrafficSource";
 import CustomerDetails from "../CustomerDetails/index";
+import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
 
@@ -219,14 +220,23 @@ const Sales = () => {
       >
         <CustomerDetails />
       </Modal>
-      <GeneralTable
-        data={filteredDataDos}
-        columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31]}
-        maxBodyHeight={"55vh"}
-        pageSize={7}
-        getUserProfile={getUserProfile}
-      />
+      {filteredDataDos === undefined ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "250px", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      ) : (
+        <GeneralTable
+          data={filteredDataDos}
+          columns={columnsToSet}
+          pageSizeOptions={[7, 15, 31]}
+          maxBodyHeight={"55vh"}
+          pageSize={7}
+          getUserProfile={getUserProfile}
+        />
+      )}
     </>
   );
 };

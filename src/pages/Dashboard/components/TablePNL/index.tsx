@@ -200,6 +200,9 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     );
   };
 
+  console.log("tablePnl", tablePnl);
+  console.log("selectPlatform", selectPlatform);
+  console.log("selectPlatform.length", selectPlatform.length);
   return (
     <Table className="tables">
       <MaterialTable

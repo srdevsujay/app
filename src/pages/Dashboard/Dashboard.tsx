@@ -18,6 +18,9 @@ import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
 import { useNavigate } from "react-router-dom";
 import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
+// import styled, { ThemeProvider } from "styled-components";
+import ToggleButton from "../../utilities/theme/ToggleButton";
+import { lightTheme, darkTheme } from "../../styled-components/Theme/themes";
 
 import {
   yesterDay,
@@ -27,8 +30,10 @@ import {
   lastWeek,
   currentMonth,
 } from "../../utilities/functionDateFilter/HandleDate";
+import { BeatLoader } from "react-spinners";
+import { totalPnl } from "./components/TotalTablePnl";
 
-setAutoFreeze(false);
+// setAutoFreeze(false);
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -51,9 +56,15 @@ const Dashboard = () => {
     },
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
-  const { tokenfacebook, tokengoogle, toggleSlider } = useAppSelector(
-    (state) => state.dashboard
-  );
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+  console.log("theme", theme);
+
+  const { tokenfacebook, tokengoogle, toggleSlider, isLoading } =
+    useAppSelector((state) => state.dashboard);
 
   console.log("tokenfacebook", tokenfacebook);
   console.log("tokengoogle", tokengoogle);
@@ -216,9 +227,26 @@ const Dashboard = () => {
     dispatch(getMetricFunnel(dateFormat));
   };
 
+  // const DashboardContainer = styled.div`
+  //   background-color: ${(props) => props.theme.body};
+  //   color: ${(props) => props.theme.text};
+  // `;
+
+  useEffect(() => {
+    if (selectPlatform.length === 0) return;
+    totalPnl(selectPlatform);
+  }, [selectPlatform]);
+
+  console.log("isLoadingDashboard", isLoading);
+  console.log("isLoadingDashboardgroupPlataform", groupPlataform);
+
   return (
+    // <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
     <Main width={toggleSlider ? "87vw" : "97vw"}>
       <Card height="85vh" borderRadius="16px">
+        {/* <DashboardContainer>
+            <h1>Dashboard</h1>
+          </DashboardContainer> */}
         <Title fontSize="17px" color="#123249">
           Dashboard PNL ({pnlDays})
         </Title>
@@ -227,8 +255,8 @@ const Dashboard = () => {
           <div className="col-sm-12">
             <div className="d-flex justify-content-end">
               {/* <Title fontSize="14px" color="#192a3e">
-                {`PNL (${pnlDays})`}
-              </Title> */}
+                    {`PNL (${pnlDays})`}
+                  </Title> */}
               <div className="d-flex mt-2">
                 <SourceFilter
                   groupPlataform={groupPlataform}
@@ -254,18 +282,29 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-            <TablePNL
-              tablePnl={groupPlataform}
-              selectPlatform={selectPlatform}
-            />
+            {groupPlataform.length === 0 || isLoading === true ? (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ height: "250px", zIndex: "99999999" }}
+              >
+                <BeatLoader color="#3997FF" />
+              </div>
+            ) : (
+              <TablePNL
+                tablePnl={groupPlataform}
+                selectPlatform={selectPlatform}
+              />
+            )}
           </div>
           <div className="col-sm-12">
-            <Graphics />
+            <Graphics selectPlatform={selectPlatform} />
           </div>
         </div>
       </Card>
+      <ToggleButton theme={theme} toggleTheme={toggleTheme} />
       <FooterMenu />
     </Main>
+    // </ThemeProvider>
   );
 };
 

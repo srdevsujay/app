@@ -68,7 +68,7 @@ const SourceFilter = ({
 
   useEffect(() => {
     // setTablePnl(dashboardMain);
-    if (dashboardMain.length > 0 && canCallTotalTable) {
+    if (dashboardMain.length > 0) {
       groupByPNL();
       getPlataform();
       setCanCallTotalTable(false);

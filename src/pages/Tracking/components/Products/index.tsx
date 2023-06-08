@@ -14,6 +14,7 @@ import { ColumnsProduct } from "./ColumnsProduct";
 import Modal from "../../../../components/modal/Modal.component";
 import FormProducts from "../FormProduct";
 import TabMenuTracking from "../TabMenuTracking";
+import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
 
@@ -127,13 +128,22 @@ const Products = () => {
           setCurrentEdit={setCurrentEdit}
         />
       </Modal>
-      <GeneralTable
-        data={filteredData}
-        columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31]}
-        maxBodyHeight={"60vh"}
-        pageSize={7}
-      />
+      {filteredData === undefined ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "50vh", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      ) : (
+        <GeneralTable
+          data={filteredData}
+          columns={columnsToSet}
+          pageSizeOptions={[7, 15, 31]}
+          maxBodyHeight={"60vh"}
+          pageSize={7}
+        />
+      )}
     </>
   );
 };

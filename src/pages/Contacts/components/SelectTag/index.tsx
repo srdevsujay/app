@@ -20,6 +20,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   }, []);
 
   const handleTagChange = (tag: string) => {
+    console.log("tag...", tag);
     setSelectedTag(tag);
     if (tag === "") {
       setFilteredDataDos(dataLead);
@@ -84,7 +85,11 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
       />
       <div className={onFocused ? "d-block onFocused" : "d-none onFocused"}>
         {uniqueTags?.map((tag: any, i: number) => (
-          <div style={{ padding: "8px 10px" }} key={i}>
+          <div
+            style={{ padding: "8px 10px" }}
+            key={i}
+            onClick={() => handleTagChange(tag)}
+          >
             <BackColorsTableOrigin
               width="initial"
               marginBottom="0px"
@@ -97,7 +102,6 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
                   ? "back-orange"
                   : "back-green"
               }`}
-              onClick={() => handleTagChange(tag)}
             >
               {tag?.substr(0, 1) === "@" ? (
                 <img src={click} alt="" className="iconos-table-origin" />

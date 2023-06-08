@@ -22,28 +22,8 @@ const Configuration = lazy(() => import("./pages/Configuration/index"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
 
-const themes: any = {
-  default: {
-    colors: {
-      body: "#f1f1f1", // Color de fondo
-      title: "#989898", // Color del texto
-      subtitle: "#000", // Color de las cantidades
-    },
-  },
-  dark: {
-    colors: {
-      body: "#23292d",
-      title: "#FFF",
-      subtitle: "#317e94",
-    },
-  },
-};
-
 function App() {
-  // const [theme] = useThemeMode() as any;
-  // const user: any = useAppSelector((state) => state.user?.user);
   const user = useSelector((state: AppStore) => state.user.user);
-
   const usersub = useAppSelector((state) => state.user?.user);
   const subscriptionUser = useAppSelector(
     (state) => state.configuration?.subscriptionUser
@@ -60,66 +40,58 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={themes}>
-      <Suspense fallback={<>Cargando...</>}>
-        <Router>
-          <ToastContainer />
-          <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
-            {user !== null ? <Sidebar /> : ""}
+    <Suspense fallback={<>Cargando...</>}>
+      <Router>
+        <ToastContainer />
+        <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
+          {user !== null ? <Sidebar /> : ""}
 
-            <RoutesWithNotFound>
-              <Route
-                path="/"
-                element={<Navigate to={privateRoutes.DASHBOARD} />}
-              />
-              <Route path={publicRoutes.LOGIN} element={<Login />} />
-              <Route element={<AuthGuard />}>
-                {usersub?.usersub.length !== 0 ||
-                Object.keys(subscriptionUser).length !== 0 ||
-                user.user_type === 1 ? (
-                  // console.log("navigate dash");
-                  <>
-                    <Route
-                      path={privateRoutes.DASHBOARD}
-                      element={<Dashboard />}
-                    />
-                    <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-                    <Route
-                      path={privateRoutes.CONTACT}
-                      element={<Contacts />}
-                    />
-                    <Route
-                      path={privateRoutes.TRACKING}
-                      element={<Tracking />}
-                    />
-                    <Route
-                      path={privateRoutes.CONFIGURATION}
-                      element={<Configuration />}
-                    />
-                  </>
-                ) : (
-                  // console.log("navigate conf");
+          <RoutesWithNotFound>
+            <Route
+              path="/"
+              element={<Navigate to={privateRoutes.DASHBOARD} />}
+            />
+            <Route path={publicRoutes.LOGIN} element={<Login />} />
+            <Route element={<AuthGuard />}>
+              {usersub?.usersub.length !== 0 ||
+              Object.keys(subscriptionUser).length !== 0 ||
+              user.user_type === 1 ? (
+                // console.log("navigate dash");
+                <>
+                  <Route
+                    path={privateRoutes.DASHBOARD}
+                    element={<Dashboard />}
+                  />
+                  <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+                  <Route path={privateRoutes.CONTACT} element={<Contacts />} />
+                  <Route path={privateRoutes.TRACKING} element={<Tracking />} />
                   <Route
                     path={privateRoutes.CONFIGURATION}
                     element={<Configuration />}
                   />
-                )}
-                {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
-                <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-                <Route path={privateRoutes.CONTACT} element={<Contacts />} />
-                <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+                </>
+              ) : (
+                // console.log("navigate conf");
                 <Route
                   path={privateRoutes.CONFIGURATION}
                   element={<Configuration />}
-                /> */}
-                <Route path={privateRoutes.AUTH} element={<Auth />} />
-              </Route>
-              <Route path="/signun" element={<CreateAccount />} />
-            </RoutesWithNotFound>
-          </div>
-        </Router>
-      </Suspense>
-    </ThemeProvider>
+                />
+              )}
+              {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
+              <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+              <Route path={privateRoutes.CONTACT} element={<Contacts />} />
+              <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+              <Route
+                path={privateRoutes.CONFIGURATION}
+                element={<Configuration />}
+              /> */}
+              <Route path={privateRoutes.AUTH} element={<Auth />} />
+            </Route>
+            <Route path="/signun" element={<CreateAccount />} />
+          </RoutesWithNotFound>
+        </div>
+      </Router>
+    </Suspense>
   );
 }
 

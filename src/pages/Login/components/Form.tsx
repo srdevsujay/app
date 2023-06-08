@@ -105,9 +105,12 @@ const Form = () => {
         usersub.usersub.length !== 0 ||
         Object.keys(subscriptionUser).length !== 0
       ) {
-        console.log("navigate dash");
+        console.log("navigate dash 1");
         navigate("/dashboard");
-      } else {
+      } else if (usersub.user_type === 1) {
+        console.log("navigate dashboard 2");
+        navigate("/dashboard");
+      } else if (usersub.user_type === 2) {
         console.log("navigate conf");
         navigate("/configuracion");
       }
@@ -117,13 +120,16 @@ const Form = () => {
   useEffect(() => {
     if (login !== null) {
       if (
-        usersub?.usersub.length !== 0 ||
+        usersub.usersub.length !== 0 ||
         Object.keys(subscriptionUser).length !== 0
       ) {
-        console.log("navigate dash");
+        console.log("navigate dash 1 --");
         navigate("/dashboard");
-      } else {
-        console.log("navigate conf");
+      } else if (usersub.user_type === 1) {
+        console.log("navigate dashboard 2 --");
+        navigate("/dashboard");
+      } else if (usersub.user_type === 2) {
+        console.log("navigate conf --");
         navigate("/configuracion");
       }
     }

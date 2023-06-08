@@ -1,18 +1,9 @@
-const LightTheme = {
-  text: "#233740",
-  toggle: "#757575",
-  hover: "#0085FF",
-  bgc: "#eee",
+export const lightTheme = {
+  body: "#f5f5f5",
+  text: "#333333",
 };
 
-const DarkTheme = {
-  text: "#233740",
-  toggle: "#757575",
-  hover: "#0085FF",
-  bgc: "#eee",
-};
-
-export const Themes = {
-  light: LightTheme,
-  dark: DarkTheme,
+export const darkTheme = {
+  body: "#222222",
+  text: "#ffffff",
 };

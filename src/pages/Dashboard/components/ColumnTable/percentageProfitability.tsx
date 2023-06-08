@@ -10,7 +10,7 @@ export const percentageProfitabilityColumn = (
     render: (dashboardMain: any) => (
       <TableStyle>
         {`${
-          dataTotal.porcentajerentabilidad === 0
+          dataTotal?.porcentajerentabilidad === 0
             ? 0
             : dashboardMain?.porcentajerentabilidad.toFixed(2)
         }`}

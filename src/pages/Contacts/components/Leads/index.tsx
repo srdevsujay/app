@@ -16,6 +16,7 @@ import CustomerDetails from "../CustomerDetails/index";
 import { obtainUserProfile } from "../../../../redux/state/slices/contacts/contactsThunk";
 import InputComponent from "../../../../components/input/Input.component";
 import SelectTag from "../SelectTag";
+import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
 
@@ -123,7 +124,7 @@ const Leads = () => {
   //   setFilteredData(e);
   // };
 
-  const memoizedUsers = useMemo(() => {
+  const memoizedUsers: any = useMemo(() => {
     console.log("Ejecutando useMemo");
     return filteredDataDos;
   }, [filteredDataDos]);
@@ -182,14 +183,23 @@ const Leads = () => {
       >
         <CustomerDetails />
       </Modal>
-      <GeneralTable
-        data={memoizedUsers}
-        columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31]}
-        maxBodyHeight={"55vh"}
-        pageSize={7}
-        getUserProfile={getUserProfile}
-      />
+      {memoizedUsers === undefined ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "250px", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      ) : (
+        <GeneralTable
+          data={memoizedUsers}
+          columns={columnsToSet}
+          pageSizeOptions={[7, 15, 31]}
+          maxBodyHeight={"55vh"}
+          pageSize={7}
+          getUserProfile={getUserProfile}
+        />
+      )}
     </>
   );
 };

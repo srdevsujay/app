@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../../hooks/appDispatch";
 import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
 import { SpanTitle } from "../../../../styled-components/span/index";
 
-const Graphics = () => {
+const Graphics = ({ selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
@@ -42,6 +42,25 @@ const Graphics = () => {
     setDateGraphic(dateGraphic.reverse());
     console.log("resultado", resultado);
   }, [dashboardMain]);
+
+  useEffect(() => {
+    const resultado = groupAndSumDatePNL(selectPlatform);
+    setDateTotal(resultado);
+    const dataIncome = resultado.map((data) => data.ingresos);
+    const dataExpense = resultado.map((data) => data.gastos);
+    const dateGraphic = resultado.map((data) => data.date);
+
+    setDataIncome(dataIncome.reverse());
+    const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+    setTotalIncome(sumTotalIncome);
+
+    setDataExpense(dataExpense.reverse());
+    const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+    setTotalExpense(sumTotalExpense);
+
+    setDateGraphic(dateGraphic.reverse());
+    console.log("resultado", resultado);
+  }, [selectPlatform]);
 
   const option = {
     nameTextStyle: {

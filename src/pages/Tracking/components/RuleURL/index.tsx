@@ -14,6 +14,7 @@ import TabMenuTracking from "../TabMenuTracking";
 import { obtainApiRuleURL } from "../../../../redux/state/slices/tracking/trackingThunk";
 import { ColumnsRule } from "./ColumnsRule";
 import FormRule from "./FormRule";
+import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
 
@@ -127,13 +128,22 @@ const RuleURL = () => {
           setCurrentEdit={setCurrentEdit}
         />
       </Modal>
-      <GeneralTable
-        data={filteredData}
-        columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31]}
-        maxBodyHeight={"55vh"}
-        pageSize={7}
-      />
+      {filteredData === undefined ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "50vh", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      ) : (
+        <GeneralTable
+          data={filteredData}
+          columns={columnsToSet}
+          pageSizeOptions={[7, 15, 31]}
+          maxBodyHeight={"55vh"}
+          pageSize={7}
+        />
+      )}
     </>
   );
 };

@@ -20,6 +20,7 @@ import {
 } from "../../../../redux/state/slices/contacts/contactsThunk";
 import moment from "moment";
 import CustomerDetails from "../CustomerDetails/index";
+import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
 
@@ -127,6 +128,8 @@ const Booking = () => {
     }
   };
 
+  console.log("filteredDataDos", filteredDataDos);
+
   return (
     <>
       <TabMenuLeads
@@ -174,14 +177,23 @@ const Booking = () => {
       >
         <CustomerDetails />
       </Modal>
-      <GeneralTable
-        data={filteredDataDos}
-        columns={columnsToSet}
-        pageSizeOptions={[7, 15, 31]}
-        maxBodyHeight={"55vh"}
-        pageSize={7}
-        getUserProfile={getUserProfile}
-      />
+      {filteredDataDos === undefined ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "250px", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      ) : (
+        <GeneralTable
+          data={filteredDataDos}
+          columns={columnsToSet}
+          pageSizeOptions={[7, 15, 31]}
+          maxBodyHeight={"55vh"}
+          pageSize={7}
+          getUserProfile={getUserProfile}
+        />
+      )}
     </>
   );
 };

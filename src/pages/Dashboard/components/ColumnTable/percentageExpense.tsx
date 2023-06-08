@@ -11,9 +11,9 @@ export const percentageExpenseColumn = (
     render: (dashboardMain: any) => (
       <TableStyle>
         {`${
-          dataTotal.gastos === 0
+          dataTotal?.gastos === 0
             ? 0
-            : ((dashboardMain.gastos * 100) / dataTotal.gastos).toFixed(2)
+            : ((dashboardMain.gastos * 100) / dataTotal?.gastos).toFixed(2)
         }%`}
       </TableStyle>
     ),
