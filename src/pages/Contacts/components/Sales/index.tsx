@@ -179,7 +179,7 @@ const Sales = () => {
         setFilteredDataDos={setFilteredDataDos}
       />
       <Modal
-        title={currentEdit !== null ? "Editar Sale" : "Crear Sale"}
+        title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="450px"

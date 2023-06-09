@@ -3,6 +3,7 @@ import Rectangle4 from "../../assets/images/Rectangle4.svg";
 import tracking from "../../assets/images/tracking.svg";
 import leads from "../../assets/images/leads.svg";
 import configuration from "../../assets/images/configuracion.svg";
+import Vector from "../../assets/images/Vector.png";
 
 export const SidebarData: SidebarItem[] = [
   {
@@ -28,7 +29,7 @@ export const SidebarData: SidebarItem[] = [
   {
     title: SidebarTitle.FUNNEL,
     path: "/funnel",
-    icon: <img src={Rectangle4} alt="" height="12" width="12" />,
+    icon: <img src={Vector} alt="" height="12" width="12" />,
   },
   {
     title: SidebarTitle.CONTACTS,

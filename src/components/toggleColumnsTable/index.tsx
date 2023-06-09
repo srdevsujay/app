@@ -1,4 +1,4 @@
-import Vector from "../../assets/images/Vector.png";
+import column_triple from "../../assets/images/column_triple.png";
 import "../../styled-components/style.css";
 import { useState, useEffect } from "react";
 import Checkbox from "@mui/material/Checkbox";
@@ -45,7 +45,7 @@ export const ToggleColumnsTable = ({
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <img src={Vector} alt="" className="" />
+        <img src={column_triple} alt="" className="" height="20px" />
       </button>
       <div
         className="dropdown-menu dropdown-style top-menu-dropdown"

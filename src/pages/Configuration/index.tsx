@@ -9,10 +9,11 @@ import TabPanel from "@mui/lab/TabPanel";
 import ProfileTab from "./components/ProfileTab/index";
 import IntegrationTab from "./components/IntegrationTab/index";
 import BillingTab from "./components/BillingTab/index";
-import { useAppDispatch } from "../../hooks/appDispatch";
+import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
 import { obtainSubscriptionUser } from "../../redux/state/slices/configuration/configurationThunk";
 
 const Configuration = () => {
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("1");
 
@@ -35,7 +36,7 @@ const Configuration = () => {
   }, [localStorageChangeTab]);
 
   return (
-    <Main width="97vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Card height="85vh" borderRadius="16px">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

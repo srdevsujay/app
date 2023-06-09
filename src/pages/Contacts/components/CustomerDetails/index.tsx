@@ -12,7 +12,7 @@ import Shopping from "../popupCustomerDetail/Shopping";
 import BookingPopup from "../popupCustomerDetail/Booking";
 import Data from "../popupCustomerDetail/Data";
 
-const CustomerDetails = () => {
+const CustomerDetails = ({ emailCustomerDetail }: any) => {
   const {
     clicks,
     phonesandips,
@@ -24,6 +24,7 @@ const CustomerDetails = () => {
     emails,
   } = useAppSelector((state) => state.contact.dataUser);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
   const [value, setValue] = useState("1");
   const [currentJourney, setCurrentJourney] = useState<any>();
 
@@ -65,8 +66,10 @@ const CustomerDetails = () => {
     setCurrentJourney(result);
   }, [journey]);
 
+  console.log("emailsJourney", emails);
+
   return (
-    <Main width="97vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box
@@ -108,7 +111,11 @@ const CustomerDetails = () => {
             <BookingPopup booking={booking} time_Zone={time_Zone} />
           </TabPanel>
           <TabPanel value="4">
-            <Data phonesandips={phonesandips} emails={emails} />
+            <Data
+              phonesandips={phonesandips}
+              emails={emails}
+              emailCustomerDetail={emailCustomerDetail}
+            />
           </TabPanel>
         </TabContext>
       </Box>

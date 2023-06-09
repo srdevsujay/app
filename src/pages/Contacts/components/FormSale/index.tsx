@@ -59,16 +59,10 @@ const FormSale = ({
       .string()
       .email("El correo electrónico debe ser un correo electrónico válido")
       .required("El correo electronico es requerido"),
-    phone: yup
-      .number()
-      .positive()
-      .integer()
-      .min(10)
-      .required("El numero de telefono es requerido"),
     // date: yup.date().required("La fecha es obligatoria"),
     selectFunnel: yup.string().required(),
     // selectProduct: yup.string().required("La fecha es obligatoria"),
-    price: yup.number().integer().required("El precio es requerido"),
+    price: yup.number().required().typeError("El precio es requerido"),
   });
 
   const initForm = () => {
@@ -294,7 +288,7 @@ const FormSale = ({
               placeholder="Ingresa el precio"
               label="Precio"
               id="0"
-              type="number"
+              type="text"
               min={0}
               disabled={refaund}
               name="price"

@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  createContext,
+} from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import {
   deleteLead,
@@ -19,6 +25,12 @@ import SelectTag from "../SelectTag";
 import { BeatLoader } from "react-spinners";
 
 setAutoFreeze(false);
+
+interface MyContextType {
+  emailCustomerDetail: string;
+}
+
+const MyContext = createContext<MyContextType | undefined>(undefined);
 
 const Leads = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +58,7 @@ const Leads = () => {
 
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
-  const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
+  const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>("");
   const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
 
   useEffect(() => {
@@ -109,6 +121,8 @@ const Leads = () => {
   const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
 
   const getUserProfile = (data: any, e: any) => {
+    console.log("dataPrifile", data);
+
     const clickColumnEdit = e.target.value;
     if (clickColumnEdit === "") {
     } else {
@@ -128,6 +142,8 @@ const Leads = () => {
     console.log("Ejecutando useMemo");
     return filteredDataDos;
   }, [filteredDataDos]);
+
+  console.log("emailCustomerDetail", emailCustomerDetail);
 
   return (
     <>
@@ -181,7 +197,7 @@ const Leads = () => {
         btnClose={1}
         subTitle={emailCustomerDetail}
       >
-        <CustomerDetails />
+        <CustomerDetails emailCustomerDetail={emailCustomerDetail} />
       </Modal>
       {memoizedUsers === undefined ? (
         <div

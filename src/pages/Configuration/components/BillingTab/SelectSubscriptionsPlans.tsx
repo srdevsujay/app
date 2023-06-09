@@ -130,11 +130,11 @@ const SelectSubscriptionsPlans = ({
         )}
         <div className="d-flex justify-content-center w-100 mt-2">
           <Title fontSize="35px" color="#123249" className="text-center w-100">
-            Meta
+            Objetivo de facturación
           </Title>
         </div>
         <div className="d-flex justify-content-center w-100 mt-2">
-          <Bar width="7vw"></Bar>
+          <Bar width="30vw"></Bar>
         </div>
         <div className="row d-flex mt-5">
           <div className="col-sm-6">

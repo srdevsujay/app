@@ -48,24 +48,24 @@ import {
 } from "@stripe/react-stripe-js";
 import visa from "../../../../assets/images/visa.svg";
 
-const stripePromise = loadStripe(
-  "pk_test_51Kha17DfKIMhwzEG7hdRFjUIO0soTyO2SAbgTLBOCwOcmXkWqa1m39C4IsHg0tyOMeCHozQGLx8DQSA7Epx5cMDG00Lhb4nYoI"
-);
-
 // const stripePromise = loadStripe(
-//   process.env.REACT_APP_STRIPE_PUBLIC_KEY as any
+//   "pk_test_51Kha17DfKIMhwzEG7hdRFjUIO0soTyO2SAbgTLBOCwOcmXkWqa1m39C4IsHg0tyOMeCHozQGLx8DQSA7Epx5cMDG00Lhb4nYoI"
 // );
 
-// const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY as any, {
-//   apiVersion: "2022-11-15",
-// });
-
-const stripe = new Stripe(
-  "sk_test_51Kha17DfKIMhwzEGl6wR1eXgP3DIjDtQBwbu1QguP9tiJUdvxY5hyp8l0Uzthwbn8xqpFptbqwJS40MqZRg71gSz00NYzytTTs",
-  {
-    apiVersion: "2022-11-15",
-  }
+const stripePromise = loadStripe(
+  process.env.REACT_APP_STRIPE_PUBLIC_KEY as any
 );
+
+const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY as any, {
+  apiVersion: "2022-11-15",
+});
+
+// const stripe = new Stripe(
+//   "sk_test_51Kha17DfKIMhwzEGl6wR1eXgP3DIjDtQBwbu1QguP9tiJUdvxY5hyp8l0Uzthwbn8xqpFptbqwJS40MqZRg71gSz00NYzytTTs",
+//   {
+//     apiVersion: "2022-11-15",
+//   }
+// );
 
 const BillingTab = () => {
   // const stripe = new Stripe('TU_CLAVE_API_PRIVADA');

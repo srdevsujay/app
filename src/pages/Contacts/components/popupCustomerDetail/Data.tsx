@@ -3,7 +3,7 @@ import IPs from "../../../../assets/images/IPs.svg";
 import emailIcon from "../../../../assets/images/email.svg";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const Data = ({ phonesandips, emails }: any) => {
+const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
   const { email } = useAppSelector((state) => state.user.user);
 
   return (
@@ -31,7 +31,9 @@ const Data = ({ phonesandips, emails }: any) => {
                 <span className="title-ips">E-MAIL</span>
               </div>
               <div className="col-sm-12">
-                <span className="titleAccordeon2 ips">{email}</span>
+                <span className="titleAccordeon2 ips">
+                  {emailCustomerDetail}
+                </span>
               </div>
               {emails.map((email: any) => (
                 <div className="col-sm-12">

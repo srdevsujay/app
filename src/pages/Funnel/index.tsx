@@ -33,6 +33,7 @@ const Funnel = () => {
     (state) => state.dashboard.dataFunnel
   );
   const { id: user_funel } = useAppSelector((state) => state.user.user);
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
 
   const [currentEdit, setCurrentEdit] = useState(0);
   const [idEditCurrent, setIdEditCurrent] = useState(0);
@@ -219,7 +220,7 @@ const Funnel = () => {
   console.log("adAccounts--", adAccounts);
 
   return (
-    <Main width="97vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Card height="75vh" borderRadius="16px 16px 0 0">
         <Title fontSize="17px" color="#123249">
           Funnel

@@ -12,8 +12,10 @@ import FormAttribution from "./components/Attribution/FormAttribution";
 import RuleURL from "./components/RuleURL/index";
 import ScriptTab from "./components/ScriptTab/index";
 import "./styled-components/styled.css";
+import { useAppSelector } from "../../hooks/appDispatch";
 
 const Tracking = () => {
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
   const [value, setValue] = useState("1");
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -30,7 +32,7 @@ const Tracking = () => {
   }, [localStorageChangeTab]);
 
   return (
-    <Main width="87vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Card height="85vh" borderRadius="16px">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

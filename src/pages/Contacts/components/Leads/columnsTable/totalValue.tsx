@@ -1,4 +1,5 @@
 import { TextColors } from "../../../../../styled-components/Table/index";
+import { FormatNumber } from "../../../../../utilities/FormatNumber";
 export const totalValueColumn = () => {
   return {
     title: "VALOR TOTAL",
@@ -15,7 +16,9 @@ export const totalValueColumn = () => {
               ? "text-green"
               : "text-danger"
           }`}
-        >{`$${dataContacts?.payments.toFixed(2)}`}</TextColors>
+        >
+          <FormatNumber number={dataContacts?.payments} />
+        </TextColors>
       ),
   };
 };

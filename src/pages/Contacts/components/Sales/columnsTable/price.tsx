@@ -1,4 +1,5 @@
 import { TextColors } from "../../../../../styled-components/Table/index";
+import { FormatNumber } from "../../../../../utilities/FormatNumber";
 export const priceColumn = () => {
   return {
     title: "Precio",
@@ -15,7 +16,9 @@ export const priceColumn = () => {
               ? "text-green"
               : "text-danger"
           }`}
-        >{`$${dataSale?.price.toFixed(2)}`}</TextColors>
+        >
+          <FormatNumber number={dataSale?.price} />
+        </TextColors>
       ),
   };
 };

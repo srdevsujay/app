@@ -9,15 +9,17 @@ import Leads from "./components/Leads/index";
 import Booking from "./components/Booking";
 import Sales from "./components/Sales/index";
 import "./styled-components/style.css";
+import { useAppSelector } from "../../hooks/appDispatch";
 
 const Contacts = () => {
   const [value, setValue] = useState("1");
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   return (
-    <Main width="87vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Card height="85vh" borderRadius="16px">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

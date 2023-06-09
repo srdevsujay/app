@@ -242,7 +242,7 @@ const Dashboard = () => {
 
   return (
     // <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-    <Main width={toggleSlider ? "87vw" : "97vw"}>
+    <Main width={toggleSlider ? "87vw" : "96vw"}>
       <Card height="85vh" borderRadius="16px">
         {/* <DashboardContainer>
             <h1>Dashboard</h1>

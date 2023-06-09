@@ -10,6 +10,7 @@ import { useDecryptTokenGoogle } from "../../hooks/useDecryptTokenGoogle.hook";
 import { refreshToken } from "../../redux/state/slices/configuration/configurationThunk";
 
 const Auth = () => {
+  const { toggleSlider } = useAppSelector((state) => state.dashboard);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
@@ -78,7 +79,7 @@ const Auth = () => {
   };
 
   return (
-    <Main width="97vw">
+    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
       <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
           Autenticación Google

@@ -88,7 +88,10 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
           <div
             style={{ padding: "8px 10px" }}
             key={i}
-            onClick={() => handleTagChange(tag)}
+            onClick={(e: any) => {
+              handleTagChange(tag);
+              e.stopPropagation();
+            }}
           >
             <BackColorsTableOrigin
               width="initial"
