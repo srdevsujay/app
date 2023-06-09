@@ -28,8 +28,9 @@ any) => {
   const [isModalOpen, setModalState] = useState<boolean>(false);
   const toggleModal = () => setModalState(!isModalOpen);
 
-  const handleOpen = () => {
+  const handleOpen = (e: any) => {
     setModalState(true);
+    e.stopPropagation();
   };
 
   useEffect(() => {
@@ -59,7 +60,7 @@ any) => {
         isOpen={isModalOpen}
         onClose={toggleModal}
         width="70vw"
-        padding="padding: 10px;"
+        padding="10px"
         btnClose={0}
       >
         <div className="d-flex">

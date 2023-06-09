@@ -46,6 +46,7 @@ import {
 } from "../../../../styled-components/button/index";
 import deleted from "../../../../assets/images/Delete.svg";
 import edit from "../../../../assets/images/Edit.svg";
+import "../../styled-components/style.css";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -891,116 +892,127 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
       {dataTracking.map((tracking: any, index: number) => (
         <div
           key={index}
-          style={{ borderBottom: "1px solid #80808026", position: "sticky" }}
+          style={{
+            borderBottom: "1px solid #80808026",
+            position: "sticky",
+          }}
         >
-          <ContainerFiltersFunnel>
-            <DateFilter
-              titleDatePickerPNL={titleDatePickerFunnel}
-              handleDateDashboardMain={handleDateDashboardMain}
-              flagModal={flagModal}
-              setFlagModal={setFlagModal}
-              currentCalendar={currentCalendar}
-              setCurrentCalendar={setCurrentCalendar}
-              handleYesterday={handleYesterday}
-              handleToday={handleToday}
-              handleSevenDay={handleSevenDay}
-              handleCurrentWeek={handleCurrentWeek}
-              handleLastWeek={handleLastWeek}
-              handleThirtyDays={handleThirtyDays}
-              handleCurrentMonth={handleCurrentMonth}
-              handleFourteenDays={handleFourteenDays}
-            />
-            <div className="dropdown">
-              <button
-                className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <img src={Vector} alt="" className="" />
-              </button>
-              <div
-                className="dropdown-menu dropdown-style top-menu-dropdown"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <ContainerFilter>
-                  <InputComponent
-                    // max={5}
-                    placeholder="Buscar..."
-                    label=""
-                    type="text"
-                    onChange={(e: any) => setSearchString(e)}
-                  />
-                </ContainerFilter>
-                <div className="filter-scroll">
-                  {dataFunnelToggle?.map((column: any) => (
-                    <div key={column.name} className="column-container">
-                      <Checkbox
-                        {...label}
-                        checked={column.checkbox}
-                        onChange={(e) => handleColumnToggle(e, column)}
-                      />
-                      <label>{column.name}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="btn-group" role="group">
-              <button
-                id="btnGroupDrop1"
-                type="button"
-                className="btn mr-2 dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {/* <img src={ellipsisOff} alt="" className="" /> */}
-              </button>
-              <div
-                className="dropdown-menu dropdown-style top-menu-dropdown"
-                aria-labelledby="btnGroupDrop1"
-                style={{ padding: "10px" }}
-              >
-                <ButtonEditWithIcon
-                  className="dropdown-item dropdown-style-button"
-                  onClick={() => editFunnel(index)}
-                >
-                  <img src={edit} height="12" className="" />
-                  Editar
-                </ButtonEditWithIcon>
-                <ButtonDeleteWithIcon
-                  className="dropdown-item dropdown-style-button"
-                  onClick={() => onDeleteFunnel(index)}
-                >
-                  <img src={deleted} height="12" className="" />
-                  Eliminar
-                </ButtonDeleteWithIcon>
-                {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
-              </div>
-            </div>
-          </ContainerFiltersFunnel>
           <Accordion
             expanded={expanded === index}
             onChange={handleChange(index)}
             className="width-vw padding-table"
           >
-            <AccordionSummary
-              aria-controls={`panel${index}d-content`}
-              id={`panel${index}d-header`}
-              className="d-flex"
-              // onClick={() =>
-              //   dispatch(obtainApiDashboardFunnel(tracking.id, tracking, index))
-              // }
-            >
-              <Typography>
-                <span className="title-accordeon-funnel">
-                  {tracking.funnel_name} ({funnelDays})
-                </span>
-              </Typography>
-            </AccordionSummary>
+            <div className="d-flex justify-content-between">
+              <AccordionSummary
+                aria-controls={`panel${index}d-content`}
+                id={`panel${index}d-header`}
+                className="d-flex"
+                // onClick={() =>
+                //   dispatch(obtainApiDashboardFunnel(tracking.id, tracking, index))
+                // }
+              >
+                <Typography>
+                  <span className="title-accordeon-funnel">
+                    {tracking.funnel_name} ({funnelDays})
+                  </span>
+                </Typography>
+              </AccordionSummary>
+              <ContainerFiltersFunnel>
+                <DateFilter
+                  titleDatePickerPNL={titleDatePickerFunnel}
+                  handleDateDashboardMain={handleDateDashboardMain}
+                  flagModal={flagModal}
+                  setFlagModal={setFlagModal}
+                  currentCalendar={currentCalendar}
+                  setCurrentCalendar={setCurrentCalendar}
+                  handleYesterday={handleYesterday}
+                  handleToday={handleToday}
+                  handleSevenDay={handleSevenDay}
+                  handleCurrentWeek={handleCurrentWeek}
+                  handleLastWeek={handleLastWeek}
+                  handleThirtyDays={handleThirtyDays}
+                  handleCurrentMonth={handleCurrentMonth}
+                  handleFourteenDays={handleFourteenDays}
+                />
+                <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    onClick={(e: any) => {
+                      e.stopImmediatePropagation();
+                    }}
+                  >
+                    <img src={Vector} alt="" className="" />
+                  </button>
+                  <div
+                    className="dropdown-menu dropdown-style top-menu-dropdown"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <ContainerFilter>
+                      <InputComponent
+                        // max={5}
+                        placeholder="Buscar..."
+                        label=""
+                        type="text"
+                        onChange={(e: any) => setSearchString(e)}
+                      />
+                    </ContainerFilter>
+                    <div className="filter-scroll">
+                      {dataFunnelToggle?.map((column: any) => (
+                        <div key={column.name} className="column-container">
+                          <Checkbox
+                            {...label}
+                            checked={column.checkbox}
+                            onChange={(e) => handleColumnToggle(e, column)}
+                          />
+                          <label>{column.name}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="btn-group" role="group">
+                  <button
+                    id="btnGroupDrop1"
+                    type="button"
+                    className="btn mr-2 dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {/* <img src={ellipsisOff} alt="" className="" /> */}
+                  </button>
+                  <div
+                    className="dropdown-menu dropdown-style top-menu-dropdown"
+                    aria-labelledby="btnGroupDrop1"
+                    style={{ padding: "10px" }}
+                    onClick={(e: any) => {
+                      e.stopImmediatePropagation();
+                    }}
+                  >
+                    <ButtonEditWithIcon
+                      className="dropdown-item dropdown-style-button"
+                      onClick={() => editFunnel(index)}
+                    >
+                      <img src={edit} height="12" className="" />
+                      Editar
+                    </ButtonEditWithIcon>
+                    <ButtonDeleteWithIcon
+                      className="dropdown-item dropdown-style-button"
+                      onClick={() => onDeleteFunnel(index)}
+                    >
+                      <img src={deleted} height="12" className="" />
+                      Eliminar
+                    </ButtonDeleteWithIcon>
+                    {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
+                  </div>
+                </div>
+              </ContainerFiltersFunnel>
+            </div>
             <AccordionDetails>
               <Typography>
                 <div className="table-responsive ocultarMostrar">

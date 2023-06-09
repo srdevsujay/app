@@ -78,7 +78,7 @@ export const BackColorsTable = styled.div`
 `;
 
 export const BackColorsTableOrigin = styled.div<SelectTag>(
-  ({ width, marginBottom, paddingLeft, opacity }) => ({
+  ({ width, marginBottom, paddingLeft, opacity, justifyContent }) => ({
     fontSize: "13px",
     fontFamily: "Helvetica-NeueL",
     marginBottom: marginBottom,
@@ -90,6 +90,7 @@ export const BackColorsTableOrigin = styled.div<SelectTag>(
     height: "auto",
     width: width,
     paddingLeft: paddingLeft,
+    justifyContent: justifyContent,
 
     "&.back-lila": {
       background: "#4e14dd42",

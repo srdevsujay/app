@@ -43,24 +43,24 @@ const Graphics = ({ selectPlatform }: any) => {
     console.log("resultado", resultado);
   }, [dashboardMain]);
 
-  useEffect(() => {
-    const resultado = groupAndSumDatePNL(selectPlatform);
-    setDateTotal(resultado);
-    const dataIncome = resultado.map((data) => data.ingresos);
-    const dataExpense = resultado.map((data) => data.gastos);
-    const dateGraphic = resultado.map((data) => data.date);
+  // useEffect(() => {
+  //   const resultado = groupAndSumDatePNL(selectPlatform);
+  //   setDateTotal(resultado);
+  //   const dataIncome = resultado.map((data) => data.ingresos);
+  //   const dataExpense = resultado.map((data) => data.gastos);
+  //   const dateGraphic = resultado.map((data) => data.date);
 
-    setDataIncome(dataIncome.reverse());
-    const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
-    setTotalIncome(sumTotalIncome);
+  //   setDataIncome(dataIncome.reverse());
+  //   const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+  //   setTotalIncome(sumTotalIncome);
 
-    setDataExpense(dataExpense.reverse());
-    const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
-    setTotalExpense(sumTotalExpense);
+  //   setDataExpense(dataExpense.reverse());
+  //   const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+  //   setTotalExpense(sumTotalExpense);
 
-    setDateGraphic(dateGraphic.reverse());
-    console.log("resultado", resultado);
-  }, [selectPlatform]);
+  //   setDateGraphic(dateGraphic.reverse());
+  //   console.log("resultado", resultado);
+  // }, [selectPlatform]);
 
   const option = {
     nameTextStyle: {

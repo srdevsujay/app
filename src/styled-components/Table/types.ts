@@ -11,4 +11,5 @@ export type SelectTag = {
   marginBottom?: string;
   paddingLeft?: string;
   opacity?: string;
+  justifyContent?: string;
 }

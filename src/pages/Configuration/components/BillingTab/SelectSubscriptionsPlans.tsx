@@ -35,7 +35,7 @@ const SelectSubscriptionsPlans = ({
   useEffect(() => {
     if (!plans) return;
     const plansAddSelect: any = [].concat(plans);
-    plansAddSelect.push({ id: 10, name: "Seleccione", percentage: 0 });
+    plansAddSelect.push({ id: 0, name: "Seleccione", percentage: 0 });
     const currentPlans: any = _.orderBy(plansAddSelect, "id", "asc");
     console.log("currentPlans", currentPlans);
 

@@ -30,7 +30,7 @@ const Tracking = () => {
   }, [localStorageChangeTab]);
 
   return (
-    <Main width="97vw">
+    <Main width="87vw">
       <Card height="85vh" borderRadius="16px">
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

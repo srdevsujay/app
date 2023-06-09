@@ -187,6 +187,7 @@ const Sales = () => {
         bottom="14px"
         height="480px"
         btnClose={1}
+        overflowY="auto"
       >
         <FormSale
           onClose={toggleModal}
@@ -231,7 +232,7 @@ const Sales = () => {
         <GeneralTable
           data={filteredDataDos}
           columns={columnsToSet}
-          pageSizeOptions={[7, 15, 31]}
+          pageSizeOptions={[10, 25, 50, 100]}
           maxBodyHeight={"55vh"}
           pageSize={7}
           getUserProfile={getUserProfile}

@@ -59,11 +59,9 @@ export const DateData = styled.div`
 
 export const ContainerFiltersFunnel = styled.div`
   display: flex;
-  position: absolute;
+  align-items: center;
   right: 0;
-  padding-right: 22px !important;
   z-index: 9;
-  margin-top: 8px;
 `;
 
 export const HeaderTitleGraphic = styled.div`

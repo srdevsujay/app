@@ -21,6 +21,8 @@ const Modal: FC<ModalProps> = ({
   height,
   btnClose,
   subTitle,
+  overflowY,
+  overflowX,
 }) => {
   const outsideRef = useRef(null);
 
@@ -33,9 +35,16 @@ const Modal: FC<ModalProps> = ({
   };
 
   return isOpen ? (
-    <ModalContainer>
+    <ModalContainer onClick={(e) => e.stopPropagation()}>
       <ModalOverlay ref={outsideRef} onClick={handleCloseOnOverlay} />
-      <ModalBox width={width} padding={padding} bottom={bottom} height={height}>
+      <ModalBox
+        width={width}
+        padding={padding}
+        bottom={bottom}
+        height={height}
+        overflowY={overflowY}
+        overflowX={overflowX}
+      >
         {btnClose === 0 ? (
           ""
         ) : (

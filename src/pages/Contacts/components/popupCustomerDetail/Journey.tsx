@@ -252,7 +252,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                   </span>
                 </div>
               )}
-              {journey.adset_name === "" ? (
+              {journey.adset_name === null ? (
                 ""
               ) : journey.adset_name !== "" ? (
                 <div
@@ -309,12 +309,12 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                     // journey?.tag.substring(1,0) === "@" ? "back-source_detail_user" : journey?.tag.substring(1,0) === "$" ? "back-sale_detail_user" : "back-action_detail_user"
                     journey.tag !== ""
                       ? journey.tag.substr(0, 1) === "@"
-                        ? "back-source_detail_user"
+                        ? "back-source_detail_user ml-2"
                         : journey.tag.substr(0, 1) === "!"
-                        ? "back-action_detail_user"
+                        ? "back-action_detail_user ml-2"
                         : journey.tag.substr(0, 1) === "#"
-                        ? "back_telephone_detail_user"
-                        : "back-sale_detail_user"
+                        ? "back_telephone_detail_user ml-2"
+                        : "back-sale_detail_user ml-2"
                       : journey.event_name === "Click on Pop Up" ||
                         journey.event_name === "Click on Video" ||
                         journey.event_name === "Click on Purchase" ||

@@ -3,6 +3,8 @@ export type ModalWidthBox = {
   padding?: string;
   bottom?: string;
   height?: string;
+  overflowY?: string;
+  overflowX?: string;
 }
 
 export type ButtonClose = {

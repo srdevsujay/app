@@ -194,7 +194,7 @@ const Leads = () => {
         <GeneralTable
           data={memoizedUsers}
           columns={columnsToSet}
-          pageSizeOptions={[7, 15, 31]}
+          pageSizeOptions={[10, 25, 50, 100]}
           maxBodyHeight={"55vh"}
           pageSize={7}
           getUserProfile={getUserProfile}

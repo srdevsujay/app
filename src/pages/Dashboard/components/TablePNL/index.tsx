@@ -212,7 +212,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
         options={{
           columnsButton: false,
           search: false,
-          pageSizeOptions: [10, 25, 50, 100, 100],
+          pageSizeOptions: [10, 25, 50],
           headerStyle: { position: "sticky", top: 0 },
           maxBodyHeight: "30vh",
         }}

@@ -93,8 +93,9 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
             <BackColorsTableOrigin
               width="initial"
               marginBottom="0px"
-              paddingLeft="28%"
+              paddingLeft="0"
               opacity="0.5"
+              justifyContent="center"
               className={`${
                 tag?.substr(0, 1) === "@"
                   ? "back-lila"

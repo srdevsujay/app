@@ -9,4 +9,6 @@ export interface ModalProps {
   bottom?: string;
   height?: string;
   subTitle?: string;
+  overflowY?: string;
+  overflowX?: string;
 }

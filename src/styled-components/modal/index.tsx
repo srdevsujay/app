@@ -24,7 +24,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalBox = styled.div<ModalWidthBox>(
-  ({ width, padding, bottom, height }) => ({
+  ({ width, padding, bottom, height, overflowY, overflowX }) => ({
     width: width,
     padding: padding,
     bottom: bottom,
@@ -34,7 +34,8 @@ export const ModalBox = styled.div<ModalWidthBox>(
     borderRadius: "10px",
     backgroundColor: "white",
     cursor: "auto",
-    overflowY: "auto",
+    overflowY: overflowY ? "auto" : "hidden",
+    overflowX: overflowX ? "auto" : "hidden",
   })
 );
 

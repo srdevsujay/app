@@ -121,6 +121,7 @@ const RuleURL = () => {
         bottom="14px"
         height="480px"
         btnClose={1}
+        overflowY="auto"
       >
         <FormRule
           onClose={toggleModal}

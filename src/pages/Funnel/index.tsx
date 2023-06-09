@@ -245,6 +245,7 @@ const Funnel = () => {
         height="543px"
         padding="12px 2.25rem 16px"
         btnClose={1}
+        overflowY="auto"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <AddFunnelInput

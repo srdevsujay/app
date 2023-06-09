@@ -38,7 +38,10 @@ export const buttonEditColumn = (
         >
           <ButtonEditWithIcon
             className="dropdown-item dropdown-style-button"
-            onClick={() => editLead(param)}
+            onClick={(e: any) => {
+              editLead(param);
+              e.stopImmediatePropagation();
+            }}
           >
             <img src={edit} height="12" className="" />
             Editar
