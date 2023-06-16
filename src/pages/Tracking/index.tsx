@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Main } from "../../styled-components/main";
 import FooterMenu from "../../components/Footer/index";
 import { Box, Tab } from "@mui/material";
@@ -13,6 +13,7 @@ import RuleURL from "./components/RuleURL/index";
 import ScriptTab from "./components/ScriptTab/index";
 import "./styled-components/styled.css";
 import { useAppSelector } from "../../hooks/appDispatch";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const Tracking = () => {
   const { toggleSlider } = useAppSelector((state) => state.dashboard);
@@ -31,9 +32,14 @@ const Tracking = () => {
     }
   }, [localStorageChangeTab]);
 
+  const { theme, themeDarkLight } = useContext(ThemeContext);
+
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
-      <Card height="85vh" borderRadius="16px">
+    <Main
+      width={toggleSlider === true ? "87vw" : "96vw"}
+      theme={themeDarkLight}
+    >
+      <Card height="85vh" borderRadius="16px" theme={theme}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

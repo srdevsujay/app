@@ -1,5 +1,5 @@
 .dropdown-toggle-icon {
-  background-color: #fff!important;
+  /* background-color: #fff!important; */
   height: 31px;
   width: 30px;
   border: 0.4px solid #d1d1d1!important;
@@ -19,11 +19,12 @@
 .filter-scroll {
   height: auto;
   max-height: 300px;
+  /* width: max-content; */
   overflow: auto;
   display: block !important;
 }
 
-.column-container {
+/* .column-container {
   height: 30px;
   width: auto;
   margin: 10px;
@@ -34,7 +35,7 @@
   font-size: 13px;
   font-family: "Helvetica-NeueL-Title";
   white-space: nowrap;
-}
+} */
 
 .column-container > label {
   margin-left: 8px;

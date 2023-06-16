@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-export const totalPnl = (tempGroup) => {
+export const totalPnl = (tempGroup, themeState) => {
   console.log('tempGroup', tempGroup);
+  console.log('themeState', themeState);
   const dataTotal = {
     plataform: "Total",
     gastos: _.sumBy(tempGroup, 'gastos'),
@@ -23,8 +24,8 @@ export const totalPnl = (tempGroup) => {
   //   }
   // })
   // console.log('porcentajeIngreso', porcentajeIngreso);
-  const tbody = document.createElement('tr');
-  tbody.className = "MuiTableBody-root MuiTableRow-root MuiTableRow-head backgroundTotal";
+  const tbody = document.createElement('tr'); 
+  tbody.className = `MuiTableBody-root MuiTableRow-root MuiTableRow-head ${themeState === true || themeState === "true" ? "backgroundTotalDark" : "backgroundTotal"} `;
   tbody.innerHTML = `
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">Total</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.ingresos.toFixed(2)}</td>

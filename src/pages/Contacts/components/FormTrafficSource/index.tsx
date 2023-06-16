@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import Select from "react-select";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import { createTrafficSource } from "../../../../redux/state/slices/contacts/contactsThunk";
 import "../../styled-components/style.css";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 interface IData {
   email: string;
@@ -26,6 +27,7 @@ interface IData {
 const FormTrafficSource = ({ onClose, currentEdit }: any) => {
   const dispatch = useAppDispatch();
   const { dataLead } = useAppSelector((state) => state.contact);
+  const { theme: themeDark } = useAppSelector((state) => state.configuration);
   const [selectedOption, setSelectedOption] = useState<any>(null);
   const [optionDataLead, setOptionDataLead] = useState<any>();
 
@@ -88,6 +90,8 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
     setOptionDataLead(currentDataLead);
   }, [dataLead]);
 
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-display-columns">
       <div className="row">
@@ -99,6 +103,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
             onChange={handleChange}
             placeholder="Buscar..."
             isClearable
+            className={themeDark === true ? "selectFontAttribute" : ""}
           />
         </div>
         <div className="form-group col-sm-12 d-none">
@@ -129,7 +134,11 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
+          <ButtonsModal
+            className="btn btn-close"
+            onClick={onClose}
+            theme={themeFilterFunnel}
+          >
             Cerrar
           </ButtonsModal>
         </div>

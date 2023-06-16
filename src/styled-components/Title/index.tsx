@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { TitleDashboard } from "./types";
 
 export const Title = styled.label<TitleDashboard>(
-  ({ fontSize, color, textDecorationLine, cursor }) => ({
+  ({ fontSize, color, textDecorationLine, cursor, theme }) => ({
     fontStyle: "normal",
     fontSize: fontSize,
     // fontWeight: "700",
     lineHeight: "20px",
     // letterSpacing: ".01em",
     letterSpacing: "-.03em",
-    color: color,
+    color: theme.text,
     // margin: "10px 0",
     fontFamily: "Helvetica-NeueL-Title",
     textDecorationLine: textDecorationLine ? textDecorationLine : "",

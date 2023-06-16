@@ -6,7 +6,7 @@ import { emailColumn } from "./columnsTable/email";
 import { totalValueColumn } from "./columnsTable/totalValue";
 import { firstOriginColumn } from "./columnsTable/firstOrigin";
 import { lastOriginColumn } from "./columnsTable/lastOrigin";
-import { buttonEditColumn } from "./columnsTable/buttons";
+import { ButtonEditColumn } from "./columnsTable/ButtonEditColumn";
 
 export const TableContacts = (
   dataContacts: any,
@@ -21,6 +21,6 @@ export const TableContacts = (
     totalValueColumn(),
     firstOriginColumn(),
     lastOriginColumn(),
-    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
+    ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

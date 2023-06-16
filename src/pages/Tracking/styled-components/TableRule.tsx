@@ -37,19 +37,22 @@ export const ExceptionDiv = styled.div`
 `;
 
 export const ContainerScript = styled.div`
-  border: 1px solid #000;
-  background: rgba(87, 83, 83, 0.027450980392156862);
+  border: ${(props) => props.theme.border};
+  /* background: rgba(87, 83, 83, 0.027450980392156862); */
+  background-color: ${(props) => props.theme.background};
   border-radius: 10px;
-  color: #000;
+  /* color: #000; */
+  color: ${(props) => props.theme.text};
   font-family: "Helvetica-NeueL";
   font-size: 14px;
   padding: 20px 0 20px 10%;
 `;
 
 export const SelectScript = styled.select`
-  background: #f7f7f8;
+  /* background: #f7f7f8; */
   border: 0.4px solid #575353;
-  color: #030229;
+  /* color: #030229; */
+  color: ${(props) => props.theme.text};
   font-size: 13px !important;
   opacity: 0.5;
   font-family: "Helvetica-NeueL";
@@ -57,7 +60,12 @@ export const SelectScript = styled.select`
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #fafafb !important;
+  /* background-color: #fafafb !important; */
+  background-color: ${(props) => props.theme.background};
   height: 37px !important;
   width: 280px;
+`;
+
+export const InputException = styled.input`
+  background-color: ${(props) => props.theme.background};
 `;

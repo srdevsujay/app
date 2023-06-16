@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +12,7 @@ import {
 import { ButtonsModal } from "../../../../styled-components/button/index";
 // import { schema } from "./yupSchemaLead";
 import * as yup from "yup";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 interface IFormInput {
   fullName: String;
@@ -72,6 +73,8 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     onClose();
   };
 
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -124,7 +127,11 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
+          <ButtonsModal
+            className="btn btn-close"
+            onClick={onClose}
+            theme={themeFilterFunnel}
+          >
             Cerrar
           </ButtonsModal>
         </div>

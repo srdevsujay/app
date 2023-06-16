@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./components/Form";
 import { useNavigate } from "react-router-dom";
 import Marni from "../../assets/images/Marni.png";
@@ -10,14 +10,19 @@ import barLogin from "../../assets/images/barrasLogin.svg";
 import { Image, SpanColor } from "./styled-components/imagesLogin";
 import { FlexColumnLogin } from "./styled-components";
 import FooterMenu from "../../components/Footer";
+import "./styled-components/style.css";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const onRegister = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     navigate("/signun");
   };
+
+  let localStorageTheme: string | null | number | boolean =
+    localStorage.getItem("Theme");
+
+  console.log("localStorageTheme", localStorageTheme);
 
   return (
     <>
@@ -31,7 +36,13 @@ const Login = () => {
         <>
           <div className="account-pages" style={{ width: "98%" }}>
             <div className="row justify-content-center">
-              <FlexColumnLogin className="col-sm-5">
+              <FlexColumnLogin
+                className={
+                  localStorageTheme === "true"
+                    ? "col-sm-5 back-theme-login-left"
+                    : "col-sm-5"
+                }
+              >
                 <Form />
                 <div className="row mt-4">
                   <div className="col-12 text-center">
@@ -42,7 +53,13 @@ const Login = () => {
                   </div>
                 </div>
               </FlexColumnLogin>
-              <div className="col-sm-7">
+              <div
+                className={
+                  localStorageTheme === "true"
+                    ? "col-sm-7 back-theme-login-right"
+                    : "col-sm-7"
+                }
+              >
                 <SpanColor
                   width="323px"
                   height="124px"

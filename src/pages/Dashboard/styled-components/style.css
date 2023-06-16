@@ -15,16 +15,28 @@
 
 .MuiTableCell-head div {
   font-family: "Helvetica-NeueL-Title"!important;
-  color: #334d6e!important;
+  /* color: #334d6e!important; */
   font-size: 13px!important;
   opacity: .5!important;
   font-weight: 500!important;
   width: max-content;
 }
 
-/* .tables .MuiPaper-root div:nth-child(1).MuiToolbar-gutters {
-  border: 1px solid red;
-} */
+.tables > div > .MuiTable-root {
+  background: #0D0D0D !important;
+}
+
+.tables > div > .MuiTable-root button {
+    color: white;
+}
+
+.tables > div > .MuiTable-root div {
+  color: white;
+}
+
+.tables > div > .MuiTable-root svg {
+  color: white;
+}
 
 .MuiAccordionDetails-root {
   border: none !important;
@@ -32,7 +44,7 @@
 }
 
 .dropdown-toggle-icon {
-  background-color: #fff!important;
+  /* background-color: #fff!important; */
   height: 31px;
   width: 30px;
   border: 0.4px solid #d1d1d1!important;
@@ -49,9 +61,9 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.15) !important;
 }
 
-.MuiAccordionSummary-root {
+/* .MuiAccordionSummary-root {
   background-color: #fff !important;
-}
+} */
 
 .box-shadow {
   border-radius: 4px;
@@ -71,9 +83,27 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
   display: none !important;
 }
 
+.backgroundTotalDark {
+  background: #0D0D0D;
+  display: none !important;
+}
+
 .backgroundTotal:nth-child(1) {
   background: #d5eafe;
   display: table-row !important;
+}
+
+.backgroundTotalDark:nth-child(1) {
+  background: #0D0D0D;
+  display: table-row !important;
+}
+
+.backgroundTotal td {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.backgroundTotalDark td {
+  color: #DDDDDD;
 }
 
 .MuiMenu-list {
@@ -125,3 +155,42 @@ td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-paddingNone {
 }
 
 MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone */
+
+.DateRangePickerTheme .rdrDateRangeWrapper {
+  background-color: #0D0D0D;
+}
+
+.DateRangePickerTheme .rdrDateDisplayWrapper {
+  background-color: #0D0D0D;
+}
+
+.DateRangePickerTheme .rdrDateRangeWrapper .rdrDayNumber span {
+  color: white;
+}
+
+.DateRangePickerTheme .rdrDateRangeWrapper .rdrDateInput input {
+  background-color: #0D0D0D !important;
+}
+
+.DateRangePickerTheme .rdrPprevButton {
+  background-color: #0D0D0D;
+  border: 1px solid grey;
+}
+
+.DateRangePickerTheme .rdrNextButton {
+  background-color: #0D0D0D;
+  border: 1px solid grey;
+}
+
+.DateRangePickerTheme .rdrPprevButton i {
+  border-color: transparent rgb(23 111 200) transparent transparent;
+}
+
+.DateRangePickerTheme .rdrNextButton i {
+  border-color: transparent transparent transparent rgb(23 111 200);
+}
+
+.backMenuItem {
+  color: #3998ff !important;
+  background-color: #161616 !important;
+}

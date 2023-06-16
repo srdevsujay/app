@@ -7,7 +7,7 @@ import { exeptionColumn } from "../Tag/ColumnsTable/exeption";
 import { wordColumn } from "../Tag/ColumnsTable/word";
 import { nameColumn } from "../../../Contacts/components/Sales/columnsTable/name";
 import { tagRuleColumn } from "../Tag/ColumnsTable/tag";
-import { buttonEditColumn } from "../../../Contacts/components/Leads/columnsTable/buttons";
+import { ButtonEditColumn } from "../../../Contacts/components/Leads/columnsTable/ButtonEditColumn";
 
 export const ColumnsRule = (
   data: any,
@@ -22,6 +22,6 @@ export const ColumnsRule = (
     wordColumn(),
     nameColumn(),
     tagRuleColumn(),
-    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
+    ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

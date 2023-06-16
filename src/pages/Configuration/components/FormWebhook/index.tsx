@@ -2,6 +2,9 @@ import { useAppSelector } from "../../../../hooks/appDispatch";
 import ClipboardJS from "clipboard";
 import { CopyButton } from "../../../../styled-components/button/index";
 import { SeeImplementation } from "../../styled-components/Plataform/index";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { useContext } from "react";
+import { Input } from "../../../../styled-components/input/index";
 
 const FormWebhook = ({ isStripe, titleWebhook }: any) => {
   new ClipboardJS(".btn");
@@ -18,18 +21,21 @@ const FormWebhook = ({ isStripe, titleWebhook }: any) => {
     console.log("btnCopy", btn);
   };
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <form>
       <div className="row mt-4">
         <div className="form-group col-sm-12">
           <label className="title-label-popup">Webhook</label>
-          <input
+          <Input
             id="foo"
             type="text"
             className="form-control"
             placeholder="Ingresa la clave secreta del webhook"
             name="endpoint_secret"
             value={`${titleWebhook}${public_id}`}
+            theme={theme}
             // defaultValue={stripeToken ? stripeToken : stripe?.endpoint_secret}
             // onChange={ (e) => onChangeFormGoogle(e)}
           />
@@ -52,11 +58,12 @@ const FormWebhook = ({ isStripe, titleWebhook }: any) => {
         <div className="row">
           <div className="form-group col-sm-12">
             <label className="title-label-popup">Firma Secreta</label>
-            <input
+            <Input
               type="text"
               className="form-control"
               placeholder="Ingresa la clave secreta del webhook"
               name="endpoint_secret"
+              theme={theme}
               // defaultValue={stripeToken ? stripeToken : stripe?.endpoint_secret}
               // onChange={ (e) => onChangeFormGoogle(e)}
             />

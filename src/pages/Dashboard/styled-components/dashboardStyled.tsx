@@ -13,14 +13,16 @@ export const ButtonTitlePicker = styled.button`
   font-size: 10px !important;
   display: flex !important;
   justify-content: space-between;
-  color: #333 !important;
-  background-color: #fff !important;
+  /* color: #333 !important;
+  background-color: #fff !important; */
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   width: auto;
   border: 0.4px solid #575353 !important;
   border-radius: 5px !important;
   span {
     font-size: 10px !important;
-    color: #333 !important;
+    color: ${(props) => props.theme.text};
     margin-right: 5px;
   }
 `;
@@ -31,7 +33,9 @@ export const FilterSource = styled.div`
     margin-top: 0;
     height: 30px;
     font-size: 13px;
-    font-family: helvetica;
+    font-family: "Helvetica-NeueL-Title";
+    background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
   }
   div div:first-child {
     padding-top: 14px;
@@ -101,4 +105,18 @@ export const TableExpanded = styled.table`
   /* td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-paddingNone {
     background: #e5e2e24a;
   } */
+`;
+
+export const ButtonFilterCalendar = styled.button`
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  border: 0;
+`;
+
+export const RdrDefinedRangesWrapper2 = styled.div`
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  font-size: 12px;
+  width: 226px;
+  border-right: 1px solid #eff2f7;
 `;

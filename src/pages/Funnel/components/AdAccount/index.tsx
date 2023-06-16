@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AdAccountType } from "../../../Dashboard/models";
 import AdAccountFunnel from "../../../Dashboard/components/AdAccountFunnel";
 import { Option } from "../../../../components/Select";
@@ -6,6 +6,7 @@ import { Option } from "../../../../components/Select";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { Title } from "../../../../styled-components/Title/index";
 import Swal from "sweetalert2";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const AdAccount = ({
   adAccounts,
@@ -212,11 +213,13 @@ const AdAccount = ({
     setAdAccounts(currentDataEditFunnel?.campaings);
   }, [currentDataEditFunnel]);
 
+  const { theme, themeTitleModal } = useContext(ThemeContext);
+
   return (
     <>
-      <div className="row">
+      <div className="row mb-4">
         <div className="col-md-10">
-          <Title fontSize="17px" color="#123249">
+          <Title fontSize="17px" color="#123249" theme={themeTitleModal}>
             Cuenta Publicitaria
           </Title>
         </div>

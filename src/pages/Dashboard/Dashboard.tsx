@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { Card, Main } from "../../styled-components/main";
 import { Bar } from "./styled-components/dashboardStyled";
 import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
@@ -18,9 +18,6 @@ import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
 import { useNavigate } from "react-router-dom";
 import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
-// import styled, { ThemeProvider } from "styled-components";
-import ToggleButton from "../../utilities/theme/ToggleButton";
-import { lightTheme, darkTheme } from "../../styled-components/Theme/themes";
 
 import {
   yesterDay,
@@ -32,8 +29,17 @@ import {
 } from "../../utilities/functionDateFilter/HandleDate";
 import { BeatLoader } from "react-spinners";
 import { totalPnl } from "./components/TotalTablePnl";
+import styled from "styled-components";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
+import Toggle from "../../utilities/theme/ToggleButton";
 
 // setAutoFreeze(false);
+
+const Container = styled.div`
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  // Agrega estilos adicionales según sea necesario
+`;
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -56,12 +62,12 @@ const Dashboard = () => {
     },
   ]);
   const [canCallMetricFunnel, setCanCallMetricFunnel] = useState(true);
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-  console.log("theme", theme);
+  // const toggleTheme = () => {
+  //   setTheme(theme === "light" ? "dark" : "light");
+  // };
+  // console.log("theme", theme);
 
   const { tokenfacebook, tokengoogle, toggleSlider, isLoading } =
     useAppSelector((state) => state.dashboard);
@@ -70,6 +76,10 @@ const Dashboard = () => {
   console.log("tokengoogle", tokengoogle);
 
   const idUser = useAppSelector((state) => state.user.user.id);
+
+  // const themeState = useAppSelector((state) => state.configuration.theme);
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(
   //   (state: AppStore) => state.dashboard.dataFunnel
@@ -227,29 +237,21 @@ const Dashboard = () => {
     dispatch(getMetricFunnel(dateFormat));
   };
 
-  // const DashboardContainer = styled.div`
-  //   background-color: ${(props) => props.theme.body};
-  //   color: ${(props) => props.theme.text};
-  // `;
-
   useEffect(() => {
     if (selectPlatform.length === 0) return;
-    totalPnl(selectPlatform);
-  }, [selectPlatform]);
+    totalPnl(selectPlatform, themeState);
+  }, [selectPlatform, themeState]);
 
   console.log("isLoadingDashboard", isLoading);
   console.log("isLoadingDashboardgroupPlataform", groupPlataform);
+  const { theme, themeDarkLight } = useContext(ThemeContext);
 
   return (
-    // <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-    <Main width={toggleSlider ? "87vw" : "96vw"}>
-      <Card height="85vh" borderRadius="16px">
-        {/* <DashboardContainer>
-            <h1>Dashboard</h1>
-          </DashboardContainer> */}
-        <Title fontSize="17px" color="#123249">
-          Dashboard PNL ({pnlDays})
-        </Title>
+    <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
+      <Card height="85vh" borderRadius="16px" theme={theme}>
+        {/* <Container theme={theme}> */}
+        <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
+        {/* </Container> */}
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
@@ -279,6 +281,7 @@ const Dashboard = () => {
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                   handleThreeMonth={handleThreeMonth}
+                  theme={theme}
                 />
               </div>
             </div>
@@ -301,12 +304,8 @@ const Dashboard = () => {
           </div>
         </div>
       </Card>
-      <div className="d-none">
-        <ToggleButton theme={theme} toggleTheme={toggleTheme} />
-      </div>
       <FooterMenu />
     </Main>
-    // </ThemeProvider>
   );
 };
 

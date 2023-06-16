@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,6 +23,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 interface IFormInput {
   fullName: String;
@@ -219,6 +220,8 @@ const FormSale = ({
   //   setPrice(currentPriceRefaund);
   // }, [refaund]);
 
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -312,7 +315,11 @@ const FormSale = ({
         </div>
         <div className="row">
           <div className="form-group col-sm-6">
-            <ButtonsModal className="btn btn-close" onClick={onClose}>
+            <ButtonsModal
+              className="btn btn-close"
+              onClick={onClose}
+              theme={themeFilterFunnel}
+            >
               Cerrar
             </ButtonsModal>
           </div>
@@ -325,7 +332,7 @@ const FormSale = ({
       </form>
       <div className="row">
         <div className={`${currentEdit ? "form-group col-sm-12" : "d-none"}`}>
-          <ButtonsModal className="btn btn-close" onClick={onCloseSubModal}>
+          <ButtonsModal className="btn btn-add" onClick={onCloseSubModal}>
             Atribuir Venta
           </ButtonsModal>
         </div>

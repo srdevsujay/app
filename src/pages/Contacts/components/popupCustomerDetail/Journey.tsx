@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import venta from "../../../../assets/images/venta.svg";
 import clickIcon from "../../../../assets/images/click.svg";
 import telephone from "../../../../assets/images/telephone.svg";
@@ -11,12 +11,18 @@ import { useAppSelector } from "../../../../hooks/appDispatch";
 import {
   Recorrido,
   Accordion,
+  TagSub,
 } from "../../styled-components/customerDetail.Styled";
 import { Tooltip } from "@mui/material";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const Journey = ({ currentJourney, time_Zone }: any) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <Accordion>
+    <Accordion theme={theme}>
       {_.orderBy(
         currentJourney,
         ["date", "time", "tag"],
@@ -94,24 +100,40 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
               // journey?.tag.substring(1,0) === "@" ? "back-source" : journey?.tag.substring(1,0) === "$" ? "back-sale" : "back-action"} key={`${index}`
               journey.tag !== ""
                 ? journey.tag.substr(0, 1) === "@"
-                  ? "back-source"
+                  ? themeState === true || themeState === "true"
+                    ? "back-source back-dark-source"
+                    : "back-source"
                   : journey.tag.substr(0, 1) === "!"
-                  ? "back-action"
+                  ? themeState === true || themeState === "true"
+                    ? "back-action back-dark-action"
+                    : "back-action"
                   : journey.tag.substr(0, 1) === "#"
-                  ? "back-telephone"
+                  ? themeState === true || themeState === "true"
+                    ? "back-telephone back-dark-telephone"
+                    : "back-telephone"
+                  : themeState === true || themeState === "true"
+                  ? "back-sale back-dark-sale"
                   : "back-sale"
                 : journey.event_name === "Click on Pop Up" ||
                   journey.event_name === "Click on Video" ||
                   journey.event_name === "Click on Purchase" ||
                   journey.event_name === "Click on Reservation"
-                ? "back-source"
+                ? themeState === true || themeState === "true"
+                  ? "back-source back-dark-source"
+                  : "back-source"
                 : journey.event_name === "Manual Sale"
-                ? "back-sale"
+                ? themeState === true || themeState === "true"
+                  ? "back-sale back-dark-sale"
+                  : "back-sale"
                 : journey.event_name === "Click on schedule"
-                ? "back-telephone"
+                ? themeState === true || themeState === "true"
+                  ? "back-telephone back-dark-telephone"
+                  : "back-telephone"
                 : journey.event_name === "Page View" ||
                   journey.event_name === "Page Checkout"
-                ? "back-view"
+                ? themeState === true || themeState === "true"
+                  ? "back-view back-dark-view"
+                  : "back-view"
                 : ""
             }
           >
@@ -240,16 +262,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                   ) : (
                     ""
                   )}
-                  <span
-                    style={{
-                      color: "#000",
-                      fontSize: "12px",
-                      fontFamily: "Helvetica-NeueL-Title",
-                      marginLeft: "5px",
-                    }}
-                  >
-                    {journey?.tag.substr(1)}
-                  </span>
+                  <TagSub theme={theme}>{journey?.tag.substr(1)}</TagSub>
                 </div>
               )}
               {journey.adset_name === null ? (
@@ -289,16 +302,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                     }
                     placement="top"
                   >
-                    <span
-                      style={{
-                        color: "#000",
-                        fontSize: "12px",
-                        fontFamily: "Helvetica-NeueL-Title",
-                        marginLeft: "5px",
-                      }}
-                    >
-                      {journey?.ad_name}
-                    </span>
+                    <TagSub theme={theme}>{journey?.ad_name}</TagSub>
                   </Tooltip>
                 </div>
               ) : journey.ct === "" ? (
@@ -330,18 +334,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                       : ""
                   }
                 >
-                  <span
-                    // className="hovertext"
-                    // data-hover={`${journey.ad_name} - ${journey.campaign}`}
-                    style={{
-                      color: "#000",
-                      fontSize: "12px",
-                      fontFamily: "Helvetica-NeueL-Title",
-                      marginLeft: "5px",
-                    }}
-                  >
-                    {journey?.ct}
-                  </span>
+                  <TagSub theme={theme}>{journey?.ct}</TagSub>
                 </div>
               )}
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Main, Card } from "../../styled-components/main/index";
 import { Bar } from "../Dashboard/styled-components/dashboardStyled";
 import FooterMenu from "../../components/Footer/index";
@@ -26,6 +26,7 @@ import {
   editFunnel,
 } from "../../redux/state/slices/dashboard/dashboardThunk";
 import { Title } from "../../styled-components/Title/index";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const Funnel = () => {
   const dispatch = useAppDispatch();
@@ -83,13 +84,14 @@ const Funnel = () => {
       setModalOpen(true);
     }
   };
-
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
   useEffect(() => {
     if (dataFunnel?.length > 0) {
       const filters = JSON.parse(filterJSON);
-      totalFunnel(dataFunnel, filters);
+      totalFunnel(dataFunnel, filters, themeState);
     }
-  }, [dataFunnel]);
+  }, [dataFunnel, themeState]);
 
   const schema = yup.object().shape({
     funnel_name: yup.string().required("El nombre del Funnel es requerido"),
@@ -218,13 +220,15 @@ const Funnel = () => {
     setAdAccounts(currentCampaign);
   };
   console.log("adAccounts--", adAccounts);
-
+  const { theme, themeDarkLight, themeBackNewFunnel, themeFilterFunnel } =
+    useContext(ThemeContext);
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
-      <Card height="75vh" borderRadius="16px 16px 0 0">
-        <Title fontSize="17px" color="#123249">
-          Funnel
-        </Title>
+    <Main
+      width={toggleSlider === true ? "87vw" : "96vw"}
+      theme={themeDarkLight}
+    >
+      <Card height="75vh" borderRadius="16px 16px 0 0" theme={theme}>
+        <Title fontSize="17px">Funnel</Title>
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
@@ -235,8 +239,10 @@ const Funnel = () => {
           </div>
         </div>
       </Card>
-      <NewFunnel>
-        <ButtonFunnel onClick={addNewFunnel}>+</ButtonFunnel>
+      <NewFunnel theme={themeBackNewFunnel}>
+        <ButtonFunnel theme={themeDarkLight} onClick={addNewFunnel}>
+          + Nuevo
+        </ButtonFunnel>
       </NewFunnel>
       <Modal
         title={"Crear Funnel"}
@@ -268,10 +274,14 @@ const Funnel = () => {
             currentDataEditFunnel={currentDataEditFunnel}
             removeCampaign={removeCampaign}
           />
-          <ContainerSticky className="row">
+          <ContainerSticky className="row" theme={theme}>
             <Bar className="mb-3"></Bar>
             <div className="form-group col-sm-6">
-              <ButtonsModal className="btn btn-close" onClick={toggleModal}>
+              <ButtonsModal
+                className="btn btn-close"
+                onClick={toggleModal}
+                theme={themeFilterFunnel}
+              >
                 Cerrar
               </ButtonsModal>
             </div>

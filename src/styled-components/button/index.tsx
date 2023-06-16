@@ -7,7 +7,7 @@ export const Button = styled.button`
 export const ButtonLogout = styled.div`
   width: 166px;
   transform: translateY(-68px);
-  background: #fff;
+  /* background: #fff; */
   height: 60px;
   position: absolute;
   bottom: 0;
@@ -21,6 +21,49 @@ export const ButtonLogout = styled.div`
   transition: all 1.5s linear;
 
   button.handleLogout {
+    background: rgba(91, 147, 255, 0.06274509803921569);
+    color: #5b93ff;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: "Helvetica-NeueL-Title";
+    padding-left: 10px !important;
+    transition: all 1.5s linear;
+    font-size: 14px;
+    bottom: 0;
+  }
+
+  button.handleTheme {
+    background: rgba(91, 147, 255, 0.06274509803921569);
+    color: #5b93ff;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: "Helvetica-NeueL-Title";
+    padding-left: 10px !important;
+    transition: all 1.5s linear;
+    font-size: 14px;
+    bottom: 4vw;
+  }
+`;
+
+export const ButtonTheme = styled.div`
+  width: 166px;
+  transform: translateY(-68px);
+  /* background: #fff; */
+  height: 60px;
+  position: absolute;
+  bottom: 4vw;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  transition: all 1.5s linear;
+
+  button.handleTheme {
     background: rgba(91, 147, 255, 0.06274509803921569);
     color: #5b93ff;
     margin-bottom: 5px;
@@ -57,13 +100,14 @@ export const ButtonsModal = styled.button`
   line-height: 16px;
   text-align: center;
   border-radius: 5px;
-  color: #3997ff;
+  color: ${(props) => props.theme.text};
   width: 100%;
   box-shadow: -14px 30px 20px rgba(0, 0, 0, 0.05);
 
   &.btn-close {
     background: #fff;
     border: 1px solid #3997ff;
+    background-color: ${(props) => props.theme.background} !important;
   }
 
   &.btn-add {
@@ -84,7 +128,7 @@ export const ButtonsModal = styled.button`
 export const ContainerSticky = styled.div`
   position: sticky;
   bottom: -0.9rem;
-  background: white;
+  background-color: ${(props) => props.theme.background};
 `;
 
 export const ButtonDeleteWithIcon = styled.button`
@@ -103,6 +147,25 @@ export const ButtonDeleteWithIcon = styled.button`
     background: rgb(231 29 54 / 8%);
     color: #e71d36;
   }
+`;
+
+export const ContainerDropdown = styled.div`
+  padding: 10px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+`;
+
+export const ContainerDropdownFilter = styled.div`
+  height: 30px;
+  width: auto;
+  margin: 10px;
+  padding: 4px 10px 0 10px;
+  color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.background};
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: "Helvetica-NeueL-Title";
+  white-space: nowrap;
 `;
 
 export const ButtonEditWithIcon = styled.button`

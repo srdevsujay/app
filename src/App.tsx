@@ -10,7 +10,7 @@ import { Sidebar } from "./components/sidebar";
 import { useAppSelector } from "./hooks";
 import { useSelector } from "react-redux";
 import { AppStore } from "./redux/store";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "./utilities/theme/ThemeContext";
 import useThemeMode from "./hooks/useThemeMode";
 
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -44,40 +44,46 @@ function App() {
       <Router>
         <ToastContainer />
         <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
-          {user !== null ? <Sidebar /> : ""}
-
-          <RoutesWithNotFound>
-            <Route
-              path="/"
-              element={<Navigate to={privateRoutes.DASHBOARD} />}
-            />
-            <Route path={publicRoutes.LOGIN} element={<Login />} />
-            <Route element={<AuthGuard />}>
-              {usersub?.usersub.length !== 0 ||
-              Object.keys(subscriptionUser).length !== 0 ||
-              user.user_type === 1 ? (
-                // console.log("navigate dash");
-                <>
-                  <Route
-                    path={privateRoutes.DASHBOARD}
-                    element={<Dashboard />}
-                  />
-                  <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-                  <Route path={privateRoutes.CONTACT} element={<Contacts />} />
-                  <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+          <ThemeProvider>
+            {user !== null ? <Sidebar /> : ""}
+            <RoutesWithNotFound>
+              <Route
+                path="/"
+                element={<Navigate to={privateRoutes.DASHBOARD} />}
+              />
+              <Route path={publicRoutes.LOGIN} element={<Login />} />
+              <Route element={<AuthGuard />}>
+                {usersub?.usersub.length !== 0 ||
+                Object.keys(subscriptionUser).length !== 0 ||
+                user.user_type === 1 ? (
+                  // console.log("navigate dash");
+                  <>
+                    <Route
+                      path={privateRoutes.DASHBOARD}
+                      element={<Dashboard />}
+                    />
+                    <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+                    <Route
+                      path={privateRoutes.CONTACT}
+                      element={<Contacts />}
+                    />
+                    <Route
+                      path={privateRoutes.TRACKING}
+                      element={<Tracking />}
+                    />
+                    <Route
+                      path={privateRoutes.CONFIGURATION}
+                      element={<Configuration />}
+                    />
+                  </>
+                ) : (
+                  // console.log("navigate conf");
                   <Route
                     path={privateRoutes.CONFIGURATION}
                     element={<Configuration />}
                   />
-                </>
-              ) : (
-                // console.log("navigate conf");
-                <Route
-                  path={privateRoutes.CONFIGURATION}
-                  element={<Configuration />}
-                />
-              )}
-              {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
+                )}
+                {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
               <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
               <Route path={privateRoutes.CONTACT} element={<Contacts />} />
               <Route path={privateRoutes.TRACKING} element={<Tracking />} />
@@ -85,10 +91,11 @@ function App() {
                 path={privateRoutes.CONFIGURATION}
                 element={<Configuration />}
               /> */}
-              <Route path={privateRoutes.AUTH} element={<Auth />} />
-            </Route>
-            <Route path="/signun" element={<CreateAccount />} />
-          </RoutesWithNotFound>
+                <Route path={privateRoutes.AUTH} element={<Auth />} />
+              </Route>
+              <Route path="/signun" element={<CreateAccount />} />
+            </RoutesWithNotFound>
+          </ThemeProvider>
         </div>
       </Router>
     </Suspense>

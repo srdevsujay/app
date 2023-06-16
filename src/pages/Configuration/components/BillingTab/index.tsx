@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 
 import { createSubscription } from "../FormBilling/createSubscriptionForm";
@@ -47,6 +47,8 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import visa from "../../../../assets/images/visa.svg";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { IngresosRastreados } from "../../styled-components/Plataform/index";
 
 // const stripePromise = loadStripe(
 //   "pk_test_51Kha17DfKIMhwzEG7hdRFjUIO0soTyO2SAbgTLBOCwOcmXkWqa1m39C4IsHg0tyOMeCHozQGLx8DQSA7Epx5cMDG00Lhb4nYoI"
@@ -390,8 +392,16 @@ const BillingTab = () => {
     setEditCardStripe(!editCardStripe);
   };
 
+  const { theme } = useContext(ThemeContext);
+
+  const tableStyles = {
+    backgroundColor: theme.background,
+    color: theme.text,
+    // Agrega más estilos según sea necesario
+  };
+
   return (
-    <div className="">
+    <div className="p-4">
       <div className="row">
         {toggleEditSubscription === 1 || selectedPayment === "0" ? (
           <SelectSubscriptionsPlans
@@ -439,10 +449,10 @@ const BillingTab = () => {
             : "d-none"
         }
       >
-        <div className="row ingresos-rastreados">
+        <IngresosRastreados className="row" theme={theme}>
           <div className="col-sm-8">
             <Title fontSize="20px">
-              Ingreso rastreado del mes en curso $
+              Ingreso rastreado del mes en curso{" "}
               {amount ? <FormatNumber number={amount} /> : 0}
             </Title>
             <br />
@@ -456,7 +466,7 @@ const BillingTab = () => {
               Meta: <FormatNumber number={subscription_user?.income} />
             </span>
           </div>
-        </div>
+        </IngresosRastreados>
         {payment_gateway === "Stripe" && (
           <div className="row mt-4 mb-5">
             <div className="col-sm-5">
@@ -524,8 +534,14 @@ const BillingTab = () => {
                     search: false,
                     pageSizeOptions: [5, 10, 25, 50, 100],
                     pageSize: 5,
-                    headerStyle: { position: "sticky", top: 0 },
+                    // headerStyle: { position: "sticky", top: 0 },
                     maxBodyHeight: "45vh",
+                    headerStyle: {
+                      backgroundColor: theme.background,
+                      color: theme.text,
+                      position: "sticky",
+                      top: 0,
+                    },
                   }}
                   localization={{
                     pagination: {
@@ -535,6 +551,7 @@ const BillingTab = () => {
                       emptyDataSourceMessage: "No hay Datos...",
                     },
                   }}
+                  style={tableStyles}
                 />
               </div>
             </div>

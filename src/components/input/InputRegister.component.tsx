@@ -1,7 +1,8 @@
-import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { ChangeEventHandler, InputHTMLAttributes, useContext } from "react";
 import { Input } from "../../styled-components";
 import { UseFormRegister } from "react-hook-form";
 import { ErrorLabel } from "../../styled-components/input";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 type InputProps = {
   label?: string;
@@ -14,10 +15,12 @@ type InputProps = {
 const InputRegister = (props: InputProps) => {
   const { label, onChange, name, register, error, ...otherProps } = props;
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <>
       <label htmlFor={name}>{label}</label>
-      <Input {...register(name)} {...otherProps} />
+      <Input theme={theme} {...register(name)} {...otherProps} />
       {error !== "undefined" ? <ErrorLabel>{error}</ErrorLabel> : ""}
     </>
   );

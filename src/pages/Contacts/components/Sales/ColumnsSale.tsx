@@ -10,7 +10,7 @@ import { nameColumn } from "./columnsTable/name";
 import { emailColumn } from "./columnsTable/email";
 import { priceColumn } from "./columnsTable/price";
 import { phoneColumn } from "./columnsTable/phone";
-import { buttonEditColumn } from "../Leads/columnsTable/buttons";
+import { ButtonEditColumn } from "../Leads/columnsTable/ButtonEditColumn";
 import { refaundColumn } from "./columnsTable/refaund";
 
 export const ColumnTableSale = (
@@ -28,6 +28,6 @@ export const ColumnTableSale = (
     priceColumn(),
     refaundColumn(),
     phoneColumn(),
-    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
+    ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

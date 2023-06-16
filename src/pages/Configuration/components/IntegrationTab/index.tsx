@@ -1,13 +1,13 @@
-import googleApi from "../../../../assets/images/Google-AdWords-API.gif";
+import googleApi from "../../../../assets/images/Google-AdWords-API.png";
 import Facebook from "../../../../assets/images/facebookAds.png";
 import stripeIcon from "../../../../assets/images/stripeIcon.png";
-import paypal from "../../../../assets/images/paypal.avif";
+import paypal from "../../../../assets/images/paypal.png";
 import hotmart from "../../../../assets/images/hotmart.png";
 import iconPaypal from "../../../../assets/images/iconPaypal.png";
 import FormGroup from "@mui/material/FormGroup";
 import { FormControlLabel, Switch } from "@mui/material";
 import { CardPlatform } from "../../styled-components/Plataform/index";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Modal from "../../../../components/modal/Modal.component";
 import FormWebhook from "../FormWebhook/index";
 import FormGoogle from "../FormGoogle/index";
@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import { createTokenFacebook } from "../../../../redux/state/slices/configuration/configurationThunk";
 import { useAppDispatch } from "../../../../hooks/appDispatch";
 import FacebookButtonLogin from "./FacebookButtonLogin";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const IntegrationTab = () => {
   const dispatch = useAppDispatch();
@@ -142,11 +143,13 @@ const IntegrationTab = () => {
     },
   ];
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div className="row">
       {integrationArr.map((integration: any, i: number) => (
         <div className="col-sm-4 mt-5 pl-0" key={i}>
-          <CardPlatform>
+          <CardPlatform theme={theme}>
             <div className="activeIntegration">
               <FormGroup>
                 <FormControlLabel
@@ -164,7 +167,7 @@ const IntegrationTab = () => {
             <img
               src={integration.urlImg}
               alt=""
-              width="70"
+              width="50"
               className="imgApi"
             />
             <div className="ApiText">

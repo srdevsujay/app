@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-export const totalFunnel = (tempGroup: any, filters: any) => {
+export const totalFunnel = (tempGroup: any, filters: any, themeState: any) => {
   const dataTotal: any = {
     spend: _.sumBy(tempGroup, "spend"),
     impressions: _.sumBy(tempGroup, "impressions"),
@@ -100,7 +100,11 @@ export const totalFunnel = (tempGroup: any, filters: any) => {
     "MuiTableBody-root",
     "MuiTableRow-root",
     "MuiTableRow-head",
-    "backgroundTotal"
+    `${
+      themeState === true || themeState === "true"
+        ? "backgroundTotalDark"
+        : "backgroundTotal"
+    }`
   );
 
   const createTableCell = (text: string) => {

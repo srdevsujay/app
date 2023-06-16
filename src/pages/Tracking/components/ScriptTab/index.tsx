@@ -1,10 +1,11 @@
 import { FormControl } from "@mui/material";
 import ClipboardJS from "clipboard";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { getTrackingFunnel } from "../../../../redux/state/slices/dashboard/dashboardThunk";
 import ScriptConstants from "./ScriptConstants";
 import { SelectScript } from "../../styled-components/TableRule";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import {
   TitleHelvetica,
   Title,
@@ -35,16 +36,16 @@ const ScriptTab = () => {
   //   }
   // }, [numberTab])
 
+  const { theme, themeTitleModal } = useContext(ThemeContext);
+
   return (
     <section className="w-75 mt-3">
       <div className="row">
         <div className="col-sm-12">
-          <Title fontSize="16px" color="#192a3e">
-            Guión universal
-          </Title>
+          <Title fontSize="16px">Guión universal</Title>
         </div>
         <div className="col-sm-12">
-          <TitleHelvetica fontSize="14px" color="#192a3e">
+          <TitleHelvetica fontSize="14px">
             El script universal recopila información de seguimiento y crea
             clientes potenciales etiquetados con una etiqueta personalizada.
           </TitleHelvetica>
@@ -52,13 +53,15 @@ const ScriptTab = () => {
       </div>
       <div className="row mt-3">
         <div className="col-sm-12">
-          <Title fontSize="14px" color="#030229">
-            Seleccionar Funnel
-          </Title>
+          <Title fontSize="14px">Seleccionar Funnel</Title>
         </div>
         <div className="form-group col-sm-12">
           <FormControl>
-            <SelectScript className="css-select-1" onChange={handleChange}>
+            <SelectScript
+              className="css-select-1"
+              onChange={handleChange}
+              theme={theme}
+            >
               {funnels.map((funnel: any) => (
                 <>
                   <option value={funnel.id}>{funnel.funnel_name}</option>

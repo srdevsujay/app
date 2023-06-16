@@ -93,7 +93,7 @@ const Graphics = ({ selectPlatform }: any) => {
     grid: {
       top: "12%",
       left: "4%",
-      right: "15%",
+      right: "6%",
       bottom: "15%",
       containLabel: true,
     },

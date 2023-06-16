@@ -1,7 +1,12 @@
 import column_triple from "../../assets/images/column_triple.png";
 import "../../styled-components/style.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Checkbox from "@mui/material/Checkbox";
+import {
+  ContainerDropdown,
+  ContainerDropdownFilter,
+} from "../../styled-components/button/index";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -35,6 +40,9 @@ export const ToggleColumnsTable = ({
     updateData(newColumns);
   };
 
+  const { theme, themeButtonDropdown, themeFilterDropdown } =
+    useContext(ThemeContext);
+
   return (
     <div className="dropdown mr-2 hidden-last-cell">
       <button
@@ -47,12 +55,17 @@ export const ToggleColumnsTable = ({
       >
         <img src={column_triple} alt="" className="" height="20px" />
       </button>
-      <div
+      <ContainerDropdown
         className="dropdown-menu dropdown-style top-menu-dropdown"
         aria-labelledby="dropdownMenuButton"
+        theme={themeButtonDropdown}
       >
         {dataFunnelToggle.map((column: any) => (
-          <div key={column.field} className="column-container">
+          <ContainerDropdownFilter
+            key={column.field}
+            theme={themeFilterDropdown}
+            className="column-container"
+          >
             <Checkbox
               {...label}
               checked={
@@ -63,9 +76,9 @@ export const ToggleColumnsTable = ({
               onChange={() => handleColumnToggle(column)}
             />
             <label>{column.title}</label>
-          </div>
+          </ContainerDropdownFilter>
         ))}
-      </div>
+      </ContainerDropdown>
     </div>
   );
 };

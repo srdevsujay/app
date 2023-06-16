@@ -1,12 +1,15 @@
 import ellipsisOff from "../../../../../assets/images/ellipsisOff.svg";
 import deleted from "../../../../../assets/images/Delete.svg";
 import edit from "../../../../../assets/images/Edit.svg";
+// import { ThemeContext } from "../../../../../utilities/theme/ThemeContext";
 import {
   ButtonDeleteWithIcon,
   ButtonEditWithIcon,
+  ContainerDropdown,
 } from "../../../../../styled-components/button/index";
+import ButtonColumns from "./ButtonColumns";
 
-export const buttonEditColumn = (
+export const ButtonEditColumn = (
   setCurrentEdit: any,
   setIdEditCurrent: any
 ) => {
@@ -17,6 +20,8 @@ export const buttonEditColumn = (
   const handleDeleteLead = (id: number) => {
     setIdEditCurrent(id);
   };
+
+  // const { theme, themeButtonDropdown } = useContext(ThemeContext);
 
   return {
     render: (param: any, index: any) => (
@@ -31,10 +36,15 @@ export const buttonEditColumn = (
         >
           <img src={ellipsisOff} alt="" className="" />
         </button>
-        <div
+        <ButtonColumns
+          editLead={editLead}
+          handleDeleteLead={handleDeleteLead}
+          param={param}
+        />
+        {/* <ContainerDropdown
           className="dropdown-menu dropdown-style"
           aria-labelledby="btnGroupDrop1"
-          style={{ padding: "10px" }}
+          theme={themeButtonDropdown}
         >
           <ButtonEditWithIcon
             className="dropdown-item dropdown-style-button"
@@ -54,7 +64,6 @@ export const buttonEditColumn = (
             Eliminar
           </ButtonDeleteWithIcon>
           {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
-        </div>
       </div>
     ),
   };

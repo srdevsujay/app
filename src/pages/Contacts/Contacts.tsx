@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Main } from "../../styled-components/main";
 import FooterMenu from "../../components/Footer/index";
 import { Box, Tab } from "@mui/material";
@@ -10,6 +10,7 @@ import Booking from "./components/Booking";
 import Sales from "./components/Sales/index";
 import "./styled-components/style.css";
 import { useAppSelector } from "../../hooks/appDispatch";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const Contacts = () => {
   const [value, setValue] = useState("1");
@@ -18,9 +19,20 @@ const Contacts = () => {
     setValue(newValue);
   };
 
+  const { theme, themeDarkLight, themeTitleTab } = useContext(ThemeContext);
+
+  const tableStyles = {
+    backgroundColor: themeTitleTab.background,
+    color: themeTitleTab.text,
+    // Agrega más estilos según sea necesario
+  };
+
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
-      <Card height="85vh" borderRadius="16px">
+    <Main
+      width={toggleSlider === true ? "87vw" : "96vw"}
+      theme={themeDarkLight}
+    >
+      <Card height="85vh" borderRadius="16px" theme={theme}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -28,7 +40,7 @@ const Contacts = () => {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="Leads" value="1" />
+                <Tab label="Leads" value="1" style={tableStyles} />
                 <Tab label="Bookings" value="2" />
                 <Tab label="Ventas" value="3" />
                 {/* <Tab label="Carga Manual" value="4" /> */}

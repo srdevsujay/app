@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { Bar, TableExpanded } from "../../styled-components/dashboardStyled";
 import { Table } from "../../../../styled-components/Table";
@@ -17,6 +17,8 @@ import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { percentageIncomeColumn } from "../ColumnTable/percentageIncome";
 import { percentageExpenseColumn } from "../ColumnTable/percentageExpense";
 import { meetingsColumn } from "../ColumnTable/meetings";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import "../../styled-components/style.css";
 
 const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
@@ -44,6 +46,14 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     };
     setCurrentTotal(dataTotal);
   }, [tablePnl]);
+
+  const { theme } = useContext(ThemeContext);
+
+  const tableStyles = {
+    backgroundColor: theme.background,
+    color: theme.text,
+    // Agrega más estilos según sea necesario
+  };
 
   const currentDetailPanel = (dataExpandedPNL: any) => {
     const expanded: any[] = dashboardMain.filter((elem: any) => {
@@ -203,8 +213,14 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   console.log("tablePnl", tablePnl);
   console.log("selectPlatform", selectPlatform);
   console.log("selectPlatform.length", selectPlatform.length);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
-    <Table className="tables">
+    <Table
+      className={themeState === true || themeState === "true" ? "tables" : ""}
+    >
       <MaterialTable
         title=""
         data={selectPlatform.length === 0 ? tablePnl : selectPlatform}
@@ -213,8 +229,14 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
           columnsButton: false,
           search: false,
           pageSizeOptions: [10, 25, 50],
-          headerStyle: { position: "sticky", top: 0 },
+          // headerStyle: { position: "sticky", top: 0 },
           maxBodyHeight: "30vh",
+          headerStyle: {
+            backgroundColor: theme.background,
+            color: theme.text,
+            position: "sticky",
+            top: 0,
+          },
         }}
         localization={{
           pagination: {
@@ -229,6 +251,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
         // }}
         onRowClick={(event, rowData, togglePanel: any) => togglePanel()}
         detailPanel={currentDetailPanel}
+        style={tableStyles}
       />
     </Table>
   );

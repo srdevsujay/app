@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   TitleHelvetica,
   Title,
@@ -13,6 +13,7 @@ import { FormatNumberSum } from "../../../../utilities/FormatNumberSum";
 import "../../styled-components/style.css";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { ModalClose } from "../../../../styled-components/modal/index";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const SelectSubscriptionsPlans = ({
   selectedPayment,
@@ -114,6 +115,7 @@ const SelectSubscriptionsPlans = ({
   };
 
   console.log("selectedPayment", selectedPayment);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -146,6 +148,7 @@ const SelectSubscriptionsPlans = ({
                 value={selectedSubs}
                 onChange={handleSubs}
                 className="container w-100 d-flex justify-content-center"
+                theme={theme}
               >
                 {dataSubscriptions?.map((data: any) => (
                   <option key={data?.id} value={data?.income}>
@@ -171,6 +174,7 @@ const SelectSubscriptionsPlans = ({
                     ? "cursor-noDrop container w-100 d-flex justify-content-center"
                     : "container w-100 d-flex justify-content-center"
                 }
+                theme={theme}
               >
                 {dataPlans?.map(({ id, name, percentage }: any) => (
                   <option key={id} value={name}>
@@ -190,7 +194,7 @@ const SelectSubscriptionsPlans = ({
           </div>
           <div className="col-sm-6 d-flex justify-content-end">
             <div className="row">
-              <ContainerBilling className="container">
+              <ContainerBilling className="container" theme={theme}>
                 <h3
                   style={{
                     fontSize: "16px",

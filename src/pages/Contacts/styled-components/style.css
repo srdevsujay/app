@@ -112,7 +112,7 @@
   font-weight: 300;
   color: #85662b;
   margin-bottom: 0!important;
-  color: #000!important;
+  color: #000;
   font-family: 'Helvetica-NeueL';
   margin-left: 20px;
 }
@@ -145,4 +145,29 @@
 
 .tab-detail .MuiTabs-indicator {
   background-color: inherit !important;
+}
+
+.selectFontAttribute div {
+  background-color: #0D0D0D;
+  color: grey;
+}
+
+.back-dark-sale {
+  background: rgb(13 13 13) !important;
+}
+
+.back-dark-view {
+  background: rgb(13 13 13) !important;
+}
+
+.back-dark-action {
+  background: rgb(13 13 13) !important;
+}
+
+.back-dark-telephone {
+  background: rgb(13 13 13) !important;
+}
+
+.back-dark-source {
+  background: rgb(13 13 13) !important;
 }

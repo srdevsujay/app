@@ -20,9 +20,9 @@ export const MenuIconClose = styled(Link)`
   color: #3997ff;
 `;
 
-export const SidebarMenu = styled.div<SidebarMenuProps>(({ close }) => ({
+export const SidebarMenu = styled.div<SidebarMenuProps>(({ close, theme }) => ({
   height: "100vh",
-  backgroundColor: "#fff",
+  backgroundColor: theme.background,
   top: "0",
   width: close ? "165px" : "50px",
   transition: "0.6s",
@@ -41,13 +41,13 @@ export const MenuItemLinks = styled(Link)`
   padding: 0 2rem;
   font-size: 20px;
   text-decoration: none;
-  color: #3997ff;
+  color: #6f6c99;
   padding: 5px 18px;
   height: 40px;
 
   &:hover {
-    background-color: #ffffff;
-    color: #3997ff;
+    /* background-color: #ffffff; */
+    /* color: #3997ff; */
     text-decoration: none;
     /* width: 100%;
     height: 45px;

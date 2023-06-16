@@ -8,6 +8,7 @@ import {
   setCustomerId,
   setSubscriptionsPlans,
   setSubscriptionUser,
+  setTheme,
   starLoading,
 } from "./configurationSlice";
 import {
@@ -314,6 +315,17 @@ export const updateSubscriptionStripe = (data: any): AppThunk => {
           "success"
         );
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateTheme = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      dispatch(setTheme(data));
     } catch (error) {
       console.log(error);
     }

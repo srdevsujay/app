@@ -4,7 +4,7 @@ export const Accordion = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #fff;
+  background-color: ${(props) => props.theme.background};
   height: 42vh;
   max-height: 42vh;
 `;
@@ -149,7 +149,7 @@ export const Recorrido = styled.div`
   }
 
   .back-action_detail_user {
-    background: #f0830310;
+    background: #f0830363;
     border-radius: 5px;
     border: 0.7px solid #f08303;
     height: 26px;
@@ -280,10 +280,38 @@ export const Recorrido = styled.div`
   .back-view {
     background: #ebf5ff;
     border-radius: 5px;
-    border: 0.7px solid #3997ff6b;
+    border: 0.7px solid #3997ffa8;
     height: 50px;
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
+`;
+
+export const DataClientPotential = styled.div`
+  span {
+    color: ${(props) => props.theme.text};
+  }
+`;
+
+export const TagSub = styled.span`
+  color: ${(props) => props.theme.text};
+  font-size: 12px;
+  font-family: "Helvetica-NeueL-Title";
+  margin-left: 5px;
+`;
+
+export const OnFocused = styled.div`
+  border: 1px solid #80808059;
+  margin-top: 5px;
+  border-radius: 5px;
+  max-height: 120px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 999;
+  width: 30%;
+  max-height: 180px;
+  max-width: 21.48vw;
+  background-color: ${(props) => props.theme.background};
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 20px;
 `;

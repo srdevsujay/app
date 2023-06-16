@@ -4,7 +4,7 @@ import { nameColumn } from "../../Booking/columnsTable/name";
 import { eventColumn } from "../../Booking/columnsTable/event";
 import { emailColumn } from "../../Leads/columnsTable/email";
 import { stateColumn } from "../../Booking/columnsTable/state";
-import { buttonEditColumn } from "../../Leads/columnsTable/buttons";
+import { ButtonEditColumn } from "../../Leads/columnsTable/ButtonEditColumn";
 
 export const ColumnTableBookingPopup = (
   dataContacts: any,

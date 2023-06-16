@@ -1,8 +1,13 @@
-import React, { SelectHTMLAttributes, ChangeEventHandler } from "react";
+import React, {
+  SelectHTMLAttributes,
+  ChangeEventHandler,
+  useContext,
+} from "react";
 import { UseFormRegister } from "react-hook-form";
 import { Select } from "../../../../styled-components/select/index";
 import { ErrorLabel } from "../../../../styled-components/input/index";
 import { useState, useEffect } from "react";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 export interface Option {
   value: string;
@@ -32,6 +37,8 @@ const SelectOnlyForProduct = (props: SelectProps) => {
     ...otherProps
   } = props;
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}
@@ -41,6 +48,7 @@ const SelectOnlyForProduct = (props: SelectProps) => {
         onChange={(newValue: any) => {
           setSelectProductOnchange(newValue.target.value);
         }}
+        theme={theme}
       >
         {options.map((option: any, idx: number) => (
           <option key={idx} value={option.name}>

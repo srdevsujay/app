@@ -1,5 +1,6 @@
-import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { ChangeEventHandler, InputHTMLAttributes, useContext } from "react";
 import { InputSearch } from "../../styled-components/input";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 type InputProps = {
   label?: string;
@@ -12,10 +13,12 @@ const InputComponent = (props: InputProps) => {
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
     onChange && onChange(target.value);
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <>
       {label ? <label htmlFor={otherProps.id}>{label}</label> : ""}
-      <InputSearch onChange={handleChange} {...otherProps} />
+      <InputSearch onChange={handleChange} {...otherProps} theme={theme} />
     </>
   );
 };

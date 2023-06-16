@@ -1,5 +1,6 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useContext, useRef } from "react";
 import { ModalProps } from "../../models";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 import {
   ModalContainer,
   ModalOverlay,
@@ -24,6 +25,7 @@ const Modal: FC<ModalProps> = ({
   overflowY,
   overflowX,
 }) => {
+  const { theme, themeTitleModal } = useContext(ThemeContext);
   const outsideRef = useRef(null);
 
   const handleCloseOnOverlay = (
@@ -44,6 +46,7 @@ const Modal: FC<ModalProps> = ({
         height={height}
         overflowY={overflowY}
         overflowX={overflowX}
+        theme={theme}
       >
         {btnClose === 0 ? (
           ""
@@ -52,8 +55,8 @@ const Modal: FC<ModalProps> = ({
             {/* x<img src={iconX} alt={'close'} /> */}x
           </ModalClose>
         )}
-        <ModalTitle>{title}</ModalTitle>
-        <ModalSubTitle>{subTitle}</ModalSubTitle>
+        <ModalTitle theme={theme}>{title}</ModalTitle>
+        <ModalSubTitle theme={theme}>{subTitle}</ModalSubTitle>
         <ModalContent>{children}</ModalContent>
       </ModalBox>
     </ModalContainer>

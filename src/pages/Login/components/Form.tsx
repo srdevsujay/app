@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,12 +8,16 @@ import { setUser } from "../../../redux/state/slices/login/authSlice";
 import { useLoginUserMutation } from "../services/userService";
 import { ButtonLogin, FormLogin, TitleH4 } from "../styled-components";
 import logo from "../../../assets/images/logoRoalytics.png";
+import logoWhite from "../../../assets/images/LogoRoalyticsWhite.png";
 import {
   hadleLogin,
   hadleLoginGoogle,
 } from "../../../redux/state/slices/login/loginThunk";
 import GoogleLoginButton from "./GoogleLoginButton";
 import { registerUserThunk } from "../../../redux/state/slices/register/thunk";
+import { Input } from "../../../styled-components/input/index";
+import { ThemeContext } from "../../../utilities/theme/ThemeContext";
+import { Title } from "../../../styled-components/Title/index";
 
 interface FormState {
   user: User;
@@ -135,40 +139,62 @@ const Form = () => {
     }
   }, [login]);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+  const { theme, themeSliderText } = useContext(ThemeContext);
+
   return (
     <>
       <div className="text-center w-75">
-        <TitleH4 className="text-dark-50 text-center mt-0 font-weight-bold mb-4">
+        <TitleH4
+          className="text-dark-50 text-center mt-0 font-weight-bold mb-4"
+          theme={theme}
+        >
           ¡Bienvenido a{" "}
           <span>
-            <img src={logo} alt="" />
+            {themeState === true || themeState === "true" ? (
+              <img
+                src={logoWhite}
+                alt=""
+                height="25"
+                style={{ marginTop: "-5px" }}
+              />
+            ) : (
+              <img src={logo} alt="" style={{ marginTop: "-5px" }} />
+            )}
           </span>
           !
         </TitleH4>
       </div>
       <FormLogin onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="title-email">E-Mail</label>
-          <input
+          <Title className="title-email" theme={theme}>
+            E-Mail
+          </Title>
+          <Input
             type="text"
             className="form-control"
             placeholder="example@gmail.com"
             name="email"
             defaultValue={userForm.email}
             onChange={hadleChange}
-            style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+            // style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+            theme={theme}
           />
         </div>
         <div className="form-group">
-          <label className="title-email">Contraseña</label>
-          <input
+          <Title className="title-email" theme={theme}>
+            Contraseña
+          </Title>
+          <Input
             type="password"
             className="form-control"
             placeholder="Contraseña"
             name="password"
             defaultValue={userForm.password}
             onChange={hadleChange}
-            style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+            // style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+            theme={theme}
           />
         </div>
         <div className="form-group d-flex justify-content-between">
@@ -179,9 +205,13 @@ const Form = () => {
               value=""
               id="flexCheckDefault"
             />
-            <label className="form-check-label check-recordarme">
+            <Title
+              fontSize="1rem"
+              className="form-check-label check-recordarme"
+              theme={theme}
+            >
               Recordarme
-            </label>
+            </Title>
           </div>
           <a className="restablecer-contraseña">Restablecer Contraseña</a>
         </div>

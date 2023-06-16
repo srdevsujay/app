@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import _ from "lodash";
 import venta from "../../../../assets/images/venta.svg";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { formattTimeZone } from "../../../../utilities/FormattTimeZone";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
+import { TagSub } from "../../styled-components/customerDetail.Styled";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import {
   Recorrido,
   Accordion,
 } from "../../styled-components/customerDetail.Styled";
 
 const Shopping = ({ purchase, time_Zone }: any) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+  const { theme } = useContext(ThemeContext);
   const purch = [
     {
       date: "Thu, 26 Jan 2023 18:07:51 GMT",
@@ -34,7 +39,13 @@ const Shopping = ({ purchase, time_Zone }: any) => {
           <div className="back-sale-tag-recorrido img-recorrido">
             <img src={venta} alt="" className="venta" />
           </div>
-          <div className="back-sale">
+          <div
+            className={
+              themeState === true || themeState === "true"
+                ? "back-sale back-dark-sale"
+                : "back-sale"
+            }
+          >
             <div className="d-flex align-items-center content-recorrido">
               <span>{formattTimeZone(purchase?.date, time_Zone)}</span>
               <span>|</span>
@@ -48,9 +59,10 @@ const Shopping = ({ purchase, time_Zone }: any) => {
                     fontSize: "12px",
                     fontFamily: "Helvetica-NeueL-Title",
                   }}
-                >
+                ></span>
+                <TagSub theme={theme}>
                   <FormatNumber number={purchase?.price} />
-                </span>
+                </TagSub>
               </div>
             </div>
           </div>

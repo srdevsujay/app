@@ -7,7 +7,7 @@ import { eventColumn } from "./columnsTable/event";
 import { emailColumn } from "../Leads/columnsTable/email";
 import { firstOriginColumn } from "../Leads/columnsTable/firstOrigin";
 import { lastOriginColumn } from "../Leads/columnsTable/lastOrigin";
-import { buttonEditColumn } from "../Leads/columnsTable/buttons";
+import { ButtonEditColumn } from "../Leads/columnsTable/ButtonEditColumn";
 import { stateColumn } from "./columnsTable/state";
 
 export const ColumnTableBooking = (
@@ -26,6 +26,6 @@ export const ColumnTableBooking = (
     firstOriginColumn(),
     lastOriginColumn(),
     stateColumn(dataContacts, onChangeStatus),
-    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
+    ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

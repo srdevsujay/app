@@ -46,13 +46,13 @@ border: none !important
 }
 
 
-.ingresos-rastreados {
+/* .ingresos-rastreados {
   background: #FFFFFF;
   box-shadow: 0px 10px 60px rgb(226 236 249 / 50%);
   border-radius: 30px;
   height: 151px;
   align-items: center;
-}
+} */
 
 .ingresos-rastreados > .col-sm-8 > span:nth-child(1) { 
   color: #192A3E;

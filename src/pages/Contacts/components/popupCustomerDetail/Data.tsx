@@ -2,12 +2,17 @@ import phone from "../../../../assets/images/phone.svg";
 import IPs from "../../../../assets/images/IPs.svg";
 import emailIcon from "../../../../assets/images/email.svg";
 import { useAppSelector } from "../../../../hooks/appDispatch";
+import { DataClientPotential } from "../../styled-components/customerDetail.Styled";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { useContext } from "react";
 
 const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
   const { email } = useAppSelector((state) => state.user.user);
 
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="accordion2 nt-child-ips">
+    <DataClientPotential theme={theme} className="accordion2 nt-child-ips">
       {phonesandips?.map((traffic: any, index: any) => (
         <div className="item2 mt-4" key={`${index}`}>
           <div className="title2 mb-2" style={{ paddingLeft: "20px" }}>
@@ -64,7 +69,7 @@ const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
       {phonesandips.length === 0 && (
         <h4 className="color-h4 ip-empty">No hay IPs registradas.</h4>
       )}
-    </div>
+    </DataClientPotential>
   );
 };
 

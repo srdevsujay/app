@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,6 +20,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { stateBooking } from "../../models/routes";
 import SelectStateBooking from "../SelectStateBooking/index";
 import moment from "moment";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 interface IFormInput {
   fullName: String;
@@ -145,6 +146,8 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     onClose();
   };
 
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -188,7 +191,7 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           <label className="title-label-popup w-100">
             Fecha y Hora de Creación
           </label>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} theme={theme}>
             <DateTimePicker
               value={appoimentDate}
               disabled
@@ -233,7 +236,11 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
+          <ButtonsModal
+            className="btn btn-close"
+            onClick={onClose}
+            theme={themeFilterFunnel}
+          >
             Cerrar
           </ButtonsModal>
         </div>

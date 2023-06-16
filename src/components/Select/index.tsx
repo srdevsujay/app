@@ -1,5 +1,10 @@
-import React, { SelectHTMLAttributes, ChangeEventHandler } from "react";
+import React, {
+  SelectHTMLAttributes,
+  ChangeEventHandler,
+  useContext,
+} from "react";
 import { Select } from "../../styled-components/select";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 export interface Option {
   value: string;
   label: string;
@@ -18,10 +23,12 @@ const SelectComponent = (props: any) => {
     onChange && onChange(target.value);
   };
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <>
       {label ? <label htmlFor={otherPros.id}>{label}</label> : ""}
-      <Select onChange={handleChange} {...otherPros}>
+      <Select onChange={handleChange} {...otherPros} theme={theme}>
         <option value="" disabled>
           Selecciona una opción
         </option>

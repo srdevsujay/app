@@ -7,6 +7,7 @@ export const configurationState: any = {
   subscriptionUser: {},
   subscriptionsPlans: {},
   amount: {},
+  theme: false,
 };
 
 export const configurationSlice = createSlice({
@@ -36,6 +37,10 @@ export const configurationSlice = createSlice({
       state.isLoading = false;
       state.amount = action.payload;
     },
+    setTheme: (state, action) => {
+      state.isLoading = false;
+      state.theme = action.payload;
+    },
   },
 });
 
@@ -46,5 +51,6 @@ export const {
   setSubscriptionUser,
   setSubscriptionsPlans,
   setAmount,
+  setTheme,
 } = configurationSlice.actions;
 export default configurationSlice.reducer;

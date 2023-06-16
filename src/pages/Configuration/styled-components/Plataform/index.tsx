@@ -4,7 +4,8 @@ export const CardPlatform = styled.div`
   height: 160px;
   display: flex;
   align-items: center;
-  background: #fff;
+  background-color: ${(props) => props.theme.background};
+  /* background: #fff; */
   box-shadow: 0 14px 40px rgb(109 141 173/25%);
   border-radius: 10px;
 
@@ -12,7 +13,8 @@ export const CardPlatform = styled.div`
     font-weight: 500;
     font-size: 16px;
     letter-spacing: -0.03em;
-    color: #192a3e;
+    /* color: #192a3e; */
+    color: ${(props) => props.theme.text};
     font-style: normal;
     line-height: 143%;
     font-family: "Helvetica-NeueL-Title";
@@ -67,8 +69,18 @@ export const ContainerBilling = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #fff;
-  box-shadow: 0 14px 40px rgb(109 141 173/25%);
+  /* background: #fff; */
+  background-color: ${(props) => props.theme.background};
+  box-shadow: 0px 1px 8px rgb(226 236 249 / 50%);
   border-radius: 10px;
   display: block;
+`;
+
+export const IngresosRastreados = styled.div`
+  /* background: #FFFFFF; */
+  background-color: ${(props) => props.theme.background};
+  box-shadow: 0px 1px 8px rgb(226 236 249 / 50%);
+  border-radius: 30px;
+  height: 151px;
+  align-items: center;
 `;

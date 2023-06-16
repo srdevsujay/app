@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FunnelStep } from "../../../Dashboard/models";
 import StepFunnel from "../StepFunnel";
 
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { Title } from "../../../../styled-components/Title/index";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const StepsFunnel = ({
   currentSteps,
@@ -39,11 +40,13 @@ const StepsFunnel = ({
     setCurrentSteps(currentDataEditFunnel?.steps);
   }, [currentDataEditFunnel]);
 
+  const { theme, themeTitleModal } = useContext(ThemeContext);
+
   return (
     <>
-      <div className="row">
-        <div className="col-md-12">
-          <Title fontSize="17px" color="#123249">
+      <div className="row mb-4">
+        <div className="col-md-12 mt-3">
+          <Title fontSize="17px" color="#123249" theme={themeTitleModal}>
             Pasos
           </Title>
         </div>

@@ -24,7 +24,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalBox = styled.div<ModalWidthBox>(
-  ({ width, padding, bottom, height, overflowY, overflowX }) => ({
+  ({ width, padding, bottom, height, overflowY, overflowX, theme }) => ({
     width: width,
     padding: padding,
     bottom: bottom,
@@ -32,7 +32,7 @@ export const ModalBox = styled.div<ModalWidthBox>(
     position: "relative",
     boxSizing: "border-box",
     borderRadius: "10px",
-    backgroundColor: "white",
+    backgroundColor: theme.background,
     cursor: "auto",
     overflowY: overflowY ? "auto" : "hidden",
     overflowX: overflowX ? "auto" : "hidden",
@@ -56,7 +56,8 @@ export const ModalTitle = styled.div`
   font-size: 30px; */
   font-family: "Helvetica-NeueL-Title";
   font-size: 18px;
-  color: #030229;
+  /* color: #030229; */
+  color: ${(props) => props.theme.text};
   line-height: 21px;
   font-style: normal;
   font-weight: 400;
@@ -66,7 +67,7 @@ export const ModalTitle = styled.div`
 export const ModalSubTitle = styled.div`
   font-family: "Helvetica-NeueL";
   font-size: 15px;
-  color: #030229;
+  color: ${(props) => props.theme.text};
   line-height: 21px;
   font-style: normal;
   font-weight: 400;

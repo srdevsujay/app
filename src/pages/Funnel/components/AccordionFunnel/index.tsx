@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ContainerFiltersFunnel } from "../../../Dashboard/styled-components/dashboardStyled";
 import MuiAccordion from "@mui/material/Accordion";
 import { styled } from "@mui/material/styles";
@@ -33,7 +33,10 @@ import { CampaignData } from "../../../Dashboard/models/dashboard.model";
 import InputComponent from "../../../../components/input/Input.component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import "../../../../styled-components/style.css";
-import { ContainerFilter } from "../../../../styled-components/input/index";
+import {
+  ContainerFilter,
+  DropdownMenu,
+} from "../../../../styled-components/input/index";
 import FunnelTable from "../tableFunnel/index";
 import {
   createFilterFunnel,
@@ -47,6 +50,12 @@ import {
 import deleted from "../../../../assets/images/Delete.svg";
 import edit from "../../../../assets/images/Edit.svg";
 import "../../styled-components/style.css";
+import {
+  ContainerAccordion,
+  ButtonFilter,
+} from "../../styled-components/funnel-styled";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { ContainerDropdown } from "../../../../styled-components/button/index";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -886,17 +895,12 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
   ];
 
   console.log("dataDataFunnel", typeof dataDataFunnel);
-
+  const { theme, themeButtonDropdown, themeFilterFunnel } =
+    useContext(ThemeContext);
   return (
     <div className="mt-3">
       {dataTracking.map((tracking: any, index: number) => (
-        <div
-          key={index}
-          style={{
-            borderBottom: "1px solid #80808026",
-            position: "sticky",
-          }}
-        >
+        <ContainerAccordion key={index} theme={theme}>
           <Accordion
             expanded={expanded === index}
             onChange={handleChange(index)}
@@ -934,8 +938,8 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                 />
-                <div className="dropdown">
-                  <button
+                <div className="dropdown ml-2">
+                  <ButtonFilter
                     className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
                     type="button"
                     id="dropdownMenuButton"
@@ -945,6 +949,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                     onClick={(e: any) => {
                       e.stopImmediatePropagation();
                     }}
+                    theme={theme}
                   >
                     <img
                       src={column_triple}
@@ -952,10 +957,11 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                       className=""
                       height="20px"
                     />
-                  </button>
-                  <div
-                    className="dropdown-menu dropdown-style top-menu-dropdown"
+                  </ButtonFilter>
+                  <DropdownMenu
+                    className="dropdown-menu dropdown-style top-menu-dropdown mr-2"
                     aria-labelledby="dropdownMenuButton"
+                    theme={themeFilterFunnel}
                   >
                     <ContainerFilter>
                       <InputComponent
@@ -966,7 +972,10 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                         onChange={(e: any) => setSearchString(e)}
                       />
                     </ContainerFilter>
-                    <div className="filter-scroll">
+                    <ContainerDropdown
+                      className="filter-scroll"
+                      theme={themeFilterFunnel}
+                    >
                       {dataFunnelToggle?.map((column: any) => (
                         <div key={column.name} className="column-container">
                           <Checkbox
@@ -977,8 +986,8 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                           <label>{column.name}</label>
                         </div>
                       ))}
-                    </div>
-                  </div>
+                    </ContainerDropdown>
+                  </DropdownMenu>
                 </div>
                 <div className="btn-group" role="group">
                   <button
@@ -991,13 +1000,14 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                   >
                     {/* <img src={ellipsisOff} alt="" className="" /> */}
                   </button>
-                  <div
+                  <ContainerDropdown
                     className="dropdown-menu dropdown-style top-menu-dropdown"
                     aria-labelledby="btnGroupDrop1"
                     style={{ padding: "10px" }}
                     onClick={(e: any) => {
                       e.stopImmediatePropagation();
                     }}
+                    theme={themeButtonDropdown}
                   >
                     <ButtonEditWithIcon
                       className="dropdown-item dropdown-style-button"
@@ -1014,7 +1024,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
                       Eliminar
                     </ButtonDeleteWithIcon>
                     {/* <button class="dropdown-item" href="#">Dropdown link</button> */}
-                  </div>
+                  </ContainerDropdown>
                 </div>
               </ContainerFiltersFunnel>
             </div>
@@ -1092,7 +1102,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
               </Typography>
             </AccordionDetails>
           </Accordion> */}
-        </div>
+        </ContainerAccordion>
       ))}
     </div>
   );

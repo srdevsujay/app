@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/appDispatch";
 import { editUser } from "../../../../redux/state/slices/login/loginThunk";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { SelectScript } from "../../../Tracking/styled-components/TableRule";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const FormProfileEdit = ({ onClose, perfil }: any) => {
   const dispatch = useAppDispatch();
@@ -64,6 +65,8 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
     dispatch(editUser(form));
     onClose();
   };
+
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,6 +148,7 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
               // onChange={(e) => handleChange(e)}
               value={selectedTimezone}
               onChange={onChangeSelect}
+              theme={theme}
             >
               <option value="Etc/GMT+12">
                 (GMT-12:00) International Date Line West
@@ -345,6 +349,7 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
               name="type_currency"
               // value={account?.type_currency}
               // onChange={(e) => changeForm(e)}
+              theme={theme}
             >
               <option disabled selected>
                 US
@@ -370,7 +375,11 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
+          <ButtonsModal
+            className="btn btn-close"
+            onClick={onClose}
+            theme={themeFilterFunnel}
+          >
             Cerrar
           </ButtonsModal>
         </div>

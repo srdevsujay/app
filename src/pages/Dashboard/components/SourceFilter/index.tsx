@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Theme, useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,6 +11,8 @@ import { FilterSource } from "../../styled-components/dashboardStyled";
 import { totalPnl } from "../TotalTablePnl";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { useCallback } from "react";
+import styled from "styled-components";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,21 +38,22 @@ const names = [
   "Kelly Snyder",
 ];
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+// function getStyles(name: string, personName: readonly string[], theme: Theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
 
 const SourceFilter = ({
   groupPlataform,
   setGroupPlataform,
   setSelectPlatform,
 }: any) => {
-  const theme = useTheme();
+  // const theme = useTheme();
+  const { theme } = useContext(ThemeContext);
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [personName, setPersonName] = React.useState<string[]>([]);
   const [uniquePlataform, setUniquePlataform] = useState<string[]>([]);
@@ -119,8 +122,11 @@ const SourceFilter = ({
     }
   };
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
-    <FilterSource>
+    <FilterSource theme={theme}>
       <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
         <Select
           multiple
@@ -139,7 +145,15 @@ const SourceFilter = ({
           inputProps={{ "aria-label": "Without label" }}
         >
           {uniquePlataform.map((pnl) => (
-            <MenuItem key={pnl} value={pnl}>
+            <MenuItem
+              key={pnl}
+              value={pnl}
+              className={
+                themeState === true || themeState === "true"
+                  ? "backMenuItem"
+                  : ""
+              }
+            >
               <Checkbox checked={personName.indexOf(pnl) > -1} />
               <ListItemText primary={pnl} />
             </MenuItem>

@@ -7,6 +7,10 @@ export const FormLogin = styled.form`
     font-family: "Helvetica-NeueL";
   }
 
+  .restablecer-contraseña {
+    font-family: "Helvetica-NeueL-Title" !important;
+  }
+
   .restablecer-contraseña:hover {
     text-decoration: underline !important;
     opacity: 0.7 !important;
@@ -59,8 +63,8 @@ export const ButtonLogin = styled.button`
 `;
 
 export const TitleH4 = styled.h4`
-  color: #333;
-  font-family: "Helvetica";
+  color: ${(props) => props.theme.text};
+  font-family: "Helvetica-NeueL-Title" !important;
   font-style: normal;
   font-weight: 700;
   font-size: 26px;

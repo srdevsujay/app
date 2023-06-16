@@ -1,7 +1,12 @@
-import React, { SelectHTMLAttributes, ChangeEventHandler } from "react";
+import React, {
+  SelectHTMLAttributes,
+  ChangeEventHandler,
+  useContext,
+} from "react";
 import { Select } from "../../../../styled-components/select/index";
 import { ErrorLabel } from "../../../../styled-components/input/index";
 import { UseFormRegister } from "react-hook-form";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 export interface Option {
   value: string;
@@ -34,11 +39,11 @@ const SelectStateBooking = (props: SelectProps) => {
   // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
   //   onChange && onChange(target.value);
   // };
-
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       {label ? <label htmlFor={name}>{label}</label> : ""}
-      <Select {...register(name)} {...otherProps}>
+      <Select {...register(name)} {...otherProps} theme={theme}>
         {options.map((option: any, i = 1) => (
           <option key={i} value={option.value}>
             {option.name}

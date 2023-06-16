@@ -29,7 +29,7 @@ code {
 .MuiTab-root.MuiTab-textColorPrimary.Mui-selected {
   font-family: 'Helvetica-NeueL-Title';
   text-transform: capitalize!important;
-  color: #192a3e!important;
+  color: #C1D2E6!important;
   font-weight: 700!important;
   line-height: 18px;
 }
@@ -43,4 +43,8 @@ code {
   font-style: normal;
   font-family: 'Helvetica-NeueL-Title';
   text-transform: capitalize!important;
+}
+
+.activeSlider {
+  color: #3997FF !important;
 }

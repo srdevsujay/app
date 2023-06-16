@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import ClipboardJS from "clipboard";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { ContainerScript } from "../../styled-components/TableRule";
 import { CopyButton } from "../../../../styled-components/button/index";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const ScriptConstants = ({ funnels }: any) => {
   new ClipboardJS(".btn");
@@ -38,9 +39,11 @@ const ScriptConstants = ({ funnels }: any) => {
     console.log("btnCopy", btn);
   };
 
+  const { theme, themeTitleModal } = useContext(ThemeContext);
+
   return (
     <>
-      <ContainerScript>
+      <ContainerScript theme={theme}>
         <div>{script1}</div>
         <div className="ml-2">{script2}</div>
         <div className="ml-2">{script3}</div>

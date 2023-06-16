@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Main } from "../../styled-components/main";
 import FooterMenu from "../../components/Footer/index";
 import { Box, Tab } from "@mui/material";
@@ -11,6 +11,7 @@ import IntegrationTab from "./components/IntegrationTab/index";
 import BillingTab from "./components/BillingTab/index";
 import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
 import { obtainSubscriptionUser } from "../../redux/state/slices/configuration/configurationThunk";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const Configuration = () => {
   const { toggleSlider } = useAppSelector((state) => state.dashboard);
@@ -35,9 +36,14 @@ const Configuration = () => {
     }
   }, [localStorageChangeTab]);
 
+  const { theme, themeDarkLight } = useContext(ThemeContext);
+
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
-      <Card height="85vh" borderRadius="16px">
+    <Main
+      width={toggleSlider === true ? "87vw" : "96vw"}
+      theme={themeDarkLight}
+    >
+      <Card height="85vh" borderRadius="16px" theme={theme}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

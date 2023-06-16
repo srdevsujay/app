@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BackColorsTableOrigin } from "../../../../styled-components/Table/index";
 import "../../../../styled-components/Table/style.css";
 import venta from "../../../../assets/images/venta.svg";
 import click from "../../../../assets/images/click.svg";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import InputComponent from "../../../../components/input/Input.component";
+import { OnFocused } from "../../styled-components/customerDetail.Styled";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   const [selectedTag, setSelectedTag] = useState("");
@@ -68,6 +70,8 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   //   handleFilteredData(filteredDataDos);
   // }, [filteredDataDos]);
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div
       style={{
@@ -83,7 +87,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
         onBlur={(e) => toggleSelectTag(e)}
         className="w-100"
       />
-      <div className={onFocused ? "d-block onFocused" : "d-none onFocused"}>
+      <OnFocused className={onFocused ? "d-block" : "d-none"} theme={theme}>
         {uniqueTags?.map((tag: any, i: number) => (
           <div
             style={{ padding: "8px 10px" }}
@@ -127,7 +131,7 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
             </BackColorsTableOrigin>
           </div>
         ))}
-      </div>
+      </OnFocused>
     </div>
   );
 };

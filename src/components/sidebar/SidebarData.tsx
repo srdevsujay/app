@@ -3,7 +3,7 @@ import Rectangle4 from "../../assets/images/Rectangle4.svg";
 import tracking from "../../assets/images/tracking.svg";
 import leads from "../../assets/images/leads.svg";
 import configuration from "../../assets/images/configuracion.svg";
-import Vector from "../../assets/images/Vector.png";
+import Vector from "../../assets/images/VectorSVG.svg";
 
 export const SidebarData: SidebarItem[] = [
   {

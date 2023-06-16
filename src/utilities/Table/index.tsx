@@ -1,7 +1,8 @@
 import MaterialTable from "material-table";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Table } from "../../styled-components/Table/index";
 import "../../styled-components/style.css";
+import { ThemeContext } from "../theme/ThemeContext";
 
 const GeneralTable = ({
   data,
@@ -11,6 +12,14 @@ const GeneralTable = ({
   pageSize,
   getUserProfile,
 }: any) => {
+  const { theme } = useContext(ThemeContext);
+
+  const tableStyles = {
+    backgroundColor: theme.background,
+    color: theme.text,
+    // Agrega más estilos según sea necesario
+  };
+
   return (
     <Table className="tables" position="relative">
       <MaterialTable
@@ -21,7 +30,12 @@ const GeneralTable = ({
           columnsButton: false,
           search: false,
           pageSizeOptions: pageSizeOptions,
-          headerStyle: { position: "sticky", top: 0 },
+          headerStyle: {
+            backgroundColor: theme.background,
+            color: theme.text,
+            position: "sticky",
+            top: 0,
+          },
           maxBodyHeight: maxBodyHeight,
           pageSize: pageSize,
         }}
@@ -34,6 +48,7 @@ const GeneralTable = ({
           },
         }}
         onRowClick={(e, rowData) => getUserProfile(rowData, e)}
+        style={tableStyles}
       />
     </Table>
   );

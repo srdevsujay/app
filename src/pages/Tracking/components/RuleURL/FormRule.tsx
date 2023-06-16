@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import InputRegister from "../../../../components/input/InputRegister.component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import * as yup from "yup";
-import { ExceptionDiv } from "../../styled-components/TableRule";
+import {
+  ExceptionDiv,
+  InputException,
+} from "../../styled-components/TableRule";
 import SelectOnlyForProduct from "../../../Contacts/components/SelectProduct/index";
 import clickIcon from "../../../../assets/images/click.svg";
 import venta from "../../../../assets/images/venta.svg";
@@ -16,6 +19,7 @@ import {
   editRuleURL,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
 import Swal from "sweetalert2";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const dataTypeTag: any = [
   { id: 0, value: 0, name: "Origen" },
@@ -132,6 +136,9 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   const exceptionValue = useRef<any>(null);
   const wordsValue = useRef<any>(null);
+
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -218,7 +225,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             *Ingresa la(s) palabra(s) que debe contener la URL para NO cumplir
             la regla y NO añadirse la etiqueta. Luego presiona enter.
           </label>
-          <input
+          <InputException
             type="text"
             className="form-control"
             placeholder="Presiona enter para agregar una nueva excepción."
@@ -236,6 +243,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
                 exceptionValue.current.value = "";
               }
             }}
+            theme={theme}
           />
         </div>
       </div>
@@ -267,7 +275,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             *Ingresa la(s) palabra(s) que debe contener la URL para cumplir la
             regla y añadirse la etiqueta. Luego presiona enter.
           </label>
-          <input
+          <InputException
             type="text"
             className="form-control"
             placeholder="Presiona enter para agregar una nueva coincidencia."
@@ -282,6 +290,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
                 wordsValue.current.value = "";
               }
             }}
+            theme={theme}
           />
         </div>
       </div>
@@ -364,7 +373,11 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       </div>
       <div className="row">
         <div className="form-group col-sm-6">
-          <ButtonsModal className="btn btn-close" onClick={onClose}>
+          <ButtonsModal
+            className="btn btn-close"
+            onClick={onClose}
+            theme={themeFilterFunnel}
+          >
             Cerrar
           </ButtonsModal>
         </div>

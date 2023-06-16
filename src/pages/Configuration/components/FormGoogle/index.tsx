@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import btnGoogle from "../../../../assets/images/btn_google_light_focus_ios.svg";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import { ButtonGoogle } from "../../../../styled-components/button/index";
 import { createTokenGoogle } from "../../../../redux/state/slices/configuration/configurationThunk";
+import { Input } from "../../../../styled-components/input/index";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 var CryptoJS = require("crypto-js");
 
 const FormGoogle = () => {
@@ -100,12 +102,14 @@ const FormGoogle = () => {
     dispatch(createTokenGoogle(google, secretKey));
   };
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <form>
       <div className="row mt-4">
         <div className="form-group col-sm-12">
           <label className="title-label-popup">Developer Token</label>
-          <input
+          <Input
             type="text"
             className="form-control"
             placeholder="Ingresa tu Developer Token"
@@ -113,11 +117,12 @@ const FormGoogle = () => {
             // defaultValue={user.email}
             defaultValue={google?.developer_token}
             onChange={(e) => onChangeFormGoogle(e)}
+            theme={theme}
           />
         </div>
         <div className="form-group col-sm-12">
           <label className="title-label-popup">Login Customer Id</label>
-          <input
+          <Input
             type="text"
             className="form-control"
             placeholder="Ingresa tu Customer Id"
@@ -125,6 +130,7 @@ const FormGoogle = () => {
             // defaultValue={user.password}
             defaultValue={google?.login_customer_id}
             onChange={(e) => onChangeFormGoogle(e)}
+            theme={theme}
           />
         </div>
       </div>

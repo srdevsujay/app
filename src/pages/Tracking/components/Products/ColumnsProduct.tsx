@@ -5,7 +5,7 @@ import { categoryColumn } from "./ColumnsTable/category";
 import { priceColumn } from "./ColumnsTable/price";
 import { skuColumn } from "./ColumnsTable/sku";
 import { tagColumn } from "./ColumnsTable/tag";
-import { buttonEditColumn } from "../../../Contacts/components/Leads/columnsTable/buttons";
+import { ButtonEditColumn } from "../../../Contacts/components/Leads/columnsTable/ButtonEditColumn";
 
 export const ColumnsProduct = (
   dataContacts: any,
@@ -21,6 +21,6 @@ export const ColumnsProduct = (
     tagColumn(),
     // totalValueColumn(),
     // firstOriginColumn(),
-    buttonEditColumn(setCurrentEdit, setIdEditCurrent),
+    ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };
