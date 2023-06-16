@@ -62,3 +62,19 @@
 [data-react-beautiful-dnd-drag-handle="1"] {
   width: max-content;
 }
+
+.tables > div > .MuiTable-root {
+  background: #0D0D0D !important;
+}
+
+.tables > div > .MuiTable-root button {
+    color: white;
+}
+
+.tables > div > .MuiTable-root div {
+  color: white;
+}
+
+.tables > div > .MuiTable-root svg {
+  color: white;
+}

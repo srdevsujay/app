@@ -20,8 +20,14 @@ const GeneralTable = ({
     // Agrega más estilos según sea necesario
   };
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
-    <Table className="tables" position="relative">
+    <Table
+      className={themeState === true || themeState === "true" ? "tables" : ""}
+      position="relative"
+    >
       <MaterialTable
         title=""
         data={data}
