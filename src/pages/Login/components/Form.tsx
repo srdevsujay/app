@@ -18,6 +18,7 @@ import { registerUserThunk } from "../../../redux/state/slices/register/thunk";
 import { Input } from "../../../styled-components/input/index";
 import { ThemeContext } from "../../../utilities/theme/ThemeContext";
 import { Title } from "../../../styled-components/Title/index";
+import Swal from "sweetalert2";
 
 interface FormState {
   user: User;
@@ -58,10 +59,13 @@ const Form = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email && password) {
-      dispatch(hadleLogin({ email, password }));
+    console.log("email-", email === "");
+    console.log("password-", password === "");
+    if (email === "" || password === "") {
+      // toast.error("ingrese correo o contraseña");
+      Swal.fire("", "Ingrese el correo o la contraseña", "info");
     } else {
-      toast.error("ingrese correo o contraseña");
+      dispatch(hadleLogin({ email, password }));
     }
   };
 
@@ -103,6 +107,7 @@ const Form = () => {
           profilePicture: loginData.profilePicture,
           pictureTime: loginData.pictureTime,
           deleteProfilePicture: loginData.deleteProfilePicture,
+          email: loginData.email,
         })
       );
       if (

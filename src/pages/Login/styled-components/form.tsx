@@ -42,9 +42,14 @@ export const FlexColumnLogin = styled.div`
   }
 
   b {
-    color: #3997ff !important;
+    color: #3997ff;
     font-size: 16px;
     font-family: "Helvetica-NeueL-Title";
+    cursor: pointer;
+  }
+
+  .overFY {
+    overflow-y: overlay !important;
   }
 `;
 

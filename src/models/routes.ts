@@ -1,5 +1,7 @@
 export const publicRoutes = {
-  LOGIN: 'login'
+  LOGIN: 'login',
+  TERMINOSYCONDICIONES: "Terminosycondiciones",
+  POLITICAS: "politicas"
 }
 
 export const privateRoutes = {

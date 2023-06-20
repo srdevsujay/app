@@ -21,6 +21,12 @@ const Tracking = lazy(() => import("./pages/Tracking/index"));
 const Configuration = lazy(() => import("./pages/Configuration/index"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Register = lazy(() => import("./pages/Register/CreateAccount"));
+const Terminosycondiciones = lazy(
+  () => import("./components/Terminosycondiciones/index")
+);
+const Politicasdeprivacidad = lazy(
+  () => import("./components/Politicasdeprivacidad/index")
+);
 
 function App() {
   const user = useSelector((state: AppStore) => state.user.user);
@@ -47,6 +53,14 @@ function App() {
           <ThemeProvider>
             {user !== null ? <Sidebar /> : ""}
             <RoutesWithNotFound>
+              <Route
+                path={publicRoutes.TERMINOSYCONDICIONES}
+                element={<Terminosycondiciones />}
+              />
+              <Route
+                path={publicRoutes.POLITICAS}
+                element={<Politicasdeprivacidad />}
+              />
               <Route
                 path="/"
                 element={<Navigate to={privateRoutes.DASHBOARD} />}

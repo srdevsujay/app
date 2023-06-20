@@ -21,7 +21,13 @@ export const hadleLogin = (date: any): AppThunk => {
     try {
       const resultAction = await loginHandle(date);
       console.log("resultAction", resultAction);
-      if (resultAction.status === 200) {
+      if (resultAction.data.request === "Credentials Incorrects") {
+        Swal.fire(
+          "Correcto",
+          "Correo o contraseña incorrecto, Intenta de nuevo",
+          "error"
+        );
+      } else if (resultAction.status === 200) {
         dispatch(
           setUser({
             token: resultAction.data.token,

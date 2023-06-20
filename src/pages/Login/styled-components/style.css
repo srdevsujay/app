@@ -5,3 +5,22 @@
 .back-theme-login-right {
   background: #161616 !important;
 }
+
+.w-65 {
+  width: 65%;
+}
+
+.text-muted {
+  color: #98a6ad!important;
+  font-size: 12px!important;
+}
+
+.error-password {
+  color: rgb(231,29,54);
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 14px;
+}
+
+.overFY {
+  overflow: auto;
+}

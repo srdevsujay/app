@@ -16,6 +16,7 @@ export const EmptyUserState: UserInfo = {
   profilePicture: "",
   pictureTime: Date.now(),
   deleteProfilePicture: "",
+  email: "",
 };
 
 export const authSlice = createSlice({
@@ -62,6 +63,10 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.deleteProfilePicture = action.payload.deleteProfilePicture;
     },
+    setEmailProfile: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.email = action.payload;
+    },
   },
 });
 
@@ -75,6 +80,7 @@ export const {
   setUserEdit,
   setProfilePicture,
   setDeleteProfilePicture,
+  setEmailProfile,
 } = authSlice.actions;
 
 export default authSlice.reducer;

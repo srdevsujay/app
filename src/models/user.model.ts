@@ -38,6 +38,7 @@ export interface UserInfo {
   profilePicture: string;
   pictureTime: any;
   deleteProfilePicture: string;
+  email: string
 }
 
 export interface RegisterUser {
@@ -50,4 +51,5 @@ export interface RegisterUser {
   user_type: number;
   time_zone: string;
   type_currency: string;
+  validatePassword?: string,
 }
