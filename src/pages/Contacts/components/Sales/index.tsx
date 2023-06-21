@@ -18,6 +18,7 @@ import { obtainApiProduct } from "../../../../redux/state/slices/tracking/tracki
 import FormTrafficSource from "../FormTrafficSource";
 import CustomerDetails from "../CustomerDetails/index";
 import { BeatLoader } from "react-spinners";
+import _ from "lodash";
 
 setAutoFreeze(false);
 
@@ -77,6 +78,7 @@ const Sales = () => {
       setCurrentColumns(columns as any);
       setOriginalData(dataSale);
       setFilteredData(dataSale);
+      // const currentDateSale = _.orderBy(dataSale, "date", "desc");
       setFilteredDataDos(dataSale);
     }
   }, [dataSale]);

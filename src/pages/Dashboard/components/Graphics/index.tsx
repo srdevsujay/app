@@ -8,8 +8,9 @@ import { FormatNumber } from "../../../../utilities/FormatNumber";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
 import { SpanTitle } from "../../../../styled-components/span/index";
+import { BeatLoader } from "react-spinners";
 
-const Graphics = ({ selectPlatform }: any) => {
+const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
@@ -206,49 +207,56 @@ const Graphics = ({ selectPlatform }: any) => {
       <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
       </HeaderTitleGraphic>
-      <div className="filterPNL mt-2">
-        <div className="d-flex check-toggle-graphic">
-          <Checkbox
-            checked={checkedSelectIncomeGraphic}
-            onChange={(e) => handleChangeSelectGraphicIncome(e)}
-            inputProps={{ "aria-label": "controlled" }}
-          />
-          <SpanTitle className="green">Ingresos</SpanTitle>
-          <Checkbox
-            checked={checkedSelectCostsGraphic}
-            onChange={(e) => handleChangeSelectGraphicCosts(e)}
-            className="ml-2"
-          />
-          <SpanTitle className="red">Gastos</SpanTitle>
+      {groupPlataform.length === 0 || isLoading === true ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "250px", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
         </div>
-        <div className="d-flex justify-content-evenly w-75">
-          {checkedSelectIncomeGraphic === true ? (
-            <SpanTitle className="green ml-3">
-              Ingresos: <FormatNumber number={totalIncome} />
-            </SpanTitle>
-          ) : (
-            ""
-          )}
-          {checkedSelectIncomeGraphic === true &&
-          checkedSelectCostsGraphic === true ? (
-            <span className="ml-2 mr-2">-</span>
-          ) : (
-            ""
-          )}
-          {checkedSelectCostsGraphic === true ? (
-            <SpanTitle className="red">
-              Gastos: <FormatNumber number={totalExpense} />
-            </SpanTitle>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-      <ReactEcharts option={option} style={{ height: "270px" }} />
-      {/* <GraphicBar 
-        groupPlataform={groupPlataform}
-        selectPlatform={selectPlatform}
-      /> */}
+      ) : (
+        <>
+          <div className="filterPNL mt-2">
+            <div className="d-flex check-toggle-graphic">
+              <Checkbox
+                checked={checkedSelectIncomeGraphic}
+                onChange={(e) => handleChangeSelectGraphicIncome(e)}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+              <SpanTitle className="green">Ingresos</SpanTitle>
+              <Checkbox
+                checked={checkedSelectCostsGraphic}
+                onChange={(e) => handleChangeSelectGraphicCosts(e)}
+                className="ml-2"
+              />
+              <SpanTitle className="red">Gastos</SpanTitle>
+            </div>
+            <div className="d-flex justify-content-evenly w-75">
+              {checkedSelectIncomeGraphic === true ? (
+                <SpanTitle className="green ml-3">
+                  Ingresos: <FormatNumber number={totalIncome} />
+                </SpanTitle>
+              ) : (
+                ""
+              )}
+              {checkedSelectIncomeGraphic === true &&
+              checkedSelectCostsGraphic === true ? (
+                <span className="ml-2 mr-2">-</span>
+              ) : (
+                ""
+              )}
+              {checkedSelectCostsGraphic === true ? (
+                <SpanTitle className="red">
+                  Gastos: <FormatNumber number={totalExpense} />
+                </SpanTitle>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+          <ReactEcharts option={option} style={{ height: "270px" }} />
+        </>
+      )}
     </div>
   );
 };

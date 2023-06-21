@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { AppStore } from "./redux/store";
 import { ThemeProvider } from "./utilities/theme/ThemeContext";
 import useThemeMode from "./hooks/useThemeMode";
+import { BeatLoader } from "react-spinners";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
@@ -46,7 +47,16 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<>Cargando...</>}>
+    <Suspense
+      fallback={
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "95vh", zIndex: "99999999" }}
+        >
+          <BeatLoader color="#3997FF" />
+        </div>
+      }
+    >
       <Router>
         <ToastContainer />
         <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>

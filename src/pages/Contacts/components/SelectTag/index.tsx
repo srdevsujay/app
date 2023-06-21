@@ -7,6 +7,7 @@ import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import InputComponent from "../../../../components/input/Input.component";
 import { OnFocused } from "../../styled-components/customerDetail.Styled";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import _ from "lodash";
 
 const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   const [selectedTag, setSelectedTag] = useState("");
@@ -25,10 +26,12 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
     console.log("tag...", tag);
     setSelectedTag(tag);
     if (tag === "") {
-      setFilteredDataDos(dataLead);
+      const currentDateSale = _.orderBy(dataLead, "date", "desc");
+      setFilteredDataDos(currentDateSale);
     } else {
       const filtered = dataLead.filter((d: any) => d.first_origintag === tag);
-      setFilteredDataDos(filtered);
+      const currentDateSale = _.orderBy(filtered, "date", "desc");
+      setFilteredDataDos(currentDateSale);
     }
     setOnFocused(0);
   };

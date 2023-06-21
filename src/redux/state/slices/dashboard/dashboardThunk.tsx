@@ -33,6 +33,8 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
     try {
       const dateFormat = getDate(date);
       const resultAction = await getDataPnl(!date ? dateFormat : date);
+      console.log("resultActionDashboard", resultAction);
+
       const currentDataPNL: any = _.orderBy(
         resultAction.data.data,
         "id",
@@ -43,7 +45,14 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
         dispatch(setTokenFacebook(resultAction.data.tokenfacebook));
         dispatch(setTokenGoogle(resultAction.data.tokengoogle));
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.code === "ERR_BAD_RESPONSE") {
+        Swal.fire(
+          "",
+          "En este momento no puede mostrarte este filtro con tantos días, vuelve a intentarlo con menos días",
+          "info"
+        );
+      }
       console.log(error);
     }
   };

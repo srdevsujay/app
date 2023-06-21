@@ -194,3 +194,8 @@ MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone */
   color: #3998ff !important;
   background-color: #161616 !important;
 }
+
+.calendar-title {
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 16px;
+}

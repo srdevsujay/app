@@ -300,7 +300,11 @@ const Dashboard = () => {
             )}
           </div>
           <div className="col-sm-12">
-            <Graphics selectPlatform={selectPlatform} />
+            <Graphics
+              selectPlatform={selectPlatform}
+              groupPlataform={groupPlataform}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       </Card>

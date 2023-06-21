@@ -52,7 +52,7 @@ const FormSale = ({
   const [selectProduct, setSelectProduct] = useState(dataProduct[0]?.name);
   const [price, setPrice] = useState(dataProduct[0]?.price);
   const [originalPrice, setOriginalPrice] = useState();
-  const [dateSale, setDateSale] = useState<Date>(today);
+  const [dateSale, setDateSale] = useState<any>(today);
   const [selectProductOnchange, setSelectProductOnchange] = useState();
 
   const schema = yup.object().shape({
@@ -69,6 +69,7 @@ const FormSale = ({
   const initForm = () => {
     if (currentEdit) {
       console.log("currentEdit", currentEdit);
+      console.log("currentEditdate", currentEdit.date);
 
       const {
         email: emailParam,
@@ -84,6 +85,12 @@ const FormSale = ({
       setSelectProduct(product);
       setPrice(priceParam);
       setOriginalPrice(priceParam);
+      const currentDate = moment(date, "ddd, DD MMM YYYY HH:mm:ss [GMT]");
+      const dateFormat = currentDate.format("DD-MMM-YYYY hh:mm A");
+      console.log("currentEditdatenew dateFormat", dateFormat);
+      console.log("currentEditdatenew dateFormatnew", new Date(date));
+      const currentDateSale = moment(date).format("YYYY-MM-DD hh:mm:ss");
+      console.log("currentEditdatenew currentDateSale", currentDateSale);
       setDateSale(new Date(date));
     }
   };
@@ -180,8 +187,11 @@ const FormSale = ({
     const currentRefaundPrice = !refaund ? data.price : 0;
     const currentRefaund = refaund ? originalPrice : 0;
 
+    const today = new Date(currentDateSale).toISOString();
+    console.log("today", today);
+
     const form: any = {
-      date: currentDateSale,
+      date: today,
       email: data.email,
       funnel_id: data.selectFunnel,
       phone: data.phone,
@@ -195,10 +205,12 @@ const FormSale = ({
     if (idEditSale !== 0) {
       form.id = currentEdit.id;
       form.id_traffic = currentEdit.id_traffic;
+      console.log("formformformEdit", form);
       dispatch(editSale(form));
       setCurrentEdit();
       setIdEditSale(0);
     } else {
+      console.log("formformformSucces", form);
       dispatch(createSale(form));
     }
     onClose();

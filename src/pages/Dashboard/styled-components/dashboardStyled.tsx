@@ -24,6 +24,7 @@ export const ButtonTitlePicker = styled.button`
     font-size: 10px !important;
     color: ${(props) => props.theme.text};
     margin-right: 5px;
+    font-family: "Helvetica-NeueL-Title";
   }
 `;
 
