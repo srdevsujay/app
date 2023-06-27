@@ -133,7 +133,17 @@ export const obtainApiBooking = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataBooking();
-      const currentDataLead: any = _.orderBy(result.data, "id", "asc");
+      const currentDataLead: any = _.orderBy(
+        result.data,
+        "appoiment_date",
+        "asc"
+      );
+      console.log("currentDataLead", currentDataLead);
+
+      const sortedDataBook = result.data.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
       dispatch(setBooking(currentDataLead));
     } catch (error) {
       console.log(error);
@@ -332,6 +342,16 @@ export const createTrafficSource = (data: any): AppThunk => {
         dispatch(obtainApiContacts());
         Swal.fire("Correcto", "Trafico Editado correctamente!!", "success");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const closeUserDetail = (): AppThunk => {
+  return async (dispatch) => {
+    try {
+      dispatch(setUser([]));
     } catch (error) {
       console.log(error);
     }

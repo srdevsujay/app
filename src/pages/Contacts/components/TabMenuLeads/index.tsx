@@ -20,6 +20,7 @@ const TabMenuLeads = ({
   openModal,
   dataLead,
   setFilteredDataDos,
+  clearFilterContacts,
 }: any) => {
   return (
     <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
@@ -37,6 +38,7 @@ const TabMenuLeads = ({
         <SelectTag
           dataLead={dataLead}
           setFilteredDataDos={setFilteredDataDos}
+          clearFilterContacts={clearFilterContacts}
         />
       </div>
     </div>

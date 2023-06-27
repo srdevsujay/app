@@ -227,6 +227,7 @@ export const Recorrido = styled.div`
 
   .content-recorrido {
     font-size: 14px !important;
+    white-space: nowrap;
   }
 
   .content-recorrido span:first-child {
@@ -285,6 +286,22 @@ export const Recorrido = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+
+  .overflow-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .overflow-scroll::-webkit-scrollbar-thumb {
+    background: #3998ff;
+    border-radius: 40px;
+  }
+  .overflow-scroll::-webkit-scrollbar {
+    height: 3px;
+    width: 50px;
+    background-color: #aaa;
+    border-radius: 40px;
   }
 `;
 

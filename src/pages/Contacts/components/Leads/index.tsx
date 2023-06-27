@@ -19,10 +19,14 @@ import Modal from "../../../../components/modal/Modal.component";
 import FormLead from "../FormLead/index";
 import TabMenuLeads from "../TabMenuLeads/index";
 import CustomerDetails from "../CustomerDetails/index";
-import { obtainUserProfile } from "../../../../redux/state/slices/contacts/contactsThunk";
+import {
+  obtainUserProfile,
+  closeUserDetail,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
 import InputComponent from "../../../../components/input/Input.component";
 import SelectTag from "../SelectTag";
 import { BeatLoader } from "react-spinners";
+import ModalDetailClient from "../../../../components/modal/ModalDetailClient";
 
 setAutoFreeze(false);
 
@@ -118,7 +122,10 @@ const Leads = () => {
     }
   };
 
-  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+  const toggleModalUser = () => {
+    setModalOpenUser(!isModalOpenUser);
+    dispatch(closeUserDetail());
+  };
 
   const getUserProfile = (data: any, e: any) => {
     console.log("dataPrifile", data);
@@ -145,6 +152,11 @@ const Leads = () => {
 
   console.log("emailCustomerDetail", emailCustomerDetail);
 
+  const clearFilterContacts = () => {
+    console.log("ClearFilter");
+    setFilteredDataDos(dataLead);
+  };
+
   return (
     <>
       {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
@@ -162,6 +174,7 @@ const Leads = () => {
         openModal={openModal}
         dataLead={dataLead}
         setFilteredDataDos={setFilteredDataDos}
+        clearFilterContacts={clearFilterContacts}
       />
       {/* <div style={{ width: "25%" }}>
           <SelectTag
@@ -186,7 +199,7 @@ const Leads = () => {
           setCurrentEdit={setCurrentEdit}
         />
       </Modal>
-      <Modal
+      <ModalDetailClient
         title="Detalles del cliente potencial"
         isOpen={isModalOpenUser}
         onClose={toggleModalUser}
@@ -198,7 +211,7 @@ const Leads = () => {
         subTitle={emailCustomerDetail}
       >
         <CustomerDetails emailCustomerDetail={emailCustomerDetail} />
-      </Modal>
+      </ModalDetailClient>
       {memoizedUsers === undefined ? (
         <div
           className="d-flex justify-content-center align-items-center"

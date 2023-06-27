@@ -56,6 +56,7 @@ import {
 } from "../../styled-components/funnel-styled";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import { ContainerDropdown } from "../../../../styled-components/button/index";
+import { BeatLoader } from "react-spinners";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -95,7 +96,12 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
+const AccordionFunnel = ({
+  obtainFunnelEdit,
+  setCurrentSteps,
+  showLodash,
+  setShowLodash,
+}: any) => {
   const dispatch = useAppDispatch();
   const dataTracking: any[] = useAppSelector(
     (state) => state.dashboard.dataTracking
@@ -203,6 +209,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
       );
       console.log("activeColumns--", activeColumns);
       setColumnsToSet(activeColumns);
+      setShowLodash(activeColumns);
       setDataFunnelToggle(getDataColumns2);
       setOriginalData(getDataColumns2);
     }
@@ -401,6 +408,7 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
     );
     console.log("activeColumns--2", activeColumns);
     setColumnsToSet(activeColumns);
+    setShowLodash(activeColumns);
     setDataFunnelToggle(updatedColumns);
     setOriginalData(updatedColumns);
   };
@@ -1031,22 +1039,22 @@ const AccordionFunnel = ({ obtainFunnelEdit, setCurrentSteps }: any) => {
             <AccordionDetails>
               <Typography>
                 <div className="table-responsive ocultarMostrar">
-                  {/* <ReactTooltip /> */}
-                  {/* {loadingMetricasFunnel ? (
+                  {showLodash.length === 0 ? (
                     <div
                       className="d-flex justify-content-center align-items-center"
-                      style={{ height: "230px" }}
+                      style={{ height: "250px", zIndex: "99999999" }}
                     >
                       <BeatLoader color="#3997FF" />
                     </div>
-                  ) : ( */}
-                  <FunnelTable
-                    data={dataDataFunnel}
-                    columns={columnsToSet}
-                    pageSizeOptions={[7, 15, 31]}
-                    maxBodyHeight={"60vh"}
-                    pageSize={7}
-                  />
+                  ) : (
+                    <FunnelTable
+                      data={dataDataFunnel}
+                      columns={columnsToSet}
+                      pageSizeOptions={[7, 15, 31]}
+                      maxBodyHeight={"60vh"}
+                      pageSize={7}
+                    />
+                  )}
                 </div>
               </Typography>
             </AccordionDetails>

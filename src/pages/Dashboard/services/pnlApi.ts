@@ -94,3 +94,12 @@ export const loginGoogle = async (data: any) => {
     }
   });
 };
+
+export const restorePasswordService = async (data: any) => {
+  return clientAxios.post("/reset_password", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+

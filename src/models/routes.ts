@@ -1,7 +1,8 @@
 export const publicRoutes = {
   LOGIN: 'login',
   TERMINOSYCONDICIONES: "Terminosycondiciones",
-  POLITICAS: "politicas"
+  POLITICAS: "politicas",
+  RESTOREPASS: "restablecercontrasena",
 }
 
 export const privateRoutes = {

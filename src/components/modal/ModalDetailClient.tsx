@@ -1,6 +1,8 @@
 import React, { FC, useContext, useRef } from "react";
 import { ModalProps } from "../../models";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
+import { useAppDispatch } from "../../hooks/appDispatch";
+import { closeUserDetail } from "../../redux/state/slices/contacts/contactsThunk";
 import {
   ModalContainer,
   ModalOverlay,
@@ -11,7 +13,7 @@ import {
   ModalSubTitle,
 } from "../../styled-components";
 
-const Modal: FC<ModalProps> = ({
+const ModalDetailClient: FC<ModalProps> = ({
   title,
   isOpen,
   onClose,
@@ -27,12 +29,14 @@ const Modal: FC<ModalProps> = ({
 }) => {
   const { theme, themeTitleModal } = useContext(ThemeContext);
   const outsideRef = useRef(null);
+  const dispatch = useAppDispatch();
 
   const handleCloseOnOverlay = (
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     if (e.target === outsideRef.current) {
-      console.log("refClose");
+      console.log("refCloseClient");
+      dispatch(closeUserDetail());
       onClose();
     }
   };
@@ -64,4 +68,4 @@ const Modal: FC<ModalProps> = ({
   ) : null;
 };
 
-export default Modal;
+export default ModalDetailClient;

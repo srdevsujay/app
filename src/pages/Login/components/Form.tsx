@@ -144,6 +144,11 @@ const Form = () => {
     }
   }, [login]);
 
+  const onRestorePass = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    navigate("/restablecercontrasena");
+  };
+
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
   const { theme, themeSliderText } = useContext(ThemeContext);
@@ -218,7 +223,9 @@ const Form = () => {
               Recordarme
             </Title>
           </div>
-          <a className="restablecer-contraseña">Restablecer Contraseña</a>
+          <a className="restablecer-contraseña" onClick={onRestorePass}>
+            Restablecer Contraseña
+          </a>
         </div>
         <ButtonLogin className="mt-2">Iniciar Sesión</ButtonLogin>
         <div className="row mt-3">

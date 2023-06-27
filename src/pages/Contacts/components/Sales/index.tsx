@@ -13,7 +13,10 @@ import {
   obtainUserProfile,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
 import FormSale from "../FormSale";
-import { deleteSale } from "../../../../redux/state/slices/contacts/contactsThunk";
+import {
+  deleteSale,
+  closeUserDetail,
+} from "../../../../redux/state/slices/contacts/contactsThunk";
 import { obtainApiProduct } from "../../../../redux/state/slices/tracking/trackingThunk";
 import FormTrafficSource from "../FormTrafficSource";
 import CustomerDetails from "../CustomerDetails/index";
@@ -79,7 +82,12 @@ const Sales = () => {
       setOriginalData(dataSale);
       setFilteredData(dataSale);
       // const currentDateSale = _.orderBy(dataSale, "date", "desc");
-      setFilteredDataDos(dataSale);
+      const sortedDataSale = dataSale.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      console.log("sortedRulesSAles", sortedDataSale);
+      setFilteredDataDos(sortedDataSale);
     }
   }, [dataSale]);
 
@@ -149,7 +157,10 @@ const Sales = () => {
   //   setSelected(e.target.value);
   // };
 
-  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+  const toggleModalUser = () => {
+    setModalOpenUser(!isModalOpenUser);
+    dispatch(closeUserDetail());
+  };
 
   const getUserProfile = (data: any, e: any) => {
     const clickColumnEdit = e.target.value;
@@ -160,6 +171,15 @@ const Sales = () => {
       setEmailCustomerDetail(data.email);
       dispatch(obtainUserProfile(currentEmail));
     }
+  };
+
+  const clearFilterContacts = () => {
+    console.log("ClearFilter");
+    const sortedDataSale = dataSale.sort(
+      (a: any, b: any) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+    setFilteredDataDos(sortedDataSale);
   };
 
   return (
@@ -179,6 +199,7 @@ const Sales = () => {
         openModal={openModal}
         dataLead={dataSale}
         setFilteredDataDos={setFilteredDataDos}
+        clearFilterContacts={clearFilterContacts}
       />
       <Modal
         title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}

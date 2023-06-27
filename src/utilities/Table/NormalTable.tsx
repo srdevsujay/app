@@ -43,6 +43,7 @@ const NormalTable = ({
           },
           maxBodyHeight: maxBodyHeight,
           pageSize: pageSize,
+          emptyRowsWhenPaging: false,
         }}
         localization={{
           pagination: {

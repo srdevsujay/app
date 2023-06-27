@@ -21,6 +21,7 @@ import {
 import moment from "moment";
 import CustomerDetails from "../CustomerDetails/index";
 import { BeatLoader } from "react-spinners";
+import { closeUserDetail } from "../../../../redux/state/slices/contacts/contactsThunk";
 
 setAutoFreeze(false);
 
@@ -115,7 +116,10 @@ const Booking = () => {
   };
 
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
-  const toggleModalUser = () => setModalOpenUser(!isModalOpenUser);
+  const toggleModalUser = () => {
+    setModalOpenUser(!isModalOpenUser);
+    dispatch(closeUserDetail());
+  };
 
   const getUserProfile = (data: any, e: any) => {
     const clickColumnEdit = e.target.value;
@@ -129,6 +133,11 @@ const Booking = () => {
   };
 
   console.log("filteredDataDos", filteredDataDos);
+
+  const clearFilterContacts = () => {
+    console.log("ClearFilter");
+    setFilteredDataDos(dataBooking);
+  };
 
   return (
     <>
@@ -147,6 +156,7 @@ const Booking = () => {
         openModal={openModal}
         dataLead={dataBooking}
         setFilteredDataDos={setFilteredDataDos}
+        clearFilterContacts={clearFilterContacts}
       />
       <Modal
         title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}

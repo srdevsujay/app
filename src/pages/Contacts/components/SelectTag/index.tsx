@@ -9,7 +9,11 @@ import { OnFocused } from "../../styled-components/customerDetail.Styled";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import _ from "lodash";
 
-const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
+const SelectTag = ({
+  dataLead,
+  setFilteredDataDos,
+  clearFilterContacts,
+}: any) => {
   const [selectedTag, setSelectedTag] = useState("");
   const [currentSelectedTag, setCurrentSelectedTag] = useState<any>();
 
@@ -26,12 +30,23 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
     console.log("tag...", tag);
     setSelectedTag(tag);
     if (tag === "") {
+      const sortedDataLead = dataLead.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      console.log("sortedLead 1", sortedDataLead);
+
       const currentDateSale = _.orderBy(dataLead, "date", "desc");
-      setFilteredDataDos(currentDateSale);
+      setFilteredDataDos(sortedDataLead);
     } else {
       const filtered = dataLead.filter((d: any) => d.first_origintag === tag);
       const currentDateSale = _.orderBy(filtered, "date", "desc");
-      setFilteredDataDos(currentDateSale);
+      const sortedDataFiltered = filtered.sort(
+        (a: any, b: any) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      console.log("sortedLead 2", sortedDataFiltered);
+      setFilteredDataDos(sortedDataFiltered);
     }
     setOnFocused(0);
   };
@@ -74,7 +89,12 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
   // }, [filteredDataDos]);
 
   const { theme } = useContext(ThemeContext);
+  console.log("selectedTag--", selectedTag === "");
 
+  const clearFilter = () => {
+    setSelectedTag("");
+    clearFilterContacts();
+  };
   return (
     <div
       style={{
@@ -90,6 +110,46 @@ const SelectTag = ({ dataLead, setFilteredDataDos }: any) => {
         onBlur={(e) => toggleSelectTag(e)}
         className="w-100"
       />
+      <div
+        className={
+          selectedTag === "" ? "d-none mt-2 mb-2" : "d-block mt-2 mb-2"
+        }
+        onClick={clearFilter}
+      >
+        <div className="custom-div"></div>
+        <BackColorsTableOrigin
+          width="initial"
+          marginBottom="0px"
+          paddingLeft="0"
+          opacity="0.5"
+          justifyContent="center"
+          className={`${
+            selectedTag?.substr(0, 1) === "@"
+              ? "back-lila"
+              : selectedTag?.substr(0, 1) === "!"
+              ? "back-orange"
+              : "back-green"
+          }`}
+        >
+          {selectedTag?.substr(0, 1) === "@" ? (
+            <img src={click} alt="" className="iconos-table-origin" />
+          ) : selectedTag?.substr(0, 1) === "!" ? (
+            <CheckCircleOutlinedIcon
+              style={{
+                color: "#F08303",
+                fontSize: "17px",
+                marginTop: "2px",
+                marginRight: "4px",
+              }}
+            />
+          ) : (
+            <img src={venta} alt="" className="iconos-table-origin" />
+          )}
+          <option key={selectedTag} value={selectedTag}>
+            {selectedTag !== null ? selectedTag?.substr(1) : null}
+          </option>
+        </BackColorsTableOrigin>
+      </div>
       <OnFocused className={onFocused ? "d-block" : "d-none"} theme={theme}>
         {uniqueTags?.map((tag: any, i: number) => (
           <div

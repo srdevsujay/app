@@ -1,9 +1,10 @@
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
 import { useContext, useEffect } from "react";
 import { Table } from "../../../../styled-components/Table/index";
 import "../../../../styled-components/style.css";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import "../../../../styled-components/style.css";
+import { Chip } from "@material-ui/core";
 
 const FunnelTable = ({
   data,
@@ -44,6 +45,7 @@ const FunnelTable = ({
           },
           maxBodyHeight: maxBodyHeight,
           pageSize: pageSize,
+          emptyRowsWhenPaging: false,
         }}
         localization={{
           pagination: {
@@ -54,6 +56,65 @@ const FunnelTable = ({
           },
         }}
         style={tableStyles}
+        // components={{
+        //   Toolbar: (props) => (
+        //     <div>
+        //       <MTableToolbar {...props} />
+        //       <thead className="MuiTableHead-root prueba-css">
+        //         <tr
+        //           className="MuiTableBody-root MuiTableRow-root MuiTableRow-head"
+        //           style={{ padding: "0px 10px" }}
+        //         >
+        //           {/* <div className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             <span>Total</span>
+        //           </div> */}
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
+        //             Total
+        //           </td>
+        //         </tr>
+        //       </thead>
+        //     </div>
+        //   ),
+        // }}
       />
     </Table>
   );

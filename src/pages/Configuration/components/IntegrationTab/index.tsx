@@ -5,7 +5,7 @@ import paypal from "../../../../assets/images/paypal.png";
 import hotmart from "../../../../assets/images/hotmart.png";
 import iconPaypal from "../../../../assets/images/iconPaypal.png";
 import FormGroup from "@mui/material/FormGroup";
-import { FormControlLabel, Switch } from "@mui/material";
+import { FormControlLabel, Switch, Checkbox } from "@mui/material";
 import { CardPlatform } from "../../styled-components/Plataform/index";
 import { useContext, useRef, useState } from "react";
 import Modal from "../../../../components/modal/Modal.component";
@@ -154,7 +154,7 @@ const IntegrationTab = () => {
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Switch
+                    <Checkbox
                       checked={integration.active}
                       // onChange={handleChange}
                       inputProps={{ "aria-label": "controlled" }}

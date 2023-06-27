@@ -11,9 +11,11 @@ import {
   editUserService,
   createDeleteImageProfileService,
   loginGoogle,
+  restorePasswordService,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export const hadleLogin = (date: any): AppThunk => {
   return async (dispatch) => {
@@ -135,6 +137,37 @@ export const hadleLoginGoogle = (date: any): AppThunk => {
             user: resultAction.data.user,
           } as any)
         );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const restorePassword = (email: string): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading());
+    try {
+      const user = {
+        email,
+      };
+      const result = await restorePasswordService(user);
+      console.log("resultPassRest", result.data.data);
+      if (
+        result.data.response === 200 ||
+        result.data.message === "Update user successfully!"
+      ) {
+        Swal.fire({
+          title:
+            "Su contraseña ha sido restablecida, por favor revise la bandeja de entrada o SPAM de su correo electrónico para obtenerla.",
+          showCancelButton: false,
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            <Navigate to="/login" replace={true} />;
+          }
+        });
       }
     } catch (error) {
       console.log(error);

@@ -60,6 +60,7 @@ const Funnel = () => {
   const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
+  const [showLodash, setShowLodash] = useState([]);
 
   const toggleModal = () => setModalOpen(!isModalOpen);
 
@@ -87,11 +88,14 @@ const Funnel = () => {
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
   useEffect(() => {
-    if (dataFunnel?.length > 0) {
+    if (showLodash?.length > 0) {
       const filters = JSON.parse(filterJSON);
       totalFunnel(dataFunnel, filters, themeState);
+      console.log("entra a totalFunnel");
+      console.log("dataFunnelTotal", dataFunnel);
+      console.log("showLodashTotal", showLodash);
     }
-  }, [dataFunnel, themeState]);
+  }, [dataFunnel, showLodash, themeState]);
 
   const schema = yup.object().shape({
     funnel_name: yup.string().required("El nombre del Funnel es requerido"),
@@ -235,6 +239,8 @@ const Funnel = () => {
             <AccordionFunnel
               obtainFunnelEdit={obtainFunnelEdit}
               setCurrentSteps={setCurrentSteps}
+              showLodash={showLodash}
+              setShowLodash={setShowLodash}
             />
           </div>
         </div>

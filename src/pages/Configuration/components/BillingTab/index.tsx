@@ -542,6 +542,7 @@ const BillingTab = () => {
                       position: "sticky",
                       top: 0,
                     },
+                    emptyRowsWhenPaging: false,
                   }}
                   localization={{
                     pagination: {

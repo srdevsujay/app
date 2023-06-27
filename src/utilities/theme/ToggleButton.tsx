@@ -20,7 +20,10 @@ const Toggle: React.FC = () => {
   const theme: any = localStorage.getItem("Theme");
   const themeDark = JSON.parse(theme);
 
-  console.log("entra al localStorage", localStorage.getItem("Theme"));
+  console.log(
+    "entra al localStorage, acá aplicar lo del Auth",
+    localStorage.getItem("Theme")
+  );
 
   return (
     <button className="btn handleTheme" onClick={newToggleTheme}>

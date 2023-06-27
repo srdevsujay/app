@@ -108,6 +108,7 @@ const Sidebar: FC = () => {
   }, [usersub, subscriptionUser]);
 
   console.log("SidebarDataStatusCancel", SidebarDataStatusCancel);
+
   const { theme, themeSliderText } = useContext(ThemeContext);
   const [activeItem, setActiveItem] = useState("");
   return (

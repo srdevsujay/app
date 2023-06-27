@@ -160,7 +160,7 @@ export const obtainApiRuleURL = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataRuleURL();
-      const currentDataRule: any = _.orderBy(result.data, "id", "asc");
+      const currentDataRule: any = _.orderBy(result.data, "created_on", "desc");
       dispatch(setRule(currentDataRule));
     } catch (error) {
       console.log(error);
