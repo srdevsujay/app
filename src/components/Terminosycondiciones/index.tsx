@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Title } from "../../styled-components/Title/index";
+import FooterMenu from "../Footer";
 
 const Terminosycondiciones = () => {
   return (
@@ -13,7 +14,7 @@ const Terminosycondiciones = () => {
             position: "sticky",
             top: 0,
             zIndex: 99999,
-            background: "#80808017",
+            background: "rgb(236 236 236)",
             fontFamily: "Helvetica-NeueL-Title",
           }}
         >
@@ -34,7 +35,10 @@ const Terminosycondiciones = () => {
         </div>
         <div className="col-md-12" style={{ fontFamily: "Helvetica-NeueL" }}>
           <div className="card">
-            <div className="card-body">
+            <div
+              className="card-body"
+              style={{ overflowY: "auto", height: "76vh" }}
+            >
               <div className="row">
                 <div className="col-sm-12">
                   <div className="form-group">
@@ -491,6 +495,7 @@ const Terminosycondiciones = () => {
           </div>
         </div>
       </div>
+      <FooterMenu />
     </>
   );
 };

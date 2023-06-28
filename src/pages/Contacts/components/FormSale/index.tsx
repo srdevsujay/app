@@ -24,6 +24,8 @@ import { useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 interface IFormInput {
   fullName: String;
@@ -89,9 +91,17 @@ const FormSale = ({
       const dateFormat = currentDate.format("DD-MMM-YYYY hh:mm A");
       console.log("currentEditdatenew dateFormat", dateFormat);
       console.log("currentEditdatenew dateFormatnew", new Date(date));
+      console.log("Date(date).toISOString()", new Date(date).toISOString());
+      const currentFormatIso = new Date(date).toISOString();
+      const formattedDate1 = currentFormatIso.slice(0, -1);
+      const formattedDate = moment(formattedDate1).format(
+        "ddd MMM DD YYYY HH:mm:ss [GMT]ZZ (z)"
+      );
+      console.log("formattedDate", formattedDate);
       const currentDateSale = moment(date).format("YYYY-MM-DD hh:mm:ss");
       console.log("currentEditdatenew currentDateSale", currentDateSale);
-      setDateSale(new Date(date));
+      setDateSale(formattedDate1);
+      // setDateSale(new Date(date).toISOString());
     }
   };
 
@@ -188,10 +198,11 @@ const FormSale = ({
     const currentRefaund = refaund ? originalPrice : 0;
 
     const today = new Date(currentDateSale).toISOString();
-    console.log("today", today);
+    const formattedDate = today.slice(0, -1);
+    console.log("today", formattedDate);
 
     const form: any = {
-      date: today,
+      date: formattedDate,
       email: data.email,
       funnel_id: data.selectFunnel,
       phone: data.phone,
@@ -264,10 +275,10 @@ const FormSale = ({
           </div>
           <div className="form-group col-sm-12 date-width">
             <label className="title-label-popup w-100">Fecha y Hora</label>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
-                value={dateSale}
-                minDate={today}
+                value={dayjs(dateSale)}
+                minDate={dayjs(today)}
                 onChange={(newValue: any) => {
                   setDateSale(newValue);
                 }}

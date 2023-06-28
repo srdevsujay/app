@@ -21,6 +21,7 @@ import {
 } from "../../../../pages/Contacts/services/index";
 import _ from "lodash";
 import Swal from "sweetalert2";
+import { signOut } from "../../../../utilities/localstorage.utility";
 import {
   createSaleService,
   deleteSaleService,
@@ -30,6 +31,7 @@ import {
   getDataSales,
   getUserProfile,
 } from "../../../../pages/Contacts/services/index";
+import { logoutUser } from "../login/authSlice";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
@@ -37,6 +39,13 @@ export const obtainApiContacts = (): AppThunk => {
     try {
       const result = await getDataLeads();
       const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       dispatch(setLeads(currentDataLead));
     } catch (error) {
       console.log(error);
@@ -133,6 +142,13 @@ export const obtainApiBooking = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataBooking();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataLead: any = _.orderBy(
         result.data,
         "appoiment_date",
@@ -241,6 +257,13 @@ export const obtainApiSale = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataSales();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataLead: any = _.orderBy(result.data.data, "date", "desc");
       dispatch(setSale(currentDataLead));
     } catch (error) {

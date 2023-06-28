@@ -15,6 +15,7 @@ import {
 import _ from "lodash";
 import Swal from "sweetalert2";
 import { deleteRuleURLService } from "../../../../pages/Tracking/services/index";
+import { signOut } from "../../../../utilities/localstorage.utility";
 import {
   createRuleURLService,
   editRuleURLService,
@@ -27,12 +28,20 @@ import {
   getDataTag,
   getDataAttribution,
 } from "../../../../pages/Tracking/services/index";
+import { logoutUser } from "../login/authSlice";
 
 export const obtainApiProduct = (): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await getDataProduct();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataProduct: any = _.orderBy(result.data, "id", "desc");
       dispatch(setProduct(currentDataProduct));
     } catch (error) {
@@ -112,6 +121,13 @@ export const obtainApiTag = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataTag();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataTag: any = _.orderBy(result.data.data, "id", "desc");
       dispatch(setTag(currentDataTag));
     } catch (error) {
@@ -125,6 +141,13 @@ export const obtainApiAttribution = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataAttribution();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const DataAttribution: any = _.orderBy(result.data.data, "id", "asc");
       dispatch(setAttribution(DataAttribution));
     } catch (error) {
@@ -160,6 +183,13 @@ export const obtainApiRuleURL = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataRuleURL();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataRule: any = _.orderBy(result.data, "created_on", "desc");
       dispatch(setRule(currentDataRule));
     } catch (error) {

@@ -486,7 +486,7 @@ const CreateAccount = () => {
                     className="ml-1"
                     style={{ textDecoration: "none" }}
                   >
-                    <b className="text-muted">Regresar al Login</b>
+                    <b className="text-muted">Tengo una cuenta</b>
                   </Link>
                 </p>
               </div>

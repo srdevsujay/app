@@ -36,6 +36,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [exception, setException] = useState<any>([]);
   const [selectTypeTagOnchange, setSelectTypeTagOnchange] = useState("Venta");
   const [words, setWords] = useState<any>([]);
+  const [apply, setApply] = useState("URL Anterior");
   const schema = yup.object().shape({
     name: yup.string().required("El nombre del producto es requerido"),
     tag: yup.string().required("La Categoria es requerido"),
@@ -59,6 +60,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       setIdEditLead(currentEdit.id);
       setException(JSON.parse(currentEdit.exeptions));
       setWords(JSON.parse(currentEdit.words));
+      setApply(currentEdit?.apply_to);
       const currentTypeTag = currentEdit.tag.substring(1, 0);
       console.log("currentTypeTag", currentTypeTag);
       const tag =
@@ -118,7 +120,6 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
   };
 
-  const [apply, setApply] = useState("URL Anterior");
   console.log("apply", apply);
   console.log("exception", exception);
 
@@ -151,11 +152,10 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
         >
           <label
             className={`btn btn-secondary title-label-popup ${
-              currentEdit?.apply_to === "URL Anterior"
-                ? "active"
-                : currentEdit?.length !== 0
-                ? ""
-                : "active"
+              apply === "URL Anterior" ? "active" : ""
+              // : currentEdit?.length !== 0
+              // ? ""
+              // : "active"
             }`}
           >
             <input
@@ -163,7 +163,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               name="apply"
               id="option1"
               // autocomplete="off"
-              checked
+              // checked
               value="URL Anterior"
               onClick={(e) => onChangeFormApply(e)}
             />{" "}
@@ -171,7 +171,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           </label>
           <label
             className={`btn ${
-              currentEdit?.apply_to === "URL Actual" ? "active" : ""
+              apply === "URL Actual" ? "active" : ""
             } btn-secondary title-label-popup`}
           >
             <input
@@ -186,7 +186,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           </label>
           <label
             className={`btn ${
-              currentEdit?.apply_to === "Ambas URL" ? "active" : ""
+              apply === "Ambas URL" ? "active" : ""
             } btn-secondary title-label-popup`}
           >
             <input

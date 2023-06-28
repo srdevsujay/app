@@ -22,6 +22,7 @@ import {
 import qs from "qs";
 import { clientAxios } from "../../../../services/axios";
 import { updateSubscriptionStripeService } from "../../../../pages/Configuration/services/index";
+import { signOut } from "../../../../utilities/localstorage.utility";
 import {
   getUserTotalSaleMonthService,
   getCancelSubscriptionService,
@@ -34,12 +35,20 @@ import {
   createSubscriptionStripeService,
   getDataSubscriptionsPlans,
 } from "../../../../pages/Configuration/services/index";
+import { logoutUser } from "../login/authSlice";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await getDataLeads();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
       dispatch(setLeads(currentDataLead));
     } catch (error) {
@@ -237,6 +246,13 @@ export const obtainApiStripe = (): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await getDataSubscriptionsPlans();
+      if (
+        result.data.message === "Token is invalid!" ||
+        result.data.error === "Signature has expired"
+      ) {
+        signOut();
+        dispatch(logoutUser());
+      }
       dispatch(setSubscriptionsPlans(result.data));
     } catch (error) {
       console.log(error);

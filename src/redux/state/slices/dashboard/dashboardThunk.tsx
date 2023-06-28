@@ -9,7 +9,10 @@ import {
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
-import { getCurrentUser } from "../../../../utilities/localstorage.utility";
+import {
+  getCurrentUser,
+  signOut,
+} from "../../../../utilities/localstorage.utility";
 import {
   getDataPnl,
   getDataFunnel,
@@ -26,6 +29,7 @@ import {
 } from "../../../../pages/Dashboard/services/pnlApi";
 import Swal from "sweetalert2";
 import { deleteFunnelService } from "../../../../pages/Dashboard/services/pnlApi";
+import { logoutUser } from "../login/authSlice";
 
 export const getMetricFunnel = (date?: DateFormat): AppThunk => {
   return async (dispatch) => {
@@ -34,7 +38,14 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
       const dateFormat = getDate(date);
       const resultAction = await getDataPnl(!date ? dateFormat : date);
       console.log("resultActionDashboard", resultAction);
-
+      if (
+        resultAction.data.message === "Token is invalid!" ||
+        resultAction.data.error === "Signature has expired"
+      ) {
+        console.log("Se logea");
+        signOut();
+        dispatch(logoutUser());
+      }
       const currentDataPNL: any = _.orderBy(
         resultAction.data.data,
         "id",
@@ -121,6 +132,14 @@ export const obtainApiDashboardFunnel = (
       //   "id",
       //   "asc"
       // );
+      if (
+        resultAction.data.message === "Token is invalid!" ||
+        resultAction.data.error === "Signature has expired"
+      ) {
+        console.log("Se logea Funnel");
+        signOut();
+        dispatch(logoutUser());
+      }
       dispatch(setDataFunnel(resultAction.data));
     } catch (error) {
       console.log(error);

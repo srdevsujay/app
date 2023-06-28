@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FooterMenu from "../Footer";
 
 const Politicasdeprivacidad = () => {
   return (
@@ -11,7 +12,7 @@ const Politicasdeprivacidad = () => {
           position: "sticky",
           top: 0,
           zIndex: 99999,
-          background: "#80808017",
+          background: "rgb(236 236 236)",
           fontFamily: "Helvetica-NeueL-Title",
         }}
       >
@@ -34,7 +35,10 @@ const Politicasdeprivacidad = () => {
       >
         <div className="col-md-12">
           <div className="card">
-            <div className="card-body">
+            <div
+              className="card-body"
+              style={{ overflowY: "auto", height: "76vh" }}
+            >
               <div className="row">
                 <div className="col-sm-12">
                   <div className="form-group">
@@ -371,6 +375,7 @@ const Politicasdeprivacidad = () => {
           </div>
         </div>
       </div>
+      <FooterMenu />
     </div>
   );
 };
