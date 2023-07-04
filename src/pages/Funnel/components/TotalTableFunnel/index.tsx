@@ -81,6 +81,8 @@ export const totalFunnel = (tempGroup: any, filters: any, themeState: any) => {
   const arrDataTotal = [];
   arrDataTotal.push(dataTotal);
 
+  console.log("arrDataTotal---", arrDataTotal);
+  console.log("filters---", filters);
   const currentFunnel: any = {};
   if (filters?.length > 0) {
     filters.map(({ field, name, checkbox }: any) => {

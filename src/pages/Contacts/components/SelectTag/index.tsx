@@ -111,9 +111,7 @@ const SelectTag = ({
         className="w-100"
       />
       <div
-        className={
-          selectedTag === "" ? "d-none mt-2 mb-2" : "d-block mt-2 mb-2"
-        }
+        className={selectedTag === "" ? "d-none" : "d-block mb-2"}
         onClick={clearFilter}
       >
         <div className="custom-div"></div>

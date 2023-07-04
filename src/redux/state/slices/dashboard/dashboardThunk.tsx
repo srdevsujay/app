@@ -108,6 +108,7 @@ export const obtainApiDashboardFunnel = (
   date?: DateFormat
 ): AppThunk => {
   return async (dispatch, getState) => {
+    dispatch(starLoading());
     try {
       // return async (dispatch, getState) => {
       //   const { dataPNL, dataTracking } = getState().dashboard;
@@ -118,6 +119,7 @@ export const obtainApiDashboardFunnel = (
       //       dataTracking: dataTracking,
       //     } as any)
       //   );
+
       let type_dashboard = typeDashboard[i]?.type_dashboard;
       let dateFormat = getDate(date);
       let objFacebook = {

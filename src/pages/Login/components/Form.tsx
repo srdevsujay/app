@@ -63,7 +63,7 @@ const Form = () => {
     console.log("password-", password === "");
     if (email === "" || password === "") {
       // toast.error("ingrese correo o contraseña");
-      Swal.fire("", "Ingrese el correo o la contraseña", "info");
+      Swal.fire("", "Ingrese el correo y/o la contraseña", "info");
     } else {
       dispatch(hadleLogin({ email, password }));
     }

@@ -26,6 +26,7 @@ import { FormControlLabel } from "@mui/material";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { addHours, format } from "date-fns";
 
 interface IFormInput {
   fullName: String;
@@ -55,6 +56,7 @@ const FormSale = ({
   const [price, setPrice] = useState(dataProduct[0]?.price);
   const [originalPrice, setOriginalPrice] = useState();
   const [dateSale, setDateSale] = useState<any>(today);
+  const [dateSale2, setDateSale2] = useState<any>();
   const [selectProductOnchange, setSelectProductOnchange] = useState();
 
   const schema = yup.object().shape({
@@ -98,9 +100,17 @@ const FormSale = ({
         "ddd MMM DD YYYY HH:mm:ss [GMT]ZZ (z)"
       );
       console.log("formattedDate", formattedDate);
-      const currentDateSale = moment(date).format("YYYY-MM-DD hh:mm:ss");
-      console.log("currentEditdatenew currentDateSale", currentDateSale);
-      setDateSale(formattedDate1);
+      ////////////
+      const currentFormatDateToday = moment
+        .utc(formattedDate1)
+        .format("YYYY-MM-DD HH:mm:ss");
+      console.log("currentFormatDateToday", currentFormatDateToday);
+      console.log("currentFormatDateTodaydate", date);
+      const fechaHoraNueva = moment(date)
+        .add(10, "hours")
+        .format("ddd, DD MMM YYYY HH:mm:ss [GMT]");
+      console.log("fechaHoraNueva", fechaHoraNueva);
+      setDateSale(fechaHoraNueva);
       // setDateSale(new Date(date).toISOString());
     }
   };
@@ -174,7 +184,7 @@ const FormSale = ({
   }, [selectProductOnchange]);
 
   const [refaund, setRefaund] = useState(false);
-
+  console.log("dateSaleFechaHora12", dateSale);
   const onSubmit = (data: any) => {
     if (dataProduct.length === 0) {
       Swal.fire({
@@ -193,16 +203,17 @@ const FormSale = ({
       });
       return;
     }
-    const currentDateSale = moment(dateSale).format("YYYY-MM-DD hh:mm:ss");
+    console.log("dateSaleFechaHora", dateSale);
+    const currentDateSale = moment.utc(dateSale).format("YYYY-MM-DD HH:mm:ss");
     const currentRefaundPrice = !refaund ? data.price : 0;
     const currentRefaund = refaund ? originalPrice : 0;
 
-    const today = new Date(currentDateSale).toISOString();
-    const formattedDate = today.slice(0, -1);
-    console.log("today", formattedDate);
+    // const today = new Date(currentDateSale).toISOString();
+    // const formattedDate = today.slice(0, -1);
+    console.log("currentDateSale", currentDateSale);
 
     const form: any = {
-      date: formattedDate,
+      date: currentDateSale,
       email: data.email,
       funnel_id: data.selectFunnel,
       phone: data.phone,
@@ -280,8 +291,10 @@ const FormSale = ({
                 value={dayjs(dateSale)}
                 minDate={dayjs(today)}
                 onChange={(newValue: any) => {
-                  setDateSale(newValue);
+                  console.log("cambianewValue", newValue.$d);
+                  setDateSale(newValue.$d);
                 }}
+                ampm={false}
               />
             </LocalizationProvider>
           </div>

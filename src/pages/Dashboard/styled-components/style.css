@@ -83,6 +83,10 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
   display: none !important;
 }
 
+.backgroundTotal th {
+  font-family: 'Helvetica-NeueL-Title' !important;
+}
+
 .backgroundTotalDark {
   background: #0D0D0D;
   display: none !important;

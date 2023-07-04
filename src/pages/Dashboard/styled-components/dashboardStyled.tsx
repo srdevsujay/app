@@ -66,7 +66,7 @@ export const ContainerFiltersFunnel = styled.div`
   display: flex;
   align-items: center;
   right: 0;
-  z-index: 9;
+  /* z-index: 9; */
 `;
 
 export const HeaderTitleGraphic = styled.div`

@@ -87,15 +87,16 @@ const Funnel = () => {
   };
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
-  useEffect(() => {
-    if (showLodash?.length > 0) {
-      const filters = JSON.parse(filterJSON);
-      totalFunnel(dataFunnel, filters, themeState);
-      console.log("entra a totalFunnel");
-      console.log("dataFunnelTotal", dataFunnel);
-      console.log("showLodashTotal", showLodash);
-    }
-  }, [dataFunnel, showLodash, themeState]);
+  // Total que se agrega con las clases de la Table
+  // useEffect(() => {
+  //   if (showLodash?.length > 0) {
+  //     const filters = JSON.parse(filterJSON);
+  //     totalFunnel(dataFunnel, filters, themeState);
+  //     console.log("entra a totalFunnel");
+  //     console.log("dataFunnelTotal", dataFunnel);
+  //     console.log("showLodashTotal", showLodash);
+  //   }
+  // }, [dataFunnel, showLodash, themeState]);
 
   const schema = yup.object().shape({
     funnel_name: yup.string().required("El nombre del Funnel es requerido"),
@@ -231,25 +232,6 @@ const Funnel = () => {
       width={toggleSlider === true ? "87vw" : "96vw"}
       theme={themeDarkLight}
     >
-      <Card height="75vh" borderRadius="16px 16px 0 0" theme={theme}>
-        <Title fontSize="17px">Funnel</Title>
-        <div className="row">
-          <Bar></Bar>
-          <div className="col-sm-12">
-            <AccordionFunnel
-              obtainFunnelEdit={obtainFunnelEdit}
-              setCurrentSteps={setCurrentSteps}
-              showLodash={showLodash}
-              setShowLodash={setShowLodash}
-            />
-          </div>
-        </div>
-      </Card>
-      <NewFunnel theme={themeBackNewFunnel}>
-        <ButtonFunnel theme={themeDarkLight} onClick={addNewFunnel}>
-          + Nuevo
-        </ButtonFunnel>
-      </NewFunnel>
       <Modal
         title={"Crear Funnel"}
         isOpen={isModalOpen}
@@ -300,6 +282,37 @@ const Funnel = () => {
           </ContainerSticky>
         </form>
       </Modal>
+      <Card height="75vh" borderRadius="16px 16px 0 0" theme={theme}>
+        <Title fontSize="17px">Funnel</Title>
+        <div className="row">
+          <Bar></Bar>
+          <div className="col-sm-12">
+            <AccordionFunnel
+              obtainFunnelEdit={obtainFunnelEdit}
+              setCurrentSteps={setCurrentSteps}
+              showLodash={showLodash}
+              setShowLodash={setShowLodash}
+              isModalOpen={isModalOpen}
+              toggleModal={toggleModal}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              register={register}
+              errors={errors}
+              currentDataEditFunnel={currentDataEditFunnel}
+              currentSteps={currentSteps}
+              removeStep={removeStep}
+              adAccounts={adAccounts}
+              setAdAccounts={setAdAccounts}
+              removeCampaign={removeCampaign}
+            />
+          </div>
+        </div>
+      </Card>
+      <NewFunnel theme={themeBackNewFunnel}>
+        <ButtonFunnel theme={themeDarkLight} onClick={addNewFunnel}>
+          + Nuevo
+        </ButtonFunnel>
+      </NewFunnel>
       <FooterMenu />
     </Main>
   );

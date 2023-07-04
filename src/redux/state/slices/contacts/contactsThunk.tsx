@@ -35,7 +35,7 @@ import { logoutUser } from "../login/authSlice";
 
 export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await getDataLeads();
       const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
@@ -55,7 +55,7 @@ export const obtainApiContacts = (): AppThunk => {
 
 export const createLead = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const today = new Date().toISOString();
       const form = {
@@ -78,7 +78,7 @@ export const createLead = (data: any): AppThunk => {
 
 export const editLead = (data: any, id: number): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const today = new Date().toISOString();
       const form = {
@@ -103,7 +103,7 @@ export const editLead = (data: any, id: number): AppThunk => {
 
 export const deleteLead = (id: number): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    // dispatch(starLoading());
     try {
       Swal.fire({
         title: "¿Estas seguro?",
@@ -139,7 +139,7 @@ export const deleteLead = (id: number): AppThunk => {
 
 export const obtainApiBooking = (): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await getDataBooking();
       if (
@@ -169,7 +169,7 @@ export const obtainApiBooking = (): AppThunk => {
 
 export const createBooking = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await createBookingService(data);
       if (result.data.message === "Create Booking successfully!") {
@@ -184,7 +184,7 @@ export const createBooking = (data: any): AppThunk => {
 
 export const editBooking = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await editBookingService(data);
       if (result.data.message === "Edit Booking successfully!") {
@@ -200,7 +200,7 @@ export const editBooking = (data: any): AppThunk => {
 
 export const editStateBooking = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await editBookingStateService(data);
       if (result.data.message === "Edit Booking successfully!") {
@@ -220,7 +220,7 @@ export const editStateBooking = (data: any): AppThunk => {
 
 export const deleteBooking = (id: number): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       Swal.fire({
         title: "¿Estas seguro?",
@@ -254,7 +254,7 @@ export const deleteBooking = (id: number): AppThunk => {
 
 export const obtainApiSale = (): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await getDataSales();
       if (
@@ -274,7 +274,7 @@ export const obtainApiSale = (): AppThunk => {
 
 export const createSale = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await createSaleService(data);
       if (
@@ -292,7 +292,7 @@ export const createSale = (data: any): AppThunk => {
 
 export const editSale = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await editSaleService(data);
       if (result.data.message === "Edit Sale successfully!") {
@@ -308,7 +308,7 @@ export const editSale = (data: any): AppThunk => {
 
 export const deleteSale = (id: number): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       Swal.fire({
         title: "¿Estas seguro?",
@@ -342,7 +342,7 @@ export const deleteSale = (id: number): AppThunk => {
 
 export const obtainUserProfile = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await getUserProfile(data);
       console.log("resultProfile", result);
@@ -356,7 +356,7 @@ export const obtainUserProfile = (data: any): AppThunk => {
 
 export const createTrafficSource = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading);
+    dispatch(starLoading());
     try {
       const result = await createTrafficSourceService(data);
       console.log("resultTraficc", result);

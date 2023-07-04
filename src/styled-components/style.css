@@ -24,7 +24,8 @@
   display: block !important;
 }
 
-/* .column-container {
+/* lo teniamos comentado, no se sabe si afectaba otras etiquetas */
+.column-container {
   height: 30px;
   width: auto;
   margin: 10px;
@@ -35,7 +36,7 @@
   font-size: 13px;
   font-family: "Helvetica-NeueL-Title";
   white-space: nowrap;
-} */
+}
 
 .column-container > label {
   margin-left: 8px;

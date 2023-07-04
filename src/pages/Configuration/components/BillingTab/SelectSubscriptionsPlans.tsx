@@ -261,13 +261,13 @@ const SelectSubscriptionsPlans = ({
           </div>
         </div>
         <div className="row mt-3 justify-content-end">
-          <div className="form-group col-sm-2 pr-0">
+          <div className="form-group col-sm-3 pr-0">
             {toggleEditSubscription === 1 ? (
               <ButtonsProfile
                 className="btn w-100"
                 onClick={hanldeUpdateSubscriptionStripe}
               >
-                Actualizar
+                Actualizar Suscripción
               </ButtonsProfile>
             ) : (
               <ButtonsProfile className="btn w-100" onClick={handleNextStep}>

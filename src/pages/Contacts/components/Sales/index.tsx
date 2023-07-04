@@ -45,7 +45,7 @@ setAutoFreeze(false);
 
 const Sales = () => {
   const dispatch = useAppDispatch();
-  const { dataSale } = useAppSelector((state) => state.contact);
+  const { dataSale, isLoading } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Venta");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -244,7 +244,7 @@ const Sales = () => {
       >
         <CustomerDetails />
       </Modal>
-      {filteredDataDos === undefined ? (
+      {filteredDataDos === undefined || isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "250px", zIndex: "99999999" }}

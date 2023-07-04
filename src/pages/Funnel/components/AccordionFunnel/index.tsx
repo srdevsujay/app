@@ -108,7 +108,7 @@ const AccordionFunnel = ({
   );
   console.log("dataTracking", dataTracking);
   const { id: user_funel } = useAppSelector((state) => state.user.user);
-
+  const { isLoading } = useAppSelector((state) => state.dashboard);
   // .map((data: any) => ({
   //   ...data,
   //   campaigns: data?.campaigns?.map((campaign: any) => ({
@@ -120,13 +120,12 @@ const AccordionFunnel = ({
   //   })),
   // }));
 
-  const { filters: objFilter }: any = useAppSelector(
+  const { filters: objFilter, data: dataFunnel }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
 
-  const dataF: any = useAppSelector((state) => state.dashboard.dataFunnel);
-
-  console.log("dataFunnel--", Array.isArray(dataF.data));
+  // console.log("dataFunnel--", Array.isArray(dataF.data));
+  console.log("dataFunnel", dataFunnel);
 
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [funnelDays, setFunnelDays] = useState<number>(7);
@@ -1039,7 +1038,7 @@ const AccordionFunnel = ({
             <AccordionDetails>
               <Typography>
                 <div className="table-responsive ocultarMostrar">
-                  {showLodash.length === 0 ? (
+                  {showLodash.length === 0 || isLoading === true ? (
                     <div
                       className="d-flex justify-content-center align-items-center"
                       style={{ height: "250px", zIndex: "99999999" }}
@@ -1049,6 +1048,7 @@ const AccordionFunnel = ({
                   ) : (
                     <FunnelTable
                       data={dataDataFunnel}
+                      // data={dataFunnel}
                       columns={columnsToSet}
                       pageSizeOptions={[7, 15, 31]}
                       maxBodyHeight={"60vh"}

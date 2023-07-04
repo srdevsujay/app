@@ -1,10 +1,17 @@
-import MaterialTable, { MTableToolbar } from "material-table";
-import { useContext, useEffect } from "react";
+import MaterialTable, { MTableHeader, MTableToolbar } from "material-table";
+import { useContext, useEffect, useState } from "react";
 import { Table } from "../../../../styled-components/Table/index";
 import "../../../../styled-components/style.css";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import "../../../../styled-components/style.css";
 import { Chip } from "@material-ui/core";
+import _ from "lodash";
+import { useAppSelector } from "../../../../hooks/appDispatch";
+import { FormatNumber } from "../../../../utilities/FormatNumber";
+
+interface DataObject {
+  [key: string]: number;
+}
 
 const FunnelTable = ({
   data,
@@ -14,6 +21,11 @@ const FunnelTable = ({
   pageSize,
 }: any) => {
   const { theme } = useContext(ThemeContext);
+  const { filters: filterJSON }: any = useAppSelector(
+    (state) => state.dashboard.dataFunnel
+  );
+
+  const [currentTotalColumns, setCurrentTotalColumns] = useState<any>([]);
 
   const tableStyles = {
     backgroundColor: theme.background,
@@ -23,6 +35,62 @@ const FunnelTable = ({
 
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
+
+  // con esto podemos mirar la data real del funnel que le esta pasando
+  // const dataTotal = () => {
+  //   data.map((total: any) => {
+  //     console.log("totalFunnel--", total);
+  //   });
+  //   // spend: _.sumBy(tempGroup, "spend"),
+  // };
+
+  // useEffect(() => {
+  //   dataTotal();
+  // }, []);
+
+  useEffect(() => {
+    const keys = _.union(...data.map(Object.keys));
+
+    // Sumar las propiedades de los objetos separados por clave
+    const sumByProperties: Record<string, number> = data.reduce(
+      (accumulator: any, obj: any) => {
+        keys.forEach((key: any) => {
+          if (typeof obj[key] === "number") {
+            accumulator[key] = (accumulator[key] || 0) + obj[key];
+          }
+        });
+        return accumulator;
+      },
+      {}
+    );
+
+    const filters = JSON.parse(filterJSON);
+    console.log("filters", filters);
+    const currentFunnel: any = {};
+    if (filters?.length > 0) {
+      filters.map(({ field, name, checkbox }: any) => {
+        if (field in sumByProperties) {
+          currentFunnel[field] = {
+            field,
+            name,
+            checkbox,
+            total: sumByProperties[field],
+          };
+        }
+      });
+    }
+    const newObject = {
+      AFecha: {
+        field: "Fecha",
+        name: "Total",
+        checkbox: true,
+        total: "Total",
+      },
+    };
+    const updatedFunnel = Object.assign({}, newObject, currentFunnel);
+    console.log("currentFunnel---", Object.values(updatedFunnel));
+    setCurrentTotalColumns(Object.values(updatedFunnel));
+  }, [data, filterJSON]);
 
   return (
     <Table
@@ -56,65 +124,46 @@ const FunnelTable = ({
           },
         }}
         style={tableStyles}
-        // components={{
-        //   Toolbar: (props) => (
-        //     <div>
-        //       <MTableToolbar {...props} />
-        //       <thead className="MuiTableHead-root prueba-css">
-        //         <tr
-        //           className="MuiTableBody-root MuiTableRow-root MuiTableRow-head"
-        //           style={{ padding: "0px 10px" }}
-        //         >
-        //           {/* <div className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             <span>Total</span>
-        //           </div> */}
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //           <td className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft">
-        //             Total
-        //           </td>
-        //         </tr>
-        //       </thead>
-        //     </div>
-        //   ),
-        // }}
+        components={{
+          Header: (props, i) => (
+            <>
+              <MTableHeader {...props} />
+              <thead key={i} className="MuiTableHead-root prueba-css">
+                <tr
+                  className="MuiTableRow-root MuiTableRow-head backgroundTotal"
+                  style={{ padding: "0px 10px" }}
+                >
+                  {currentTotalColumns.map((sum: any) => {
+                    console.log("summmmm", sum.name.substring(0, 1));
+                    if (sum.checkbox === true) {
+                      if (sum.name.substring(0, 1) === "$") {
+                        return (
+                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                            <FormatNumber number={sum.total} />
+                          </th>
+                        );
+                      } else if (sum.name.substring(0, 1) === "%") {
+                        return (
+                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                            {(sum.total * 100).toLocaleString(undefined, {
+                              style: "percent",
+                            })}
+                          </th>
+                        );
+                      } else {
+                        return (
+                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                            {sum.total}
+                          </th>
+                        );
+                      }
+                    }
+                  })}
+                </tr>
+              </thead>
+            </>
+          ),
+        }}
       />
     </Table>
   );

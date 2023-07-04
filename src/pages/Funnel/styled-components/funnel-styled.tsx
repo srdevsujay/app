@@ -16,11 +16,12 @@ export const ButtonFunnel = styled.button`
   text-align: center;
   width: 97%;
   border: none;
+  font-family: "Helvetica-NeueL-Title";
 `;
 
 export const ContainerAccordion = styled.div`
   border-bottom: 1px solid #80808026;
-  position: sticky;
+  /* position: sticky; */
 
   .width-vw {
     background-color: ${(props) => props.theme.background};
