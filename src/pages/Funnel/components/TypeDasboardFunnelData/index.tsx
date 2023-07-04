@@ -126,7 +126,7 @@ export const TypeDashboardDataTableColumns = (
       atColumn(funnelData),
       cpatColumn(funnelData),
       atrColumn(funnelData),
-      ctaColumn(false),
+      ctaColumn(funnelData),
       LTAColumn(funnelData),
       CKORColumn(funnelData),
       ApsColumn(funnelData),

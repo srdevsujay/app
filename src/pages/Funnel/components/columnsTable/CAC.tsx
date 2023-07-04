@@ -34,7 +34,7 @@ export const CACColumn = (funnelData: any) => {
             ? "back-green-table"
             : "back-danger-table"
         }`}
-      >{`$${funnelData?.CAC.toFixed(2)}`}</BackColorsTable>
+      >{`$${funnelData?.CAC?.toFixed(2)}`}</BackColorsTable>
     ),
   };
 };

@@ -47,12 +47,16 @@ const FunnelTable = ({
   // useEffect(() => {
   //   dataTotal();
   // }, []);
-
+  const [currentDataFunnel, setCurrentDataFunnel] = useState([]);
   useEffect(() => {
+    if (!data) return;
     const keys = _.union(...data.map(Object.keys));
-
+    const cloneData = structuredClone(data);
+    setCurrentDataFunnel(cloneData);
+    console.log("DataColunscurrent", cloneData);
+    console.log("DataColunscurrentkeys", keys);
     // Sumar las propiedades de los objetos separados por clave
-    const sumByProperties: Record<string, number> = data.reduce(
+    const sumByProperties: Record<string, number> = cloneData.reduce(
       (accumulator: any, obj: any) => {
         keys.forEach((key: any) => {
           if (typeof obj[key] === "number") {
@@ -91,7 +95,8 @@ const FunnelTable = ({
     console.log("currentFunnel---", Object.values(updatedFunnel));
     setCurrentTotalColumns(Object.values(updatedFunnel));
   }, [data, filterJSON]);
-
+  console.log("currentDataFunnel", currentDataFunnel.length);
+  console.log("currentTotalColumns.length", currentTotalColumns.length);
   return (
     <Table
       className={themeState === true || themeState === "true" ? "tables" : ""}
@@ -99,7 +104,7 @@ const FunnelTable = ({
     >
       <MaterialTable
         title=""
-        data={data}
+        data={currentDataFunnel}
         columns={columns}
         options={{
           columnsButton: false,

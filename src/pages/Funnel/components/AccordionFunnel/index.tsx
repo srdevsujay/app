@@ -125,7 +125,7 @@ const AccordionFunnel = ({
   );
 
   // console.log("dataFunnel--", Array.isArray(dataF.data));
-  console.log("dataFunnel", dataFunnel);
+  console.log("dataFunnel.", dataFunnel);
 
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [funnelDays, setFunnelDays] = useState<number>(7);
@@ -190,6 +190,8 @@ const AccordionFunnel = ({
   useEffect(() => {
     if (objFilter) {
       const filter = JSON.parse(objFilter);
+      console.log("filterJSON", filter);
+
       const getDataColumns = filter.map((funnel: any) => {
         return TypeDashboardDataTableColumns(
           funnel,
@@ -203,9 +205,16 @@ const AccordionFunnel = ({
           getDataColumns2.push(getDataColumns[i][i]);
         }
       }
-      const activeColumns = getDataColumns2?.filter(
-        (column: any) => column.checkbox
-      );
+      console.log("getDataColumns2", getDataColumns2);
+      // if(getDataColumns2 !== undefined) {
+
+      // }
+      const activeColumns = getDataColumns2?.filter((column: any) => {
+        console.log("column...", column);
+        if (column !== undefined) {
+          return column.checkbox;
+        }
+      });
       console.log("activeColumns--", activeColumns);
       setColumnsToSet(activeColumns);
       setShowLodash(activeColumns);
@@ -901,7 +910,7 @@ const AccordionFunnel = ({
     },
   ];
 
-  console.log("dataDataFunnel", typeof dataDataFunnel);
+  console.log("dataDataFunnel", dataDataFunnel);
   const { theme, themeButtonDropdown, themeFilterFunnel } =
     useContext(ThemeContext);
   return (
@@ -984,13 +993,13 @@ const AccordionFunnel = ({
                       theme={themeFilterFunnel}
                     >
                       {dataFunnelToggle?.map((column: any) => (
-                        <div key={column.name} className="column-container">
+                        <div key={column?.name} className="column-container">
                           <Checkbox
                             {...label}
-                            checked={column.checkbox}
+                            checked={column?.checkbox}
                             onChange={(e) => handleColumnToggle(e, column)}
                           />
-                          <label>{column.name}</label>
+                          <label>{column?.name}</label>
                         </div>
                       ))}
                     </ContainerDropdown>
@@ -1038,7 +1047,7 @@ const AccordionFunnel = ({
             <AccordionDetails>
               <Typography>
                 <div className="table-responsive ocultarMostrar">
-                  {showLodash.length === 0 || isLoading === true ? (
+                  {showLodash.length === 0 ? (
                     <div
                       className="d-flex justify-content-center align-items-center"
                       style={{ height: "250px", zIndex: "99999999" }}
@@ -1047,8 +1056,7 @@ const AccordionFunnel = ({
                     </div>
                   ) : (
                     <FunnelTable
-                      data={dataDataFunnel}
-                      // data={dataFunnel}
+                      data={dataFunnel}
                       columns={columnsToSet}
                       pageSizeOptions={[7, 15, 31]}
                       maxBodyHeight={"60vh"}
