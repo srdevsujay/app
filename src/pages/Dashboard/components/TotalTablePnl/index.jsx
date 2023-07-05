@@ -24,17 +24,18 @@ export const totalPnl = (tempGroup, themeState) => {
   //   }
   // })
   // console.log('porcentajeIngreso', porcentajeIngreso);
+  console.log('dataTotal.ingresos.toFixed(2)', dataTotal.ingresos/dataTotal.gastos);
   const tbody = document.createElement('tr'); 
   tbody.className = `MuiTableBody-root MuiTableRow-root MuiTableRow-head ${themeState === true || themeState === "true" ? "backgroundTotalDark" : "backgroundTotal"} `;
   tbody.innerHTML = `
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">Total</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.ingresos.toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">100%</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${dataTotal.gastos.toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">100%</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">$${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">100%</td>
-  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">0.00</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.ingresos.toFixed(2) > 0 ? "100%" : "0.00%"}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.gastos.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.gastos.toFixed(2) > 0 ? "100%" : "0.00%"}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.rentabilidad.toFixed(2)}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.rentabilidad.toFixed(2) > 0 ? "100%" : "0.00%"}</td>
+  <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.ingresos/dataTotal.gastos == Infinity ? "0.00" : (dataTotal.ingresos/dataTotal.gastos).toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.leeds.toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.bookings.toFixed(2)}</td>
   <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${dataTotal.meetings.toFixed(2)}</td>
@@ -42,6 +43,8 @@ export const totalPnl = (tempGroup, themeState) => {
   return document.querySelector(".MuiTableHead-root")?.prepend(tbody);
 }
 
+// Rentabilidad
+{/* <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${(dataTotal.ingresos-dataTotal.gastos).toFixed(2)}</td> */}
 {/* <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft font-Title-Helvetica">${(dataTotal.ingresos.toFixed(2)/(dataTotal.ingresos.toFixed(2)-dataTotal.gastos.toFixed(2))).toFixed(2)}%</td> */}
 
 // esta va en el roi, organizar roi
