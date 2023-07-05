@@ -36,7 +36,7 @@ const CustomerDetails = ({ emailCustomerDetail }: any) => {
     if (!journey) return;
     const dataJourney = journey?.map((jour: any) => ({
       ...jour,
-      date: moment(jour.date).format("YYYY-MM-DD hh:mm:ss"),
+      date: moment(jour?.date, "ddd, DD MMM YYYY HH:mm:ss [GMT]"),
     }));
     const result = [
       ...dataJourney

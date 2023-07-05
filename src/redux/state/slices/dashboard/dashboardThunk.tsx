@@ -119,6 +119,7 @@ export const obtainApiDashboardFunnel = (
       //       dataTracking: dataTracking,
       //     } as any)
       //   );
+      console.log("typeDashboard", typeDashboard);
 
       let type_dashboard = typeDashboard[i]?.type_dashboard;
       let dateFormat = getDate(date);
@@ -128,21 +129,23 @@ export const obtainApiDashboardFunnel = (
         funnel_id: id,
         type_dashboard,
       };
-      const resultAction: any = await getDashboardFunnel(objFacebook);
-      // const currentDataFunnel: any = _.orderBy(
-      //   resultAction.data,
-      //   "id",
-      //   "asc"
-      // );
-      if (
-        resultAction.data.message === "Token is invalid!" ||
-        resultAction.data.error === "Signature has expired"
-      ) {
-        console.log("Se logea Funnel");
-        signOut();
-        dispatch(logoutUser());
-      }
-      dispatch(setDataFunnel(resultAction.data));
+      console.log("type_dashboard", type_dashboard);
+      console.log("objFacebook", objFacebook);
+      // const resultAction: any = await getDashboardFunnel(objFacebook);
+      // // const currentDataFunnel: any = _.orderBy(
+      // //   resultAction.data,
+      // //   "id",
+      // //   "asc"
+      // // );
+      // if (
+      //   resultAction.data.message === "Token is invalid!" ||
+      //   resultAction.data.error === "Signature has expired"
+      // ) {
+      //   console.log("Se logea Funnel");
+      //   signOut();
+      //   dispatch(logoutUser());
+      // }
+      // dispatch(setDataFunnel(resultAction.data));
     } catch (error) {
       console.log(error);
     }

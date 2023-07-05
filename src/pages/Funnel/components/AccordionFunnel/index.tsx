@@ -927,9 +927,11 @@ const AccordionFunnel = ({
                 aria-controls={`panel${index}d-content`}
                 id={`panel${index}d-header`}
                 className="d-flex"
-                // onClick={() =>
-                //   dispatch(obtainApiDashboardFunnel(tracking.id, tracking, index))
-                // }
+                onClick={() =>
+                  dispatch(
+                    obtainApiDashboardFunnel(tracking.id, tracking, index)
+                  )
+                }
               >
                 <Typography>
                   <span className="title-accordeon-funnel">

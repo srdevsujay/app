@@ -192,7 +192,7 @@ export const ButtonEditWithIcon = styled.button`
 // };
 
 export const ButtonsProfile = styled.button`
-  background: rgba(91, 147, 243, 0.2) !important;
+  background: #5b93ff10 !important;
   color: #3997ff !important;
   font-size: 13px !important;
   height: 31px !important;
