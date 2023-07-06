@@ -15,12 +15,14 @@ import { ButtonsModal } from "../../../../styled-components/button/index";
 import * as yup from "yup";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { stateBooking } from "../../models/routes";
 import SelectStateBooking from "../SelectStateBooking/index";
 import moment from "moment";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import dayjs from "dayjs";
 
 interface IFormInput {
   fullName: String;
@@ -39,8 +41,8 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [name, setName] = useState();
   const [nameDate, setNameDate] = useState();
   const [email, setEmail] = useState();
-  const [callDate, setCallDate] = useState<Date>(today);
-  const [appoimentDate, setAppoimentDate] = useState<Date>(today);
+  const [callDate, setCallDate] = useState<any>(today);
+  const [appoimentDate, setAppoimentDate] = useState<any>(today);
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const [selectState, setSelectState] = useState(stateBooking[0]?.value);
   const schema = yup.object().shape({
@@ -68,8 +70,19 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       setName(nameParam);
       setNameDate(name_date);
       setEmail(emailParam);
-      setCallDate(new Date(call_date));
-      setAppoimentDate(new Date(appoiment_date));
+
+      const editDateCall = moment(call_date)
+        .add(10, "hours")
+        .format("ddd, DD MMM YYYY HH:mm:ss [GMT]");
+      console.log("editDateCall", editDateCall);
+      setCallDate(editDateCall);
+      const editDateAppoimentD = moment(appoiment_date)
+        .add(10, "hours")
+        .format("ddd, DD MMM YYYY HH:mm:ss [GMT]");
+      console.log("editDateAppoimentD", editDateAppoimentD);
+      setAppoimentDate(editDateAppoimentD);
+      // setCallDate(new Date(call_date));
+      // setAppoimentDate(new Date(appoiment_date));
       setSelectFunnel(funnel_id);
       setSelectState(status);
     }
@@ -122,10 +135,14 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   }, [callDate]);
 
   const onSubmit = (data: any) => {
-    const currentCallDate = moment(callDate).format("YYYY-MM-DD hh:mm:ss");
-    const currentAppoimentDate = moment(appoimentDate).format(
-      "YYYY-MM-DD hh:mm:ss"
-    );
+    console.log("dateSaleFechaHoraappoimentDate", appoimentDate);
+    console.log("dateSaleFechaHoracallDate", callDate);
+    const currentAppoimentDate = moment
+      .utc(appoimentDate)
+      .format("YYYY-MM-DD hh:mm:ss");
+    const currentCallDate = moment.utc(callDate).format("YYYY-MM-DD hh:mm:ss");
+    console.log("currentAppoimentDate", currentAppoimentDate);
+    console.log("currentCallDate", currentCallDate);
     const form: any = {
       appoiment_date: currentAppoimentDate,
       call_date: currentCallDate,
@@ -191,11 +208,18 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           <label className="title-label-popup w-100">
             Fecha y Hora de Creación
           </label>
-          <LocalizationProvider dateAdapter={AdapterDateFns} theme={theme}>
+          {/* <LocalizationProvider dateAdapter={AdapterDateFns} theme={theme}>
             <DateTimePicker
               value={appoimentDate}
               disabled
               label="Ingresa Fecha y Hora"
+            />
+          </LocalizationProvider> */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              value={dayjs(appoimentDate)}
+              disabled
+              ampm={false}
             />
           </LocalizationProvider>
         </div>
@@ -203,13 +227,24 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           <label className="title-label-popup w-100">
             Fecha y Hora de la cita
           </label>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
               value={callDate}
               minDate={today}
               onChange={(newValue: any) => {
                 setCallDate(newValue);
               }}
+            />
+          </LocalizationProvider> */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              value={dayjs(callDate)}
+              minDate={dayjs(today)}
+              onChange={(newValue: any) => {
+                console.log("cambianewValue", newValue.$d);
+                setCallDate(newValue.$d);
+              }}
+              ampm={false}
             />
           </LocalizationProvider>
         </div>

@@ -151,8 +151,8 @@ export const obtainApiBooking = (): AppThunk => {
       }
       const currentDataLead: any = _.orderBy(
         result.data,
-        "appoiment_date",
-        "asc"
+        ["id", "appoiment_date"],
+        ["desc", "asc"]
       );
       console.log("currentDataLead", currentDataLead);
 
