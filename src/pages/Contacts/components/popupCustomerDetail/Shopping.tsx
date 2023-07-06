@@ -15,25 +15,25 @@ const Shopping = ({ purchase, time_Zone }: any) => {
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
   const { theme } = useContext(ThemeContext);
-  const purch = [
-    {
-      date: "Thu, 26 Jan 2023 18:07:51 GMT",
-      funnel_name: "Incubadora BlueHackers",
-      price: 7000,
-      product: "BLUEHACKERS.COM",
-      refaund: null,
-    },
-    {
-      date: "Thu, 26 Jan 2023 18:07:51 GMT",
-      funnel_name: "Incubadora BlueHackers",
-      price: 7000,
-      product: "BLUEHACKERS.COM",
-      refaund: null,
-    },
-  ];
+  // const purch = [
+  //   {
+  //     date: "Thu, 26 Jan 2023 18:07:51 GMT",
+  //     funnel_name: "Incubadora BlueHackers",
+  //     price: 7000,
+  //     product: "BLUEHACKERS.COM",
+  //     refaund: null,
+  //   },
+  //   {
+  //     date: "Thu, 26 Jan 2023 18:07:51 GMT",
+  //     funnel_name: "Incubadora BlueHackers",
+  //     price: 7000,
+  //     product: "BLUEHACKERS.COM",
+  //     refaund: null,
+  //   },
+  // ];
   return (
     <Accordion>
-      {_.orderBy(purch, "date", "desc")?.map((purchase, index) => (
+      {_.orderBy(purchase, "date", "desc")?.map((purchase, index) => (
         <Recorrido className="recorrido" key={index}>
           <span className="separator-route"></span>
           <div className="back-sale-tag-recorrido img-recorrido">
