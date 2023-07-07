@@ -131,21 +131,79 @@ export const obtainApiDashboardFunnel = (
       };
       console.log("type_dashboard", type_dashboard);
       console.log("objFacebook", objFacebook);
-      // const resultAction: any = await getDashboardFunnel(objFacebook);
-      // // const currentDataFunnel: any = _.orderBy(
-      // //   resultAction.data,
-      // //   "id",
-      // //   "asc"
-      // // );
-      // if (
-      //   resultAction.data.message === "Token is invalid!" ||
-      //   resultAction.data.error === "Signature has expired"
-      // ) {
-      //   console.log("Se logea Funnel");
-      //   signOut();
-      //   dispatch(logoutUser());
-      // }
-      // dispatch(setDataFunnel(resultAction.data));
+      const resultAction: any = await getDashboardFunnel(objFacebook);
+      // const currentDataFunnel: any = _.orderBy(
+      //   resultAction.data,
+      //   "id",
+      //   "asc"
+      // );
+      if (
+        resultAction.data.message === "Token is invalid!" ||
+        resultAction.data.error === "Signature has expired"
+      ) {
+        console.log("Se logea Funnel");
+        signOut();
+        dispatch(logoutUser());
+      }
+      dispatch(setDataFunnel(resultAction.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const obtainApiFunnel = (
+  id: number,
+  typeDashboard: any,
+  date?: DateFormat
+): AppThunk => {
+  return async (dispatch, getState) => {
+    dispatch(starLoading());
+    try {
+      // return async (dispatch, getState) => {
+      //   const { dataPNL, dataTracking } = getState().dashboard;
+      //   dispatch(
+      //     setDataFunnel({
+      //       dataFunnel: currentDataFunnel,
+      //       dataPNL: dataPNL,
+      //       dataTracking: dataTracking,
+      //     } as any)
+      //   );
+      console.log("typeDashboardFunnel", typeDashboard);
+
+      let type_dashboard = typeDashboard?.type_dashboard;
+      if (type_dashboard === null) {
+        Swal.fire(
+          "",
+          "En este momento no tienes un tipo de Funnel registrado.",
+          "info"
+        );
+        return;
+      }
+      let dateFormat = getDate(date);
+      let objFacebook = {
+        fecha_inicial: date ? date?.fecha_inicial : dateFormat.fecha_inicial,
+        fecha_final: date ? date?.fecha_final : dateFormat.fecha_final,
+        funnel_id: id,
+        type_dashboard,
+      };
+      console.log("type_dashboard", type_dashboard);
+      console.log("objFacebook", objFacebook);
+      const resultAction: any = await getDashboardFunnel(objFacebook);
+      // const currentDataFunnel: any = _.orderBy(
+      //   resultAction.data,
+      //   "id",
+      //   "asc"
+      // );
+      if (
+        resultAction.data.message === "Token is invalid!" ||
+        resultAction.data.error === "Signature has expired"
+      ) {
+        console.log("Se logea Funnel");
+        signOut();
+        dispatch(logoutUser());
+      }
+      dispatch(setDataFunnel(resultAction.data));
     } catch (error) {
       console.log(error);
     }

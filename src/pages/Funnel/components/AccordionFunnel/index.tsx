@@ -41,6 +41,7 @@ import FunnelTable from "../tableFunnel/index";
 import {
   createFilterFunnel,
   deleteFunnel,
+  obtainApiFunnel,
 } from "../../../../redux/state/slices/dashboard/dashboardThunk";
 import { SalesCall } from "../../../../utilities/pruebajs";
 import {
@@ -188,6 +189,7 @@ const AccordionFunnel = ({
   }, [dataTrackingState]);
 
   useEffect(() => {
+    console.log("objFilter", objFilter);
     if (objFilter) {
       const filter = JSON.parse(objFilter);
       console.log("filterJSON", filter);
@@ -911,6 +913,7 @@ const AccordionFunnel = ({
   ];
 
   console.log("dataDataFunnel", dataDataFunnel);
+  console.log("dataDataFunneldataFunnel", dataFunnel);
   const { theme, themeButtonDropdown, themeFilterFunnel } =
     useContext(ThemeContext);
   return (
@@ -927,11 +930,7 @@ const AccordionFunnel = ({
                 aria-controls={`panel${index}d-content`}
                 id={`panel${index}d-header`}
                 className="d-flex"
-                onClick={() =>
-                  dispatch(
-                    obtainApiDashboardFunnel(tracking.id, tracking, index)
-                  )
-                }
+                onClick={() => dispatch(obtainApiFunnel(tracking.id, tracking))}
               >
                 <Typography>
                   <span className="title-accordeon-funnel">
@@ -1049,6 +1048,7 @@ const AccordionFunnel = ({
             <AccordionDetails>
               <Typography>
                 <div className="table-responsive ocultarMostrar">
+                  {/* hay que añadirle el || dataFunnel bien en forma */}
                   {showLodash.length === 0 ? (
                     <div
                       className="d-flex justify-content-center align-items-center"

@@ -21,7 +21,7 @@ const FunnelTable = ({
   pageSize,
 }: any) => {
   const { theme } = useContext(ThemeContext);
-  const { filters: filterJSON }: any = useAppSelector(
+  const { filters: filterJSON, data: dataFunnel }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
 
@@ -97,6 +97,8 @@ const FunnelTable = ({
   }, [data, filterJSON]);
   console.log("currentDataFunnel", currentDataFunnel.length);
   console.log("currentTotalColumns.length", currentTotalColumns.length);
+  console.log("dataFunnel", dataFunnel.length);
+
   return (
     <Table
       className={themeState === true || themeState === "true" ? "tables" : ""}
@@ -138,32 +140,34 @@ const FunnelTable = ({
                   className="MuiTableRow-root MuiTableRow-head backgroundTotal"
                   style={{ padding: "0px 10px" }}
                 >
-                  {currentTotalColumns.map((sum: any) => {
-                    console.log("summmmm", sum.name.substring(0, 1));
-                    if (sum.checkbox === true) {
-                      if (sum.name.substring(0, 1) === "$") {
-                        return (
-                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
-                            <FormatNumber number={sum.total} />
-                          </th>
-                        );
-                      } else if (sum.name.substring(0, 1) === "%") {
-                        return (
-                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
-                            {(sum.total * 100).toLocaleString(undefined, {
-                              style: "percent",
-                            })}
-                          </th>
-                        );
-                      } else {
-                        return (
-                          <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
-                            {sum.total}
-                          </th>
-                        );
-                      }
-                    }
-                  })}
+                  {dataFunnel.length === 0
+                    ? ""
+                    : currentTotalColumns.map((sum: any) => {
+                        console.log("summmmm", sum.name.substring(0, 1));
+                        if (sum.checkbox === true) {
+                          if (sum.name.substring(0, 1) === "$") {
+                            return (
+                              <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                                <FormatNumber number={sum.total} />
+                              </th>
+                            );
+                          } else if (sum.name.substring(0, 1) === "%") {
+                            return (
+                              <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                                {(sum.total * 100).toLocaleString(undefined, {
+                                  style: "percent",
+                                })}
+                              </th>
+                            );
+                          } else {
+                            return (
+                              <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                                {sum.total}
+                              </th>
+                            );
+                          }
+                        }
+                      })}
                 </tr>
               </thead>
             </>
