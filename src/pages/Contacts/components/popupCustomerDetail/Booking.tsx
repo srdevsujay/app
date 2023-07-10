@@ -25,7 +25,7 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
   }, [booking]);
 
   useEffect(() => {
-    if (booking.length > 0) {
+    if (booking?.length > 0) {
       const columns = ColumnTableBookingPopup(
         booking,
         time_Zone,

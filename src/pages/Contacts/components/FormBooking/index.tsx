@@ -23,6 +23,7 @@ import SelectStateBooking from "../SelectStateBooking/index";
 import moment from "moment";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import dayjs from "dayjs";
+import { addHours, format } from "date-fns";
 
 interface IFormInput {
   fullName: String;
@@ -139,8 +140,8 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     console.log("dateSaleFechaHoracallDate", callDate);
     const currentAppoimentDate = moment
       .utc(appoimentDate)
-      .format("YYYY-MM-DD hh:mm:ss");
-    const currentCallDate = moment.utc(callDate).format("YYYY-MM-DD hh:mm:ss");
+      .format("YYYY-MM-DD HH:mm:ss");
+    const currentCallDate = moment.utc(callDate).format("YYYY-MM-DD HH:mm:ss");
     console.log("currentAppoimentDate", currentAppoimentDate);
     console.log("currentCallDate", currentCallDate);
     const form: any = {

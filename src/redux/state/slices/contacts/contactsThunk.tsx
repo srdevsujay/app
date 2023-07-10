@@ -220,7 +220,6 @@ export const editStateBooking = (data: any): AppThunk => {
 
 export const deleteBooking = (id: number): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading());
     try {
       Swal.fire({
         title: "¿Estas seguro?",
@@ -238,6 +237,7 @@ export const deleteBooking = (id: number): AppThunk => {
             };
             const resultData = await deleteBookingService(objId);
             if (resultData.data.message === "Delete Booking successfully!") {
+              dispatch(starLoading());
               dispatch(obtainApiBooking());
               Swal.fire(
                 "Eliminado!",

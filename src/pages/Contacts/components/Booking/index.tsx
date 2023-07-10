@@ -27,7 +27,7 @@ setAutoFreeze(false);
 
 const Booking = () => {
   const dispatch = useAppDispatch();
-  const { dataBooking } = useAppSelector((state) => state.contact);
+  const { dataBooking, isLoading } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Booking");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -186,12 +186,12 @@ const Booking = () => {
         btnClose={1}
         subTitle={emailCustomerDetail}
       >
-        <CustomerDetails />
+        <CustomerDetails emailCustomerDetail={emailCustomerDetail} />
       </Modal>
-      {filteredDataDos === undefined ? (
+      {filteredDataDos === undefined || isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "250px", zIndex: "99999999" }}
+          style={{ height: "55vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>

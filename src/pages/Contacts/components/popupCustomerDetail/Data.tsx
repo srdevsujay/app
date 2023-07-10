@@ -14,7 +14,7 @@ const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
   return (
     <DataClientPotential theme={theme} className="accordion2 nt-child-ips">
       {phonesandips?.map((traffic: any, index: any) => (
-        <div className="item2 mt-4" key={`${index}`}>
+        <div className="item2 mt-4" key={index}>
           <div className="title2 mb-2" style={{ paddingLeft: "20px" }}>
             <div className="row mb-3">
               <div className="12">
@@ -23,7 +23,14 @@ const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
               </div>
               <div className="col-sm-12">
                 <span className="titleAccordeon2 ips">
-                  {traffic.traffic_source_ip}
+                  {/* {traffic.traffic_source_ip} */}
+                  {traffic.traffic_source_ip ? (
+                    traffic.traffic_source_ip
+                  ) : (
+                    <span className="color-h4 mt-3">
+                      No hay IPs registradas.
+                    </span>
+                  )}
                 </span>
               </div>
             </div>
@@ -40,11 +47,16 @@ const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
                   {emailCustomerDetail}
                 </span>
               </div>
-              {emails.map((email: any) => (
-                <div className="col-sm-12">
-                  <span className="titleAccordeon2 ips">{email.email}</span>
-                </div>
-              ))}
+              {emails.map(
+                (email: any) => (
+                  console.log("emailIPSs", email),
+                  (
+                    <div className="col-sm-12">
+                      <span className="titleAccordeon2 ips">{email.email}</span>
+                    </div>
+                  )
+                )
+              )}
             </div>
             <div className="row mb-3">
               <div className="12">
@@ -53,16 +65,18 @@ const Data = ({ phonesandips, emails, emailCustomerDetail }: any) => {
               </div>
               <div className="col-sm-12">
                 <span className="titleAccordeon2 ips">
-                  {traffic.phone ? "" : "No hay telefonos registrados"}
+                  {traffic.phone
+                    ? traffic.phone
+                    : "No hay telefonos registrados"}
                 </span>
                 {/* {traffic.phone ? <hr className="hr-width"></hr> : <h4 className="color-h4 mt-3">No hay telefonos registrados.</h4>} */}
               </div>
             </div>
-            {traffic.traffic_source_ip ? (
-              ""
-            ) : (
-              <h4 className="color-h4 mt-3">No hay IPs registradas.</h4>
-            )}
+            {/* {traffic.traffic_source_ip ? (
+                  ""
+                ) : (
+                  <h4 className="color-h4 mt-3">No hay IPs registradas.</h4>
+                )} */}
           </div>
         </div>
       ))}
