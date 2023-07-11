@@ -127,7 +127,7 @@ const CreateAccount = () => {
               : "col-sm-5 overFY"
           }
         >
-          <div className="row mt-5">
+          <div className="row mt-5 ">
             <div className="mt-3 col-sm-12">
               <div className="page-title-box">
                 <h4 className="text-dark-50 text-center font-weight-bold title-bienvenido mt-4">
