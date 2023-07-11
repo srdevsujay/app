@@ -215,7 +215,7 @@ const Leads = () => {
       {memoizedUsers === undefined ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "250px", zIndex: "99999999" }}
+          style={{ height: "55vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>

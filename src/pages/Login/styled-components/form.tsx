@@ -30,7 +30,7 @@ export const FlexColumnLogin = styled.div`
   justify-content: center;
   align-items: center;
   background: #fff;
-  height: 97vh;
+  height: 100vh;
 
   span {
     font-style: normal;

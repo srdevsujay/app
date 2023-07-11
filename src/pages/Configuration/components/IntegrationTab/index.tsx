@@ -101,7 +101,7 @@ const IntegrationTab = () => {
       title: "Google Ads Api",
       description:
         "Haga clic para integrar con Google Ads Api Informes personalizados",
-      active: tokengoogle,
+      active: !tokengoogle,
       urlImg: googleApi,
       event: toggleModalGoogle,
     },
@@ -116,7 +116,7 @@ const IntegrationTab = () => {
       title: "Facebook",
       description:
         "Para integrar tus campañas y anuncios de Facebook haz clic debajo e inicia sesión en tu cuenta de Facebook",
-      active: tokenfacebook,
+      active: !tokenfacebook,
       urlImg: Facebook,
       event: handleClickFacebook,
     },

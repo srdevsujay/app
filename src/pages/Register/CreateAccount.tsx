@@ -128,7 +128,7 @@ const CreateAccount = () => {
           }
         >
           <div className="row mt-5">
-            <div className="col-sm-12">
+            <div className="mt-3 col-sm-12">
               <div className="page-title-box">
                 <h4 className="text-dark-50 text-center font-weight-bold title-bienvenido mt-4">
                   ¡Crear cuenta!
@@ -136,7 +136,7 @@ const CreateAccount = () => {
               </div>
             </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="w-65">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-3 w-65">
             <div className="form-group">
               {/* <label className="title-email">Nombre</label>
               <input
