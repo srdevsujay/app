@@ -102,6 +102,16 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
   display: table-row !important;
 }
 
+tr.backgroundTotal th:nth-child(n+2) {
+  text-align: center;
+  padding-left: 0px !important;
+}
+
+.table-funnel tr th:nth-child(n+2) {
+  text-align: center;
+  padding-left: 25px;
+}
+
 .backgroundTotal td {
   color: rgba(0, 0, 0, 0.87);
 }

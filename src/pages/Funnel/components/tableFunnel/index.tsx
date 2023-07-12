@@ -21,8 +21,8 @@ const FunnelTable = ({
   pageSize,
 }: any) => {
   const { theme } = useContext(ThemeContext);
-  const { filters: filterJSON, data: dataFunnel }: any = useAppSelector(
-    (state) => state.dashboard.dataFunnel
+  const { dataFilter: filterJSON, dataFunnel }: any = useAppSelector(
+    (state) => state.dashboard
   );
 
   const [currentTotalColumns, setCurrentTotalColumns] = useState<any>([]);
@@ -49,8 +49,15 @@ const FunnelTable = ({
   // }, []);
   const [currentDataFunnel, setCurrentDataFunnel] = useState([]);
   useEffect(() => {
-    if (!data) return;
-    const keys = _.union(...data.map(Object.keys));
+    console.log("dataFilterDatas", data);
+    if (data.length === 0) {
+      const cloneData = structuredClone(data);
+      setCurrentDataFunnel(cloneData);
+      setCurrentTotalColumns([]);
+      console.log("dataFilterDatas2", Array.isArray(data));
+      return;
+    }
+    const keys = _.union(...data?.map(Object.keys));
     const cloneData = structuredClone(data);
     setCurrentDataFunnel(cloneData);
     console.log("DataColunscurrent", cloneData);
@@ -139,11 +146,12 @@ const FunnelTable = ({
                 <tr
                   className="MuiTableRow-root MuiTableRow-head backgroundTotal"
                   style={{ padding: "0px 10px" }}
+                  key={i}
                 >
                   {dataFunnel.length === 0
                     ? ""
                     : currentTotalColumns.map((sum: any) => {
-                        console.log("summmmm", sum.name.substring(0, 1));
+                        // console.log("summmmm", sum.name.substring(0, 1));
                         if (sum.checkbox === true) {
                           if (sum.name.substring(0, 1) === "$") {
                             return (

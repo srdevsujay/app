@@ -9,6 +9,7 @@ export const dashboardState: DashboardInfo = {
   dataPNL: [],
   dataTracking: [],
   dataFunnel: [],
+  dataFilter: "",
   tokenfacebook: false,
   tokengoogle: false,
   toggleSlider: false,
@@ -33,6 +34,10 @@ export const dashboardSlice = createSlice({
       state.isLoading = false;
       state.dataFunnel = action.payload;
     },
+    setDataFilter: (state, action: PayloadAction<"">) => {
+      state.isLoading = false;
+      state.dataFilter = action.payload;
+    },
     setTokenFacebook: (state, action: PayloadAction<boolean>) => {
       state.tokenfacebook = action.payload;
     },
@@ -50,6 +55,7 @@ export const {
   setPNL,
   setDataTracking,
   setDataFunnel,
+  setDataFilter,
   setTokenFacebook,
   setTokenGoogle,
   setToggleSlider,

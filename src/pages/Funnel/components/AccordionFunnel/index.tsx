@@ -121,8 +121,12 @@ const AccordionFunnel = ({
   //   })),
   // }));
 
-  const { filters: objFilter, data: dataFunnel }: any = useAppSelector(
-    (state) => state.dashboard.dataFunnel
+  // const { filters: objFilter, data: dataFunnel }: any = useAppSelector(
+  //   (state) => state.dashboard.dataFunnel
+  // );
+
+  const { dataFilter: objFilter, dataFunnel }: any = useAppSelector(
+    (state) => state.dashboard
   );
 
   // console.log("dataFunnel--", Array.isArray(dataF.data));
@@ -212,7 +216,7 @@ const AccordionFunnel = ({
 
       // }
       const activeColumns = getDataColumns2?.filter((column: any) => {
-        console.log("column...", column);
+        // console.log("column...", column);
         if (column !== undefined) {
           return column.checkbox;
         }
@@ -1047,9 +1051,9 @@ const AccordionFunnel = ({
             </div>
             <AccordionDetails>
               <Typography>
-                <div className="table-responsive ocultarMostrar">
+                <div className="table-responsive ocultarMostrar table-funnel">
                   {/* hay que añadirle el || dataFunnel bien en forma */}
-                  {showLodash.length === 0 ? (
+                  {showLodash.length === 0 || isLoading === true ? (
                     <div
                       className="d-flex justify-content-center align-items-center"
                       style={{ height: "250px", zIndex: "99999999" }}

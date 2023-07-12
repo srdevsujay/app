@@ -3,6 +3,7 @@ export interface DashboardInfo {
   dataPNL: [];
   dataTracking: [];
   dataFunnel: [],
+  dataFilter: "",
   tokenfacebook: boolean,
   tokengoogle: boolean,
   toggleSlider: boolean,

@@ -6,6 +6,7 @@ import {
   setTokenFacebook,
   setTokenGoogle,
   setToggleSlider,
+  setDataFilter,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -132,6 +133,7 @@ export const obtainApiDashboardFunnel = (
       console.log("type_dashboard", type_dashboard);
       console.log("objFacebook", objFacebook);
       const resultAction: any = await getDashboardFunnel(objFacebook);
+      console.log("resultAction--", resultAction);
       // const currentDataFunnel: any = _.orderBy(
       //   resultAction.data,
       //   "id",
@@ -145,7 +147,8 @@ export const obtainApiDashboardFunnel = (
         signOut();
         dispatch(logoutUser());
       }
-      dispatch(setDataFunnel(resultAction.data));
+      dispatch(setDataFunnel(resultAction.data.data));
+      dispatch(setDataFilter(resultAction.data.filters));
     } catch (error) {
       console.log(error);
     }
@@ -190,6 +193,7 @@ export const obtainApiFunnel = (
       console.log("type_dashboard", type_dashboard);
       console.log("objFacebook", objFacebook);
       const resultAction: any = await getDashboardFunnel(objFacebook);
+      console.log("resultAction---", resultAction);
       // const currentDataFunnel: any = _.orderBy(
       //   resultAction.data,
       //   "id",
@@ -203,7 +207,8 @@ export const obtainApiFunnel = (
         signOut();
         dispatch(logoutUser());
       }
-      dispatch(setDataFunnel(resultAction.data));
+      dispatch(setDataFunnel(resultAction.data.data));
+      dispatch(setDataFilter(resultAction.data.filters));
     } catch (error) {
       console.log(error);
     }
@@ -222,12 +227,14 @@ export const createFilterFunnel = (
       console.log("dataFilter", data);
 
       const result: any = await createFilterFunnelService(data);
-      if (
-        result.data.message === "Update filter dashboard user successfully!"
-      ) {
-        dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
-        // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
-      }
+      console.log("dataFilterResult", result);
+      dispatch(setDataFilter(result.data.data.filter_json));
+      // if (
+      //   result.data.message === "Update filter dashboard user successfully!"
+      // ) {
+      //   dispatch(obtainApiDashboardFunnel(id, typeDashboard, i));
+      //   // Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+      // }
     } catch (error) {
       console.log(error);
     }
