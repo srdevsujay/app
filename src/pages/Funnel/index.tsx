@@ -282,7 +282,7 @@ const Funnel = () => {
           </ContainerSticky>
         </form>
       </Modal>
-      <Card height="75vh" borderRadius="16px 16px 0 0" theme={theme}>
+      <Card height="84vh" borderRadius="16px 16px 0 0" theme={theme}>
         <Title fontSize="17px">Funnel</Title>
         <div className="row">
           <Bar></Bar>
@@ -313,7 +313,7 @@ const Funnel = () => {
           + Nuevo
         </ButtonFunnel>
       </NewFunnel>
-      <FooterMenu />
+      {/* <FooterMenu /> */}
     </Main>
   );
 };

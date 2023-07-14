@@ -11,5 +11,6 @@ export const stateUser = {
   time_zone: "",
   type_currency: "0",
   image_name: "",
-  usersub: []
+  usersub: [],
+  rgpd: false,
 };

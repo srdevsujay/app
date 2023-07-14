@@ -26,7 +26,7 @@ const Toggle: React.FC = () => {
   );
 
   return (
-    <button className="btn handleTheme" onClick={newToggleTheme}>
+    <button className="btn handleTheme d-none" onClick={newToggleTheme}>
       {themeDark === true ? "Modo Claro" : "Modo Oscuro"}
     </button>
   );

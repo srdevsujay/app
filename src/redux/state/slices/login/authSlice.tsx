@@ -67,6 +67,10 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.email = action.payload;
     },
+    setUserUpload: (state, action: PayloadAction<any>) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
   },
 });
 
@@ -81,6 +85,7 @@ export const {
   setProfilePicture,
   setDeleteProfilePicture,
   setEmailProfile,
+  setUserUpload,
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -248,7 +248,7 @@ const Dashboard = () => {
 
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
-      <Card height="85vh" borderRadius="16px" theme={theme}>
+      <Card height="94vh" borderRadius="16px" theme={theme}>
         {/* <Container theme={theme}> */}
         <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
         {/* </Container> */}
@@ -308,7 +308,7 @@ const Dashboard = () => {
           </div>
         </div>
       </Card>
-      <FooterMenu />
+      {/* <FooterMenu /> */}
     </Main>
   );
 };

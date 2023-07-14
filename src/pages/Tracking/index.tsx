@@ -14,6 +14,7 @@ import ScriptTab from "./components/ScriptTab/index";
 import "./styled-components/styled.css";
 import { useAppSelector } from "../../hooks/appDispatch";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
+import RGPD from "./components/RGPD/RGPD";
 
 const Tracking = () => {
   const { toggleSlider } = useAppSelector((state) => state.dashboard);
@@ -39,7 +40,7 @@ const Tracking = () => {
       width={toggleSlider === true ? "87vw" : "96vw"}
       theme={themeDarkLight}
     >
-      <Card height="85vh" borderRadius="16px" theme={theme}>
+      <Card height="94vh" borderRadius="16px" theme={theme}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -52,6 +53,7 @@ const Tracking = () => {
                 <Tab label="Productos" value="3" />
                 <Tab label="Etiquetas" value="4" />
                 <Tab label="Atribución de venta" value="5" />
+                <Tab label="RGPD" value="6" />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -69,10 +71,13 @@ const Tracking = () => {
             <TabPanel value="5">
               <FormAttribution />
             </TabPanel>
+            <TabPanel value="6">
+              <RGPD />
+            </TabPanel>
           </TabContext>
         </Box>
       </Card>
-      <FooterMenu />
+      {/* <FooterMenu /> */}
     </Main>
   );
 };

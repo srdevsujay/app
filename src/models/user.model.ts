@@ -27,6 +27,7 @@ export interface UserState {
   image_name: string;
   type_currency: string;
   usersub: any[];
+  rgpd: boolean;
 }
 
 export interface UserInfo {

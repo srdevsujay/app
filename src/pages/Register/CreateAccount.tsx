@@ -15,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputRegister from "../../components/input/InputRegister.component";
 import Swal from "sweetalert2";
+import FormGroup from "@mui/material/FormGroup";
+import { FormControlLabel, Switch, Checkbox } from "@mui/material";
 
 const CreateAccount = () => {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ const CreateAccount = () => {
 
   const [selectedTimezone, setSelectedTimezone] = useState("Etc/GMT+12");
   const [selectedTypeCurrency, setSelectedTypeCurrency] = useState(1);
+  const [terminos, setTerminos] = useState(false);
 
   const {
     name,
@@ -67,7 +70,12 @@ const CreateAccount = () => {
     resolver: yupResolver(schema),
   });
 
+  console.log("terminos", terminos);
   const onSubmit = async (data: any) => {
+    if (terminos == false) {
+      Swal.fire("Debes aceptar los terminos y condiciones");
+      return;
+    }
     setConfirmPassword(data.password);
     if (form.validatePassword !== data.password) {
       // Swal.fire("Las contraseñas deben coinsidir");
@@ -474,6 +482,30 @@ const CreateAccount = () => {
                   <option value={1}>$ US</option>
                 </Select>
               </FormControl>
+            </div>
+            <div className="row">
+              <div className="col-sm-10">
+                <Link
+                  to="/terminosycondiciones"
+                  className="font-text-Label-Configuracion"
+                >
+                  Aceptar Terminos y condiciones
+                </Link>
+              </div>
+              <div className="col-sm-2">
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={terminos}
+                        onChange={() => setTerminos(!terminos)}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    }
+                    label=""
+                  />
+                </FormGroup>
+              </div>
             </div>
             <ButtonLogin type="submit" className="mt-2">
               Crear Usuario

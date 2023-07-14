@@ -88,3 +88,11 @@ export const deleteRuleURLService = async (id: any) => {
     }
   });
 };
+
+export const handleRGPDService = async (id: any) => {
+  return clientAxios.post("/user_rgpd", id, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};

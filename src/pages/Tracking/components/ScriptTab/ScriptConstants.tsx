@@ -10,6 +10,7 @@ const ScriptConstants = ({ funnels }: any) => {
   const funnelsId: any = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
+  const { public_id } = useAppSelector((state) => state.user.user);
   // const { isEdit } = useAppSelector(({ funnelModal }) => funnelModal.modal);
   console.log("-funnels-", funnels.length);
   const script1 = '<script type="text/javascript">';
@@ -23,8 +24,7 @@ const ScriptConstants = ({ funnels }: any) => {
   const script3 = "var head = document.head;";
   const script4 = "var script = document.createElement('script');";
   const script5 = "script.type = 'text/javascript';";
-  const script6 =
-    'script.src = "https://api-roalytics.herokuapp.com/api/v1/get_script";';
+  const script6 = `script.src = "https://api-roalytics.herokuapp.com/api/v1/get_script/${public_id}";`;
   const script7 = "head.appendChild(script);";
   const script8 = "</script>";
 
@@ -65,7 +65,7 @@ const ScriptConstants = ({ funnels }: any) => {
             var head = document.head;
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = "https://api-roalytics.herokuapp.com/api/v1/get_script";
+            script.src = "https://api-roalytics.herokuapp.com/api/v1/get_script/${public_id}";
             head.appendChild(script);
             </script>`}
             onClick={handleButton}

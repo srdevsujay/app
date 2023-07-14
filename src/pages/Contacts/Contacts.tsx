@@ -32,7 +32,7 @@ const Contacts = () => {
       width={toggleSlider === true ? "87vw" : "96vw"}
       theme={themeDarkLight}
     >
-      <Card height="85vh" borderRadius="16px" theme={theme}>
+      <Card height="94vh" borderRadius="16px" theme={theme}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -58,7 +58,7 @@ const Contacts = () => {
           </TabContext>
         </Box>
       </Card>
-      <FooterMenu />
+      {/* <FooterMenu /> */}
     </Main>
   );
 };

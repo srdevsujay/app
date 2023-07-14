@@ -3,6 +3,7 @@ import {
   createProductService,
   editProductService,
   deleteProductService,
+  handleRGPDService,
 } from "../../../../pages/Tracking/services/index";
 import { AppThunk } from "../../../store";
 import {
@@ -28,7 +29,7 @@ import {
   getDataTag,
   getDataAttribution,
 } from "../../../../pages/Tracking/services/index";
-import { logoutUser } from "../login/authSlice";
+import { logoutUser, setUserUpload } from "../login/authSlice";
 
 export const obtainApiProduct = (): AppThunk => {
   return async (dispatch) => {
@@ -258,6 +259,28 @@ export const deleteRuleURL = (id: number): AppThunk => {
           } catch (error) {}
         }
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const handleRGPD = (data: any): AppThunk => {
+  return async (dispatch) => {
+    dispatch(starLoading);
+    try {
+      console.log("dataRGPD", data);
+
+      const dataRGPD = {
+        rgpd: data,
+      };
+      const result = await handleRGPDService(dataRGPD);
+      console.log("resultRGPD", result);
+      dispatch(setUserUpload(result.data.data));
+      // if (result.data.message === "Create rule successfully!") {
+      //   dispatch(obtainApiRuleURL());
+      //   Swal.fire("Correcto", "Regla Editada correctamente!!", "success");
+      // }
     } catch (error) {
       console.log(error);
     }
