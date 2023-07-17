@@ -38,7 +38,7 @@ const MyContext = createContext<MyContextType | undefined>(undefined);
 
 const Leads = () => {
   const dispatch = useAppDispatch();
-  const { dataLead } = useAppSelector((state) => state.contact);
+  const { dataLead, isLoading } = useAppSelector((state) => state.contact);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Lead");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -66,18 +66,18 @@ const Leads = () => {
   const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
 
   useEffect(() => {
-    if (dataLead.length > 0) {
-      const columns = TableContacts(
-        dataLead,
-        time_Zone,
-        setCurrentEdit,
-        setIdEditCurrent
-      );
-      setCurrentColumns(columns as any);
-      setOriginalData(dataLead);
-      setFilteredData(dataLead);
-      setFilteredDataDos(dataLead);
-    }
+    // if (dataLead.length > 0) {
+    const columns = TableContacts(
+      dataLead,
+      time_Zone,
+      setCurrentEdit,
+      setIdEditCurrent
+    );
+    setCurrentColumns(columns as any);
+    setOriginalData(dataLead);
+    setFilteredData(dataLead);
+    setFilteredDataDos(dataLead);
+    // }
   }, [dataLead]);
 
   useEffect(() => {
@@ -151,6 +151,8 @@ const Leads = () => {
   }, [filteredDataDos]);
 
   console.log("emailCustomerDetail", emailCustomerDetail);
+  console.log("emailCustomerMemoizedUsers", memoizedUsers);
+  console.log("isLoadingCOntact", isLoading);
 
   const clearFilterContacts = () => {
     console.log("ClearFilter");
@@ -212,7 +214,7 @@ const Leads = () => {
       >
         <CustomerDetails emailCustomerDetail={emailCustomerDetail} />
       </ModalDetailClient>
-      {memoizedUsers === undefined ? (
+      {isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "55vh", zIndex: "99999999" }}

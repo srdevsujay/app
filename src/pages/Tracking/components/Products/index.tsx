@@ -20,7 +20,7 @@ setAutoFreeze(false);
 
 const Products = () => {
   const dispatch = useAppDispatch();
-  const { dataProduct } = useAppSelector((state) => state.tracking);
+  const { dataProduct, isLoading } = useAppSelector((state) => state.tracking);
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Productos");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -40,17 +40,17 @@ const Products = () => {
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
-    if (dataProduct.length > 0) {
-      const columns = ColumnsProduct(
-        dataProduct,
-        time_Zone,
-        setCurrentEdit,
-        setIdEditCurrent
-      );
-      setCurrentColumns(columns as any);
-      setOriginalData(dataProduct);
-      setFilteredData(dataProduct);
-    }
+    // if (dataProduct.length > 0) {
+    const columns = ColumnsProduct(
+      dataProduct,
+      time_Zone,
+      setCurrentEdit,
+      setIdEditCurrent
+    );
+    setCurrentColumns(columns as any);
+    setOriginalData(dataProduct);
+    setFilteredData(dataProduct);
+    // }
   }, [dataProduct]);
 
   useEffect(() => {

@@ -20,6 +20,7 @@ export const ToggleColumnsTable = ({
   useEffect(() => {
     if (columns) {
       setDataFunnelToggle(columns);
+      console.log("newDataSAlecolumns1", columns);
       updateData(columns);
     }
   }, [columns]);
@@ -37,6 +38,7 @@ export const ToggleColumnsTable = ({
     } else {
       newColumns = [...columnsToSet, column];
     }
+    console.log("newDataSAlecolumns2", newColumns);
     updateData(newColumns);
   };
 

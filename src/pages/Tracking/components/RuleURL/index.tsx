@@ -40,17 +40,17 @@ const RuleURL = () => {
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
-    if (dataRule.length > 0) {
-      const columns = ColumnsRule(
-        dataRule,
-        time_Zone,
-        setCurrentEdit,
-        setIdEditCurrent
-      );
-      setCurrentColumns(columns as any);
-      setOriginalData(dataRule);
-      setFilteredData(dataRule);
-    }
+    // if (dataRule.length > 0) {
+    const columns = ColumnsRule(
+      dataRule,
+      time_Zone,
+      setCurrentEdit,
+      setIdEditCurrent
+    );
+    setCurrentColumns(columns as any);
+    setOriginalData(dataRule);
+    setFilteredData(dataRule);
+    // }
   }, [dataRule]);
 
   useEffect(() => {

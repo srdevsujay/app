@@ -71,24 +71,25 @@ const Sales = () => {
   // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
 
   useEffect(() => {
-    if (dataSale.length > 0) {
-      const columns = ColumnTableSale(
-        dataSale,
-        time_Zone,
-        setCurrentEdit,
-        setIdEditCurrent
-      );
-      setCurrentColumns(columns as any);
-      setOriginalData(dataSale);
-      setFilteredData(dataSale);
-      // const currentDateSale = _.orderBy(dataSale, "date", "desc");
-      const sortedDataSale = dataSale.sort(
-        (a: any, b: any) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-      console.log("sortedRulesSAles", sortedDataSale);
-      setFilteredDataDos(sortedDataSale);
-    }
+    // if (dataSale.length > 0) {
+    const columns = ColumnTableSale(
+      dataSale,
+      time_Zone,
+      setCurrentEdit,
+      setIdEditCurrent
+    );
+    setCurrentColumns(columns as any);
+    setOriginalData(dataSale);
+    setFilteredData(dataSale);
+    // const currentDateSale = _.orderBy(dataSale, "date", "desc");
+    const sortedDataSale = dataSale.sort(
+      (a: any, b: any) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+    console.log("sortedRulesSAles", sortedDataSale);
+    console.log("sortedRulesSAlesCcolumns", columns);
+    setFilteredDataDos(sortedDataSale);
+    // }
   }, [dataSale]);
 
   useEffect(() => {
@@ -99,6 +100,8 @@ const Sales = () => {
   }, [idEditCurrent]);
 
   const updateData = useCallback((newData: any) => {
+    console.log("newDataSAle", newData);
+
     setColumnsToSet(newData);
   }, []);
 
@@ -182,6 +185,8 @@ const Sales = () => {
     setFilteredDataDos(sortedDataSale);
   };
 
+  console.log("columnsToSet--", columnsToSet);
+
   return (
     <>
       <TabMenuLeads
@@ -244,7 +249,7 @@ const Sales = () => {
       >
         <CustomerDetails />
       </Modal>
-      {filteredDataDos === undefined || isLoading === true ? (
+      {isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "55vh", zIndex: "99999999" }}

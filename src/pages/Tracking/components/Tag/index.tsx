@@ -22,7 +22,7 @@ const TagTracking = () => {
   }, []);
 
   useEffect(() => {
-    if (!dataTag) return;
+    // if (!dataTag) return;
     const columns = ColumnsTag();
     setsetColumnsTag(columns);
     setOriginalData(dataTag);

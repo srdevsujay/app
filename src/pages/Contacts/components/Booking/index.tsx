@@ -58,19 +58,19 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    if (dataBooking.length > 0) {
-      const columns = ColumnTableBooking(
-        dataBooking,
-        time_Zone,
-        setCurrentEdit,
-        setIdEditCurrent,
-        onChangeStatus
-      );
-      setCurrentColumns(columns as any);
-      setOriginalData(dataBooking);
-      setFilteredData(dataBooking);
-      setFilteredDataDos(dataBooking);
-    }
+    // if (dataBooking.length > 0) {
+    const columns = ColumnTableBooking(
+      dataBooking,
+      time_Zone,
+      setCurrentEdit,
+      setIdEditCurrent,
+      onChangeStatus
+    );
+    setCurrentColumns(columns as any);
+    setOriginalData(dataBooking);
+    setFilteredData(dataBooking);
+    setFilteredDataDos(dataBooking);
+    // }
   }, [dataBooking]);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const Booking = () => {
       >
         <CustomerDetails emailCustomerDetail={emailCustomerDetail} />
       </Modal>
-      {filteredDataDos === undefined || isLoading === true ? (
+      {isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "55vh", zIndex: "99999999" }}
