@@ -214,6 +214,7 @@ const IntegrationTab = () => {
         <FacebookButtonLogin
           responseFacebook={responseFacebook}
           clickHandle={clickHandle}
+          setClickHandle={setClickHandle}
         />
       </div>
     </div>

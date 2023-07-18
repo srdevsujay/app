@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import FacebookLogin from "react-facebook-login";
 
-const FacebookButtonLogin = ({responseFacebook, clickHandle}) => {
+const FacebookButtonLogin = ({responseFacebook, clickHandle, setClickHandle}) => {
 
   useEffect(() => {
     if(clickHandle === 1) {
       document.querySelector('.kep-login-facebook').click();
+      setClickHandle(0);
     }
   }, [clickHandle])
   
