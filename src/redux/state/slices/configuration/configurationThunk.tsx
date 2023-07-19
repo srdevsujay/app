@@ -63,6 +63,8 @@ export const createTokenGoogle = (google: any, user: any): AppThunk => {
     try {
       const CryptoJS = require("crypto-js");
       // Encrypt
+      console.log("googleToken-createTokenGoogle", google);
+
       const ciphertext = CryptoJS.AES.encrypt(
         JSON.stringify(google),
         user.email + user.id

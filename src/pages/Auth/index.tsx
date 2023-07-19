@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FooterMenu from "../../components/Footer/index";
 import { Main, Card } from "../../styled-components/main/index";
 import { Title } from "../../styled-components/Title/index";
@@ -15,6 +15,8 @@ const Auth = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
   const google = useDecryptTokenGoogle(user.tokens);
+  const [codeDecryptToken, setCodeDecryptToken] = useState("");
+
   console.log("google", google);
 
   useEffect(() => {
@@ -24,7 +26,8 @@ const Auth = () => {
   const decryptToken = (code: any) => {
     // if(code != "" && changeTokenCurrent == 0) {
     console.log("codeeeee", code);
-    dispatch(refreshToken(google, code, user));
+    setCodeDecryptToken(code);
+    // dispatch(refreshToken(google, code, user));
     // changeTokenCurrent = 0;
     //   return;
     // } else {
@@ -61,6 +64,12 @@ const Auth = () => {
     //     })
     // }
   };
+
+  useEffect(() => {
+    if (google) {
+      dispatch(refreshToken(google, codeDecryptToken, user));
+    }
+  }, [google, codeDecryptToken]);
 
   const codeGoogle = () => {
     const paramts = window.location.search;
