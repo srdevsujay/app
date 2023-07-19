@@ -28,9 +28,9 @@ export const createTokenService = async (data: any) => {
 
 export const getFacebookToken = async (accessToken: any) => {
   return clientAxios.get(`https://graph.facebook.com/${process.env.REACT_APP_VERSION_APP_FACEBOOK}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.REACT_APP_APP_ID_FACEBOOK}&client_secret=${process.env.REACT_APP_APP_SECRET_FACEBOOK}&fb_exchange_token=${accessToken}`, {
-    headers: {
-      "x-access-tokens": <string>getJwt(),
-    }
+    // headers: {
+    //   "x-access-tokens": <string>getJwt(),
+    // }
   });
 };
 

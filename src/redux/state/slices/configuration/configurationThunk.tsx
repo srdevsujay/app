@@ -95,6 +95,7 @@ export const createTokenFacebook = (
   return async (dispatch) => {
     dispatch(starLoading);
     try {
+      console.log("accessToken", accessToken);
       const result = await getFacebookToken(accessToken);
       console.log("result.data", result);
       if (result.data.access_token == "") {
