@@ -63,8 +63,6 @@ export const createTokenGoogle = (google: any, user: any): AppThunk => {
     try {
       const CryptoJS = require("crypto-js");
       // Encrypt
-      console.log("googleToken-createTokenGoogle", google);
-
       const ciphertext = CryptoJS.AES.encrypt(
         JSON.stringify(google),
         user.email + user.id
@@ -77,12 +75,7 @@ export const createTokenGoogle = (google: any, user: any): AppThunk => {
 
       const result = await createTokenService(googleToken);
       const resultGet = await getGoogleLinkToken();
-      console.log("resultGet", resultGet);
       window.open(resultGet.data.url, "_self");
-      // if (result.data.message === "Create Lead successfully!") {
-      //   dispatch(obtainApiContacts());
-      //   Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -97,9 +90,7 @@ export const createTokenFacebook = (
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("accessToken", accessToken);
       const result = await getFacebookToken(accessToken);
-      console.log("result.data", result);
       if (result.data.access_token == "") {
         Swal.fire({
           title:
@@ -122,13 +113,9 @@ export const createTokenFacebook = (
           };
           const resultFacebook = await createTokenService(facebookToken);
 
-          console.log("result.data.data.token", resultFacebook.data.data.token);
-
           // Alerta
           Swal.fire("Correcto", "Token registrado con exito", "success");
           const resultUser = await getUser(user.id);
-          console.log("result:", result);
-          console.log("resultUser:", resultUser);
         } else {
           Swal.fire({
             title:
@@ -150,8 +137,6 @@ export const refreshToken = (
   user: any
 ): AppThunk => {
   return async (dispatch) => {
-    console.log("decryptedData---", decryptedData);
-    console.log("code---", code);
     try {
       await clientAxios({
         method: "post",
@@ -169,51 +154,24 @@ export const refreshToken = (
             "application/x-www-form-urlencoded;charset=utf-8;text/plain",
         },
       }).then((result) => {
-        console.log("respuesta 2do link", result);
-        console.log(result.data.access_token);
         //condicionar Auth
         try {
           decryptedData.refresh_token = result.data.refresh_token;
           decryptedData.access_token = result.data.access_token;
-          console.log("---->", decryptedData);
           const CryptoJS = require("crypto-js");
           // Encrypt
           const ciphertext = CryptoJS.AES.encrypt(
             JSON.stringify(decryptedData),
             user.email + user.id
           ).toString();
-          console.log("ciphertext:", ciphertext);
-          console.log(user.id);
           const googleToken = {
             plataform: "google",
             token: ciphertext,
             user_id: user.id,
           };
           const resultFacebook = createTokenService(googleToken);
-          console.log("resultFacebook:", resultFacebook);
+
           Swal.fire("Correcto", "Token registrado con exito", "success");
-          // clientAxios
-          //   .post("/usertoken", googleToken, {
-          //     headers: {
-          //       "Content-Type": "application/json",
-          //       Accept: "*/*",
-          //       "x-access-tokens": getJwt(),
-          //     },
-          //   })
-          //   .then((result) => {
-          //     dispatch(obtainApiFacebook());
-          //     // Alerta
-          //     Swal.fire(
-          //       "Correcto",
-          //       "Token registrado con exito",
-          //       "success"
-          //     ).then((result) => {
-          //       if (result.isConfirmed) {
-          //         //dispatch(obtainApiFacebook());
-          //         console.log("entro al swal para ejecutar el link de google");
-          //       }
-          //     });
-          //   });
         } catch (error) {
           console.log("error registro:", error);
         }

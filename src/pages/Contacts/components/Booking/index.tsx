@@ -22,6 +22,8 @@ import moment from "moment";
 import CustomerDetails from "../CustomerDetails/index";
 import { BeatLoader } from "react-spinners";
 import { closeUserDetail } from "../../../../redux/state/slices/contacts/contactsThunk";
+import { useMinMaxDateFilter } from "../../hooks";
+import bookingsFilter from "../../../../assets/images/bookingsFilter.svg";
 
 setAutoFreeze(false);
 
@@ -47,6 +49,9 @@ const Booking = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+
+  const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
+  const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
 
   const onChangeStatus = (e: any, paramBooking: any) => {
     const currentState = e.target.value;
@@ -139,6 +144,67 @@ const Booking = () => {
     setFilteredDataDos(dataBooking);
   };
 
+  const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataBooking);
+
+  const [currentCalendar, setCurrentCalendar] = useState<any>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+  const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
+    useState([]);
+
+  const handleDateFilterCalendar = () => {
+    const startDate = currentCalendar[0].startDate;
+    const endDate = currentCalendar[0].endDate;
+    // Convertir la fecha de endDate a GMT
+    const endDateGMT = new Date(
+      endDate.toLocaleString("en-US", { timeZone: "GMT" })
+    );
+    // Establecer la hora máxima del día en endDate
+    const startDateWithMaxTime = new Date(startDate);
+    startDateWithMaxTime.setHours(0);
+    startDateWithMaxTime.setMinutes(0);
+    startDateWithMaxTime.setSeconds(0);
+    // Establecer la hora máxima del día en endDate
+    const endDateWithMaxTime = new Date(endDateGMT);
+    endDateWithMaxTime.setHours(18);
+    endDateWithMaxTime.setMinutes(0);
+    endDateWithMaxTime.setSeconds(0);
+
+    const filteredData = dataBooking.filter((lead: any) => {
+      const joinedDate = new Date(lead.appoiment_date);
+      return (
+        joinedDate >= startDateWithMaxTime && joinedDate <= endDateWithMaxTime
+      );
+    });
+
+    console.log("filteredData--", filteredData);
+    setFilteredDataTotal(filteredData);
+    setFilteredDataDos(filteredData);
+    setModalStateFilter(false);
+  };
+
+  useEffect(() => {
+    if (handleButtonsFilterCalendar.length === 0) return;
+    setFilteredDataTotal(handleButtonsFilterCalendar);
+    setFilteredDataDos(handleButtonsFilterCalendar);
+    setModalStateFilter(false);
+  }, [handleButtonsFilterCalendar]);
+
+  const totalBookings = filteredDataTotal.length;
+
+  const dataBookingFilter = [
+    {
+      image: bookingsFilter,
+      value: totalBookings,
+    },
+  ];
+
   return (
     <>
       <TabMenuLeads
@@ -157,6 +223,16 @@ const Booking = () => {
         dataLead={dataBooking}
         setFilteredDataDos={setFilteredDataDos}
         clearFilterContacts={clearFilterContacts}
+        isModalOpenFilter={isModalOpenFilter}
+        setModalStateFilter={setModalStateFilter}
+        toggleModalFilter={toggleModalFilter}
+        currentCalendar={currentCalendar}
+        setCurrentCalendar={setCurrentCalendar}
+        minDate={minDate}
+        maxDate={maxDate}
+        handleDateFilterCalendar={handleDateFilterCalendar}
+        dataFiltersCalendar={dataBookingFilter}
+        setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
       />
       <Modal
         title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}

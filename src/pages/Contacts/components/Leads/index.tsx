@@ -27,6 +27,11 @@ import InputComponent from "../../../../components/input/Input.component";
 import SelectTag from "../SelectTag";
 import { BeatLoader } from "react-spinners";
 import ModalDetailClient from "../../../../components/modal/ModalDetailClient";
+import leadsFilter from "../../../../assets/images/leadsFilter.svg";
+import reembolso from "../../../../assets/images/reembolso.svg";
+import ventasFilter from "../../../../assets/images/ventasFilter.svg";
+import { useMinMaxDateFilter } from "../../hooks";
+import { FormatNumber } from "../../../../utilities/FormatNumber";
 
 setAutoFreeze(false);
 
@@ -64,6 +69,25 @@ const Leads = () => {
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>("");
   const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
+
+  const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
+  const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
+
+  const [currentCalendar, setCurrentCalendar] = useState<any>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+
+  const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);
+
+  console.log("minDate-", minDate);
+  console.log("maxDate-", maxDate);
+  console.log("selectedDates-", selectedDates);
 
   useEffect(() => {
     // if (dataLead.length > 0) {
@@ -146,22 +170,95 @@ const Leads = () => {
   // };
 
   const memoizedUsers: any = useMemo(() => {
-    console.log("Ejecutando useMemo");
     return filteredDataDos;
   }, [filteredDataDos]);
 
-  console.log("emailCustomerDetail", emailCustomerDetail);
-  console.log("emailCustomerMemoizedUsers", memoizedUsers);
   console.log("isLoadingCOntact", isLoading);
 
   const clearFilterContacts = () => {
-    console.log("ClearFilter");
     setFilteredDataDos(dataLead);
   };
+
+  // const handleDateFilterCalendar = () => {
+  //   setModalState(true);
+  // };
+
+  const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
+    useState([]);
+
+  const handleDateFilterCalendar = () => {
+    const startDate = currentCalendar[0].startDate;
+    const endDate = currentCalendar[0].endDate;
+    // Convertir la fecha de endDate a GMT
+    const endDateGMT = new Date(
+      endDate.toLocaleString("en-US", { timeZone: "GMT" })
+    );
+    // Establecer la hora máxima del día en endDate
+    const startDateWithMaxTime = new Date(startDate);
+    startDateWithMaxTime.setHours(0);
+    startDateWithMaxTime.setMinutes(0);
+    startDateWithMaxTime.setSeconds(0);
+    // Establecer la hora máxima del día en endDate
+    const endDateWithMaxTime = new Date(endDateGMT);
+    endDateWithMaxTime.setHours(18);
+    endDateWithMaxTime.setMinutes(0);
+    endDateWithMaxTime.setSeconds(0);
+
+    const filteredData = dataLead.filter((lead: any) => {
+      const joinedDate = new Date(lead.joined);
+      return (
+        joinedDate >= startDateWithMaxTime && joinedDate <= endDateWithMaxTime
+      );
+    });
+
+    console.log("filteredData--", filteredData);
+    setFilteredDataTotal(filteredData);
+    setFilteredDataDos(filteredData);
+    setModalStateFilter(false);
+  };
+
+  useEffect(() => {
+    if (handleButtonsFilterCalendar.length === 0) return;
+    setFilteredDataTotal(handleButtonsFilterCalendar);
+    setFilteredDataDos(handleButtonsFilterCalendar);
+    setModalStateFilter(false);
+  }, [handleButtonsFilterCalendar]);
+
+  const totalPayments = filteredDataTotal.reduce(
+    (total: any, lead: any) => total + lead?.payments,
+    0
+  );
+
+  const totalRefund = filteredDataTotal.reduce(
+    (total: any, lead: any) => total + lead?.refaund,
+    0
+  );
+
+  const totalLeads = filteredDataTotal.length;
+
+  console.log("totalLeads", totalLeads);
+  console.log("totalPayments", totalPayments);
+  console.log("totalRefund", totalRefund);
+
+  const dataLeadsFilter = [
+    {
+      image: leadsFilter,
+      value: totalLeads,
+    },
+    {
+      image: ventasFilter,
+      value: <FormatNumber number={totalPayments} />,
+    },
+    {
+      image: reembolso,
+      value: <FormatNumber number={totalRefund} />,
+    },
+  ];
 
   return (
     <>
       {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
+      {/* <img src={leadsFilter} alt="" className="" /> */}
       <TabMenuLeads
         nameTab={nameTab}
         columns={currentColumns}
@@ -177,6 +274,16 @@ const Leads = () => {
         dataLead={dataLead}
         setFilteredDataDos={setFilteredDataDos}
         clearFilterContacts={clearFilterContacts}
+        isModalOpenFilter={isModalOpenFilter}
+        setModalStateFilter={setModalStateFilter}
+        toggleModalFilter={toggleModalFilter}
+        currentCalendar={currentCalendar}
+        setCurrentCalendar={setCurrentCalendar}
+        minDate={minDate}
+        maxDate={maxDate}
+        handleDateFilterCalendar={handleDateFilterCalendar}
+        dataFiltersCalendar={dataLeadsFilter}
+        setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
       />
       {/* <div style={{ width: "25%" }}>
           <SelectTag

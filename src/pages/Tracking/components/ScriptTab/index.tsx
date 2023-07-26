@@ -47,7 +47,10 @@ const ScriptTab = () => {
         <div className="col-sm-12">
           <TitleHelvetica fontSize="14px">
             El script universal recopila información de seguimiento y crea
-            clientes potenciales etiquetados con una etiqueta personalizada.
+            clientes potenciales etiquetados con una etiqueta personalizada. Que
+            podrás crearla en la sección Reglas de Url. "Este script debe de
+            estar incrustado en tu landing page para obtener la vista de los
+            recorridos del cliente"
           </TitleHelvetica>
         </div>
       </div>

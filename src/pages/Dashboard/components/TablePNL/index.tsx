@@ -39,7 +39,7 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
   ];
 
   useEffect(() => {
-    if (!tablePnl) return;
+    // if (!tablePnl) return;
     const dataTotal = {
       gastos: _.sumBy(tablePnl, "gastos"),
       ingresos: _.sumBy(tablePnl, "ingresos"),

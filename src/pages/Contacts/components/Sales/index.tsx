@@ -22,6 +22,11 @@ import FormTrafficSource from "../FormTrafficSource";
 import CustomerDetails from "../CustomerDetails/index";
 import { BeatLoader } from "react-spinners";
 import _ from "lodash";
+import { useMinMaxDateFilter } from "../../hooks";
+import ventarecurrente from "../../../../assets/images/ventarecurrente.svg";
+import reembolso from "../../../../assets/images/reembolso.svg";
+import ventasFilter from "../../../../assets/images/ventasFilter.svg";
+import { FormatNumber } from "../../../../utilities/FormatNumber";
 
 setAutoFreeze(false);
 
@@ -69,6 +74,88 @@ const Sales = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   // const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+
+  const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
+  const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
+
+  const [currentCalendar, setCurrentCalendar] = useState<any>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+  const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
+    useState([]);
+
+  const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataSale);
+
+  const handleDateFilterCalendar = () => {
+    const startDate = currentCalendar[0].startDate;
+    const endDate = currentCalendar[0].endDate;
+    // Convertir la fecha de endDate a GMT
+    const endDateGMT = new Date(
+      endDate.toLocaleString("en-US", { timeZone: "GMT" })
+    );
+    // Establecer la hora máxima del día en endDate
+    const startDateWithMaxTime = new Date(startDate);
+    startDateWithMaxTime.setHours(0);
+    startDateWithMaxTime.setMinutes(0);
+    startDateWithMaxTime.setSeconds(0);
+    // Establecer la hora máxima del día en endDate
+    const endDateWithMaxTime = new Date(endDateGMT);
+    endDateWithMaxTime.setHours(18);
+    endDateWithMaxTime.setMinutes(0);
+    endDateWithMaxTime.setSeconds(0);
+
+    const filteredData = dataSale.filter((lead: any) => {
+      const joinedDate = new Date(lead.date);
+      return (
+        joinedDate >= startDateWithMaxTime && joinedDate <= endDateWithMaxTime
+      );
+    });
+
+    console.log("filteredData--", filteredData);
+    setFilteredDataTotal(filteredData);
+    setFilteredDataDos(filteredData);
+    setModalStateFilter(false);
+  };
+
+  useEffect(() => {
+    if (handleButtonsFilterCalendar.length === 0) return;
+    setFilteredDataTotal(handleButtonsFilterCalendar);
+    setFilteredDataDos(handleButtonsFilterCalendar);
+    setModalStateFilter(false);
+  }, [handleButtonsFilterCalendar]);
+
+  const totalPayments = filteredDataTotal.reduce(
+    (total: any, lead: any) => total + lead?.price,
+    0
+  );
+
+  const totalRefund = filteredDataTotal.reduce(
+    (total: any, lead: any) => total + lead?.refaund,
+    0
+  );
+
+  const totalSale = filteredDataTotal.length;
+
+  const dataLeadsFilter = [
+    {
+      image: ventarecurrente,
+      value: totalSale,
+    },
+    {
+      image: ventasFilter,
+      value: <FormatNumber number={totalPayments} />,
+    },
+    {
+      image: reembolso,
+      value: <FormatNumber number={totalRefund} />,
+    },
+  ];
 
   useEffect(() => {
     // if (dataSale.length > 0) {
@@ -205,6 +292,16 @@ const Sales = () => {
         dataLead={dataSale}
         setFilteredDataDos={setFilteredDataDos}
         clearFilterContacts={clearFilterContacts}
+        isModalOpenFilter={isModalOpenFilter}
+        setModalStateFilter={setModalStateFilter}
+        toggleModalFilter={toggleModalFilter}
+        currentCalendar={currentCalendar}
+        setCurrentCalendar={setCurrentCalendar}
+        minDate={minDate}
+        maxDate={maxDate}
+        handleDateFilterCalendar={handleDateFilterCalendar}
+        dataFiltersCalendar={dataLeadsFilter}
+        setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
       />
       <Modal
         title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}
