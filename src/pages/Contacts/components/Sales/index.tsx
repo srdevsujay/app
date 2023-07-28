@@ -86,7 +86,7 @@ const Sales = () => {
     },
   ]);
 
-  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>(dataSale);
   const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
     useState([]);
 

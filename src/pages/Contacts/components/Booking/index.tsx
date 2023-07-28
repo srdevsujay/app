@@ -154,7 +154,7 @@ const Booking = () => {
     },
   ]);
 
-  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>(dataBooking);
   const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
     useState([]);
 

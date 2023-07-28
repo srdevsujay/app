@@ -81,7 +81,7 @@ const Leads = () => {
     },
   ]);
 
-  const [filteredDataTotal, setFilteredDataTotal] = useState<any>([]);
+  const [filteredDataTotal, setFilteredDataTotal] = useState<any>(dataLead);
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);
 
