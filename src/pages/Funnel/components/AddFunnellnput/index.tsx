@@ -12,6 +12,7 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import "../../styled-components/style.css";
 
 const AddFunnelInput = ({
   register,
@@ -21,6 +22,8 @@ const AddFunnelInput = ({
 }: any) => {
   const { dataProduct } = useAppSelector((state) => state.tracking);
   const navigate = useNavigate();
+  const theme: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(theme);
 
   useEffect(() => {
     if (dataProduct.length === 0) {
@@ -38,13 +41,11 @@ const AddFunnelInput = ({
               El tipo de Funnel establece las metricas orientadas a su negocio.
             </Tooltip>
             <a
-              className="typeFunnel"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "typeFunnel icon-help-funnel-dark"
+                  : "typeFunnel icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -64,13 +65,11 @@ const AddFunnelInput = ({
               El tipo de Funnel establece las metricas orientadas a su negocio.
             </Tooltip>
             <a
-              className="selecctFunnel"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "selecctFunnel icon-help-funnel-dark"
+                  : "selecctFunnel icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -92,13 +91,11 @@ const AddFunnelInput = ({
               Nombre personalizado del Funnel
             </Tooltip>
             <a
-              className="nameFunnel"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "nameFunnel icon-help-funnel-dark"
+                  : "nameFunnel icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -121,13 +118,11 @@ const AddFunnelInput = ({
               Ingresar la url del landing o del sitio web.
             </Tooltip>
             <a
-              className="urlFunnel"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "urlFunnel icon-help-funnel-dark"
+                  : "urlFunnel icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>

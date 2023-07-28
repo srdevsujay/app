@@ -9,6 +9,8 @@ import FormLead from "../FormLead/index";
 import SelectTag from "../SelectTag";
 import FilterContacts from "../FilterContacts/FilterContacts";
 import leadsFilter from "../../../../assets/images/leadsFilter.svg";
+import { Tooltip } from "@mui/material";
+import { Title } from "../../../../styled-components/Title/index";
 
 const TabMenuLeads = ({
   nameTab,
@@ -38,17 +40,39 @@ const TabMenuLeads = ({
     "Selecciona una fecha"
   );
 
+  console.log("dataFiltersCalendar", dataFiltersCalendar);
+
   return (
     <div className="row justify-content-between">
       <div
-        className="d-flex align-items-center mr-3 mt-4"
-        style={{ width: "300px", justifyContent: "space-evenly" }}
+        className={`${
+          dataFiltersCalendar.length === 1
+            ? "mt-4 ml-3"
+            : " d-flex align-items-center mr-3 mt-4 ml-3"
+        }`}
+        style={{ width: "300px", justifyContent: "inherit" }}
       >
         {dataFiltersCalendar?.map((filtersIcons: any) => (
-          <>
-            <img src={filtersIcons.image} alt="" className="" height="24px" />
-            <span>{filtersIcons.value}</span>
-          </>
+          <div className="d-flex align-items-center">
+            <Tooltip
+              title={
+                <>
+                  <span>{filtersIcons.name}</span>
+                </>
+              }
+              placement="top"
+            >
+              <img
+                src={filtersIcons.image}
+                alt=""
+                className="mb-2"
+                height="15px"
+              />
+            </Tooltip>
+            <Title fontSize="14px" color="#123249" className="ml-1">
+              {filtersIcons.value}
+            </Title>
+          </div>
         ))}
       </div>
       <div

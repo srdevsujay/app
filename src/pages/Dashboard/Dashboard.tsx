@@ -237,14 +237,15 @@ const Dashboard = () => {
     dispatch(getMetricFunnel(dateFormat));
   };
 
+  const { theme, themeDarkLight } = useContext(ThemeContext);
+
   useEffect(() => {
     if (selectPlatform.length === 0) return;
-    totalPnl(selectPlatform, themeState);
-  }, [selectPlatform, themeState]);
+    totalPnl(selectPlatform, themeState, theme);
+  }, [selectPlatform, themeState, theme]);
 
   console.log("isLoadingDashboard", isLoading);
   console.log("isLoadingDashboardgroupPlataform", groupPlataform);
-  const { theme, themeDarkLight } = useContext(ThemeContext);
 
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>

@@ -7,6 +7,7 @@ import { ButtonsModal } from "../../../../styled-components/button/index";
 import { Title } from "../../../../styled-components/Title/index";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { ModalSubTitleFunnel } from "../../../../styled-components/modal/index";
 
 const AdAccount = ({
   adAccounts,
@@ -219,9 +220,9 @@ const AdAccount = ({
     <>
       <div className="row mb-4">
         <div className="col-md-10">
-          <Title fontSize="17px" color="#123249" theme={themeTitleModal}>
+          <ModalSubTitleFunnel theme={theme}>
             Cuenta Publicitaria
-          </Title>
+          </ModalSubTitleFunnel>
         </div>
       </div>
       {adAccounts.map((adAccount: any, i: number) => (

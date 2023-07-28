@@ -6,7 +6,9 @@ import { updateTheme } from "../../redux/state/slices/configuration/configuratio
 
 const Toggle: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [themeClick, setThemeClick] = useState(false);
+  const theme: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(theme);
+  const [themeClick, setThemeClick] = useState(themeDark);
   const [themeDarkLight, setThemeDarkLight] = useState<any>(null);
   const { toggleTheme } = useContext(ThemeContext);
 
@@ -17,13 +19,13 @@ const Toggle: React.FC = () => {
     toggleTheme();
   };
 
-  const theme: any = localStorage.getItem("Theme");
-  const themeDark = JSON.parse(theme);
+  console.log("themeLogin", theme);
+  console.log("themeLoginthemeDark", themeDark);
+  console.log("themeLoginthemeClick", themeClick);
 
-  console.log(
-    "entra al localStorage, acá aplicar lo del Auth",
-    localStorage.getItem("Theme")
-  );
+  useEffect(() => {
+    toggleTheme();
+  }, [themeDark]);
 
   return (
     <button className="btn handleTheme d-none" onClick={newToggleTheme}>

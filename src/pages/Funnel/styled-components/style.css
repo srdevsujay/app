@@ -7,3 +7,37 @@
   font-size: 16px;
   font-family: Helvetica-NeueL-Title;
 }
+
+.icon-help-funnel-light {
+  position: relative;
+  top: -12px;
+  left: 10px;
+  color: #000;
+}
+
+.icon-help-funnel-light:hover .icon-help-funnel-dark  {
+  color: #000;
+}
+
+.icon-help-funnel-dark {
+  position: relative;
+  top: -12px;
+  left: 10px;
+  color: #6b6b6b;
+}
+
+.icon-close-funnel-light {
+  color: #000;
+  font-size: 27px;
+  margin-top: 40px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.icon-close-funnel-dark {
+  color: #6b6b6b;
+  font-size: 27px;
+  margin-top: 40px;
+  margin-right: 4px;
+  cursor: pointer;
+}

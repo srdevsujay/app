@@ -64,6 +64,19 @@ export const ModalTitle = styled.div`
   margin-top: 20px;
 `;
 
+export const ModalSubTitleFunnel = styled.div`
+  /* color: #9e25fc;
+  font-size: 30px; */
+  font-family: "Helvetica-NeueL-Title";
+  font-size: 17px;
+  /* color: #030229; */
+  color: ${(props) => props.theme.text};
+  line-height: 21px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 20px;
+`;
+
 export const ModalSubTitle = styled.div`
   font-family: "Helvetica-NeueL";
   font-size: 15px;

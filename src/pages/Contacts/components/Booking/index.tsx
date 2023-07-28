@@ -200,6 +200,7 @@ const Booking = () => {
 
   const dataBookingFilter = [
     {
+      name: "Total Booking",
       image: bookingsFilter,
       value: totalBookings,
     },

@@ -47,11 +47,12 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
     setCurrentTotal(dataTotal);
   }, [tablePnl]);
 
-  const { theme } = useContext(ThemeContext);
+  const { themeTable, theme } = useContext(ThemeContext);
+  console.log("theme--", theme);
 
   const tableStyles = {
-    backgroundColor: theme.background,
-    color: theme.text,
+    backgroundColor: themeTable.background,
+    color: themeTable.text,
     // Agrega más estilos según sea necesario
   };
 
@@ -232,8 +233,8 @@ const TablePNL = ({ tablePnl, selectPlatform }: any) => {
           // headerStyle: { position: "sticky", top: 0 },
           maxBodyHeight: "30vh",
           headerStyle: {
-            backgroundColor: theme.background,
-            color: theme.text,
+            backgroundColor: themeTable.background,
+            color: themeTable.text,
             position: "sticky",
             top: 0,
           },

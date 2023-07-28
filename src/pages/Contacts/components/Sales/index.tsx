@@ -25,7 +25,7 @@ import _ from "lodash";
 import { useMinMaxDateFilter } from "../../hooks";
 import ventarecurrente from "../../../../assets/images/ventarecurrente.svg";
 import reembolso from "../../../../assets/images/reembolso.svg";
-import ventasFilter from "../../../../assets/images/ventasFilter.svg";
+import saleFilter from "../../../../assets/images/saleFilter.svg";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 
 setAutoFreeze(false);
@@ -144,16 +144,19 @@ const Sales = () => {
 
   const dataLeadsFilter = [
     {
-      image: ventarecurrente,
+      name: "Total Ventas",
+      image: saleFilter,
       value: totalSale,
     },
     {
-      image: ventasFilter,
-      value: <FormatNumber number={totalPayments} />,
-    },
-    {
+      name: "Reembolso",
       image: reembolso,
       value: <FormatNumber number={totalRefund} />,
+    },
+    {
+      name: "ventas Recurrentes",
+      image: ventarecurrente,
+      value: <FormatNumber number={totalPayments} />,
     },
   ];
 

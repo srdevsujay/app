@@ -18,6 +18,8 @@ import {
   darkFilterFunnel,
   lightSidebarText,
   darkSidebarText,
+  lightTable,
+  darkTable,
 } from "../../styled-components/Theme/themes";
 
 interface ThemeContextProps {
@@ -30,6 +32,7 @@ interface ThemeContextProps {
   themeBackNewFunnel: ThemeType;
   themeFilterFunnel: ThemeType;
   themeSliderText: ThemeType;
+  themeTable: ThemeType;
   toggleTheme: () => void;
 }
 
@@ -43,6 +46,7 @@ export const ThemeContext = createContext<ThemeContextProps>({
   themeBackNewFunnel: lightTheme,
   themeFilterFunnel: lightTheme,
   themeSliderText: lightSidebarText,
+  themeTable: lightTable,
   toggleTheme: () => {},
 });
 
@@ -51,6 +55,12 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
+
+  console.log("themeLoginContext", themeLocalStorage);
+  console.log("themeLoginthemeDarkContext", themeDark);
+
   const [theme, setTheme] = useState<ThemeType>(lightTheme);
   const [themeDarkLight, setThemeDarkLight] = useState<ThemeType>(lightTheme);
   const [themeTitleModal, setThemeTitleModal] =
@@ -74,14 +84,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [themeSliderText, setThemeSliderText] =
     useState<ThemeType>(lightSidebarText);
 
+  const [themeTable, setThemeTable] = useState<ThemeType>(lightTable);
+
   /////////////////////////////////////////////////////////////////
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme
+      prevTheme === lightTheme || themeDark === true ? darkTheme : lightTheme
     );
     setThemeDarkLight((prevTheme) =>
-      prevTheme === lightTheme ? darkLightTheme : lightTheme
+      prevTheme === lightTheme || themeDark === true
+        ? darkLightTheme
+        : lightTheme
     );
     setThemeTitleModal((prevTheme) =>
       prevTheme === darkThemeTitleModal
@@ -89,26 +103,37 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         : darkThemeTitleModal
     );
     setThemeTitleTab((prevTheme) =>
-      prevTheme === lightThemeTitleTab ? darkThemeTitleTab : lightThemeTitleTab
+      prevTheme === lightThemeTitleTab || themeDark === true
+        ? darkThemeTitleTab
+        : lightThemeTitleTab
     );
     setThemeButtonDropdown((prevTheme) =>
-      prevTheme === lightButtonThemeDropdown
+      prevTheme === lightButtonThemeDropdown || themeDark === true
         ? darkButtonThemeDropdown
         : lightButtonThemeDropdown
     );
     setThemeFilterDropdown((prevTheme) =>
-      prevTheme === lightFilterThemeDropdown
+      prevTheme === lightFilterThemeDropdown || themeDark === true
         ? darkFilterThemeDropdown
         : lightFilterThemeDropdown
     );
     setThemeBackNewFunnel((prevTheme) =>
-      prevTheme === lightBackNewFunnel ? darkTheme : lightBackNewFunnel
+      prevTheme === lightBackNewFunnel || themeDark === true
+        ? darkTheme
+        : lightBackNewFunnel
     );
     setThemeFilterFunnel((prevTheme) =>
-      prevTheme === lightFilterFunnel ? darkFilterFunnel : lightFilterFunnel
+      prevTheme === lightFilterFunnel || themeDark === true
+        ? darkFilterFunnel
+        : lightFilterFunnel
     );
     setThemeSliderText((prevTheme) =>
-      prevTheme === lightSidebarText ? darkSidebarText : lightSidebarText
+      prevTheme === lightSidebarText || themeDark === true
+        ? darkSidebarText
+        : lightSidebarText
+    );
+    setThemeTable((prevTheme) =>
+      prevTheme === lightTable || themeDark === true ? darkTable : lightTable
     );
   };
 
@@ -124,6 +149,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         themeBackNewFunnel,
         themeFilterFunnel,
         themeSliderText,
+        themeTable,
         toggleTheme,
       }}
     >

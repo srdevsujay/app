@@ -8,8 +8,12 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import "../../styled-components/style.css";
 
 const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
+  const theme: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(theme);
+
   const [stepObject, setStepObject] = useState(step);
 
   const handleChangeStepName = (step_name: string) => {
@@ -44,13 +48,11 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
               Nombre personalizado.
             </Tooltip>
             <a
-              className="my-anchor-element"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "my-anchor-elemen icon-help-funnel-dark"
+                  : "my-anchor-elemen icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -73,13 +75,11 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
               dominio, ejemplo: /agenda
             </Tooltip>
             <a
-              className="my-anchor-element2"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "my-anchor-element2 icon-help-funnel-dark"
+                  : "my-anchor-element2 icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -96,12 +96,11 @@ const StepFunnel = ({ setStepFunnel, step, removeStep }: StepFunnelProps) => {
         </div>
         <div className="col-sm-1 flex-two-icon d-flex">
           <HighlightOffIcon
-            style={{
-              color: "#000",
-              fontSize: "27px",
-              marginTop: "40px",
-              marginRight: "4px",
-            }}
+            className={`${
+              themeDark === true
+                ? "icon-close-funnel-dark"
+                : "icon-close-funnel-light"
+            }`}
             onClick={() => removeStep(stepObject.id)}
           />
         </div>

@@ -34,7 +34,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [idEditLead, setIdEditLead] = useState<number>(0);
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const [exception, setException] = useState<any>([]);
-  const [selectTypeTagOnchange, setSelectTypeTagOnchange] = useState("Venta");
+  const [selectTypeTagOnchange, setSelectTypeTagOnchange] = useState("Origen");
   const [words, setWords] = useState<any>([]);
   const [apply, setApply] = useState("URL Anterior");
   const schema = yup.object().shape({

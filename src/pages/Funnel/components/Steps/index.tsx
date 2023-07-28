@@ -5,6 +5,7 @@ import StepFunnel from "../StepFunnel";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { Title } from "../../../../styled-components/Title/index";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import { ModalSubTitleFunnel } from "../../../../styled-components/modal/index";
 
 const StepsFunnel = ({
   currentSteps,
@@ -46,9 +47,7 @@ const StepsFunnel = ({
     <>
       <div className="row mb-4">
         <div className="col-md-12 mt-3">
-          <Title fontSize="17px" color="#123249" theme={themeTitleModal}>
-            Pasos
-          </Title>
+          <ModalSubTitleFunnel theme={theme}>Pasos</ModalSubTitleFunnel>
         </div>
       </div>
       {currentSteps?.map((step: FunnelStep, i: number) => (

@@ -242,17 +242,20 @@ const Leads = () => {
 
   const dataLeadsFilter = [
     {
+      name: "Total Leads",
       image: leadsFilter,
       value: totalLeads,
     },
-    {
-      image: ventasFilter,
-      value: <FormatNumber number={totalPayments} />,
-    },
-    {
-      image: reembolso,
-      value: <FormatNumber number={totalRefund} />,
-    },
+    // {
+    //   name: "Total Leads",
+    //   image: ventasFilter,
+    //   value: <FormatNumber number={totalPayments} />,
+    // },
+    // {
+    //   name: "Total Leads",
+    //   image: reembolso,
+    //   value: <FormatNumber number={totalRefund} />,
+    // },
   ];
 
   return (

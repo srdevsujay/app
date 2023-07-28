@@ -100,7 +100,7 @@ export const TableExpanded = styled.table`
   .font-body-Helvetica {
     font-family: "Helvetica-NeueL";
     font-size: 13px !important;
-    color: #464646 !important;
+    /* color: #464646 !important; */
   }
 
   /* td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-paddingNone {

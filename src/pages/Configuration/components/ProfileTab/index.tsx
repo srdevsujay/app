@@ -264,7 +264,7 @@ const ProfileTab = () => {
         width="450px"
         padding="10px 32px"
         bottom="14px"
-        height="480px"
+        height="530px"
         btnClose={1}
       >
         <FormProfileEdit

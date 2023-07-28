@@ -81,6 +81,18 @@ export const darkSidebarText = {
   text: "#6F6C99",
 };
 
+export const lightTable = {
+  background: "#FFFFFF",
+  text: "#464646",
+  border: "1px solid #000",
+};
+
+export const darkTable = {
+  background: "#0D0D0D",
+  text: "#6F6C10",
+  border: "1px solid #000",
+};
+
 export type ThemeType =
   | typeof lightTheme
   | typeof darkTheme
@@ -97,4 +109,6 @@ export type ThemeType =
   | typeof lightFilterFunnel
   | typeof darkFilterFunnel
   | typeof lightSidebarText
-  | typeof darkSidebarText;
+  | typeof darkSidebarText
+  | typeof lightTable
+  | typeof darkTable;

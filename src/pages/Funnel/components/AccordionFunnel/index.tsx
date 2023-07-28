@@ -396,7 +396,9 @@ const AccordionFunnel = ({
 
   const handleColumnToggle = (e: any, column: any) => {
     const updatedColumns = originalData.map((originalColumn: any) => {
-      if (originalColumn.field === column.field) {
+      console.log("originalColumncolumn", column);
+      console.log("originalColumn", originalColumn);
+      if (originalColumn?.field === column?.field) {
         return {
           ...originalColumn,
           checkbox: !originalColumn.checkbox,
@@ -404,10 +406,10 @@ const AccordionFunnel = ({
       }
       return originalColumn;
     });
-    const currentFunnel: any = updatedColumns.map((funnel: any) => ({
-      field: funnel.field,
-      name: funnel.name,
-      checkbox: funnel.checkbox,
+    const currentFunnel: any = updatedColumns?.map((funnel: any) => ({
+      field: funnel?.field,
+      name: funnel?.name,
+      checkbox: funnel?.checkbox,
     }));
     const currentColumnsJSON = JSON.stringify(currentFunnel);
     const obj = {
@@ -417,8 +419,8 @@ const AccordionFunnel = ({
     dispatch(
       createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)
     );
-    const activeColumns = updatedColumns.filter(
-      (column: any) => column.checkbox
+    const activeColumns = updatedColumns?.filter(
+      (column: any) => column?.checkbox
     );
     console.log("activeColumns--2", activeColumns);
     setColumnsToSet(activeColumns);
@@ -997,16 +999,25 @@ const AccordionFunnel = ({
                       className="filter-scroll"
                       theme={themeFilterFunnel}
                     >
-                      {dataFunnelToggle?.map((column: any) => (
-                        <div key={column?.name} className="column-container">
-                          <Checkbox
-                            {...label}
-                            checked={column?.checkbox}
-                            onChange={(e) => handleColumnToggle(e, column)}
-                          />
-                          <label>{column?.name}</label>
-                        </div>
-                      ))}
+                      {dataFunnelToggle?.map((column: any) => {
+                        if (column === undefined) {
+                          return null; // Si la columna es undefined, retornamos null para evitar errores
+                        } else {
+                          return (
+                            <div
+                              key={column?.name}
+                              className="column-container"
+                            >
+                              <Checkbox
+                                {...label}
+                                checked={column?.checkbox}
+                                onChange={(e) => handleColumnToggle(e, column)}
+                              />
+                              <label>{column?.name}</label>
+                            </div>
+                          );
+                        }
+                      })}
                     </ContainerDropdown>
                   </DropdownMenu>
                 </div>

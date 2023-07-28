@@ -28,7 +28,7 @@ export const Table = styled.div<Position>`
 export const TableStyle = styled.span<cursorStyleTable>(({ cursor }) => ({
   fontSize: "13px !important",
   fontFamily: "Helvetica-NeueL !important",
-  color: "#464646 !important",
+  // color: "#464646 !important",
   fontWeight: "400 !important",
   display: "block",
   width: "max-content",
@@ -48,7 +48,7 @@ export const TextColors = styled.span`
   }
 
   &.text-grey {
-    color: #464646 !important;
+    /* color: #464646 !important; */
     opacity: 0.5;
   }
 `;
@@ -72,7 +72,7 @@ export const BackColorsTable = styled.div`
   }
   &.back-grey-table {
     background: #5d5f600f;
-    color: #464646 !important;
+    /* color: #464646 !important; */
     opacity: 0.5;
   }
 `;

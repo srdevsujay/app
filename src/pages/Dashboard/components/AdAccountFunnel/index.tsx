@@ -6,6 +6,7 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import "../../styled-components/style.css";
 
 const AdAccountFunnel = ({
   setAdAccounts,
@@ -15,6 +16,8 @@ const AdAccountFunnel = ({
   isModalOpen,
   removeCampaign,
 }: any) => {
+  const theme: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(theme);
   const [select, setSelect] = useState(adAccount);
 
   useEffect(() => {
@@ -80,13 +83,11 @@ const AdAccountFunnel = ({
               Seleccione el origen de su fuente de tráfico.
             </Tooltip>
             <a
-              className="fontTraffic"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "fontTraffic icon-help-funnel-dark"
+                  : "fontTraffic icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -108,13 +109,11 @@ const AdAccountFunnel = ({
               Seleccione el tipo de conexión de la fuente de tráfico.
             </Tooltip>
             <a
-              className="typeConnection"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "typeConnection icon-help-funnel-dark"
+                  : "typeConnection icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -135,12 +134,11 @@ const AdAccountFunnel = ({
         </div>
         <div className="col-sm-1 flex-two-icon d-flex">
           <HighlightOffIcon
-            style={{
-              color: "#000",
-              fontSize: "27px",
-              marginTop: "40px",
-              marginRight: "4px",
-            }}
+            className={`${
+              themeDark === true
+                ? "icon-close-funnel-dark"
+                : "icon-close-funnel-light"
+            }`}
             onClick={() => removeCampaign(adAccount.id)}
           />
         </div>
@@ -153,13 +151,11 @@ const AdAccountFunnel = ({
               Nombre de la campaña de su fuente de tráfico.
             </Tooltip>
             <a
-              className="nameAccount"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "nameAccount icon-help-funnel-dark"
+                  : "nameAccount icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
@@ -188,13 +184,11 @@ const AdAccountFunnel = ({
               que la cuentas publicitarias de google.
             </Tooltip>
             <a
-              className="accountPublish"
-              style={{
-                position: "relative",
-                top: "-12px",
-                left: "10px",
-                color: "#000",
-              }}
+              className={`${
+                themeDark === true
+                  ? "accountPublish icon-help-funnel-dark"
+                  : "accountPublish icon-help-funnel-light"
+              }`}
             >
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
