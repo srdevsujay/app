@@ -90,12 +90,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === lightTheme || themeDark === true ? darkTheme : lightTheme
+      prevTheme === lightTheme ? darkTheme : lightTheme
     );
     setThemeDarkLight((prevTheme) =>
-      prevTheme === lightTheme || themeDark === true
-        ? darkLightTheme
-        : lightTheme
+      prevTheme === lightTheme ? darkLightTheme : lightTheme
     );
     setThemeTitleModal((prevTheme) =>
       prevTheme === darkThemeTitleModal
@@ -103,37 +101,29 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         : darkThemeTitleModal
     );
     setThemeTitleTab((prevTheme) =>
-      prevTheme === lightThemeTitleTab || themeDark === true
-        ? darkThemeTitleTab
-        : lightThemeTitleTab
+      prevTheme === lightThemeTitleTab ? darkThemeTitleTab : lightThemeTitleTab
     );
     setThemeButtonDropdown((prevTheme) =>
-      prevTheme === lightButtonThemeDropdown || themeDark === true
+      prevTheme === lightButtonThemeDropdown
         ? darkButtonThemeDropdown
         : lightButtonThemeDropdown
     );
     setThemeFilterDropdown((prevTheme) =>
-      prevTheme === lightFilterThemeDropdown || themeDark === true
+      prevTheme === lightFilterThemeDropdown
         ? darkFilterThemeDropdown
         : lightFilterThemeDropdown
     );
     setThemeBackNewFunnel((prevTheme) =>
-      prevTheme === lightBackNewFunnel || themeDark === true
-        ? darkTheme
-        : lightBackNewFunnel
+      prevTheme === lightBackNewFunnel ? darkTheme : lightBackNewFunnel
     );
     setThemeFilterFunnel((prevTheme) =>
-      prevTheme === lightFilterFunnel || themeDark === true
-        ? darkFilterFunnel
-        : lightFilterFunnel
+      prevTheme === lightFilterFunnel ? darkFilterFunnel : lightFilterFunnel
     );
     setThemeSliderText((prevTheme) =>
-      prevTheme === lightSidebarText || themeDark === true
-        ? darkSidebarText
-        : lightSidebarText
+      prevTheme === lightSidebarText ? darkSidebarText : lightSidebarText
     );
     setThemeTable((prevTheme) =>
-      prevTheme === lightTable || themeDark === true ? darkTable : lightTable
+      prevTheme === lightTable ? darkTable : lightTable
     );
   };
 
