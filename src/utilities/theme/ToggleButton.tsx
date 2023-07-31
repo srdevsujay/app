@@ -23,9 +23,9 @@ const Toggle: React.FC = () => {
   console.log("themeLoginthemeDark", themeDark);
   console.log("themeLoginthemeClick", themeClick);
 
-  useEffect(() => {
-    toggleTheme();
-  }, [themeDark]);
+  // useEffect(() => {
+  //   toggleTheme();
+  // }, [themeDark]);
 
   return (
     <button className="btn handleTheme d-none" onClick={newToggleTheme}>
