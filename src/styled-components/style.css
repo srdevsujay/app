@@ -2,8 +2,8 @@
   /* background-color: #fff!important; */
   height: 31px;
   width: 30px;
-  border: 0.4px solid #d1d1d1!important;
-  border-radius: 5px!important;
+  border: 0.4px solid #d1d1d1 !important;
+  border-radius: 5px !important;
   box-sizing: border-box;
 }
 
@@ -38,7 +38,7 @@
   white-space: nowrap;
 }
 
-.column-container > label {
+.column-container>label {
   margin-left: 8px;
 }
 
@@ -46,17 +46,17 @@
   display: none;
 }
 
-.column-container > span > svg {
-  color: #109cf1!important;
+.column-container>span>svg {
+  color: #109cf1 !important;
   height: 16px;
 }
 
-.column-container > span {
+.column-container>span {
   padding: 0px;
 }
 
 .dropdown-menu {
-  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12);
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
   border-radius: 10px !important;
 }
 
@@ -64,18 +64,29 @@
   width: max-content;
 }
 
-.tables > div > .MuiTable-root {
+.tables>div>.MuiTable-root {
   background: #0D0D0D !important;
 }
 
-.tables > div > .MuiTable-root button {
-    color: white;
-}
-
-.tables > div > .MuiTable-root div {
+.tables>div>.MuiTable-root button {
   color: white;
 }
 
-.tables > div > .MuiTable-root svg {
+.tables>div>.MuiTable-root div {
   color: white;
+}
+
+.tables>div>.MuiTable-root svg {
+  color: white;
+}
+
+.div-button-video {
+  width: 30px;
+  height: 30px;
+  border: 0.5px solid #000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

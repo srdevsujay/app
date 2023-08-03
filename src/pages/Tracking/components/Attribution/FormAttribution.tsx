@@ -16,6 +16,7 @@ import {
 import { FormAttributionSale } from "../../../../styled-components/Form/index";
 import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
 import { Title } from "../../../../styled-components/Title/index";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 import {
   createProduct,
   editProduct,
@@ -127,84 +128,76 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   return (
     <FormAttributionSale>
-      <div className="row align-content-center flex-column">
+      {/* <div className="row align-content-center flex-column"> */}
+      <div className="row">
         <Title fontSize="17px" color="#123249" className="text-center">
           Atribución de venta
         </Title>
-        <Bar style={{ width: "25%" }}></Bar>
+        <Bar></Bar>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="row align-content-center flex-column">
-          {/* <div
-            className={
-              selectAttribute === "3"
-                ? "form-group col-sm-6"
-                : "form-group col-sm-12"
-            }
-          >
-            <SelectWithValidation
-              label="Seleccionar Atributo"
-              options={dataAttribution}
-              name="selectAttribute"
-              register={register}
-              error={String(errors["selectAttribute"]?.message)}
-              disabled={currentEdit ? true : false}
-              setSelectAttribute={setSelectAttribute}
-            />
-          </div> */}
-          <div className="w-25 mb-3">
-            <SelectWithValidation
-              label="Origen"
-              options={dataAttributionOrigen}
-              name="selectOrigen"
-              register={register}
-              error={String(errors["selectOrigen"]?.message)}
-              disabled={currentEdit ? true : false}
-              setSelectAttribute={setSelectOrigen}
-            />
+        
+        {/* <div className="row align-content-center flex-column"> */}
+        <div className="row flex-column">
+          <div className="col-sm-6">
+            <div className="w-50 mb-3">
+              <SelectWithValidation
+                label="Origen"
+                options={dataAttributionOrigen}
+                name="selectOrigen"
+                register={register}
+                error={String(errors["selectOrigen"]?.message)}
+                disabled={currentEdit ? true : false}
+                setSelectAttribute={setSelectOrigen}
+              />
+            </div>
+            <div
+              className={
+                selectOrigen === "2" ? "w-50 mb-3 d-block" : "w-50 d-none"
+              }
+            >
+              <InputRegister
+                placeholder="ingresa los días de atribución"
+                label="Fuente de origen mas antiguo de"
+                id="0"
+                type="number"
+                min={1}
+                max={30}
+                name="days"
+                register={register}
+                error={String(errors["days"]?.message)}
+                onChange={(newValue: any) => {
+                  setDays(newValue.target.value);
+                }}
+              />
+            </div>
+            {/* <div
+              className={
+                selectAttribute === "3"
+                  ? "form-group col-sm-6 d-block"
+                  : "form-group col-sm-6 d-none"
+              }
+            >
+              <SelectWithValidation
+                label="Atribución aplicada a"
+                options={dataAttributionMajorMinor}
+                name="setMajorMinor"
+                register={register}
+                error={String(errors["setMajorMinor"]?.message)}
+                disabled={currentEdit ? true : false}
+                setSelectAttribute={setSelectMajorMinor}
+              />
+            </div> */}
+            <div className="w-50 mb-3">
+              <ButtonsModal className="btn btn-add" type="submit">
+                {idEditLead !== 0 ? "Editar" : "Guardar"}
+              </ButtonsModal>
+            </div>
           </div>
-          <div
-            className={
-              selectOrigen === "2" ? "w-25 mb-3 d-block" : "w-25 d-none"
-            }
-          >
-            <InputRegister
-              placeholder="ingresa los días de atribución"
-              label="Fuente de origen mas antiguo de"
-              id="0"
-              type="number"
-              min={1}
-              max={30}
-              name="days"
-              register={register}
-              error={String(errors["days"]?.message)}
-              onChange={(newValue: any) => {
-                setDays(newValue.target.value);
-              }}
-            />
+          <div className="col-sm-6">
+            <HelpVideo position={9} />
           </div>
-          {/* <div
-            className={
-              selectAttribute === "3"
-                ? "form-group col-sm-6 d-block"
-                : "form-group col-sm-6 d-none"
-            }
-          >
-            <SelectWithValidation
-              label="Atribución aplicada a"
-              options={dataAttributionMajorMinor}
-              name="setMajorMinor"
-              register={register}
-              error={String(errors["setMajorMinor"]?.message)}
-              disabled={currentEdit ? true : false}
-              setSelectAttribute={setSelectMajorMinor}
-            />
-          </div> */}
-          <div className="w-25 mb-3">
-            <ButtonsModal className="btn btn-add" type="submit">
-              {idEditLead !== 0 ? "Editar" : "Guardar"}
-            </ButtonsModal>
-          </div>
+          
         </div>
       </form>
     </FormAttributionSale>

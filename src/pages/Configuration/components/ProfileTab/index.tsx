@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import Modal from "../../../../components/modal/Modal.component";
 import FormProfileEdit from "./FormProfileEdit";
 import { getCurrentUser } from "../../../../utilities/localstorage.utility";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 import {
   addFile,
   removeFile,
@@ -196,6 +197,9 @@ const ProfileTab = () => {
             <ButtonsProfile className="btn w-100" onClick={toggleModal}>
               Editar Perfil
             </ButtonsProfile>
+          </div>
+          <div className="offset-2 col-sm-4">
+            <HelpVideo position={10} />
           </div>
         </div>
       </section>

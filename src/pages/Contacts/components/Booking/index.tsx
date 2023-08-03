@@ -234,6 +234,7 @@ const Booking = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataBookingFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
+        positionDataHelpVideo={3}
       />
       <Modal
         title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}

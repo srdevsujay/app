@@ -1,0 +1,13 @@
+export { default as Footer } from './Footer';
+export { default as HelpVideo } from './HelpVideo/HelpVideo';
+export { default as Politicasdeprivacidad } from './Politicasdeprivacidad';
+export { default as Select } from './Select';
+export { default as Terminosycondiciones } from './Terminosycondiciones';
+export { default as Accordion } from './accordion/Accordion';
+export { default as AccordionItem } from './accordion/AccordionItem';
+export * from './alerts/IntegrationAlert';
+export * from './alerts/Product';
+export * from './input';
+export * from './modal';
+export * from './sidebar';
+export * from './toggleColumnsTable';

@@ -287,6 +287,7 @@ const Leads = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
+        positionDataHelpVideo={2}
       />
       {/* <div style={{ width: "25%" }}>
           <SelectTag

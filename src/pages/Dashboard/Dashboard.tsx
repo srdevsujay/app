@@ -32,6 +32,8 @@ import { totalPnl } from "./components/TotalTablePnl";
 import styled from "styled-components";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 import Toggle from "../../utilities/theme/ToggleButton";
+import { dataHelpVideo } from '../../utilities/dataHelpVideo';
+import HelpVideo from '../../components/HelpVideo/HelpVideo';
 
 // setAutoFreeze(false);
 
@@ -266,6 +268,7 @@ const Dashboard = () => {
                   setGroupPlataform={setGroupPlataform}
                   setSelectPlatform={setSelectPlatform}
                 />
+                <HelpVideo position={0} />
                 <DateFilter
                   titleDatePickerPNL={titleDatePickerPNL}
                   handleDateDashboardMain={handleDateDashboardMain}

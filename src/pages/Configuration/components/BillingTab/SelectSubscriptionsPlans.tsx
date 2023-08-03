@@ -14,6 +14,7 @@ import "../../styled-components/style.css";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { ModalClose } from "../../../../styled-components/modal/index";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 
 const SelectSubscriptionsPlans = ({
   selectedPayment,
@@ -261,18 +262,28 @@ const SelectSubscriptionsPlans = ({
           </div>
         </div>
         <div className="row mt-3 justify-content-end">
-          <div className="form-group col-sm-3 pr-0">
+          <div className="form-group col-sm-3 pr-0 d-flex">
             {toggleEditSubscription === 1 ? (
-              <ButtonsProfile
-                className="btn w-100"
-                onClick={hanldeUpdateSubscriptionStripe}
-              >
-                Actualizar Suscripción
-              </ButtonsProfile>
+              <>
+                <ButtonsProfile
+                  className="btn w-100"
+                  onClick={hanldeUpdateSubscriptionStripe}
+                >
+                  Actualizar Suscripción
+                </ButtonsProfile>
+                <div className="ml-2">
+                  <HelpVideo position={12} />
+                </div>
+              </>
             ) : (
-              <ButtonsProfile className="btn w-100" onClick={handleNextStep}>
-                Siguiente Paso
-              </ButtonsProfile>
+              <>
+                <ButtonsProfile className="btn w-100" onClick={handleNextStep}>
+                  Siguiente Paso
+                </ButtonsProfile>
+                <div className="ml-2">
+                  <HelpVideo position={12} />
+                </div>
+              </>
             )}
           </div>
         </div>

@@ -15,7 +15,7 @@ import "../../styled-components/style.css";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const DateFilter = ({
+const DateFilter = ({ 
   titleDatePickerPNL,
   handleDateDashboardMain,
   flagModal,
@@ -59,7 +59,7 @@ any) => {
   return (
     <div className="">
       <ButtonTitlePicker
-        className="btn btn-export btn-calendar"
+        className="btn btn-export btn-calendar mr-2 ml-2"
         onClick={handleOpen}
         theme={theme}
       >

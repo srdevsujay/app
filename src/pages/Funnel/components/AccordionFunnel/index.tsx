@@ -58,6 +58,7 @@ import {
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import { ContainerDropdown } from "../../../../styled-components/button/index";
 import { BeatLoader } from "react-spinners";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -961,6 +962,7 @@ const AccordionFunnel = ({
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                 />
+                <HelpVideo position={1} />
                 <div className="dropdown ml-2">
                   <ButtonFilter
                     className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
@@ -1001,13 +1003,10 @@ const AccordionFunnel = ({
                     >
                       {dataFunnelToggle?.map((column: any) => {
                         if (column === undefined) {
-                          return null; // Si la columna es undefined, retornamos null para evitar errores
+                          return null;
                         } else {
                           return (
-                            <div
-                              key={column?.name}
-                              className="column-container"
-                            >
+                            <div key={column?.name} className="column-container">
                               <Checkbox
                                 {...label}
                                 checked={column?.checkbox}
@@ -1084,57 +1083,6 @@ const AccordionFunnel = ({
               </Typography>
             </AccordionDetails>
           </Accordion>
-          {/* <Accordion expanded={expanded === 1} onChange={handleChange(1)}>
-            <AccordionSummary
-              aria-controls="panel1d-content"
-              id="panel1d-header"
-            >
-              <Typography>Collapsible Group Item #1</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 2} onChange={handleChange(2)}>
-            <AccordionSummary
-              aria-controls="panel2d-content"
-              id="panel2d-header"
-            >
-              <Typography>Collapsible Group Item #2</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 3} onChange={handleChange(3)}>
-            <AccordionSummary
-              aria-controls="panel3d-content"
-              id="panel3d-header"
-            >
-              <Typography>Collapsible Group Item #3</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion> */}
         </ContainerAccordion>
       ))}
     </div>

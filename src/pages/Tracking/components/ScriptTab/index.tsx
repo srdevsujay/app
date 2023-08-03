@@ -6,6 +6,7 @@ import { getTrackingFunnel } from "../../../../redux/state/slices/dashboard/dash
 import ScriptConstants from "./ScriptConstants";
 import { SelectScript } from "../../styled-components/TableRule";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 import {
   TitleHelvetica,
   Title,
@@ -58,8 +59,8 @@ const ScriptTab = () => {
         <div className="col-sm-12">
           <Title fontSize="14px">Seleccionar Funnel</Title>
         </div>
-        <div className="form-group col-sm-12">
-          <FormControl>
+        <div className="form-group col-sm-12 d-flex align-items-center">
+          <FormControl className="mr-2">
             <SelectScript
               className="css-select-1"
               onChange={handleChange}
@@ -72,6 +73,8 @@ const ScriptTab = () => {
               ))}
             </SelectScript>
           </FormControl>
+          <div></div>
+          <HelpVideo position={5} />
         </div>
       </div>
       <div className="row mt-2">

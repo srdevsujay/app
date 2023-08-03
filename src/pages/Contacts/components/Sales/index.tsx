@@ -26,7 +26,6 @@ import { useMinMaxDateFilter } from "../../hooks";
 import ventarecurrente from "../../../../assets/images/ventarecurrente.svg";
 import reembolso from "../../../../assets/images/reembolso.svg";
 import saleFilter from "../../../../assets/images/saleFilter.svg";
-import { FormatNumber } from "../../../../utilities/FormatNumber";
 
 setAutoFreeze(false);
 
@@ -90,6 +89,8 @@ const Sales = () => {
   const [handleButtonsFilterCalendar, setHandleButtonsFilterCalendar] =
     useState([]);
 
+  const [recurrentes, setRecurrentes] = useState(0);
+
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataSale);
 
   const handleDateFilterCalendar = () => {
@@ -130,10 +131,10 @@ const Sales = () => {
     setModalStateFilter(false);
   }, [handleButtonsFilterCalendar]);
 
-  const totalPayments = filteredDataTotal.reduce(
-    (total: any, lead: any) => total + lead?.price,
-    0
-  );
+  // const totalPayments = filteredDataTotal.reduce(
+  //   (total: any, lead: any) => total + lead?.price,
+  //   0
+  // );
 
   const totalRefund = filteredDataTotal.reduce(
     (total: any, lead: any) => total + lead?.refaund,
@@ -141,6 +142,46 @@ const Sales = () => {
   );
 
   const totalSale = filteredDataTotal.length;
+
+  console.log('filteredDataTotal', filteredDataTotal.length);
+    
+  // const calculateRecurrentes = (data: any) => {
+  //   const recurrentes: any = {};
+  //   data.forEach((item: any) => {
+  //     const { price } = item;
+  //     recurrentes[price] = (recurrentes[price] || 0) + 1;
+  //   });
+  //   return recurrentes;
+  // };
+
+  useEffect(() => {
+    if(filteredDataTotal.length === 0) return;
+    // Utilizamos un objeto para almacenar los precios únicos y sus recuentos de ventas
+    const priceCounts: any = {};
+
+    // Calcular el recuento de ventas para cada precio único
+    filteredDataTotal.forEach((item: any) => {
+      const { price } = item;
+      if (priceCounts[price]) {
+        priceCounts[price]++;
+      } else {
+        priceCounts[price] = 1;
+      }
+    });
+
+    // Calcular el total de ventas recurrentes
+    let recurrentes = 0;
+    for (const price in priceCounts) {
+      recurrentes += Math.floor(priceCounts[price] / parseInt(price));
+    }
+
+    Object.keys(priceCounts).map((price: any) => (
+      console.log('priceCounts[price]', priceCounts[price]),
+      console.log('priceCounts[]', price)
+    ))
+    
+    console.log('resultFilterFind', recurrentes);
+  }, [filteredDataTotal])
 
   const dataLeadsFilter = [
     {
@@ -151,12 +192,12 @@ const Sales = () => {
     {
       name: "Reembolso",
       image: reembolso,
-      value: <FormatNumber number={totalRefund} />,
+      value: totalRefund,
     },
     {
       name: "ventas Recurrentes",
       image: ventarecurrente,
-      value: <FormatNumber number={totalPayments} />,
+      value: recurrentes,
     },
   ];
 
@@ -305,6 +346,7 @@ const Sales = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
+        positionDataHelpVideo={4}
       />
       <Modal
         title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}

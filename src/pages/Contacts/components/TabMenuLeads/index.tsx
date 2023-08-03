@@ -11,6 +11,7 @@ import FilterContacts from "../FilterContacts/FilterContacts";
 import leadsFilter from "../../../../assets/images/leadsFilter.svg";
 import { Tooltip } from "@mui/material";
 import { Title } from "../../../../styled-components/Title/index";
+import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
 
 const TabMenuLeads = ({
   nameTab,
@@ -35,6 +36,7 @@ const TabMenuLeads = ({
   handleDateFilterCalendar,
   dataFiltersCalendar,
   setHandleButtonsFilterCalendar,
+  positionDataHelpVideo
 }: any) => {
   const [titleDatePickerLeads, setTitleDatePickerLeads] = useState(
     "Selecciona una fecha"
@@ -77,11 +79,14 @@ const TabMenuLeads = ({
       </div>
       <div
         className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end mr-3"
-        style={{ width: "48vw" }}
+        style={{ width: "52vw" }}
       >
         <ButtonCreate className="btn" onClick={openModal}>
           {nameTab}
         </ButtonCreate>
+        <div className="mr-2">
+          <HelpVideo position={positionDataHelpVideo} />
+        </div>
         <FilterContacts
           titleDatePickerLeads={titleDatePickerLeads}
           dataLead={dataLead}

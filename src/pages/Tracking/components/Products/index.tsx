@@ -111,6 +111,7 @@ const Products = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
+        positionDataHelpVideo={7}
       />
       <Modal
         title={currentEdit !== null ? "Editar Producto" : "Crear Producto"}

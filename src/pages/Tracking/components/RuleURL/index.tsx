@@ -111,6 +111,7 @@ const RuleURL = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
+        positionDataHelpVideo={6}
       />
       <Modal
         title={currentEdit !== null ? "Editar Regla" : "Crear Regla"}
