@@ -26,10 +26,6 @@ const FormProducts = ({ onClose, currentEdit, setCurrentEdit }: any) => {
       .number()
       .positive("El precio debe ser mayor a 0")
       .required("El precio es requerido"),
-    sku: yup
-      .number()
-      .positive("El sku debe ser mayor a 0")
-      .required("El sku es requerido"),
   });
 
   const {

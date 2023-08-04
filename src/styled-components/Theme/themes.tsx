@@ -89,7 +89,7 @@ export const lightTable = {
 
 export const darkTable = {
   background: "#0D0D0D",
-  text: "#6F6C10",
+  text: "#6F6C99",
   border: "1px solid #000",
 };
 
