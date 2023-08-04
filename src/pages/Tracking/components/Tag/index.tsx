@@ -8,6 +8,7 @@ import InputComponent from "../../../../components/input/Input.component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { BeatLoader } from "react-spinners";
 import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
 
 const TagTracking = () => {
   const dispatch = useAppDispatch();
@@ -59,6 +60,7 @@ const TagTracking = () => {
     <>
       <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
         <HelpVideo position={8} />
+        <ExportExcel dataFile={filteredData} titleFile={"Tabla Etiquetas"}/>
         <div style={{ width: "25%" }} className="ml-2">
           <InputComponent
             // max={5}

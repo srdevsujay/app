@@ -90,6 +90,7 @@ const Sales = () => {
     useState([]);
 
   const [recurrentes, setRecurrentes] = useState(0);
+  const [titleFile, setTitleFile] = useState("Tabla Ventas");
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataSale);
 
@@ -143,7 +144,7 @@ const Sales = () => {
 
   const totalSale = filteredDataTotal.length;
 
-  console.log('filteredDataTotal', filteredDataTotal.length);
+  console.log('filteredDataTotal', filteredDataTotal);
     
   // const calculateRecurrentes = (data: any) => {
   //   const recurrentes: any = {};
@@ -154,52 +155,64 @@ const Sales = () => {
   //   return recurrentes;
   // };
 
-  useEffect(() => {
-    if(filteredDataTotal.length === 0) return;
-    // Utilizamos un objeto para almacenar los precios únicos y sus recuentos de ventas
-    const priceCounts: any = {};
-
-    // Calcular el recuento de ventas para cada precio único
-    filteredDataTotal.forEach((item: any) => {
-      const { price } = item;
-      if (priceCounts[price]) {
-        priceCounts[price]++;
-      } else {
-        priceCounts[price] = 1;
+  const [objectFilterSale, setObjectFilterSale] = useState<any>({})
+  console.log('resultDatanewfilteredDataDos', filteredDataDos);
+  const processData = (data: any) => {
+    const result = {
+      ventas: 0,
+      reembolsos: 0,
+      Recurrentes: 0,
+    };
+  
+    const groupedData = data.reduce((groups: any, item: any) => {
+      const key = item.refaund === 0 ? item.price : "reembolsos";
+      if (!groups[key]) {
+        groups[key] = [];
       }
-    });
-
-    // Calcular el total de ventas recurrentes
-    let recurrentes = 0;
-    for (const price in priceCounts) {
-      recurrentes += Math.floor(priceCounts[price] / parseInt(price));
+      groups[key].push(item);
+      return groups;
+    }, {});
+  
+    for (const key in groupedData) {
+      if (key === "reembolsos") {
+        result.reembolsos = groupedData[key].length;
+      } else if (groupedData[key].length > 1) {
+        result.Recurrentes += groupedData[key].length;
+      } else {
+        result.ventas += groupedData[key].length;
+      }
     }
+  
+    return result;
+  };
+  
+  useEffect(() => {
+    if(filteredDataDos === undefined) return;
+    const result = processData(filteredDataDos);
+    setObjectFilterSale(result);
+  }, [filteredDataDos])
 
-    Object.keys(priceCounts).map((price: any) => (
-      console.log('priceCounts[price]', priceCounts[price]),
-      console.log('priceCounts[]', price)
-    ))
-    
-    console.log('resultFilterFind', recurrentes);
-  }, [filteredDataTotal])
+  console.log('resultDatanew', objectFilterSale);
 
   const dataLeadsFilter = [
     {
       name: "Total Ventas",
       image: saleFilter,
-      value: totalSale,
+      value: objectFilterSale?.ventas,
     },
     {
       name: "Reembolso",
       image: reembolso,
-      value: totalRefund,
+      value: objectFilterSale?.reembolsos,
     },
     {
-      name: "ventas Recurrentes",
+      name: "Ventas Recurrentes",
       image: ventarecurrente,
-      value: recurrentes,
+      value: objectFilterSale?.Recurrentes,
     },
   ];
+
+  console.log('resultDatanewdataLeadsFilter', dataLeadsFilter);
 
   useEffect(() => {
     // if (dataSale.length > 0) {
@@ -347,6 +360,8 @@ const Sales = () => {
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         positionDataHelpVideo={4}
+        dataFile={filteredDataDos}
+        titleDataFile={titleFile}
       />
       <Modal
         title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}

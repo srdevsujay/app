@@ -6,6 +6,7 @@ import InputComponent from "../../../../components/input/Input.component";
 import { useEffect, useState } from "react";
 import Modal from "../../../../components/modal/Modal.component";
 import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
 
 const TabMenuTracking = ({
   nameTab,
@@ -18,7 +19,9 @@ const TabMenuTracking = ({
   currentEdit,
   setCurrentEdit,
   openModal,
-  positionDataHelpVideo
+  positionDataHelpVideo,
+  filteredData,
+  titleDataFile
 }: any) => {
   return (
     <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
@@ -26,6 +29,9 @@ const TabMenuTracking = ({
         {nameTab}
       </ButtonCreate>
       <HelpVideo position={positionDataHelpVideo} />
+      <div className="mr-2">
+        <ExportExcel dataFile={filteredData} titleFile={titleDataFile}/>
+      </div>
       <ToggleColumnsTable
         columns={columns}
         setDataFunnelToggle={setDataFunnelToggle}

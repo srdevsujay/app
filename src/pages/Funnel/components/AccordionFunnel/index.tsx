@@ -59,6 +59,7 @@ import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import { ContainerDropdown } from "../../../../styled-components/button/index";
 import { BeatLoader } from "react-spinners";
 import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -963,6 +964,7 @@ const AccordionFunnel = ({
                   handleFourteenDays={handleFourteenDays}
                 />
                 <HelpVideo position={1} />
+                <ExportExcel dataFile={dataFunnel} titleFile={'tabla Funnel'}/>
                 <div className="dropdown ml-2">
                   <ButtonFilter
                     className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"

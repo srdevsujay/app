@@ -38,6 +38,7 @@ const RuleURL = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  const [titleFile, setTitleFile] = useState("Tabla Reglas de URL");
 
   useEffect(() => {
     // if (dataRule.length > 0) {
@@ -112,6 +113,8 @@ const RuleURL = () => {
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
         positionDataHelpVideo={6}
+        filteredData={filteredData}
+        titleDataFile={titleFile}
       />
       <Modal
         title={currentEdit !== null ? "Editar Regla" : "Crear Regla"}

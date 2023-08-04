@@ -68,7 +68,7 @@ const Leads = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>("");
-  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>([]);
 
   const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
   const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
@@ -82,6 +82,7 @@ const Leads = () => {
   ]);
 
   const [filteredDataTotal, setFilteredDataTotal] = useState<any>(dataLead);
+  const [titleFile, setTitleFile] = useState("Tabla Leads");
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);
 
@@ -222,40 +223,14 @@ const Leads = () => {
     setFilteredDataTotal(handleButtonsFilterCalendar);
     setFilteredDataDos(handleButtonsFilterCalendar);
     setModalStateFilter(false);
-  }, [handleButtonsFilterCalendar]);
-
-  const totalPayments = filteredDataTotal.reduce(
-    (total: any, lead: any) => total + lead?.payments,
-    0
-  );
-
-  const totalRefund = filteredDataTotal.reduce(
-    (total: any, lead: any) => total + lead?.refaund,
-    0
-  );
-
-  const totalLeads = filteredDataTotal.length;
-
-  console.log("totalLeads", totalLeads);
-  console.log("totalPayments", totalPayments);
-  console.log("totalRefund", totalRefund);
+  }, [handleButtonsFilterCalendar, memoizedUsers]);
 
   const dataLeadsFilter = [
     {
       name: "Total Leads",
       image: leadsFilter,
-      value: totalLeads,
+      value: filteredDataDos.length,
     },
-    // {
-    //   name: "Total Leads",
-    //   image: ventasFilter,
-    //   value: <FormatNumber number={totalPayments} />,
-    // },
-    // {
-    //   name: "Total Leads",
-    //   image: reembolso,
-    //   value: <FormatNumber number={totalRefund} />,
-    // },
   ];
 
   return (
@@ -288,6 +263,8 @@ const Leads = () => {
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         positionDataHelpVideo={2}
+        dataFile={memoizedUsers}
+        titleDataFile={titleFile}
       />
       {/* <div style={{ width: "25%" }}>
           <SelectTag

@@ -37,7 +37,7 @@ const Booking = () => {
   const [columnsToSet, setColumnsToSet] = useState<any>(currentColumns);
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
-  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>([]);
   const [searchString, setSearchString] = useState("");
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>();
   const searchStringDebounced = useDebounce(searchString, 3000);
@@ -49,7 +49,7 @@ const Booking = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
-
+  const [titleFile, setTitleFile] = useState("Tabla Bookings");
   const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
   const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
 
@@ -196,13 +196,11 @@ const Booking = () => {
     setModalStateFilter(false);
   }, [handleButtonsFilterCalendar]);
 
-  const totalBookings = filteredDataTotal.length;
-
   const dataBookingFilter = [
     {
       name: "Total Booking",
       image: bookingsFilter,
-      value: totalBookings,
+      value: filteredDataDos.length,
     },
   ];
 
@@ -235,6 +233,8 @@ const Booking = () => {
         dataFiltersCalendar={dataBookingFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         positionDataHelpVideo={3}
+        dataFile={filteredDataDos}
+        titleDataFile={titleFile}
       />
       <Modal
         title={currentEdit !== null ? "Editar Booking" : "Crear Booking"}

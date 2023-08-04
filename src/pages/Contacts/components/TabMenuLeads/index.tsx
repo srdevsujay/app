@@ -12,6 +12,7 @@ import leadsFilter from "../../../../assets/images/leadsFilter.svg";
 import { Tooltip } from "@mui/material";
 import { Title } from "../../../../styled-components/Title/index";
 import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
 
 const TabMenuLeads = ({
   nameTab,
@@ -36,13 +37,16 @@ const TabMenuLeads = ({
   handleDateFilterCalendar,
   dataFiltersCalendar,
   setHandleButtonsFilterCalendar,
-  positionDataHelpVideo
+  positionDataHelpVideo,
+  dataFile,
+  titleDataFile
 }: any) => {
   const [titleDatePickerLeads, setTitleDatePickerLeads] = useState(
     "Selecciona una fecha"
   );
 
   console.log("dataFiltersCalendar", dataFiltersCalendar);
+  console.log("dataFiltersCalendardataLead", dataLead);
 
   return (
     <div className="row justify-content-between">
@@ -52,40 +56,43 @@ const TabMenuLeads = ({
             ? "mt-4 ml-3"
             : " d-flex align-items-center mr-3 mt-4 ml-3"
         }`}
-        style={{ width: "300px", justifyContent: "inherit" }}
+        style={{ width: "260px", justifyContent: "inherit" }}
       >
-        {dataFiltersCalendar?.map((filtersIcons: any) => (
+        {dataFiltersCalendar?.map((filtersCalendar: any) => (
           <div className="d-flex align-items-center">
             <Tooltip
               title={
                 <>
-                  <span>{filtersIcons.name}</span>
+                  <span>{filtersCalendar.name}</span>
                 </>
               }
               placement="top"
             >
               <img
-                src={filtersIcons.image}
+                src={filtersCalendar.image}
                 alt=""
                 className="mb-2"
                 height="15px"
               />
             </Tooltip>
             <Title fontSize="14px" color="#123249" className="ml-1">
-              {filtersIcons.value}
+              {filtersCalendar.value}
             </Title>
           </div>
         ))}
       </div>
       <div
         className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end mr-3"
-        style={{ width: "52vw" }}
+        style={{ width: "56vw" }}
       >
         <ButtonCreate className="btn" onClick={openModal}>
           {nameTab}
         </ButtonCreate>
-        <div className="mr-2">
+        <div className="">
           <HelpVideo position={positionDataHelpVideo} />
+        </div>
+        <div className="mr-2">
+          <ExportExcel dataFile={dataFile} titleFile={titleDataFile}/>
         </div>
         <FilterContacts
           titleDatePickerLeads={titleDatePickerLeads}
@@ -107,7 +114,7 @@ const TabMenuLeads = ({
           columnsToSet={columnsToSet}
           updateData={updateData}
         />
-        <div style={{ width: "45%" }}>
+        <div style={{ width: "34%" }}>
           <SelectTag
             dataLead={dataLead}
             setFilteredDataDos={setFilteredDataDos}

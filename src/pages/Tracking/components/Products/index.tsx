@@ -38,6 +38,7 @@ const Products = () => {
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
+  const [titleFile, setTitleFile] = useState("Tabla Productos");
 
   useEffect(() => {
     // if (dataProduct.length > 0) {
@@ -112,6 +113,8 @@ const Products = () => {
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
         positionDataHelpVideo={7}
+        filteredData={filteredData}
+        titleDataFile={titleFile}
       />
       <Modal
         title={currentEdit !== null ? "Editar Producto" : "Crear Producto"}

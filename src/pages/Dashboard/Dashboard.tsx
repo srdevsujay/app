@@ -1,4 +1,10 @@
 import { useState, useEffect, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
+import { saveAs } from 'file-saver';
+import { setAutoFreeze } from "immer";
+import moment from "moment";
+import { addDays } from "date-fns";
 import { Card, Main } from "../../styled-components/main";
 import { Bar } from "./styled-components/dashboardStyled";
 import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
@@ -6,17 +12,13 @@ import {
   getMetricFunnel,
   getTrackingFunnel,
 } from "../../redux/state/slices/dashboard/dashboardThunk";
-import { setAutoFreeze } from "immer";
 import TablePNL from "./components/TablePNL";
 import DateFilter from "./components/DateFilter";
 import "./styled-components/style.css";
-import moment from "moment";
-import { addDays } from "date-fns";
 import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
 import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
-import { useNavigate } from "react-router-dom";
 import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
 
 import {
@@ -27,13 +29,13 @@ import {
   lastWeek,
   currentMonth,
 } from "../../utilities/functionDateFilter/HandleDate";
-import { BeatLoader } from "react-spinners";
 import { totalPnl } from "./components/TotalTablePnl";
 import styled from "styled-components";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 import Toggle from "../../utilities/theme/ToggleButton";
 import { dataHelpVideo } from '../../utilities/dataHelpVideo';
-import HelpVideo from '../../components/HelpVideo/HelpVideo';
+import { HelpVideo } from '../../components/HelpVideo';
+import ExportExcel from '../../components/ExportExcel/ExportExcel';
 
 // setAutoFreeze(false);
 
@@ -246,9 +248,6 @@ const Dashboard = () => {
     totalPnl(selectPlatform, themeState, theme);
   }, [selectPlatform, themeState, theme]);
 
-  console.log("isLoadingDashboard", isLoading);
-  console.log("isLoadingDashboardgroupPlataform", groupPlataform);
-
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
       <Card height="94vh" borderRadius="16px" theme={theme}>
@@ -269,6 +268,7 @@ const Dashboard = () => {
                   setSelectPlatform={setSelectPlatform}
                 />
                 <HelpVideo position={0} />
+                <ExportExcel dataFile={groupPlataform} titleFile={'tabla pnl'}/>
                 <DateFilter
                   titleDatePickerPNL={titleDatePickerPNL}
                   handleDateDashboardMain={handleDateDashboardMain}
