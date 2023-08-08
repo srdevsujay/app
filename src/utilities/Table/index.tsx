@@ -23,6 +23,23 @@ const GeneralTable = ({
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
 
+  const handleRowClick = (event: any, rowData: any) => {
+    const clickedColumnClass = event.target.className;
+    console.log("clickedColumnClass", clickedColumnClass);
+
+    // Verifica si se hizo clic en la columna específica por su nombre de campo
+    if (
+      clickedColumnClass.includes("select-booking") ||
+      clickedColumnClass.includes("dropdown-toggle")
+    ) {
+      // Realiza una acción específica para esa columna
+      // en este caso no realizar nada para que n ose abra el popup del recorrido
+    } else {
+      // Acción por defecto para el clic en otras columnas
+      getUserProfile(rowData, event);
+    }
+  };
+
   return (
     <Table
       className={themeState === true || themeState === "true" ? "tables" : ""}
@@ -54,7 +71,8 @@ const GeneralTable = ({
             emptyDataSourceMessage: "No hay Datos...",
           },
         }}
-        onRowClick={(e, rowData) => getUserProfile(rowData, e)}
+        // onRowClick={(e, rowData) => getUserProfile(rowData, e)}
+        onRowClick={handleRowClick}
         style={tableStyles}
       />
     </Table>

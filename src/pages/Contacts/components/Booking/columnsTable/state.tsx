@@ -10,6 +10,7 @@ export const stateColumn = (dataContacts: any, onChangeStatus: any) => {
         <Select
           onChange={(e) => onChangeStatus(e, dataBooking)}
           value={dataBooking.status}
+          className="select-booking"
         >
           {stateBooking.map((option: any, i = 1) => (
             <option key={i} value={option.value}>
