@@ -269,7 +269,7 @@ const Booking = () => {
       {isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "55vh", zIndex: "99999999" }}
+          style={{ height: "80vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>
@@ -278,7 +278,7 @@ const Booking = () => {
           data={filteredDataDos}
           columns={columnsToSet}
           pageSizeOptions={[10, 25, 50, 100]}
-          maxBodyHeight={"55vh"}
+          maxBodyHeight={"80vh"}
           pageSize={7}
           getUserProfile={getUserProfile}
         />

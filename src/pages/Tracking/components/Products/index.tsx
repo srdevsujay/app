@@ -135,7 +135,7 @@ const Products = () => {
       {filteredData === undefined ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "50vh", zIndex: "99999999" }}
+          style={{ height: "80vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>
@@ -144,7 +144,7 @@ const Products = () => {
           data={filteredData}
           columns={columnsToSet}
           pageSizeOptions={[7, 15, 31]}
-          maxBodyHeight={"60vh"}
+          maxBodyHeight={"80vh"}
           pageSize={7}
         />
       )}

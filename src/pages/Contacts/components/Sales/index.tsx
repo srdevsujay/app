@@ -144,8 +144,8 @@ const Sales = () => {
 
   const totalSale = filteredDataTotal.length;
 
-  console.log('filteredDataTotal', filteredDataTotal);
-    
+  console.log("filteredDataTotal", filteredDataTotal);
+
   // const calculateRecurrentes = (data: any) => {
   //   const recurrentes: any = {};
   //   data.forEach((item: any) => {
@@ -155,15 +155,15 @@ const Sales = () => {
   //   return recurrentes;
   // };
 
-  const [objectFilterSale, setObjectFilterSale] = useState<any>({})
-  console.log('resultDatanewfilteredDataDos', filteredDataDos);
+  const [objectFilterSale, setObjectFilterSale] = useState<any>({});
+  console.log("resultDatanewfilteredDataDos", filteredDataDos);
   const processData = (data: any) => {
     const result = {
       ventas: 0,
       reembolsos: 0,
       Recurrentes: 0,
     };
-  
+
     const groupedData = data.reduce((groups: any, item: any) => {
       const key = item.refaund === 0 ? item.price : "reembolsos";
       if (!groups[key]) {
@@ -172,7 +172,7 @@ const Sales = () => {
       groups[key].push(item);
       return groups;
     }, {});
-  
+
     for (const key in groupedData) {
       if (key === "reembolsos") {
         result.reembolsos = groupedData[key].length;
@@ -182,17 +182,17 @@ const Sales = () => {
         result.ventas += groupedData[key].length;
       }
     }
-  
+
     return result;
   };
-  
+
   useEffect(() => {
-    if(filteredDataDos === undefined) return;
+    if (filteredDataDos === undefined) return;
     const result = processData(filteredDataDos);
     setObjectFilterSale(result);
-  }, [filteredDataDos])
+  }, [filteredDataDos]);
 
-  console.log('resultDatanew', objectFilterSale);
+  console.log("resultDatanew", objectFilterSale);
 
   const dataLeadsFilter = [
     {
@@ -212,7 +212,7 @@ const Sales = () => {
     },
   ];
 
-  console.log('resultDatanewdataLeadsFilter', dataLeadsFilter);
+  console.log("resultDatanewdataLeadsFilter", dataLeadsFilter);
 
   useEffect(() => {
     // if (dataSale.length > 0) {
@@ -409,7 +409,7 @@ const Sales = () => {
       {isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "55vh", zIndex: "99999999" }}
+          style={{ height: "80vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>
@@ -418,7 +418,7 @@ const Sales = () => {
           data={filteredDataDos}
           columns={columnsToSet}
           pageSizeOptions={[10, 25, 50, 100]}
-          maxBodyHeight={"55vh"}
+          maxBodyHeight={"80vh"}
           pageSize={7}
           getUserProfile={getUserProfile}
         />

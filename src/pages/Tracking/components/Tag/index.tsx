@@ -7,8 +7,8 @@ import { ColumnsTag } from "./ColumnsTable/ColumnsTag";
 import InputComponent from "../../../../components/input/Input.component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { BeatLoader } from "react-spinners";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
-import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
 
 const TagTracking = () => {
   const dispatch = useAppDispatch();
@@ -60,7 +60,7 @@ const TagTracking = () => {
     <>
       <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
         <HelpVideo position={8} />
-        <ExportExcel dataFile={filteredData} titleFile={"Tabla Etiquetas"}/>
+        <ExportExcel dataFile={filteredData} titleFile={"Tabla Etiquetas"} />
         <div style={{ width: "25%" }} className="ml-2">
           <InputComponent
             // max={5}
@@ -74,7 +74,7 @@ const TagTracking = () => {
       {filteredData === undefined ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "50vh", zIndex: "99999999" }}
+          style={{ height: "80vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>
@@ -83,7 +83,7 @@ const TagTracking = () => {
           data={filteredData}
           columns={columnsTag}
           pageSizeOptions={[7, 15, 31]}
-          maxBodyHeight={"60vh"}
+          maxBodyHeight={"80vh"}
           pageSize={7}
         />
       )}

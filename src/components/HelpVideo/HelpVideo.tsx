@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Tooltip } from "@mui/material"
-import { dataHelpVideo } from '../../utilities/dataHelpVideo';
+import { Tooltip } from "@mui/material";
+import { dataHelpVideo } from "../../utilities/dataHelpVideo";
 import { Modal } from "../modal";
 import "../../styled-components/style.css";
-import { ModalClose } from '../../styled-components/modal/index';
-import { Title } from '../../styled-components/Title/index';
+import { ModalClose } from "../../styled-components/modal/index";
+import { Title } from "../../styled-components/Title/index";
 
-const HelpVideo = ({position}: any) => {
-
+const HelpVideo = ({ position }: any) => {
   const [isModalOpen, setModalState] = useState<boolean>(false);
   const toggleModal = () => setModalState(!isModalOpen);
 
@@ -45,7 +44,17 @@ const HelpVideo = ({position}: any) => {
             <ModalClose onClick={toggleModal}>
               {/* x<img src={iconX} alt={'close'} /> */}x
             </ModalClose>
-            <iframe
+            <div
+              style={{
+                height: "300px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h4>Proximamente video tutoriales</h4>
+            </div>
+            {/* <iframe
               width="100%" // Adjust the width to your desired size
               height="315" // Adjust the height to your desired size
               src={dataHelpVideo[position]?.url}
@@ -53,11 +62,11 @@ const HelpVideo = ({position}: any) => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+            ></iframe> */}
           </div>
         </Modal>
       </div>
     </Tooltip>
-  )
-}
-export default HelpVideo
+  );
+};
+export default HelpVideo;
