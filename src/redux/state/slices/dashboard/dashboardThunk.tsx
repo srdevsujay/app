@@ -147,7 +147,14 @@ export const obtainApiDashboardFunnel = (
         signOut();
         dispatch(logoutUser());
       }
-      dispatch(setDataFunnel(resultAction.data.data));
+      const currentDataFunnel: any = _.orderBy(
+        resultAction.data.data,
+        "date_start",
+        "desc"
+      );
+      console.log("currentDataFunnel--", currentDataFunnel);
+
+      dispatch(setDataFunnel(currentDataFunnel));
       dispatch(setDataFilter(resultAction.data.filters));
     } catch (error) {
       console.log(error);
