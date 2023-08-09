@@ -8,12 +8,14 @@ const Toggle: React.FC = () => {
   const dispatch = useAppDispatch();
   const theme: any = localStorage.getItem("Theme");
   const themeDark = JSON.parse(theme);
+  console.log("themeDark--", themeDark);
+
   const [themeClick, setThemeClick] = useState(themeDark);
   const [themeDarkLight, setThemeDarkLight] = useState<any>(null);
   const { toggleTheme } = useContext(ThemeContext);
 
   const newToggleTheme = () => {
-    // console.log("entra al newToggleTheme", !themeClick);
+    console.log("entra al newToggleTheme", !themeClick);
     setThemeClick(!themeClick);
     localStorage.setItem("Theme", JSON.stringify(!themeClick));
     toggleTheme();
@@ -28,7 +30,7 @@ const Toggle: React.FC = () => {
   // }, [themeDark]);
 
   return (
-    <button className="btn handleTheme d-none" onClick={newToggleTheme}>
+    <button className="btn handleTheme" onClick={newToggleTheme}>
       {themeDark === true ? "Modo Claro" : "Modo Oscuro"}
     </button>
   );

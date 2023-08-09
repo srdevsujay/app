@@ -6,11 +6,13 @@ import { getTrackingFunnel } from "../../../../redux/state/slices/dashboard/dash
 import ScriptConstants from "./ScriptConstants";
 import { SelectScript } from "../../styled-components/TableRule";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
 import {
   TitleHelvetica,
   Title,
 } from "../../../../styled-components/Title/index";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const ScriptTab = () => {
   new ClipboardJS(".btn");
@@ -38,6 +40,9 @@ const ScriptTab = () => {
   // }, [numberTab])
 
   const { theme, themeTitleModal } = useContext(ThemeContext);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <section className="w-75 mt-3">
@@ -74,7 +79,11 @@ const ScriptTab = () => {
             </SelectScript>
           </FormControl>
           <div></div>
-          <HelpVideo position={5} />
+          <HelpVideo
+            title={"Video Tutorial Tracking"}
+            image={themeState ? video : videoDark}
+            url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
+          />
         </div>
       </div>
       <div className="row mt-2">

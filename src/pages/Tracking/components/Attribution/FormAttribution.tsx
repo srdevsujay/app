@@ -16,11 +16,13 @@ import {
 import { FormAttributionSale } from "../../../../styled-components/Form/index";
 import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
 import { Title } from "../../../../styled-components/Title/index";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
 import {
   createProduct,
   editProduct,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const dataAttributionMajorMinor: any = [
   { id: 0, value: 0, name: "Menor igual (Dias ingresados)" },
@@ -125,6 +127,8 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   // const handleChangeOperator = () => {
   //   setOperator(!operator)
   // };
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <FormAttributionSale>
@@ -136,7 +140,6 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
         <Bar></Bar>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        
         {/* <div className="row align-content-center flex-column"> */}
         <div className="row flex-column">
           <div className="col-sm-6">
@@ -195,9 +198,14 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             </div>
           </div>
           <div className="col-sm-6">
-            <HelpVideo position={9} />
+            <HelpVideo
+              title={"Video Tutorial Atribución"}
+              image={themeState ? video : videoDark}
+              url={
+                "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+              }
+            />
           </div>
-          
         </div>
       </form>
     </FormAttributionSale>

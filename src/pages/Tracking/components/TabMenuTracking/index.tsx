@@ -5,8 +5,8 @@ import { ButtonCreate } from "../../../../styled-components/button";
 import InputComponent from "../../../../components/input/Input.component";
 import { useEffect, useState } from "react";
 import Modal from "../../../../components/modal/Modal.component";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
-import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
 
 const TabMenuTracking = ({
   nameTab,
@@ -19,18 +19,24 @@ const TabMenuTracking = ({
   currentEdit,
   setCurrentEdit,
   openModal,
-  positionDataHelpVideo,
+  titleVideoTutorial,
+  imageVideoTutorial,
+  urlVideoTutorial,
   filteredData,
-  titleDataFile
+  titleDataFile,
 }: any) => {
   return (
     <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
       <ButtonCreate className="btn" onClick={openModal}>
         {nameTab}
       </ButtonCreate>
-      <HelpVideo position={positionDataHelpVideo} />
+      <HelpVideo
+        title={titleVideoTutorial}
+        image={imageVideoTutorial}
+        url={urlVideoTutorial}
+      />
       <div className="mr-2">
-        <ExportExcel dataFile={filteredData} titleFile={titleDataFile}/>
+        <ExportExcel dataFile={filteredData} titleFile={titleDataFile} />
       </div>
       <ToggleColumnsTable
         columns={columns}

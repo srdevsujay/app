@@ -11,8 +11,8 @@ import FilterContacts from "../FilterContacts/FilterContacts";
 import leadsFilter from "../../../../assets/images/leadsFilter.svg";
 import { Tooltip } from "@mui/material";
 import { Title } from "../../../../styled-components/Title/index";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
-import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
 
 const TabMenuLeads = ({
   nameTab,
@@ -37,9 +37,11 @@ const TabMenuLeads = ({
   handleDateFilterCalendar,
   dataFiltersCalendar,
   setHandleButtonsFilterCalendar,
-  positionDataHelpVideo,
+  titleVideoTutorial,
+  imageVideoTutorial,
+  urlVideoTutorial,
   dataFile,
-  titleDataFile
+  titleDataFile,
 }: any) => {
   const [titleDatePickerLeads, setTitleDatePickerLeads] = useState(
     "Selecciona una fecha"
@@ -89,10 +91,14 @@ const TabMenuLeads = ({
           {nameTab}
         </ButtonCreate>
         <div className="">
-          <HelpVideo position={positionDataHelpVideo} />
+          <HelpVideo
+            title={titleVideoTutorial}
+            image={imageVideoTutorial}
+            url={urlVideoTutorial}
+          />
         </div>
         <div className="mr-2">
-          <ExportExcel dataFile={dataFile} titleFile={titleDataFile}/>
+          <ExportExcel dataFile={dataFile} titleFile={titleDataFile} />
         </div>
         <FilterContacts
           titleDatePickerLeads={titleDatePickerLeads}

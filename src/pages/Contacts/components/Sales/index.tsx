@@ -26,6 +26,8 @@ import { useMinMaxDateFilter } from "../../hooks";
 import ventarecurrente from "../../../../assets/images/ventarecurrente.svg";
 import reembolso from "../../../../assets/images/reembolso.svg";
 import saleFilter from "../../../../assets/images/saleFilter.svg";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 setAutoFreeze(false);
 
@@ -331,6 +333,9 @@ const Sales = () => {
 
   console.log("columnsToSet--", columnsToSet);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <TabMenuLeads
@@ -359,7 +364,11 @@ const Sales = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
-        positionDataHelpVideo={4}
+        titleVideoTutorial={"Video Tutorial Ventas"}
+        imageVideoTutorial={themeState ? video : videoDark}
+        urlVideoTutorial={
+          "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+        }
         dataFile={filteredDataDos}
         titleDataFile={titleFile}
       />

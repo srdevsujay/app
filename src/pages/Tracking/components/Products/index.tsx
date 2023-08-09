@@ -15,6 +15,8 @@ import Modal from "../../../../components/modal/Modal.component";
 import FormProducts from "../FormProduct";
 import TabMenuTracking from "../TabMenuTracking";
 import { BeatLoader } from "react-spinners";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 setAutoFreeze(false);
 
@@ -97,6 +99,9 @@ const Products = () => {
     }
   };
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <TabMenuTracking
@@ -112,7 +117,11 @@ const Products = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
-        positionDataHelpVideo={7}
+        titleVideoTutorial={"Video Tutorial Productos"}
+        imageVideoTutorial={themeState ? video : videoDark}
+        urlVideoTutorial={
+          "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+        }
         filteredData={filteredData}
         titleDataFile={titleFile}
       />

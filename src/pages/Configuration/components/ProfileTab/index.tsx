@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import Modal from "../../../../components/modal/Modal.component";
 import FormProfileEdit from "./FormProfileEdit";
 import { getCurrentUser } from "../../../../utilities/localstorage.utility";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
 import {
   addFile,
   removeFile,
@@ -19,6 +19,8 @@ import {
   Title,
   TitleHelvetica,
 } from "../../../../styled-components/Title/index";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const ProfileTab = () => {
   const dispatch = useAppDispatch();
@@ -88,6 +90,9 @@ const ProfileTab = () => {
     hiddenFileInput.current.click();
     // document.querySelector(".fileInput").click();
   };
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <div className="row mt-3">
@@ -199,7 +204,13 @@ const ProfileTab = () => {
             </ButtonsProfile>
           </div>
           <div className="offset-2 col-sm-4">
-            <HelpVideo position={10} />
+            <HelpVideo
+              title={"Video Tutorial Perfil"}
+              image={themeState ? video : videoDark}
+              url={
+                "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+              }
+            />
           </div>
         </div>
       </section>

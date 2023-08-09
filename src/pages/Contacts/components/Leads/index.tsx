@@ -32,6 +32,8 @@ import reembolso from "../../../../assets/images/reembolso.svg";
 import ventasFilter from "../../../../assets/images/ventasFilter.svg";
 import { useMinMaxDateFilter } from "../../hooks";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 setAutoFreeze(false);
 
@@ -233,6 +235,9 @@ const Leads = () => {
     },
   ];
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
@@ -262,7 +267,11 @@ const Leads = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
-        positionDataHelpVideo={2}
+        titleVideoTutorial={"Video Tutorial Leads"}
+        imageVideoTutorial={themeState ? video : videoDark}
+        urlVideoTutorial={
+          "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+        }
         dataFile={memoizedUsers}
         titleDataFile={titleFile}
       />

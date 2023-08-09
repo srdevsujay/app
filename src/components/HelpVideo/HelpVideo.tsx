@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Tooltip } from "@mui/material";
-import { dataHelpVideo } from "../../utilities/dataHelpVideo";
+// import { DataHelpVideo } from "../../utilities/DataHelpVideo";
 import { Modal } from "../modal";
 import "../../styled-components/style.css";
 import { ModalClose } from "../../styled-components/modal/index";
 import { Title } from "../../styled-components/Title/index";
+import { ButtonTitlePicker } from "../../pages/Dashboard/styled-components/dashboardStyled";
+import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
-const HelpVideo = ({ position }: any) => {
+const HelpVideo = ({ title, image, url }: any) => {
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
   const [isModalOpen, setModalState] = useState<boolean>(false);
   const toggleModal = () => setModalState(!isModalOpen);
 
@@ -19,18 +22,17 @@ const HelpVideo = ({ position }: any) => {
     <Tooltip
       title={
         <>
-          <span>{dataHelpVideo[position]?.title}</span>
+          <span>{title}</span>
         </>
       }
       placement="top"
     >
-      <div className="div-button-video" onClick={handleOpen}>
-        <img
-          src={dataHelpVideo[position]?.image}
-          alt=""
-          className=""
-          height="15px"
-        />
+      <ButtonTitlePicker
+        className="div-button-video"
+        theme={theme}
+        onClick={handleOpen}
+      >
+        <img src={image} alt="" className="" height="15px" />
         <Modal
           title={""}
           isOpen={isModalOpen}
@@ -40,7 +42,7 @@ const HelpVideo = ({ position }: any) => {
           btnClose={0}
         >
           <div className="text-center">
-            <Title fontSize="27px">{dataHelpVideo[position]?.title}</Title>
+            <Title fontSize="27px">{title}</Title>
             <ModalClose onClick={toggleModal}>
               {/* x<img src={iconX} alt={'close'} /> */}x
             </ModalClose>
@@ -57,15 +59,15 @@ const HelpVideo = ({ position }: any) => {
             {/* <iframe
               width="100%" // Adjust the width to your desired size
               height="315" // Adjust the height to your desired size
-              src={dataHelpVideo[position]?.url}
-              title={dataHelpVideo[position]?.title}
+              src={url}
+              title={title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe> */}
           </div>
         </Modal>
-      </div>
+      </ButtonTitlePicker>
     </Tooltip>
   );
 };

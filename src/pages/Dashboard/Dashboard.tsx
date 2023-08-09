@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { setAutoFreeze } from "immer";
 import moment from "moment";
 import { addDays } from "date-fns";
@@ -33,9 +33,11 @@ import { totalPnl } from "./components/TotalTablePnl";
 import styled from "styled-components";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 import Toggle from "../../utilities/theme/ToggleButton";
-import { dataHelpVideo } from '../../utilities/dataHelpVideo';
-import { HelpVideo } from '../../components/HelpVideo';
-import ExportExcel from '../../components/ExportExcel/ExportExcel';
+// import { DataHelpVideo } from "../../utilities/DataHelpVideo";
+import { HelpVideo } from "../../components/HelpVideo";
+import ExportExcel from "../../components/ExportExcel/ExportExcel";
+import video from "../../assets/images/video.svg";
+import videoDark from "../../assets/images/videoDark.svg";
 
 // setAutoFreeze(false);
 
@@ -84,6 +86,8 @@ const Dashboard = () => {
   // const themeState = useAppSelector((state) => state.configuration.theme);
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
+  console.log("themeState--.", themeState);
+
   // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
   // const dataFunnel = useAppSelector(
   //   (state: AppStore) => state.dashboard.dataFunnel
@@ -267,8 +271,17 @@ const Dashboard = () => {
                   setGroupPlataform={setGroupPlataform}
                   setSelectPlatform={setSelectPlatform}
                 />
-                <HelpVideo position={0} />
-                <ExportExcel dataFile={groupPlataform} titleFile={'tabla pnl'}/>
+                <HelpVideo
+                  title={"Video Tutorial Dashboard"}
+                  image={themeState ? video : videoDark}
+                  url={
+                    "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+                  }
+                />
+                <ExportExcel
+                  dataFile={groupPlataform}
+                  titleFile={"tabla pnl"}
+                />
                 <DateFilter
                   titleDatePickerPNL={titleDatePickerPNL}
                   handleDateDashboardMain={handleDateDashboardMain}

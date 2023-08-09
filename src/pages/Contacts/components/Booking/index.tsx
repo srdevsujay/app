@@ -24,6 +24,8 @@ import { BeatLoader } from "react-spinners";
 import { closeUserDetail } from "../../../../redux/state/slices/contacts/contactsThunk";
 import { useMinMaxDateFilter } from "../../hooks";
 import bookingsFilter from "../../../../assets/images/bookingsFilter.svg";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 setAutoFreeze(false);
 
@@ -204,6 +206,9 @@ const Booking = () => {
     },
   ];
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <TabMenuLeads
@@ -232,7 +237,11 @@ const Booking = () => {
         handleDateFilterCalendar={handleDateFilterCalendar}
         dataFiltersCalendar={dataBookingFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
-        positionDataHelpVideo={3}
+        titleVideoTutorial={"Video Tutorial Booking"}
+        imageVideoTutorial={themeState ? video : videoDark}
+        urlVideoTutorial={
+          "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+        }
         dataFile={filteredDataDos}
         titleDataFile={titleFile}
       />

@@ -14,7 +14,9 @@ import "../../styled-components/style.css";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import { ModalClose } from "../../../../styled-components/modal/index";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const SelectSubscriptionsPlans = ({
   selectedPayment,
@@ -33,6 +35,9 @@ const SelectSubscriptionsPlans = ({
   const [dataPlans, setDataPlans] = useState([]);
   const [dataSubscriptions, setDataSubscriptions] = useState([]);
   console.log("dataPlans", dataPlans);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   useEffect(() => {
     if (!plans) return;
@@ -272,7 +277,13 @@ const SelectSubscriptionsPlans = ({
                   Actualizar Suscripción
                 </ButtonsProfile>
                 <div className="ml-2">
-                  <HelpVideo position={12} />
+                  <HelpVideo
+                    title={"Video Tutorial Facturación"}
+                    image={themeState ? video : videoDark}
+                    url={
+                      "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+                    }
+                  />
                 </div>
               </>
             ) : (
@@ -281,7 +292,13 @@ const SelectSubscriptionsPlans = ({
                   Siguiente Paso
                 </ButtonsProfile>
                 <div className="ml-2">
-                  <HelpVideo position={12} />
+                  <HelpVideo
+                    title={"Video Tutorial Facturación"}
+                    image={themeState ? video : videoDark}
+                    url={
+                      "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+                    }
+                  />
                 </div>
               </>
             )}

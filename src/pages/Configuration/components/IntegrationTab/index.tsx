@@ -18,7 +18,9 @@ import { createTokenFacebook } from "../../../../redux/state/slices/configuratio
 import { useAppDispatch } from "../../../../hooks/appDispatch";
 import FacebookButtonLogin from "./FacebookButtonLogin";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const IntegrationTab = () => {
   const dispatch = useAppDispatch();
@@ -105,7 +107,8 @@ const IntegrationTab = () => {
       active: !tokengoogle,
       urlImg: googleApi,
       event: toggleModalGoogle,
-      guide: "https://sites.google.com/roalytics.com/ayuda-g-ads-integracion/inicio"
+      guide:
+        "https://sites.google.com/roalytics.com/ayuda-g-ads-integracion/inicio",
     },
     {
       title: "Webhook Stripe",
@@ -113,7 +116,8 @@ const IntegrationTab = () => {
       active: true,
       urlImg: stripeIcon,
       event: eventStripe,
-      guide: "https://sites.google.com/roalytics.com/ayuda-stripe-integracion/inicio"
+      guide:
+        "https://sites.google.com/roalytics.com/ayuda-stripe-integracion/inicio",
     },
     {
       title: "Facebook",
@@ -129,7 +133,8 @@ const IntegrationTab = () => {
       active: true,
       urlImg: paypal,
       event: eventPaypal,
-      guide: "https://sites.google.com/roalytics.com/ayuda-paypal-integracion/inicio"
+      guide:
+        "https://sites.google.com/roalytics.com/ayuda-paypal-integracion/inicio",
     },
     {
       title: "Webhook Paypal",
@@ -144,64 +149,80 @@ const IntegrationTab = () => {
       active: true,
       urlImg: hotmart,
       event: eventHotmartWebhook,
-      guide: "https://sites.google.com/roalytics.com/ayuda-hotmart-integracion/inicio"
+      guide:
+        "https://sites.google.com/roalytics.com/ayuda-hotmart-integracion/inicio",
     },
   ];
 
   const { theme } = useContext(ThemeContext);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <div className="mt-3">
-        <HelpVideo position={11} />
+        <HelpVideo
+          title={"Video Tutorial Integraciones"}
+          image={themeState ? video : videoDark}
+          url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
+        />
       </div>
       <div className="row">
-        {integrationArr.map((integration: any, i: number) => (
-          console.log('integration.guide', integration.guide),
-          
-          <div className="col-sm-4 mt-4 pl-0" key={i}>
-            <CardPlatform theme={theme}>
-              <div className="activeIntegration">
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={integration.active}
-                        // onChange={handleChange}
-                        inputProps={{ "aria-label": "controlled" }}
+        {integrationArr.map(
+          (integration: any, i: number) => (
+            console.log("integration.guide", integration.guide),
+            (
+              <div className="col-sm-4 mt-4 pl-0" key={i}>
+                <CardPlatform theme={theme}>
+                  <div className="activeIntegration">
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={integration.active}
+                            // onChange={handleChange}
+                            inputProps={{ "aria-label": "controlled" }}
+                          />
+                        }
+                        label={!integration.active ? "Inactivo" : "Activo"}
                       />
-                    }
-                    label={!integration.active ? "Inactivo" : "Activo"}
+                    </FormGroup>
+                  </div>
+                  <img
+                    src={integration.urlImg}
+                    alt=""
+                    width="50"
+                    className="imgApi"
                   />
-                </FormGroup>
+                  <div className="ApiText">
+                    <span className="title-card">{integration.title}</span>
+                    <br />
+                    <span className="card-body" style={{ padding: "0" }}>
+                      {integration.description}
+                    </span>
+                    <br />
+                    <a className="click-here" onClick={integration.event}>
+                      Clic aquí
+                    </a>
+                    <br />
+                    {integration.guide === undefined ? (
+                      ""
+                    ) : (
+                      <a
+                        className="click-here"
+                        href={integration.guide}
+                        target="_blank"
+                      >
+                        Ver Guia
+                      </a>
+                    )}
+                  </div>
+                </CardPlatform>
               </div>
-              <img
-                src={integration.urlImg}
-                alt=""
-                width="50"
-                className="imgApi"
-              />
-              <div className="ApiText">
-                <span className="title-card">{integration.title}</span>
-                <br />
-                <span className="card-body" style={{ padding: "0" }}>
-                  {integration.description}
-                </span>
-                <br />
-                <a className="click-here" onClick={integration.event}>
-                  Clic aquí
-                </a>
-                <br />
-                {
-                  integration.guide === undefined ? "" : 
-                  <a className="click-here" href={integration.guide} target="_blank">
-                    Ver Guia 
-                  </a>
-                }
-              </div>
-            </CardPlatform>
-          </div>
-        ))}
+            )
+          )
+        )}
         <Modal
           title={title}
           isOpen={isModalOpenUser}

@@ -58,8 +58,10 @@ import {
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import { ContainerDropdown } from "../../../../styled-components/button/index";
 import { BeatLoader } from "react-spinners";
-import HelpVideo from '../../../../components/HelpVideo/HelpVideo';
-import ExportExcel from '../../../../components/ExportExcel/ExportExcel';
+import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
+import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -924,6 +926,10 @@ const AccordionFunnel = ({
   console.log("dataDataFunneldataFunnel", dataFunnel);
   const { theme, themeButtonDropdown, themeFilterFunnel } =
     useContext(ThemeContext);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <div className="mt-3">
       {dataTracking.map((tracking: any, index: number) => (
@@ -963,8 +969,14 @@ const AccordionFunnel = ({
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                 />
-                <HelpVideo position={1} />
-                <ExportExcel dataFile={dataFunnel} titleFile={'tabla Funnel'}/>
+                <HelpVideo
+                  title={"Video Tutorial Funnel"}
+                  image={themeState ? video : videoDark}
+                  url={
+                    "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+                  }
+                />
+                <ExportExcel dataFile={dataFunnel} titleFile={"tabla Funnel"} />
                 <div className="dropdown ml-2">
                   <ButtonFilter
                     className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
@@ -1008,7 +1020,10 @@ const AccordionFunnel = ({
                           return null;
                         } else {
                           return (
-                            <div key={column?.name} className="column-container">
+                            <div
+                              key={column?.name}
+                              className="column-container"
+                            >
                               <Checkbox
                                 {...label}
                                 checked={column?.checkbox}

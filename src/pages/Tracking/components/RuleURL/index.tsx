@@ -15,6 +15,8 @@ import { obtainApiRuleURL } from "../../../../redux/state/slices/tracking/tracki
 import { ColumnsRule } from "./ColumnsRule";
 import FormRule from "./FormRule";
 import { BeatLoader } from "react-spinners";
+import video from "../../../../assets/images/video.svg";
+import videoDark from "../../../../assets/images/videoDark.svg";
 
 setAutoFreeze(false);
 
@@ -97,6 +99,9 @@ const RuleURL = () => {
     }
   };
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <TabMenuTracking
@@ -112,7 +117,11 @@ const RuleURL = () => {
         idEditCurrent={idEditCurrent}
         setIdEditCurrent={setIdEditCurrent}
         openModal={openModal}
-        positionDataHelpVideo={6}
+        titleVideoTutorial={"Video Tutorial Reglas de URL"}
+        imageVideoTutorial={themeState ? video : videoDark}
+        urlVideoTutorial={
+          "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+        }
         filteredData={filteredData}
         titleDataFile={titleFile}
       />
