@@ -70,7 +70,8 @@ const CreateAccount = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log("terminos", terminos);
+  console.log("setValue--", setValue);
+  console.log("terminos", register);
   const onSubmit = async (data: any) => {
     if (terminos == false) {
       Swal.fire("Debes aceptar los terminos y condiciones");
@@ -102,6 +103,8 @@ const CreateAccount = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
+    const pass: any = document.querySelector<HTMLInputElement>("#passPrueba");
+    setConfirmPassword(pass.value);
   };
 
   const onChangeSelect = (e: any) => {
@@ -124,6 +127,7 @@ const CreateAccount = () => {
   }, [toLogin]);
 
   console.log("confirmPassword", confirmPassword);
+  console.log("form.validatePassword", form.validatePassword);
 
   return (
     <div className="account-pages" style={{ width: "98%" }}>
@@ -231,10 +235,11 @@ const CreateAccount = () => {
               <InputRegister
                 placeholder="Ingrese la contraseña"
                 label="Contraseña"
-                id="0"
+                // id="0"
                 type="password"
                 min={3}
                 name="password"
+                id="passPrueba"
                 register={register}
                 error={String(errors["password"]?.message)}
               />
@@ -249,7 +254,12 @@ const CreateAccount = () => {
                 name="validatePassword"
                 value={form.validatePassword}
                 onChange={(e) => handleChange(e)}
-                style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#030229",
+                  fontSize: "13px",
+                  fontFamily: "Helvetica-NeueL",
+                }}
               />
               {form.validatePassword !== confirmPassword && (
                 <label className="error-password">
