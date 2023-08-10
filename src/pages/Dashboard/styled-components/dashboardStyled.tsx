@@ -41,8 +41,8 @@ export const FilterSource = styled.div`
   div div fieldset:last-child {
     border: ${(props) => props.theme.border};
   }
-  div div fieldset:last-child:hover {
-    border-color: ${(props) => props.theme.border};
+  div.MuiInputBase-formControl fieldset:hover.MuiOutlinedInput-notchedOutline {
+    border-color: #ddd;
   }
   div div svg.MuiSvgIcon-root {
     color: #333;

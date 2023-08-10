@@ -213,3 +213,7 @@ MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone */
   font-family: "Helvetica-NeueL-Title";
   font-size: 16px;
 }
+
+.MuiTableSortLabel-root:hover {
+  color: rgb(111, 108, 153) !important;
+}
