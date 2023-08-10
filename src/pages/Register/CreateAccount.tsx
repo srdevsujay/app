@@ -70,8 +70,6 @@ const CreateAccount = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log("setValue--", setValue);
-  console.log("terminos", register);
   const onSubmit = async (data: any) => {
     if (terminos == false) {
       Swal.fire("Debes aceptar los terminos y condiciones");
@@ -93,7 +91,6 @@ const CreateAccount = () => {
       time_zone: selectedTimezone,
       type_currency,
     };
-    console.log("dataForm", dataForm);
 
     dispatch(registerUserThunk(dataForm));
   };
@@ -120,14 +117,10 @@ const CreateAccount = () => {
 
   useEffect(() => {
     const localS = localStorage.getItem("accountSuccess");
-    console.log("localS", localS);
     if (localS === "" || localS === null) return;
     navigate("/login");
     localStorage.removeItem("accountSuccess");
   }, [toLogin]);
-
-  console.log("confirmPassword", confirmPassword);
-  console.log("form.validatePassword", form.validatePassword);
 
   return (
     <div className="account-pages" style={{ width: "98%" }}>
