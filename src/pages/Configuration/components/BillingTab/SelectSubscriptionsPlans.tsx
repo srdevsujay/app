@@ -279,7 +279,7 @@ const SelectSubscriptionsPlans = ({
                 <div className="ml-2">
                   <HelpVideo
                     title={"Video Tutorial Facturación"}
-                    image={themeState ? video : videoDark}
+                    image={!themeState ? video : videoDark}
                     url={
                       "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
                     }
@@ -294,7 +294,7 @@ const SelectSubscriptionsPlans = ({
                 <div className="ml-2">
                   <HelpVideo
                     title={"Video Tutorial Facturación"}
-                    image={themeState ? video : videoDark}
+                    image={!themeState ? video : videoDark}
                     url={
                       "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
                     }

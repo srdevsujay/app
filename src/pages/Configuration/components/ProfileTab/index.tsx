@@ -206,7 +206,7 @@ const ProfileTab = () => {
           <div className="offset-2 col-sm-4">
             <HelpVideo
               title={"Video Tutorial Perfil"}
-              image={themeState ? video : videoDark}
+              image={!themeState ? video : videoDark}
               url={
                 "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
               }
