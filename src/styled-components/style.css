@@ -83,7 +83,7 @@
 .div-button-video {
   width: 30px;
   height: 30px;
-  border: 0.5px solid #000;
+  /* border: 0.5px solid #000; */
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -95,7 +95,7 @@
   height: 30px;
   font-size: 11px;
   font-family: 'Helvetica-NeueL-Title';
-  border: 0.5px solid #575353;
+  /* border: 0.5px solid #575353; */
   display: flex;
   align-items: center;
 }

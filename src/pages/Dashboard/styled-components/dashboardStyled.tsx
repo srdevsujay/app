@@ -18,7 +18,7 @@ export const ButtonTitlePicker = styled.button`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   width: auto;
-  border: 0.4px solid #575353 !important;
+  border: ${(props) => props.theme.border};
   border-radius: 5px !important;
   span {
     font-size: 10px !important;
@@ -33,13 +33,17 @@ export const FilterSource = styled.div`
     width: 236px !important;
     margin-top: 0;
     height: 30px;
-    font-size: 13px;
+    font-size: 11px;
     font-family: "Helvetica-NeueL-Title";
     background-color: ${(props) => props.theme.background};
     color: ${(props) => props.theme.text};
   }
+  div div fieldset:last-child {
+    border: ${(props) => props.theme.border};
+  }
   div div:first-child {
-    padding-top: 14px;
+    padding-top: 13px;
+    padding-left: 5px;
     font-family: "Helvetica-NeueL-Title";
   }
 `;

@@ -2,13 +2,14 @@
 export const lightTheme = {
   background: "#FFFFFF",
   text: "#333",
-  border: "1px solid #000",
+  border: "0.5px solid #000",
 };
 
 export const darkTheme = {
   background: "#0D0D0D",
   text: "#DDDDDD",
-  border: "1px solid #DDD",
+  border: "0.5px solid #DDD",
+  //border: .5px solid #575353,
 };
 
 export const darkLightTheme = {
