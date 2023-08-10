@@ -1,6 +1,5 @@
 import { Tooltip } from "@mui/material";
 import { BackColorsTable } from "../../../../styled-components/Table/index";
-import { NumericFormat } from "react-number-format";
 
 export const frecColumn = (funnelData: any) => {
   return {
@@ -35,12 +34,7 @@ export const frecColumn = (funnelData: any) => {
             : "back-danger-table"
         }`}
       >
-        <NumericFormat
-          value={funnelData?.frequency}
-          allowLeadingZeros
-          thousandSeparator=","
-          displayType="text"
-        />
+        {funnelData?.frequency.toFixed(2)}
       </BackColorsTable>
     ),
   };

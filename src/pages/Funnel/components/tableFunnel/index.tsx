@@ -151,9 +151,15 @@ const FunnelTable = ({
                   {dataFunnel.length === 0
                     ? ""
                     : currentTotalColumns.map((sum: any) => {
-                        // console.log("summmmm", sum.name.substring(0, 1));
+                        console.log("summmmm", sum.name);
                         if (sum.checkbox === true) {
-                          if (sum.name.substring(0, 1) === "$") {
+                          if (sum.name === "#Frec.") {
+                            return (
+                              <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
+                                {sum.total.toFixed(2)}
+                              </th>
+                            );
+                          } else if (sum.name.substring(0, 1) === "$") {
                             return (
                               <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
                                 <FormatNumber number={sum.total} />
@@ -170,7 +176,9 @@ const FunnelTable = ({
                           } else {
                             return (
                               <th className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft">
-                                {sum.total}
+                                {sum.total.toLocaleString("es", {
+                                  minimumFractionDigits: 0,
+                                })}
                               </th>
                             );
                           }
