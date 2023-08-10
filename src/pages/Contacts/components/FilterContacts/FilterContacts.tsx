@@ -232,7 +232,7 @@ const FilterContacts = ({
       <ButtonTitlePicker
         className="btn mr-2"
         onClick={handleOpen}
-        // theme={theme}
+        theme={theme}
       >
         <span className="btn-calendar-title">{titleDatePickerLeads}</span>
         <img src={calendar} alt="" className="" />

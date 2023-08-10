@@ -41,6 +41,12 @@ export const FilterSource = styled.div`
   div div fieldset:last-child {
     border: ${(props) => props.theme.border};
   }
+  div div fieldset:last-child:hover {
+    border-color: ${(props) => props.theme.border};
+  }
+  div div svg.MuiSvgIcon-root {
+    color: #333;
+  }
   div div:first-child {
     padding-top: 13px;
     padding-left: 5px;

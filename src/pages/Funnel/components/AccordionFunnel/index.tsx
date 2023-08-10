@@ -971,7 +971,7 @@ const AccordionFunnel = ({
                 />
                 <HelpVideo
                   title={"Video Tutorial Funnel"}
-                  image={themeState ? video : videoDark}
+                  image={!themeState ? video : videoDark}
                   url={
                     "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
                   }

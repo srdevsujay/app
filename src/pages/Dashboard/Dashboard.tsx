@@ -273,7 +273,7 @@ const Dashboard = () => {
                 />
                 <HelpVideo
                   title={"Video Tutorial Dashboard"}
-                  image={themeState ? video : videoDark}
+                  image={!themeState ? video : videoDark}
                   url={
                     "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
                   }
