@@ -151,7 +151,7 @@ const FunnelTable = ({
                   {dataFunnel.length === 0
                     ? ""
                     : currentTotalColumns.map((sum: any) => {
-                        console.log("summmmm", sum.name);
+                        // console.log("summmmm", sum.name);
                         if (sum.checkbox === true) {
                           if (sum.name === "#Frec.") {
                             return (

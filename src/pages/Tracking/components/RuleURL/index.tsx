@@ -145,7 +145,7 @@ const RuleURL = () => {
       {filteredData === undefined ? (
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: "80vh", zIndex: "99999999" }}
+          style={{ height: "64vh", zIndex: "99999999" }}
         >
           <BeatLoader color="#3997FF" />
         </div>
@@ -154,7 +154,7 @@ const RuleURL = () => {
           data={filteredData}
           columns={columnsToSet}
           pageSizeOptions={[7, 15, 31]}
-          maxBodyHeight={"80vh"}
+          maxBodyHeight={"64vh"}
           pageSize={7}
         />
       )}
