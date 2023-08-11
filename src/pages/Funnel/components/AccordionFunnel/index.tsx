@@ -388,7 +388,7 @@ const AccordionFunnel = ({
   };
 
   const handleFourteenDays = () => {
-    const item = handleDays(14);
+    const item = handleDays(13);
     setTitleDatePickerFunnel(`${item.fecha_inicial} - ${item.fecha_final}`);
     setFunnelDays(14);
     setFlagModal(1);
