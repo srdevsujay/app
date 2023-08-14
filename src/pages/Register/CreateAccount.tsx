@@ -256,7 +256,7 @@ const CreateAccount = () => {
               />
               {form.validatePassword !== confirmPassword && (
                 <label className="error-password">
-                  Las contraseñas deben coinsidir
+                  Las contraseñas deben coincidir
                 </label>
               )}
             </div>
