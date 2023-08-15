@@ -164,7 +164,7 @@ const IntegrationTab = () => {
       <div className="mt-3">
         <HelpVideo
           title={"Video Tutorial Integraciones"}
-          image={themeState ? video : videoDark}
+          image={!themeState ? video : videoDark}
           url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
         />
       </div>

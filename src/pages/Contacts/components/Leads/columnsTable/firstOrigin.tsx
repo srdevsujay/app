@@ -3,6 +3,7 @@ import "../../../../../styled-components/Table/style.css";
 import venta from "../../../../../assets/images/venta.svg";
 import click from "../../../../../assets/images/click.svg";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import { Tooltip } from "@mui/material";
 
 export const firstOriginColumn = () => {
   return {
@@ -12,6 +13,14 @@ export const firstOriginColumn = () => {
       dataContacts?.first_origintag === null ? (
         ""
       ) : (
+        // <Tooltip
+        //   title={
+        //     <>
+        //       <span>FBADS: {dataContacts?.first_ad_name}</span>
+        //     </>
+        //   }
+        //   placement="top"
+        // >
         <BackColorsTableOrigin
           width="max-content"
           marginBottom="5px"
@@ -39,6 +48,7 @@ export const firstOriginColumn = () => {
           )}
           {dataContacts?.first_origintag.substr(1)}
         </BackColorsTableOrigin>
+        // </Tooltip>
       ),
   };
 };

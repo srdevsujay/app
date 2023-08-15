@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { SidebarMenuProps } from "./types";
 
-export const MenuIconOpen = styled(Link)`
+export const MenuIconOpen = styled(NavLink)`
   display: flex;
   justify-content: start;
   font-size: 1.5rem;
@@ -11,7 +11,7 @@ export const MenuIconOpen = styled(Link)`
   color: #3997ff;
 `;
 
-export const MenuIconClose = styled(Link)`
+export const MenuIconClose = styled(NavLink)`
   display: flex;
   justify-content: end;
   font-size: 1.5rem;
@@ -35,7 +35,7 @@ export const MenuItems = styled.li`
   justify-content: start;
 `;
 
-export const MenuItemLinks = styled(Link)`
+export const MenuItemLinks = styled(NavLink)`
   display: flex;
   align-items: center;
   padding: 0 2rem;
@@ -58,9 +58,13 @@ export const MenuItemLinks = styled(Link)`
   span {
     white-space: nowrap;
     font-size: 13px;
-    margin-top: 9px;
+    /* margin-top: 9px; */
     padding-left: 10px;
     font-family: "Helvetica-NeueL-Title";
     font-weight: 700 !important;
+  }
+
+  a.active span {
+    color: #3997ff !important;
   }
 `;

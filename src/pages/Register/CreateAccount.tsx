@@ -70,7 +70,6 @@ const CreateAccount = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log("terminos", terminos);
   const onSubmit = async (data: any) => {
     if (terminos == false) {
       Swal.fire("Debes aceptar los terminos y condiciones");
@@ -92,7 +91,6 @@ const CreateAccount = () => {
       time_zone: selectedTimezone,
       type_currency,
     };
-    console.log("dataForm", dataForm);
 
     dispatch(registerUserThunk(dataForm));
   };
@@ -102,6 +100,8 @@ const CreateAccount = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
+    const pass: any = document.querySelector<HTMLInputElement>("#passPrueba");
+    setConfirmPassword(pass.value);
   };
 
   const onChangeSelect = (e: any) => {
@@ -117,13 +117,10 @@ const CreateAccount = () => {
 
   useEffect(() => {
     const localS = localStorage.getItem("accountSuccess");
-    console.log("localS", localS);
     if (localS === "" || localS === null) return;
     navigate("/login");
     localStorage.removeItem("accountSuccess");
   }, [toLogin]);
-
-  console.log("confirmPassword", confirmPassword);
 
   return (
     <div className="account-pages" style={{ width: "98%" }}>
@@ -231,10 +228,11 @@ const CreateAccount = () => {
               <InputRegister
                 placeholder="Ingrese la contraseña"
                 label="Contraseña"
-                id="0"
+                // id="0"
                 type="password"
                 min={3}
                 name="password"
+                id="passPrueba"
                 register={register}
                 error={String(errors["password"]?.message)}
               />
@@ -249,11 +247,16 @@ const CreateAccount = () => {
                 name="validatePassword"
                 value={form.validatePassword}
                 onChange={(e) => handleChange(e)}
-                style={{ backgroundColor: "#F7F7F8", color: "#030229" }}
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#030229",
+                  fontSize: "13px",
+                  fontFamily: "Helvetica-NeueL",
+                }}
               />
               {form.validatePassword !== confirmPassword && (
                 <label className="error-password">
-                  Las contraseñas deben coinsidir
+                  Las contraseñas deben coincidir
                 </label>
               )}
             </div>

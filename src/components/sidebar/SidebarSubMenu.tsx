@@ -4,6 +4,7 @@ import {
   MenuItems,
   MenuItemLinks,
 } from "../../styled-components/sidebar/index";
+import "../../styled-components/sidebar/style.css";
 
 const SidebarSubMenu = ({
   setClose,
@@ -28,7 +29,12 @@ const SidebarSubMenu = ({
       <div className="menu" onClick={toggleMenu}>
         <div className="menu_item">
           <MenuItems>
-            <MenuItemLinks to={route.path}>
+            <MenuItemLinks
+              to={route.path}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active-sidebar active" : ""}`
+              }
+            >
               {route.icon}
               <span style={{ marginLeft: "16px" }}>{route.title}.</span>
             </MenuItemLinks>
@@ -40,7 +46,13 @@ const SidebarSubMenu = ({
           {route.subRoutes.map((item: any, index: number) => {
             return (
               <MenuItems key={index}>
-                <MenuItemLinks to={item.path} style={{ marginLeft: "37px" }}>
+                <MenuItemLinks
+                  to={item.path}
+                  style={{ marginLeft: "37px" }}
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-sidebar active" : ""}`
+                  }
+                >
                   {item.icon}
                   <span
                     style={{ marginLeft: "8px" }}

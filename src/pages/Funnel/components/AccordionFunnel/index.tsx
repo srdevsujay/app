@@ -140,9 +140,6 @@ const AccordionFunnel = ({
   const [funnelDays, setFunnelDays] = useState<number>(7);
   const [expanded, setExpanded] = useState(0);
   const [flagModal, setFlagModal] = useState<number>(0);
-  const [titleDatePickerFunnel, setTitleDatePickerFunnel] = useState(
-    "Selecciona una fecha"
-  );
   const [currentCalendar, setCurrentCalendar] = useState([
     {
       startDate: addDays(new Date(), -6),
@@ -150,6 +147,13 @@ const AccordionFunnel = ({
       key: "selection",
     },
   ]);
+
+  const [titleDatePickerFunnel, setTitleDatePickerFunnel] = useState(
+    `${moment(currentCalendar[0].startDate).format("YYYY-MM-DD")} - ${moment(
+      currentCalendar[0].endDate
+    ).format("YYYY-MM-DD")}`
+  );
+
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([]);
   const [columnDataFunnelToggle, setColumnDataFunnelToggle] = useState<any>([]);
   const [columnsToSet, setColumnsToSet] = useState<any>([]);
@@ -384,7 +388,7 @@ const AccordionFunnel = ({
   };
 
   const handleFourteenDays = () => {
-    const item = handleDays(14);
+    const item = handleDays(13);
     setTitleDatePickerFunnel(`${item.fecha_inicial} - ${item.fecha_final}`);
     setFunnelDays(14);
     setFlagModal(1);
