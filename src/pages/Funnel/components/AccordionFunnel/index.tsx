@@ -947,7 +947,11 @@ const AccordionFunnel = ({
               <AccordionSummary
                 aria-controls={`panel${index}d-content`}
                 id={`panel${index}d-header`}
-                className="d-flex"
+                className={`d-flex ${
+                  themeState === true
+                    ? "colorToggleAccordionDark"
+                    : "colorToggleAccordion"
+                }`}
                 onClick={() => dispatch(obtainApiFunnel(tracking.id, tracking))}
               >
                 <Typography>

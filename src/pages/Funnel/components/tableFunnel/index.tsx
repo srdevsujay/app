@@ -144,7 +144,11 @@ const FunnelTable = ({
               <MTableHeader {...props} />
               <thead key={i} className="MuiTableHead-root prueba-css">
                 <tr
-                  className="MuiTableRow-root MuiTableRow-head backgroundTotal"
+                  className={`MuiTableBody-root MuiTableRow-root MuiTableRow-head ${
+                    themeState === true || themeState === "true"
+                      ? "backgroundTotalDark"
+                      : "backgroundTotal"
+                  } `}
                   style={{ padding: "0px 10px" }}
                   key={i}
                 >

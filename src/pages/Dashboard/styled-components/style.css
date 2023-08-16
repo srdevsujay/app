@@ -116,7 +116,19 @@ tr.backgroundTotal th:nth-child(n+2) {
   color: rgba(0, 0, 0, 0.87);
 }
 
-.backgroundTotalDark td {
+.colorToggleAccordion div:nth-child(n+2) {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.colorToggleAccordionDark div:nth-child(n+2) {
+  color: #DDDDDD;
+}
+
+.backgroundTotalDark td, th {
+  color: #DDDDDD;
+}
+
+.backgroundTotalDark th {
   color: #DDDDDD;
 }
 

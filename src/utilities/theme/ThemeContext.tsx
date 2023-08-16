@@ -89,7 +89,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   /////////////////////////////////////////////////////////////////
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
+    console.log("toggleTheme...");
+
+    setTheme((prevTheme: any) =>
       prevTheme === lightTheme ? darkTheme : lightTheme
     );
     setThemeDarkLight((prevTheme) =>
@@ -122,8 +124,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setThemeSliderText((prevTheme) =>
       prevTheme === lightSidebarText ? darkSidebarText : lightSidebarText
     );
-    setThemeTable((prevTheme) =>
-      prevTheme === lightTable ? darkTable : lightTable
+    setThemeTable(
+      (prevTheme) => (prevTheme === lightTable ? darkTable : lightTable)
+      // prevTheme === lightTable || themeDark === true ? darkTable : lightTable
     );
   };
 

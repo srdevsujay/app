@@ -98,16 +98,11 @@ export const totalFunnel = (tempGroup: any, filters: any, themeState: any) => {
   }
 
   const tbody = document.createElement("tr");
-  tbody.classList.add(
-    "MuiTableBody-root",
-    "MuiTableRow-root",
-    "MuiTableRow-head",
-    `${
-      themeState === true || themeState === "true"
-        ? "backgroundTotalDark"
-        : "backgroundTotal"
-    }`
-  );
+  tbody.className = `MuiTableBody-root MuiTableRow-root MuiTableRow-head ${
+    themeState === true || themeState === "true"
+      ? "backgroundTotalDark"
+      : "backgroundTotal"
+  } `;
 
   const createTableCell = (text: string) => {
     const td = document.createElement("td");
