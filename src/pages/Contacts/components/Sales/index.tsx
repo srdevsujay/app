@@ -24,8 +24,11 @@ import { BeatLoader } from "react-spinners";
 import _ from "lodash";
 import { useMinMaxDateFilter } from "../../hooks";
 import ventarecurrente from "../../../../assets/images/ventarecurrente.svg";
+import ventarecurrenteDark from "../../../../assets/images/ventarecurrenteDark.svg";
 import reembolso from "../../../../assets/images/reembolso.svg";
+import reembolsoDark from "../../../../assets/images/reembolsoDark.svg";
 import saleFilter from "../../../../assets/images/saleFilter.svg";
+import saleFilterDark from "../../../../assets/images/saleFilterDark.svg";
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
 
@@ -95,6 +98,9 @@ const Sales = () => {
   const [titleFile, setTitleFile] = useState("Tabla Ventas");
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataSale);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   const handleDateFilterCalendar = () => {
     const startDate = currentCalendar[0].startDate;
@@ -199,17 +205,17 @@ const Sales = () => {
   const dataLeadsFilter = [
     {
       name: "Total Ventas",
-      image: saleFilter,
+      image: themeState === true ? saleFilterDark : saleFilter,
       value: objectFilterSale?.ventas,
     },
     {
       name: "Reembolso",
-      image: reembolso,
+      image: themeState === true ? reembolsoDark : reembolso,
       value: objectFilterSale?.reembolsos,
     },
     {
       name: "Ventas Recurrentes",
-      image: ventarecurrente,
+      image: themeState === true ? ventarecurrenteDark : ventarecurrente,
       value: objectFilterSale?.Recurrentes,
     },
   ];
@@ -330,11 +336,6 @@ const Sales = () => {
     );
     setFilteredDataDos(sortedDataSale);
   };
-
-  console.log("columnsToSet--", columnsToSet);
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <>

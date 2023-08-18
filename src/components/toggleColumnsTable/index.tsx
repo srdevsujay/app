@@ -45,8 +45,14 @@ export const ToggleColumnsTable = ({
   const { theme, themeButtonDropdown, themeFilterDropdown } =
     useContext(ThemeContext);
 
+  console.log("themeContacts", theme.background);
+
   return (
-    <div className="dropdown mr-2 hidden-last-cell">
+    <div
+      className={`dropdown mr-2 hidden-last-cell ${
+        theme.background === "#0D0D0D" ? "filter-toggle-columns-dark" : ""
+      }`}
+    >
       <button
         className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
         type="button"

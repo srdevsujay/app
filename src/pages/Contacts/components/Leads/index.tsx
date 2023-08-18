@@ -28,6 +28,7 @@ import SelectTag from "../SelectTag";
 import { BeatLoader } from "react-spinners";
 import ModalDetailClient from "../../../../components/modal/ModalDetailClient";
 import leadsFilter from "../../../../assets/images/leadsFilter.svg";
+import leadsFilterDark from "../../../../assets/images/leadsFilterDark.svg";
 import reembolso from "../../../../assets/images/reembolso.svg";
 import ventasFilter from "../../../../assets/images/ventasFilter.svg";
 import { useMinMaxDateFilter } from "../../hooks";
@@ -87,6 +88,9 @@ const Leads = () => {
   const [titleFile, setTitleFile] = useState("Tabla Leads");
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   console.log("minDate-", minDate);
   console.log("maxDate-", maxDate);
@@ -230,13 +234,10 @@ const Leads = () => {
   const dataLeadsFilter = [
     {
       name: "Total Leads",
-      image: leadsFilter,
+      image: themeState === true ? leadsFilterDark : leadsFilter,
       value: filteredDataDos.length,
     },
   ];
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <>

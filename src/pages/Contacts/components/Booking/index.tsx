@@ -24,6 +24,7 @@ import { BeatLoader } from "react-spinners";
 import { closeUserDetail } from "../../../../redux/state/slices/contacts/contactsThunk";
 import { useMinMaxDateFilter } from "../../hooks";
 import bookingsFilter from "../../../../assets/images/bookingsFilter.svg";
+import bookingsFilterDark from "../../../../assets/images/bookingsFilterDark.svg";
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
 
@@ -54,6 +55,8 @@ const Booking = () => {
   const [titleFile, setTitleFile] = useState("Tabla Bookings");
   const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
   const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   const onChangeStatus = (e: any, paramBooking: any) => {
     const currentState = e.target.value;
@@ -201,13 +204,10 @@ const Booking = () => {
   const dataBookingFilter = [
     {
       name: "Total Booking",
-      image: bookingsFilter,
+      image: themeState === true ? bookingsFilterDark : bookingsFilter,
       value: filteredDataDos.length,
     },
   ];
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <>

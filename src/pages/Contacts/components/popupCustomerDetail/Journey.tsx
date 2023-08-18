@@ -215,7 +215,7 @@ const Journey = ({ currentJourney, time_Zone }: any) => {
                       // </span>
                       <span>{journey.tag.substr(1)}</span>
                     ) : (
-                      <span>{journey.url.substr(7)}</span>
+                      <span>{journey.url.substr(8)}</span>
                     )}
                   </div>
                   <div className="tag-recorrido">

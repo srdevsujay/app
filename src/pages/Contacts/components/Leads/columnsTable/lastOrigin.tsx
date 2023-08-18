@@ -13,42 +13,45 @@ export const lastOriginColumn = () => {
       dataContacts?.last_origentag === null ? (
         ""
       ) : (
-        // <Tooltip
-        //   title={
-        //     <>
-        //       <span>FBADS: {dataContacts?.last_ad_name}</span>
-        //     </>
-        //   }
-        //   placement="top"
-        // >
-        <BackColorsTableOrigin
-          width="max-content"
-          marginBottom="5px"
-          className={`${
-            dataContacts?.last_origentag.substr(0, 1) === "@"
-              ? "back-lila"
-              : dataContacts?.last_origentag.substr(0, 1) === "!"
-              ? "back-orange"
-              : "back-green"
-          }`}
+        <Tooltip
+          title={
+            <>
+              <span>
+                CA: {dataContacts?.last_adset_name} | AD:{" "}
+                {dataContacts?.last_ad_name}
+              </span>
+            </>
+          }
+          placement="top"
         >
-          {dataContacts?.last_origentag.substr(0, 1) === "@" ? (
-            <img src={click} alt="" className="iconos-table-origin" />
-          ) : dataContacts?.last_origentag.substr(0, 1) === "!" ? (
-            <CheckCircleOutlinedIcon
-              style={{
-                color: "#F08303",
-                fontSize: "17px",
-                marginTop: "2px",
-                marginRight: "4px",
-              }}
-            />
-          ) : (
-            <img src={venta} alt="" className="iconos-table-origin" />
-          )}
-          {dataContacts?.last_origentag.substr(1)}
-        </BackColorsTableOrigin>
-        // </Tooltip>
+          <BackColorsTableOrigin
+            width="max-content"
+            marginBottom="5px"
+            className={`${
+              dataContacts?.last_origentag.substr(0, 1) === "@"
+                ? "back-lila"
+                : dataContacts?.last_origentag.substr(0, 1) === "!"
+                ? "back-orange"
+                : "back-green"
+            }`}
+          >
+            {dataContacts?.last_origentag.substr(0, 1) === "@" ? (
+              <img src={click} alt="" className="iconos-table-origin" />
+            ) : dataContacts?.last_origentag.substr(0, 1) === "!" ? (
+              <CheckCircleOutlinedIcon
+                style={{
+                  color: "#F08303",
+                  fontSize: "17px",
+                  marginTop: "2px",
+                  marginRight: "4px",
+                }}
+              />
+            ) : (
+              <img src={venta} alt="" className="iconos-table-origin" />
+            )}
+            {dataContacts?.last_origentag.substr(1)}
+          </BackColorsTableOrigin>
+        </Tooltip>
       ),
   };
 };
