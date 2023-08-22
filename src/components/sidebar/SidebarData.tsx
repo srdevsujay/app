@@ -29,12 +29,12 @@ export const SidebarData: SidebarItem[] = [
   {
     title: SidebarTitle.FUNNEL,
     path: "/funnel",
-    icon: <img src={Funnel} alt="" height="12" width="12" />,
+    icon: <img src={Funnel} alt="" height="15" width="15" />,
   },
   {
     title: SidebarTitle.CONTACTS,
     path: "/contactos",
-    icon: <img src={leads} alt="" height="15" width="15" />,
+    icon: <img src={leads} alt="" height="12" width="12" />,
   },
   {
     title: SidebarTitle.TRACKING,

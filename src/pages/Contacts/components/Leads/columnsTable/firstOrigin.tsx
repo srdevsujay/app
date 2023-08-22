@@ -10,7 +10,6 @@ export const firstOriginColumn = () => {
     title: "PRIMER ORIGEN",
     field: "first_origintag",
     render: (dataContacts: any) =>
-      // console.log("dataContacts--", dataContacts),
       dataContacts?.first_origintag === null ? (
         ""
       ) : (

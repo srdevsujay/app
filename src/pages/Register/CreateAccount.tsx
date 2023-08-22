@@ -30,7 +30,7 @@ const CreateAccount = () => {
     password: "",
     image_name: "image",
     status: 1,
-    user_type: 2,
+    user_type: 1,
     time_zone: "",
     type_currency: "0",
     validatePassword: "",
