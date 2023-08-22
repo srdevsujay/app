@@ -34,7 +34,7 @@ export const SidebarData: SidebarItem[] = [
   {
     title: SidebarTitle.CONTACTS,
     path: "/contactos",
-    icon: <img src={leads} alt="" height="12" width="12" />,
+    icon: <img src={leads} alt="" height="15" width="15" />,
   },
   {
     title: SidebarTitle.TRACKING,
