@@ -72,6 +72,11 @@ export const darkFilterFunnel = {
   text: "rgb(16, 156, 241)",
 };
 
+export const darkFilterFunnelColumns = {
+  background: "#050505",
+  text: "rgb(16, 156, 241)",
+};
+
 export const lightSidebarText = {
   background: "#fff",
   text: "#3997ff",
@@ -112,4 +117,5 @@ export type ThemeType =
   | typeof lightSidebarText
   | typeof darkSidebarText
   | typeof lightTable
-  | typeof darkTable;
+  | typeof darkTable
+  | typeof darkFilterFunnelColumns;

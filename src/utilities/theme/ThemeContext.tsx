@@ -20,6 +20,7 @@ import {
   darkSidebarText,
   lightTable,
   darkTable,
+  darkFilterFunnelColumns,
 } from "../../styled-components/Theme/themes";
 
 interface ThemeContextProps {
@@ -31,6 +32,7 @@ interface ThemeContextProps {
   themeFilterDropdown: ThemeType;
   themeBackNewFunnel: ThemeType;
   themeFilterFunnel: ThemeType;
+  themeFilterFunnelColumns: ThemeType;
   themeSliderText: ThemeType;
   themeTable: ThemeType;
   toggleTheme: () => void;
@@ -45,6 +47,7 @@ export const ThemeContext = createContext<ThemeContextProps>({
   themeFilterDropdown: lightTheme,
   themeBackNewFunnel: lightTheme,
   themeFilterFunnel: lightTheme,
+  themeFilterFunnelColumns: lightFilterThemeDropdown,
   themeSliderText: lightSidebarText,
   themeTable: lightTable,
   toggleTheme: () => {},
@@ -80,6 +83,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const [themeFilterFunnel, setThemeFilterFunnel] =
     useState<ThemeType>(lightFilterFunnel);
+
+  const [themeFilterFunnelColumns, setThemeFilterFunnelColumns] =
+    useState<ThemeType>(lightFilterThemeDropdown);
 
   const [themeSliderText, setThemeSliderText] =
     useState<ThemeType>(lightSidebarText);
@@ -121,6 +127,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setThemeFilterFunnel((prevTheme) =>
       prevTheme === lightFilterFunnel ? darkFilterFunnel : lightFilterFunnel
     );
+
+    setThemeFilterFunnelColumns((prevTheme) =>
+      prevTheme === lightFilterThemeDropdown
+        ? darkFilterFunnelColumns
+        : lightFilterThemeDropdown
+    );
+
     setThemeSliderText((prevTheme) =>
       prevTheme === lightSidebarText ? darkSidebarText : lightSidebarText
     );
@@ -141,6 +154,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         themeFilterDropdown,
         themeBackNewFunnel,
         themeFilterFunnel,
+        themeFilterFunnelColumns,
         themeSliderText,
         themeTable,
         toggleTheme,

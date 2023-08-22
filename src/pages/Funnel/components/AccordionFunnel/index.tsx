@@ -47,6 +47,8 @@ import { SalesCall } from "../../../../utilities/pruebajs";
 import {
   ButtonEditWithIcon,
   ButtonDeleteWithIcon,
+  ContainerDropdown,
+  ColumnContainer,
 } from "../../../../styled-components/button/index";
 import deleted from "../../../../assets/images/Delete.svg";
 import edit from "../../../../assets/images/Edit.svg";
@@ -56,7 +58,6 @@ import {
   ButtonFilter,
 } from "../../styled-components/funnel-styled";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
-import { ContainerDropdown } from "../../../../styled-components/button/index";
 import { BeatLoader } from "react-spinners";
 import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
 import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
@@ -928,8 +929,12 @@ const AccordionFunnel = ({
 
   console.log("dataDataFunnel", dataDataFunnel);
   console.log("dataDataFunneldataFunnel", dataFunnel);
-  const { theme, themeButtonDropdown, themeFilterFunnel } =
-    useContext(ThemeContext);
+  const {
+    theme,
+    themeButtonDropdown,
+    themeFilterFunnel,
+    themeFilterFunnelColumns,
+  } = useContext(ThemeContext);
 
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
@@ -993,9 +998,9 @@ const AccordionFunnel = ({
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    onClick={(e: any) => {
-                      e.stopImmediatePropagation();
-                    }}
+                    // onClick={(e: any) => {
+                    //   e.stopImmediatePropagation();
+                    // }}
                     theme={theme}
                   >
                     <img
@@ -1028,9 +1033,10 @@ const AccordionFunnel = ({
                           return null;
                         } else {
                           return (
-                            <div
+                            <ColumnContainer
                               key={column?.name}
-                              className="column-container"
+                              // className="column-container"
+                              theme={themeFilterFunnelColumns}
                             >
                               <Checkbox
                                 {...label}
@@ -1038,7 +1044,7 @@ const AccordionFunnel = ({
                                 onChange={(e) => handleColumnToggle(e, column)}
                               />
                               <label>{column?.name}</label>
-                            </div>
+                            </ColumnContainer>
                           );
                         }
                       })}

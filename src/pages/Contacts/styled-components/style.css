@@ -177,5 +177,5 @@
 }
 
 .filter-toggle-columns-dark div:nth-child(2) div {
-  background: radial-gradient(black, transparent);
+  background: #050505;
 }

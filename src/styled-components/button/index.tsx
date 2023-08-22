@@ -155,6 +155,19 @@ export const ContainerDropdown = styled.div`
   color: ${(props) => props.theme.text};
 `;
 
+export const ColumnContainer = styled.div`
+  height: 30px;
+  width: auto;
+  margin: 10px;
+  padding: 4px 10px 0 10px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: "Helvetica-NeueL-Title";
+  white-space: nowrap;
+`;
+
 export const ContainerDropdownFilter = styled.div`
   height: 30px;
   width: auto;

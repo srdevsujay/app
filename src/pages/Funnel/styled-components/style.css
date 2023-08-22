@@ -15,6 +15,14 @@
   color: #000;
 }
 
+.icon-help-funnel-light svg {
+  cursor: pointer;
+}
+
+.icon-help-funnel-dark svg {
+  cursor: pointer;
+}
+
 .icon-help-funnel-light:hover .icon-help-funnel-dark  {
   color: #000;
 }
