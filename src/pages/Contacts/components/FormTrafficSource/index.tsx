@@ -25,6 +25,8 @@ interface IData {
 }
 
 const FormTrafficSource = ({ onClose, currentEdit }: any) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
   const dispatch = useAppDispatch();
   const { dataLead } = useAppSelector((state) => state.contact);
   const { theme: themeDark } = useAppSelector((state) => state.configuration);
@@ -95,7 +97,11 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-display-columns">
       <div className="row">
-        <div className="form-group col-sm-12 mt-5">
+        <div
+          className={`form-group col-sm-12 mt-5 ${
+            themeState ? "modeDarkSelectAttribute" : ""
+          }`}
+        >
           <label>Atributo de fuente de tráfico</label>
           <Select
             options={options}

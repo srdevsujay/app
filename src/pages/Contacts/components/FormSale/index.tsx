@@ -45,6 +45,8 @@ const FormSale = ({
 }: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
   const today = new Date();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
   const { dataProduct } = useAppSelector((state) => state.tracking);
@@ -284,7 +286,11 @@ const FormSale = ({
               error={String(errors["phone"]?.message)}
             />
           </div>
-          <div className="form-group col-sm-12 date-width">
+          <div
+            className={`form-group col-sm-12 date-width ${
+              themeState ? "modoDarkSelect" : ""
+            }`}
+          >
             <label className="title-label-popup w-100">Fecha y Hora</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker

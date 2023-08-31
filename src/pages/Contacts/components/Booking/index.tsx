@@ -238,7 +238,7 @@ const Booking = () => {
         dataFiltersCalendar={dataBookingFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         titleVideoTutorial={"Video Tutorial Booking"}
-        imageVideoTutorial={themeState ? video : videoDark}
+        imageVideoTutorial={!themeState ? video : videoDark}
         urlVideoTutorial={
           "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
         }

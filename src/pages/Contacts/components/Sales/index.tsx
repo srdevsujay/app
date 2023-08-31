@@ -366,7 +366,7 @@ const Sales = () => {
         dataFiltersCalendar={dataLeadsFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         titleVideoTutorial={"Video Tutorial Ventas"}
-        imageVideoTutorial={themeState ? video : videoDark}
+        imageVideoTutorial={!themeState ? video : videoDark}
         urlVideoTutorial={
           "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
         }
