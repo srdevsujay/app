@@ -141,11 +141,14 @@ tr.backgroundTotal th:nth-child(n+2) {
   margin-bottom: 10px;
   height: 40px;
   border-radius: 10px;
+  color: rgb(16,156,241);
+  padding-left: 7px;
+  padding-right: 10px;
 }
 
 .MuiListItemText-primary {
   font-family: 'Helvetica-NeueL-Title' !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
 }
 
 .MuiMenu-list > li > span > svg {
@@ -220,6 +223,10 @@ MuiTableCell-root MuiTableCell-body MuiTableCell-paddingNone */
   color: #3998ff !important;
   background-color: #161616 !important;
 }
+
+/* ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
+  background: #0D0D0D;
+} */
 
 .calendar-title {
   font-family: "Helvetica-NeueL-Title";
