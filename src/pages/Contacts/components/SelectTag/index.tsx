@@ -53,13 +53,21 @@ const SelectTag = ({
 
   const handleSearchChange = (event: any) => {
     const query = event.toLowerCase();
-    const filtered = dataLead.filter(
-      (d: any) => d.email.toLowerCase().includes(query)
-      // d.first_origintag.toLowerCase().includes(query) ||
-      // d.last_origentag?.toLowerCase().includes(query) ||
+    const filtered = dataLead.filter((d: any) => {
+      const emailMatch = d.email && d.email.toLowerCase().includes(query);
+      const lastAdNameMatch =
+        d.last_ad_name && d.last_ad_name.toLowerCase().includes(query);
+      const firstAdNameMatch =
+        d.first_ad_name && d.first_ad_name.toLowerCase().includes(query);
+
+      return emailMatch || lastAdNameMatch || firstAdNameMatch;
+      // d.email.toLowerCase().includes(query) ||
+      // d.last_ad_name.toLowerCase().includes(query) ||
+      // d.first_ad_name?.toLowerCase().includes(query)
       // d.name.toLowerCase().includes(query) ||
       // d.phone.toLowerCase().includes(query)
-    );
+    });
+    console.log("filtered---", filtered);
     setFilteredDataDos(filtered);
   };
 

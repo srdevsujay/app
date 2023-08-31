@@ -183,7 +183,7 @@ const Form = () => {
           </Title>
           <Input
             type="text"
-            className="form-control"
+            className={!themeState ? "form-control" : "modoDark form-control"}
             placeholder="example@gmail.com"
             name="email"
             defaultValue={userForm.email}
@@ -198,7 +198,7 @@ const Form = () => {
           </Title>
           <Input
             type="password"
-            className="form-control"
+            className={!themeState ? "form-control" : "modoDark form-control"}
             placeholder="Contraseña"
             name="password"
             defaultValue={userForm.password}

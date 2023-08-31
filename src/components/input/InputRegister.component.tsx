@@ -17,10 +17,18 @@ const InputRegister = (props: InputProps) => {
 
   const { theme } = useContext(ThemeContext);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
+
   return (
     <>
       <label htmlFor={name}>{label}</label>
-      <Input theme={theme} {...register(name)} {...otherProps} />
+      <Input
+        theme={theme}
+        {...register(name)}
+        {...otherProps}
+        className={themeDark && "modoDark"}
+      />
       {error !== "undefined" ? <ErrorLabel>{error}</ErrorLabel> : ""}
     </>
   );

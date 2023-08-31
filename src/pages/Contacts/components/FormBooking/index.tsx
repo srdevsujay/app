@@ -166,6 +166,9 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
 
   const { theme, themeFilterFunnel } = useContext(ThemeContext);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
@@ -205,7 +208,11 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             error={String(errors["email"]?.message)}
           />
         </div>
-        <div className="form-group col-sm-12 date-width">
+        <div
+          className={`form-group col-sm-12 date-width ${
+            themeState ? "modoDarkSelect" : ""
+          }`}
+        >
           <label className="title-label-popup w-100">
             Fecha y Hora de Creación
           </label>
@@ -224,7 +231,11 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             />
           </LocalizationProvider>
         </div>
-        <div className="form-group col-sm-12 date-width">
+        <div
+          className={`form-group col-sm-12 date-width ${
+            themeState ? "modoDarkSelect" : ""
+          }`}
+        >
           <label className="title-label-popup w-100">
             Fecha y Hora de la cita
           </label>
