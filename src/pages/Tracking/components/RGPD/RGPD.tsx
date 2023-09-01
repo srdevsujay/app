@@ -53,7 +53,7 @@ const RGPD = () => {
               />
             }
             label={!handleRgdp ? "Inactivo" : "Activo"}
-            className="font-toggle"
+            className={`font-toggle ${!rgpd && "modoDarkSwitch"}`}
           />
           {/* <FormGroup>
             <FormControlLabel
