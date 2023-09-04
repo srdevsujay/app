@@ -17,8 +17,10 @@ export const firstOriginColumn = () => {
           title={
             <>
               <span>
-                CA: {dataContacts?.first_adset_name} | AD:{" "}
-                {dataContacts?.first_ad_name}
+                {dataContacts?.first_adset_name === null
+                  ? ""
+                  : `CA: ${dataContacts?.first_adset_name} | AD:
+                    ${dataContacts?.first_ad_name}`}
               </span>
             </>
           }

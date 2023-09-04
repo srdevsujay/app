@@ -94,7 +94,6 @@ const Sidebar: FC = () => {
       Object.keys(subscriptionUser).length !== 0 ||
       usersub.user_type === 1
     ) {
-      console.log("entra al aaray 0 sideBar");
       setHandleSlider(SidebarData);
 
       // if (usersub === "canceled") {
@@ -102,15 +101,13 @@ const Sidebar: FC = () => {
       // } else {
       // }
     } else {
-      console.log("entra al aaray + sideBar");
       setHandleSlider(SidebarDataStatusCancel);
     }
   }, [usersub, subscriptionUser]);
 
-  console.log("SidebarDataStatusCancel", SidebarDataStatusCancel);
-
   const { theme, themeSliderText } = useContext(ThemeContext);
-  const [activeItem, setActiveItem] = useState("");
+  const [activeItem, setActiveItem] = useState("/dashboard");
+
   return (
     <SidebarMenu close={close} theme={theme}>
       <MenuIconClose to="#">
@@ -144,7 +141,7 @@ const Sidebar: FC = () => {
                 to={item.path}
                 className={isActive ? "activeSlider" : ""}
               >
-                {item.icon}
+                {isActive ? item.iconDark : item.icon}
                 <span
                   style={{ marginLeft: "16px" }}
                   onClick={(e) => {

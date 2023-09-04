@@ -2,6 +2,7 @@ export interface SidebarItem {
   title: string;
   path: string;
   icon: any;
+  iconDark?: any;
   iconOpened?: boolean;
   iconClosed?: boolean;
   subRoutes?: any;
