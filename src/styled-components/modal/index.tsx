@@ -87,8 +87,10 @@ export const ModalSubTitle = styled.div`
 `;
 
 export const ModalContent = styled.div`
+  /* color: #030229; */
   color: #6b6b6b;
-  font-size: 16px;
+  font-size: 14px;
+  font-family: "Helvetica-NeueL";
 `;
 
 export const ModalClose = styled.button<ButtonClose>(({ top, right }) => ({

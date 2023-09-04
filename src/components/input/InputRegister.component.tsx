@@ -22,7 +22,9 @@ const InputRegister = (props: InputProps) => {
 
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="font-text-Label-Configuracion">
+        {label}
+      </label>
       <Input
         theme={theme}
         {...register(name)}

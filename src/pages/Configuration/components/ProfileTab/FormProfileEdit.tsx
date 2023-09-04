@@ -11,6 +11,8 @@ import { SelectScript } from "../../../Tracking/styled-components/TableRule";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 const FormProfileEdit = ({ onClose, perfil }: any) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
   const dispatch = useAppDispatch();
   const profileEdit = useAppSelector((state) => state.user.user);
   const [selectedTimezone, setSelectedTimezone] = useState(perfil.time_zone);
@@ -73,7 +75,7 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
       <div className="row">
         <div className="form-group col-sm-6">
           <InputRegister
-            placeholder="Ingresa tu nombre completo"
+            placeholder="Ingresa tu nombre"
             label="Nombre"
             id="0"
             type="text"
@@ -141,7 +143,11 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
           <h5 className="font-text-Label-Configuracion">Zona Horaria</h5>
           <FormControl className="form-control w-100">
             <SelectScript
-              className="css-select-1 font-HelveticaNeueL"
+              className={
+                themeDark === true
+                  ? "modoDarkSelect css-select-1 font-HelveticaNeueL"
+                  : "css-select-1 font-HelveticaNeueL"
+              }
               style={{ fontSize: "14px", width: "100%" }}
               name="time_zone"
               // value={form?.time_zone}
@@ -344,7 +350,11 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
           <h5 className="font-text-Label-Configuracion">Tipo de Moneda</h5>
           <FormControl className="form-control w-100">
             <SelectScript
-              className="css-select-2 font-HelveticaNeueL"
+              className={
+                themeDark === true
+                  ? "modoDarkSelect css-select-2 font-HelveticaNeueL"
+                  : "css-select-2 font-HelveticaNeueL"
+              }
               style={{ fontSize: "14px", width: "100%" }}
               name="type_currency"
               // value={account?.type_currency}

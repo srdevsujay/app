@@ -62,7 +62,7 @@ export const SelectScript = styled.select`
   padding-right: 10px;
   /* background-color: #fafafb !important; */
   background-color: ${(props) => props.theme.background};
-  height: 37px !important;
+  height: 38px !important;
   width: 280px;
 `;
 
