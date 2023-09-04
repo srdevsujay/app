@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Select = styled.select`
-  height: 37px !important;
+  height: 38px !important;
   /* background: #fafafb !important; */
   background-color: ${(props) => props.theme.background};
   border: 1px solid #ced4da;

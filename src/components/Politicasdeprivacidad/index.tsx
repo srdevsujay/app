@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import FooterMenu from "../Footer";
 
 const Politicasdeprivacidad = () => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
+
   return (
     <div>
       <div
@@ -12,7 +15,7 @@ const Politicasdeprivacidad = () => {
           position: "sticky",
           top: 0,
           zIndex: 99999,
-          background: "rgb(236 236 236)",
+          background: themeDark === false ? "rgb(236 236 236)" : "#161616",
           fontFamily: "Helvetica-NeueL-Title",
         }}
       >
@@ -36,7 +39,11 @@ const Politicasdeprivacidad = () => {
         <div className="col-md-12">
           <div className="card">
             <div
-              className="card-body"
+              className={
+                themeDark === false
+                  ? "card-body"
+                  : "modoDarkFooterTerminosPoliticas card-body"
+              }
               style={{ overflowY: "auto", height: "76vh" }}
             >
               <div className="row">

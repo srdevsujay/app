@@ -1,12 +1,14 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Title } from "../../styled-components/Title/index";
 import FooterMenu from "../Footer";
 
 const Terminosycondiciones = () => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
+
   return (
     <>
-      <div className="row justify-content-center">
+      <div className="row">
         <div
           className="row col-12 align-items-center"
           style={{
@@ -14,7 +16,7 @@ const Terminosycondiciones = () => {
             position: "sticky",
             top: 0,
             zIndex: 99999,
-            background: "rgb(236 236 236)",
+            background: themeDark === false ? "rgb(236 236 236)" : "#161616",
             fontFamily: "Helvetica-NeueL-Title",
           }}
         >
@@ -36,7 +38,11 @@ const Terminosycondiciones = () => {
         <div className="col-md-12" style={{ fontFamily: "Helvetica-NeueL" }}>
           <div className="card">
             <div
-              className="card-body"
+              className={
+                themeDark === false
+                  ? "card-body"
+                  : "modoDarkFooterTerminosPoliticas card-body"
+              }
               style={{ overflowY: "auto", height: "76vh" }}
             >
               <div className="row">
