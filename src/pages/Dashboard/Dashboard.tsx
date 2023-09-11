@@ -38,6 +38,7 @@ import { HelpVideo } from "../../components/HelpVideo";
 import ExportExcel from "../../components/ExportExcel/ExportExcel";
 import video from "../../assets/images/video.svg";
 import videoDark from "../../assets/images/videoDark.svg";
+import { MuiMenuList } from "../../styled-components/select/index";
 
 // setAutoFreeze(false);
 
@@ -254,6 +255,7 @@ const Dashboard = () => {
 
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
+      {/* <MuiMenuList background="red"> */}
       <Card height="94vh" borderRadius="16px" theme={theme}>
         {/* <Container theme={theme}> */}
         <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
@@ -263,8 +265,8 @@ const Dashboard = () => {
           <div className="col-sm-12">
             <div className="d-flex justify-content-end">
               {/* <Title fontSize="14px" color="#192a3e">
-                    {`PNL (${pnlDays})`}
-                  </Title> */}
+                      {`PNL (${pnlDays})`}
+                    </Title> */}
               <div className="d-flex mt-2">
                 <SourceFilter
                   groupPlataform={groupPlataform}
@@ -325,6 +327,7 @@ const Dashboard = () => {
           </div>
         </div>
       </Card>
+      {/* </MuiMenuList> */}
       {/* <FooterMenu /> */}
     </Main>
   );

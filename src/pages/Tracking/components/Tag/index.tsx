@@ -66,7 +66,7 @@ const TagTracking = () => {
       <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end">
         <HelpVideo
           title={"Video Tutorial Etiquetas"}
-          image={themeState ? video : videoDark}
+          image={!themeState ? video : videoDark}
           url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
         />
         <ExportExcel dataFile={filteredData} titleFile={"Tabla Etiquetas"} />

@@ -32,6 +32,7 @@
   top: -12px;
   left: 10px;
   color: #6b6b6b;
+  /* color: #030229; */
 }
 
 .icon-close-funnel-light {
@@ -44,6 +45,7 @@
 
 .icon-close-funnel-dark {
   color: #6b6b6b;
+  /* color: #030229; */
   font-size: 27px;
   margin-top: 40px;
   margin-right: 4px;

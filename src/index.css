@@ -48,3 +48,10 @@ code {
 .activeSlider {
   color: #3997FF !important;
 }
+
+.font-text-Label-Configuracion {
+  /* color: #030229; */
+  color: #6b6b6b;
+  font-size: 14px;
+  font-family: 'Helvetica-NeueL';
+}

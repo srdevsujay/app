@@ -28,6 +28,8 @@ const dataTypeTag: any = [
 ];
 
 const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
   const dispatch = useAppDispatch();
   const funnels: any = useAppSelector((state) => state.dashboard.dataTracking);
   const { dataRule } = useAppSelector((state) => state.tracking);
@@ -227,7 +229,9 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           </label>
           <InputException
             type="text"
-            className="form-control"
+            className={`form-control form-control-exception ${
+              themeState ? "modoDark" : ""
+            }`}
             placeholder="Presiona enter para agregar una nueva excepción."
             name="exeptions"
             id="exeptions"
@@ -277,7 +281,9 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           </label>
           <InputException
             type="text"
-            className="form-control"
+            className={`form-control form-control-exception ${
+              themeState ? "modoDark" : ""
+            }`}
             placeholder="Presiona enter para agregar una nueva coincidencia."
             name="words"
             id="words"

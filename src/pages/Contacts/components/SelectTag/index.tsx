@@ -53,13 +53,21 @@ const SelectTag = ({
 
   const handleSearchChange = (event: any) => {
     const query = event.toLowerCase();
-    const filtered = dataLead.filter(
-      (d: any) => d.email.toLowerCase().includes(query)
-      // d.first_origintag.toLowerCase().includes(query) ||
-      // d.last_origentag?.toLowerCase().includes(query) ||
+    const filtered = dataLead.filter((d: any) => {
+      const emailMatch = d.email && d.email.toLowerCase().includes(query);
+      const lastAdNameMatch =
+        d.last_ad_name && d.last_ad_name.toLowerCase().includes(query);
+      const firstAdNameMatch =
+        d.first_ad_name && d.first_ad_name.toLowerCase().includes(query);
+
+      return emailMatch || lastAdNameMatch || firstAdNameMatch;
+      // d.email.toLowerCase().includes(query) ||
+      // d.last_ad_name.toLowerCase().includes(query) ||
+      // d.first_ad_name?.toLowerCase().includes(query)
       // d.name.toLowerCase().includes(query) ||
       // d.phone.toLowerCase().includes(query)
-    );
+    });
+    console.log("filtered---", filtered);
     setFilteredDataDos(filtered);
   };
 
@@ -95,6 +103,14 @@ const SelectTag = ({
     setSelectedTag("");
     clearFilterContacts();
   };
+
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      // Llamar a la función cuando se presiona Enter
+      setOnFocused(0);
+    }
+  };
+
   return (
     <div
       style={{
@@ -107,9 +123,61 @@ const SelectTag = ({
         onChange={handleSearchChange}
         placeholder="Buscar..."
         onFocus={(e) => setOnFocused(1)}
-        onBlur={(e) => toggleSelectTag(e)}
+        // onBlur={(e) => toggleSelectTag(e)}
         className="w-100"
+        onKeyPress={handleKeyPress}
       />
+      <OnFocused className={onFocused ? "d-block" : "d-none"} theme={theme}>
+        {uniqueTags?.map((tag: any, i: number) => (
+          <div
+            style={{ padding: "8px 10px" }}
+            key={i}
+            // onClick={(e: any) => {
+            //   handleTagChange(tag);
+            //   e.stopPropagation();
+            // }}
+          >
+            <BackColorsTableOrigin
+              width="initial"
+              marginBottom="0px"
+              paddingLeft="0"
+              opacity="0.5"
+              justifyContent="center"
+              className={`${
+                tag?.substr(0, 1) === "@"
+                  ? "back-lila"
+                  : tag?.substr(0, 1) === "!"
+                  ? "back-orange"
+                  : "back-green"
+              }`}
+              onClick={(e: any) => {
+                console.log("event", e);
+                console.log("tag", tag);
+                handleTagChange(tag);
+                // e.stopPropagation();
+              }}
+            >
+              {tag?.substr(0, 1) === "@" ? (
+                <img src={click} alt="" className="iconos-table-origin" />
+              ) : tag?.substr(0, 1) === "!" ? (
+                <CheckCircleOutlinedIcon
+                  style={{
+                    color: "#F08303",
+                    fontSize: "17px",
+                    marginTop: "2px",
+                    marginRight: "4px",
+                  }}
+                />
+              ) : (
+                <img src={venta} alt="" className="iconos-table-origin" />
+              )}
+              <option key={tag} value={tag}>
+                {tag !== null ? tag?.substr(1) : null}
+              </option>
+            </BackColorsTableOrigin>
+          </div>
+        ))}
+      </OnFocused>
       <div
         className={selectedTag === "" ? "d-none" : "d-block mb-2"}
         onClick={clearFilter}
@@ -148,51 +216,6 @@ const SelectTag = ({
           </option>
         </BackColorsTableOrigin>
       </div>
-      <OnFocused className={onFocused ? "d-block" : "d-none"} theme={theme}>
-        {uniqueTags?.map((tag: any, i: number) => (
-          <div
-            style={{ padding: "8px 10px" }}
-            key={i}
-            onClick={(e: any) => {
-              handleTagChange(tag);
-              e.stopPropagation();
-            }}
-          >
-            <BackColorsTableOrigin
-              width="initial"
-              marginBottom="0px"
-              paddingLeft="0"
-              opacity="0.5"
-              justifyContent="center"
-              className={`${
-                tag?.substr(0, 1) === "@"
-                  ? "back-lila"
-                  : tag?.substr(0, 1) === "!"
-                  ? "back-orange"
-                  : "back-green"
-              }`}
-            >
-              {tag?.substr(0, 1) === "@" ? (
-                <img src={click} alt="" className="iconos-table-origin" />
-              ) : tag?.substr(0, 1) === "!" ? (
-                <CheckCircleOutlinedIcon
-                  style={{
-                    color: "#F08303",
-                    fontSize: "17px",
-                    marginTop: "2px",
-                    marginRight: "4px",
-                  }}
-                />
-              ) : (
-                <img src={venta} alt="" className="iconos-table-origin" />
-              )}
-              <option key={tag} value={tag}>
-                {tag !== null ? tag?.substr(1) : null}
-              </option>
-            </BackColorsTableOrigin>
-          </div>
-        ))}
-      </OnFocused>
     </div>
   );
 };

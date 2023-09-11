@@ -2,6 +2,7 @@ export interface SidebarItem {
   title: string;
   path: string;
   icon: any;
+  iconDark?: any;
   iconOpened?: boolean;
   iconClosed?: boolean;
   subRoutes?: any;
@@ -13,6 +14,6 @@ export enum SidebarTitle {
   FUNNEL = 'Funnel',
   CONTACTS = 'Contactos',
   TRACKING = "Tracking",
-  CONFIGURATION = "Configuracion",
+  CONFIGURATION = "Configuración",
   HELP = "Ayuda"
 }

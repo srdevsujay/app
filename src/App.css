@@ -40,3 +40,83 @@
 body {
   background-color: #fafbfe;
 }
+
+.modoDark, .modoDark:-webkit-autofill,
+.modoDark:-webkit-autofill:hover, 
+.modoDark:-webkit-autofill:focus, 
+.modoDark:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #0D0D0D;
+}
+
+.modoDarkSelect > div > div > input {
+  -webkit-text-fill-color: #fff !important;
+}
+
+.date-width > div > div > input {
+  font-family: 'Helvetica-NeueL';
+  margin-left: 15px;
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+.modoDarkInput {
+  background-color: rgb(13 13 13);
+  -webkit-text-fill-color: #ffffff;
+}
+
+.modoDarkInputTitle {
+  color: #6b6b6b;
+}
+
+.modoDarkSelectProfile {
+  height: 38px !important;
+  color: #757575 !important;
+  background: #0d0d0d;
+  border: 1px solid #fff !important;
+  border-radius: 5px;
+  opacity: initial !important;
+}
+
+.modoDarkSelect > div {
+  height: 38px !important;
+  color: #757575 !important;
+  background: #0d0d0d;
+  border: 1px solid #fff !important;
+  border-radius: 5px;
+  opacity: initial !important;
+}
+
+.modoDarkSelect > input {
+  -webkit-text-fill-color: #fff !important;
+}
+
+.modoDarkSelect > div > div > div > button > svg {
+  fill: dimgrey !important;
+}
+
+.modeDarkSelectAttribute > div > div {
+  background: #0d0d0d;
+}
+
+.form-control-exception {
+  font-size: 13px !important;
+  font-family: "Helvetica-NeueL" !important;
+  height: calc(2.25rem + 2px) !important;
+  padding: 0.45rem 0.9rem !important;
+}
+
+.modoDarkSwitch > span > span:nth-child(2) {
+  background: #767676 !important;
+}
+
+.modoDarkFooterTerminosPoliticas {
+  background-color: #0D0D0D;
+  color: #333;
+}
+
+/* .MuiMenu-list {
+  background: red !important;
+} */

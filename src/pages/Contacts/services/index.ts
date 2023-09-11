@@ -2,8 +2,8 @@ import { clientAxios } from '../../../services/axios';
 import { getJwt } from '../../../utilities/localstorage.utility';
 
 
-export const getDataLeads = async () => {
-  return clientAxios.get("/contactos", {
+export const getDataLeads = async (data: any) => {
+  return clientAxios.post("/contactos", data, {
     headers: {
       "x-access-tokens": <string>getJwt(),
     }
@@ -34,13 +34,21 @@ export const deleteLeadService = async (id: any) => {
   });
 };
 
-export const getDataBooking = async () => {
-  return clientAxios.get("/booking", {
+export const getDataBooking = async (data: any) => {
+  return clientAxios.post("/booking", data, {
     headers: {
       "x-access-tokens": <string>getJwt(),
     }
   });
 };
+
+// export const getDataBooking = async () => {
+//   return clientAxios.get("/booking", {
+//     headers: {
+//       "x-access-tokens": <string>getJwt(),
+//     }
+//   });
+// };
 
 export const createBookingService = async (data: any) => {
   return clientAxios.post("/booking", data, {
@@ -74,8 +82,8 @@ export const deleteBookingService = async (id: any) => {
   });
 };
 
-export const getDataSales = async () => {
-  return clientAxios.get("/sales", {
+export const getDataSales = async (data: any) => {
+  return clientAxios.post("/sales", data, {
     headers: {
       "x-access-tokens": <string>getJwt(),
     }

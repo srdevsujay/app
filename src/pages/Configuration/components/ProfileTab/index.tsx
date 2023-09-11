@@ -163,7 +163,7 @@ const ProfileTab = () => {
         </div>
         <div className="row">
           <div className="form-group col-sm-6">
-            <Title className="font-text-title-Configuracion">
+            <Title fontSize="16px" className="font-text-title-Configuracion">
               Zona Horaria
             </Title>
             {perfil && (
@@ -181,7 +181,7 @@ const ProfileTab = () => {
             )}
           </div>
           <div className="form-group col-sm-6">
-            <Title className="font-text-title-Configuracion">
+            <Title fontSize="16px" className="font-text-title-Configuracion">
               Tipo de Moneda
             </Title>
             {perfil && (
@@ -276,7 +276,7 @@ const ProfileTab = () => {
         title="Editar Usuario"
         isOpen={isModalOpen}
         onClose={toggleModal}
-        width="450px"
+        width="480px"
         padding="10px 32px"
         bottom="14px"
         height="530px"

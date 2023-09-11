@@ -41,7 +41,11 @@ export const obtainApiContacts = (): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      const result = await getDataLeads();
+      const form = {
+        page: 1,
+        per_page: 10,
+      };
+      const result = await getDataLeads(form);
       if (
         result.data.message === "Token is invalid!" ||
         result.data.error === "Signature has expired"

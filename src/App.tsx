@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
+import { MuiMenuList } from "./styled-components/select";
 import CreateAccount from "./pages/Register/CreateAccount";
 import AuthGuard from "./guards/auth.guard";
 import { publicRoutes, privateRoutes } from "./models/routes";
@@ -57,6 +58,7 @@ function App() {
   }, []);
 
   return (
+    // <MuiMenuList background="red">
     <Suspense
       fallback={
         <div
@@ -123,13 +125,13 @@ function App() {
                     />
                   )}
                   {/* <Route path={privateRoutes.DASHBOARD} element={<Dashboard />} />
-                <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
-                <Route path={privateRoutes.CONTACT} element={<Contacts />} />
-                <Route path={privateRoutes.TRACKING} element={<Tracking />} />
-                <Route
-                  path={privateRoutes.CONFIGURATION}
-                  element={<Configuration />}
-                /> */}
+                  <Route path={privateRoutes.FUNNEL} element={<Funnel />} />
+                  <Route path={privateRoutes.CONTACT} element={<Contacts />} />
+                  <Route path={privateRoutes.TRACKING} element={<Tracking />} />
+                  <Route
+                    path={privateRoutes.CONFIGURATION}
+                    element={<Configuration />}
+                  /> */}
                   <Route path={privateRoutes.AUTH} element={<Auth />} />
                 </Route>
                 <Route path="/signun" element={<CreateAccount />} />
@@ -139,6 +141,7 @@ function App() {
         </AuthProvider>
       </Router>
     </Suspense>
+    // </MuiMenuList>
   );
 }
 

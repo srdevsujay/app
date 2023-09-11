@@ -326,7 +326,7 @@ export const OnFocused = styled.div`
   overflow-y: auto;
   position: absolute;
   z-index: 999;
-  width: 30%;
+  width: 19vw;
   max-height: 180px;
   max-width: 21.48vw;
   background-color: ${(props) => props.theme.background};

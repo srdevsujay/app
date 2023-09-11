@@ -21,7 +21,7 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
   };
 
   useEffect(() => {
-    dispatch(obtainApiBooking());
+    dispatch(obtainApiBooking(1, 100));
   }, [booking]);
 
   useEffect(() => {

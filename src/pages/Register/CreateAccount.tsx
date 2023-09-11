@@ -19,6 +19,8 @@ import FormGroup from "@mui/material/FormGroup";
 import { FormControlLabel, Switch, Checkbox } from "@mui/material";
 
 const CreateAccount = () => {
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeDark = JSON.parse(themeLocalStorage);
   const navigate = useNavigate();
   const toLogin = useAppSelector((state) => state.user.email);
   const dispatch = useAppDispatch();
@@ -239,10 +241,22 @@ const CreateAccount = () => {
               {/* {errors.password && <p style={styles}>{errors.password}</p>} */}
             </div>
             <div className="form-group">
-              <label className="title-email">Confirmar Contraseña</label>
+              <label
+                className={
+                  localStorageTheme === "true"
+                    ? "title-email modoDarkInputTitle"
+                    : "title-email"
+                }
+              >
+                Confirmar Contraseña
+              </label>
               <input
                 type="password"
-                className="form-control"
+                className={
+                  localStorageTheme === "true"
+                    ? "form-control modoDarkInput"
+                    : "form-control"
+                }
                 placeholder="Confirmar Contraseña"
                 name="validatePassword"
                 value={form.validatePassword}
@@ -266,7 +280,11 @@ const CreateAccount = () => {
               </label>
               <FormControl className="form-control w-100">
                 <Select
-                  className="css-select-1 font-HelveticaNeueL"
+                  className={
+                    themeDark === true
+                      ? "modoDarkSelect css-select-1 font-HelveticaNeueL"
+                      : "css-select-1 font-HelveticaNeueL"
+                  }
                   style={{ fontSize: "14px" }}
                   name="selectedTimezone"
                   value={selectedTimezone}
@@ -475,7 +493,11 @@ const CreateAccount = () => {
               </label>
               <FormControl className="form-control w-100">
                 <Select
-                  className="css-select-2 font-HelveticaNeueL"
+                  className={
+                    themeDark === true
+                      ? "modoDarkSelect css-select-2 font-HelveticaNeueL"
+                      : "css-select-2 font-HelveticaNeueL"
+                  }
                   style={{ fontSize: "14px" }}
                   name="type_currency"
                   // value={form.type_currency}

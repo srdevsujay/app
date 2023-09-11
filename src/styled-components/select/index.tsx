@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { MuiMenu } from "./type";
 
 export const Select = styled.select`
-  height: 37px !important;
+  height: 38px !important;
   /* background: #fafafb !important; */
   background-color: ${(props) => props.theme.background};
   border: 1px solid #ced4da;
@@ -25,3 +26,15 @@ export const Select = styled.select`
     border-color: #4747c9;
   }
 `;
+
+export const MuiMenuList = styled.ul<MuiMenu>(({ background }) => ({
+  "div > ul.MuiMenu-list": {
+    background: background,
+  },
+  "& div > ul .MuiMenu-list": {
+    background: background,
+  },
+  "& div > ul > .MuiMenu-list": {
+    background: background,
+  },
+}));

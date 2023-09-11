@@ -46,7 +46,7 @@ const Booking = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiBooking());
+    dispatch(obtainApiBooking(1, 100));
   }, []);
 
   const [currentEdit, setCurrentEdit] = useState();
@@ -238,7 +238,7 @@ const Booking = () => {
         dataFiltersCalendar={dataBookingFilter}
         setHandleButtonsFilterCalendar={setHandleButtonsFilterCalendar}
         titleVideoTutorial={"Video Tutorial Booking"}
-        imageVideoTutorial={themeState ? video : videoDark}
+        imageVideoTutorial={!themeState ? video : videoDark}
         urlVideoTutorial={
           "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
         }
