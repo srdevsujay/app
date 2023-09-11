@@ -46,7 +46,9 @@ const MyContext = createContext<MyContextType | undefined>(undefined);
 
 const Leads = () => {
   const dispatch = useAppDispatch();
-  const { dataLead, isLoading } = useAppSelector((state) => state.contact);
+  const { dataLead, isLoading, totalLeads } = useAppSelector(
+    (state) => state.contact
+  );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Lead");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -61,7 +63,7 @@ const Leads = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiContacts());
+    dispatch(obtainApiContacts(1, 100));
   }, []);
 
   const [currentEdit, setCurrentEdit] = useState();
@@ -239,6 +241,12 @@ const Leads = () => {
     },
   ];
 
+  const obtainDataPageChange = (page: number, pageSize: number) => {
+    dispatch(obtainApiContacts(page, pageSize));
+  };
+
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   return (
     <>
       {/* <div className="content-buttons-main-tracking mt-4 mt-3 d-flex justify-content-end"> */}
@@ -327,6 +335,10 @@ const Leads = () => {
           maxBodyHeight={"64vh"}
           pageSize={7}
           getUserProfile={getUserProfile}
+          obtainDataPageChange={obtainDataPageChange}
+          totalPages={totalLeads}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
         />
       )}
     </>

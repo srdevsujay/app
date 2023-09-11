@@ -123,7 +123,7 @@ const FormGoogle = () => {
         <div className="form-group col-sm-12">
           <label className="title-label-popup">Login Customer Id</label>
           <Input
-            type="text"
+            type="number"
             className="form-control"
             placeholder="Ingresa tu Customer Id"
             name="login_customer_id"

@@ -145,7 +145,7 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
             <SelectScript
               className={
                 themeDark === true
-                  ? "modoDarkSelect css-select-1 font-HelveticaNeueL"
+                  ? "modoDarkSelectProfile css-select-1 font-HelveticaNeueL"
                   : "css-select-1 font-HelveticaNeueL"
               }
               style={{ fontSize: "14px", width: "100%" }}
@@ -352,7 +352,7 @@ const FormProfileEdit = ({ onClose, perfil }: any) => {
             <SelectScript
               className={
                 themeDark === true
-                  ? "modoDarkSelect css-select-2 font-HelveticaNeueL"
+                  ? "modoDarkSelectProfile css-select-2 font-HelveticaNeueL"
                   : "css-select-2 font-HelveticaNeueL"
               }
               style={{ fontSize: "14px", width: "100%" }}

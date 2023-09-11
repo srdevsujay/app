@@ -6,7 +6,7 @@ import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 
 export const tagRuleColumn = () => {
   return {
-    title: "PRIMER ORIGEN",
+    title: "Etiquetas",
     field: "first_origintag",
     render: (dataRule: any) =>
       dataRule?.tag === null ? (

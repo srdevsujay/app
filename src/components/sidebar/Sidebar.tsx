@@ -140,14 +140,18 @@ const Sidebar: FC = () => {
               <MenuItemLinks
                 to={item.path}
                 className={isActive ? "activeSlider" : ""}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  setActiveItem(item.path);
+                }}
               >
                 {isActive ? item.iconDark : item.icon}
                 <span
                   style={{ marginLeft: "16px" }}
-                  onClick={(e) => {
-                    setIsMenuOpen(false);
-                    setActiveItem(item.path);
-                  }}
+                  // onClick={(e) => {
+                  //   setIsMenuOpen(false);
+                  //   setActiveItem(item.path);
+                  // }}
                 >
                   {close ? item.title : ""}
                 </span>

@@ -16,12 +16,12 @@ export const ColumnsRule = (
   setIdEditCurrent: any
 ) => {
   return [
-    applyToColumn(),
-    createDateColumn(time_Zone),
-    exeptionColumn(),
-    wordColumn(),
     nameColumn(),
     tagRuleColumn(),
+    applyToColumn(),
+    wordColumn(),
+    exeptionColumn(),
+    createDateColumn(time_Zone),
     ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };
