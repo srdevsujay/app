@@ -207,7 +207,7 @@ const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
       <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
       </HeaderTitleGraphic>
-      {isLoading === true ? (
+      {isLoading.length === 0 ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "250px", zIndex: "99999999" }}

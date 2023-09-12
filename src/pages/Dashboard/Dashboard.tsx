@@ -76,7 +76,7 @@ const Dashboard = () => {
   // };
   // console.log("theme", theme);
 
-  const { tokenfacebook, tokengoogle, toggleSlider, isLoading } =
+  const { tokenfacebook, tokengoogle, toggleSlider, isLoading, dataPNL } =
     useAppSelector((state) => state.dashboard);
 
   console.log("tokenfacebook", tokenfacebook);
@@ -253,6 +253,8 @@ const Dashboard = () => {
     totalPnl(selectPlatform, themeState, theme);
   }, [selectPlatform, themeState, theme]);
 
+  console.log("dataPNL.length", dataPNL.length);
+
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
       {/* <MuiMenuList background="red"> */}
@@ -304,7 +306,8 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-            {isLoading === true ? (
+            {/* {isLoading === true ? ( */}
+            {dataPNL.length === 0 ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "250px", zIndex: "99999999" }}
@@ -322,7 +325,7 @@ const Dashboard = () => {
             <Graphics
               selectPlatform={selectPlatform}
               groupPlataform={groupPlataform}
-              isLoading={isLoading}
+              isLoading={dataPNL}
             />
           </div>
         </div>
