@@ -10,7 +10,7 @@ import {
   deleteLead,
   obtainApiContacts,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
-import GeneralTable from "../../../../utilities/Table/index";
+import GeneralTable from "../../../../utilities/Table/TableContacts/GeneralTable";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
