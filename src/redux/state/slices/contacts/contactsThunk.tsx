@@ -54,19 +54,23 @@ export const obtainApiContacts = (page: number, pageSize: number): AppThunk => {
         console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
 
         let allData: any = [];
-        // for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
-        const form = {
-          // page: i,
-          page: resultGetLeads.data.page,
-          per_page: resultGetLeads.data.total_results,
-        };
-        const result = await getDataLeads(form);
-        console.log("result.data.data", result.data.data);
+        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+          const form = {
+            page: i,
+            // page: resultGetLeads.data.page,
+            per_page: 100,
+          };
+          const result = await getDataLeads(form);
+          console.log("result.data.data", result.data.data);
 
-        const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
-        console.log("resultContactos", result);
-        allData = [...allData, ...currentDataLead];
-        // };
+          const currentDataLead: any = _.orderBy(
+            result.data.data,
+            "id",
+            "desc"
+          );
+          console.log("resultContactos", result);
+          allData = [...allData, ...currentDataLead];
+        }
         console.log("allData", allData);
         // const form = {
         //   page: 1,
@@ -191,22 +195,22 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
         console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
 
         let allData: any = [];
-        // for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
-        const form = {
-          // page: i,
-          // per_page: resultGetBook.data.per_page,
-          page: resultGetBook.data.page,
-          per_page: resultGetBook.data.total_results,
-        };
-        const result = await getDataBooking(form);
-        const currentDataBook: any = _.orderBy(
-          result.data.data,
-          ["id", "appoiment_date"],
-          ["desc", "asc"]
-        );
-        console.log("resultContactos", result);
-        allData = [...allData, ...currentDataBook];
-        // }:
+        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+          const form = {
+            page: i,
+            // per_page: resultGetBook.data.per_page,
+            // page: resultGetBook.data.page,
+            per_page: 100,
+          };
+          const result = await getDataBooking(form);
+          const currentDataBook: any = _.orderBy(
+            result.data.data,
+            ["id", "appoiment_date"],
+            ["desc", "asc"]
+          );
+          console.log("resultContactos", result);
+          allData = [...allData, ...currentDataBook];
+        }
         console.log("allData", allData);
         dispatch(setBooking(allData));
       }
@@ -329,19 +333,27 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
         signOut();
         dispatch(logoutUser());
       } else {
-        const form = {
-          // page: i,
-          // per_page: resultGetBook.data.per_page,
-          page: resultGetSale.data.page,
-          per_page: resultGetSale.data.total_results,
-        };
-        const result = await getDataSales(form);
-        const currentDataLead: any = _.orderBy(
-          result.data.data,
-          "date",
-          "desc"
-        );
-        dispatch(setSale(currentDataLead));
+        let resultCurrentFor: any =
+          resultGetSale.data.total_results / resultGetSale.data.per_page;
+        console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
+
+        let allData: any = [];
+        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+          const form = {
+            page: i,
+            // per_page: resultGetBook.data.per_page,
+            // page: resultGetSale.data.page,
+            per_page: 100,
+          };
+          const result = await getDataSales(form);
+          const currentDataSale: any = _.orderBy(
+            result.data.data,
+            "date",
+            "desc"
+          );
+          allData = [...allData, ...currentDataSale];
+        }
+        dispatch(setSale(allData));
       }
     } catch (error) {
       console.log(error);

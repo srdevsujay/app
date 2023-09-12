@@ -60,6 +60,8 @@ const SourceFilter = ({
   const [canCallTotalTable, setCanCallTotalTable] = useState(true);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    console.log("sleect");
+
     const {
       target: { value },
     } = event;
@@ -125,8 +127,35 @@ const SourceFilter = ({
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
 
+  const [selectFilter, setSelectFilter] = useState(false);
+
+  // const onSelectFilter = () => {
+  //   console.log("onSelectFilter");
+  //   setSelectFilter(!selectFilter);
+  // };
+
+  // useEffect(() => {
+  //   // Accede al elemento body
+  //   const bodyElement = document.body;
+
+  //   if (bodyElement) {
+  //     // Captura el primer div hijo del body
+  //     const firstDiv = bodyElement.querySelector("div");
+
+  //     if (firstDiv) {
+  //       // Haz algo con el primer div hijo
+  //       console.log("Primer div hijo:", firstDiv);
+  //     }
+  //   }
+  // }, [selectFilter]);
+
+  const handleFilterChange = () => {
+    // Aquí puedes manejar los cambios en la selección de filtros
+    console.log("Filtros seleccionados:");
+  };
+
   return (
-    <FilterSource theme={theme}>
+    <FilterSource theme={theme} onChange={handleFilterChange}>
       <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
         <Select
           multiple
