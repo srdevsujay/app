@@ -4,11 +4,11 @@ const useMinMaxDateFilter = (dataLead: any) => {
   const [selectedDates, setSelectedDates] = useState<any>([]);
   const [minDate, setMinDate] = useState(new Date());
   const [maxDate, setMaxDate] = useState(new Date());
-  console.log("dataLeadHook", dataLead);
 
   useEffect(() => {
-    if (dataLead === undefined && dataLead === 0) return;
-
+    if (dataLead === undefined && dataLead === "") return;
+    console.log("dataLead-", dataLead);
+    console.log("dataLead-.", dataLead === "");
     const dataLeads = dataLead.map((lead: any) => {
       return lead.joined || lead.appoiment_date || lead.date;
     });

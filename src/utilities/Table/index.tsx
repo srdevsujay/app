@@ -11,11 +11,11 @@ const GeneralTable = ({
   maxBodyHeight,
   pageSize,
   getUserProfile,
-  // obtainDataPageChange,
   totalPages,
-  rowsPerPage,
-  setRowsPerPage,
-}: any) => {
+}: // obtainDataPageChange,
+// rowsPerPage,
+// setRowsPerPage,
+any) => {
   const { theme } = useContext(ThemeContext);
 
   const tableStyles = {

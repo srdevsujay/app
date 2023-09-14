@@ -54,7 +54,9 @@ setAutoFreeze(false);
 
 const Sales = () => {
   const dispatch = useAppDispatch();
-  const { dataSale, isLoading } = useAppSelector((state) => state.contact);
+  const { dataSale, isLoading, totalPageSale } = useAppSelector(
+    (state) => state.contact
+  );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Venta");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -71,7 +73,7 @@ const Sales = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiSale(1, 100));
+    dispatch(obtainApiSale(0, 100));
     dispatch(obtainApiProduct());
   }, []);
 
@@ -207,16 +209,19 @@ const Sales = () => {
       name: "Total Ventas",
       image: themeState === true ? saleFilterDark : saleFilter,
       value: objectFilterSale?.ventas,
+      loading: 1,
     },
     {
       name: "Reembolso",
       image: themeState === true ? reembolsoDark : reembolso,
       value: objectFilterSale?.reembolsos,
+      loading: 1,
     },
     {
       name: "Ventas Recurrentes",
       image: themeState === true ? ventarecurrenteDark : ventarecurrente,
       value: objectFilterSale?.Recurrentes,
+      loading: 1,
     },
   ];
 
@@ -372,6 +377,7 @@ const Sales = () => {
         }
         dataFile={filteredDataDos}
         titleDataFile={titleFile}
+        totalPageSale={totalPageSale}
       />
       <Modal
         title={currentEdit !== null ? "Editar Venta" : "Crear Venta"}

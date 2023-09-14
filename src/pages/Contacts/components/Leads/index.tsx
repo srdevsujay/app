@@ -10,7 +10,8 @@ import {
   deleteLead,
   obtainApiContacts,
 } from "../../../../redux/state/slices/contacts/contactsThunk";
-import GeneralTable from "../../../../utilities/Table/TableContacts/GeneralTable";
+// import GeneralTable from "../../../../utilities/Table/TableContacts/GeneralTable";
+import GeneralTable from "../../../../utilities/Table/index";
 import { TableContacts } from "./ColumnsLeads";
 import { setAutoFreeze } from "immer";
 import "../../styled-components/style.css";
@@ -46,7 +47,7 @@ const MyContext = createContext<MyContextType | undefined>(undefined);
 
 const Leads = () => {
   const dispatch = useAppDispatch();
-  const { dataLead, isLoading, totalLeads } = useAppSelector(
+  const { dataLead, isLoading, totalLeads, totalPageLead } = useAppSelector(
     (state) => state.contact
   );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
@@ -62,9 +63,23 @@ const Leads = () => {
   const [selected, setSelected] = useState("");
   const searchStringDebounced = useDebounce(searchString, 3000);
 
+  // const [currentPageLead, setCurrentPageLead] = useState(0);
+  // const [currentPerPage, setCurrentPerPage] = useState(10);
+  // const [allData, setAllData] = useState(dataLead);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // console.log("currentPerPage", currentPerPage);
+  // console.log("currentPage", currentPage);
+  // let allData: any = [];
   useEffect(() => {
-    dispatch(obtainApiContacts(1, 100));
+    // dispatch(obtainApiContacts(0, 10, allData));
+    dispatch(obtainApiContacts(0, 100));
   }, []);
+
+  // useEffect(() => {
+  //   console.log("entra al 2do effect");
+  //   // dispatch(obtainApiContacts(currentPageLead, currentPerPage, allData));
+  //   dispatch(obtainApiContacts(currentPage, currentPerPage));
+  // }, [currentPage, currentPerPage]);
 
   const [currentEdit, setCurrentEdit] = useState();
   const [idEditCurrent, setIdEditCurrent] = useState(0);
@@ -93,10 +108,6 @@ const Leads = () => {
 
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
-
-  console.log("minDate-", minDate);
-  console.log("maxDate-", maxDate);
-  console.log("selectedDates-", selectedDates);
 
   useEffect(() => {
     // if (dataLead.length > 0) {
@@ -161,8 +172,6 @@ const Leads = () => {
   };
 
   const getUserProfile = (data: any, e: any) => {
-    console.log("dataPrifile", data);
-
     const clickColumnEdit = e.target.value;
     if (clickColumnEdit === "") {
     } else {
@@ -181,6 +190,7 @@ const Leads = () => {
   const memoizedUsers: any = useMemo(() => {
     return filteredDataDos;
   }, [filteredDataDos]);
+  console.log("memoizedUsers", memoizedUsers);
 
   console.log("isLoadingCOntact", isLoading);
 
@@ -220,7 +230,6 @@ const Leads = () => {
       );
     });
 
-    console.log("filteredData--", filteredData);
     setFilteredDataTotal(filteredData);
     setFilteredDataDos(filteredData);
     setModalStateFilter(false);
@@ -237,15 +246,16 @@ const Leads = () => {
     {
       name: "Total Leads",
       image: themeState === true ? leadsFilterDark : leadsFilter,
-      value: filteredDataDos.length,
+      value: totalPageLead,
+      loading: 0,
     },
   ];
 
-  const obtainDataPageChange = (page: number, pageSize: number) => {
-    dispatch(obtainApiContacts(page, pageSize));
-  };
+  // const obtainDataPageChange = (page: number, pageSize: number) => {
+  //   dispatch(obtainApiContacts(page, pageSize));
+  // };
 
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
 
   return (
     <>
@@ -335,10 +345,16 @@ const Leads = () => {
           maxBodyHeight={"64vh"}
           pageSize={7}
           getUserProfile={getUserProfile}
-          obtainDataPageChange={obtainDataPageChange}
+          // obtainDataPageChange={obtainDataPageChange}
           totalPages={totalLeads}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
+          // rowsPerPage={rowsPerPage}
+          // setRowsPerPage={setRowsPerPage}
+          // totalPage={totalPageLead}
+          // setCurrentPageLead={setCurrentPageLead}
+          // currentPerPage={currentPerPage}
+          // setCurrentPerPage={setCurrentPerPage}
+          // currentPage={currentPage}
+          // setCurrentPage={setCurrentPage}
         />
       )}
     </>

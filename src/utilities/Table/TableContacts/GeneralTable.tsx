@@ -35,8 +35,14 @@ const GeneralTable = ({
   getUserProfile,
   // obtainDataPageChange,
   totalPages,
-  rowsPerPage,
-  setRowsPerPage,
+  // rowsPerPage,
+  // setRowsPerPage,
+  totalPage,
+  setCurrentPageLead,
+  currentPerPage,
+  setCurrentPerPage,
+  currentPage,
+  setCurrentPage,
 }: any) => {
   const { theme } = useContext(ThemeContext);
 
@@ -94,6 +100,10 @@ const GeneralTable = ({
   //   setChangePage(0);
   // }, [currentPage, changePage, rowsPerPage]);
 
+  // para ir acumulando los +1 para el next en la funcion de onChangeCurrentPageNext
+
+  const [currentPagePrev, setCurrentPagePrev] = useState(0);
+
   const CustomPaginationComponent = (props: any) => {
     const {
       page,
@@ -106,24 +116,66 @@ const GeneralTable = ({
 
     console.log(props);
 
-    let from = rowsPerPage * page + 1;
-    let to = rowsPerPage * (page + 1);
-    if (to > count) {
+    let from = currentPerPage * currentPage + 1;
+    let to = currentPerPage * (currentPage + 1);
+
+    if (to < count) {
       to = count;
     }
+
+    console.log("to", to);
+    console.log("rowsPerPage", props.rowsPerPage);
+
+    // setCurrentPerPage(rowsPerPage);
+
+    const onChangeCurrentPageNext = (e: any, page: number) => {
+      onChangePage(e, page);
+      const currentPageNext = currentPage + 1;
+      setCurrentPage(currentPageNext);
+      return;
+    };
+
+    const onChangeCurrentPagePrev = (e: any, page: number) => {
+      onChangePage(e, page);
+      const currentPrev = currentPage - 1;
+      setCurrentPage(currentPrev);
+      return;
+    };
+
+    const onChangePageBegin = (e: any, page: number) => {
+      onChangePage(e, page);
+      setCurrentPage(0);
+      return;
+    };
+
+    const onChangePageFinish = (e: any, page: number) => {
+      onChangePage(e, page);
+      const total = totalPage / currentPerPage;
+      console.log("total", total);
+      setCurrentPage(Math.floor(total));
+      return;
+    };
+
+    const onChangeCurrentRowsPerPage = (e: any) => {
+      console.log("PerPageValue", e);
+      onChangeRowsPerPage(e);
+      setCurrentPerPage(e.target.value);
+      return;
+    };
+
     return (
       <td>
         <Grid container alignItems="center" style={{ paddingTop: 8 }}>
           <Grid item>
             <FormControl>
-              <InputLabel>Age</InputLabel>
+              {/* <InputLabel>Age</InputLabel> */}
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={rowsPerPage}
-                onChange={onChangeRowsPerPage}
+                value={currentPerPage}
+                onChange={onChangeCurrentRowsPerPage}
               >
-                {rowsPerPageOptions.map((x: any, i: number) => (
+                {pageSizeOptions.map((x: any, i: number) => (
                   <MenuItem value={x} key={i}>
                     {x}
                   </MenuItem>
@@ -133,53 +185,54 @@ const GeneralTable = ({
           </Grid>
           <Grid item>
             <IconButton
-              disabled={page === 0}
-              onClick={(e) => onChangePage(e, 0)}
+              disabled={currentPage === 0}
+              onClick={(e) => onChangePageBegin(e, 0)}
             >
               <SkipPreviousRoundedIcon
                 fontSize="small"
-                color={page === 0 ? "disabled" : "primary"}
+                color={currentPage === 0 ? "disabled" : "primary"}
               />
               <Typography>First Page</Typography>
             </IconButton>
           </Grid>
           <Grid item>
             <IconButton
-              disabled={page === 0}
-              onClick={(e) => onChangePage(e, page - 1)}
+              disabled={currentPage === 0}
+              // onClick={(e) => onChangeCurrentPagePrev(e, page)}
+              onClick={(e) => onChangeCurrentPagePrev(e, page)}
             >
               <SkipPreviousRoundedIcon
                 fontSize="small"
-                color={page === 0 ? "disabled" : "primary"}
+                color={currentPage === 0 ? "disabled" : "primary"}
               />
               <Typography>Prev</Typography>
             </IconButton>
           </Grid>
           <Grid item>
             <Typography variant="caption" style={{ color: "black" }}>
-              {from}-{to} of {count}
+              {from}-{to} de {totalPage}
             </Typography>
           </Grid>
           <Grid item>
             <IconButton
-              disabled={to >= count}
-              onClick={(e) => onChangePage(e, page + 1)}
+              disabled={to >= totalPage}
+              onClick={(e) => onChangeCurrentPageNext(e, page)}
             >
               <Typography>Next</Typography>
               <SkipNextRoundedIcon
                 fontSize="small"
-                color={to < count ? "primary" : "disabled"}
+                color={to < totalPage ? "primary" : "disabled"}
               />
             </IconButton>
           </Grid>
           <Grid item>
             <IconButton
-              disabled={to >= count}
-              onClick={(e) => onChangePage(e, count)}
+              disabled={to >= totalPage}
+              onClick={(e) => onChangePageFinish(e, totalPage)}
             >
               <SkipNextRoundedIcon
                 fontSize="small"
-                color={to >= count ? "disabled" : "primary"}
+                color={to >= totalPage ? "disabled" : "primary"}
               />
               <Typography>Last Page</Typography>
             </IconButton>

@@ -42,8 +42,8 @@ export const obtainApiContacts = (): AppThunk => {
     dispatch(starLoading);
     try {
       const form = {
-        page: 1,
-        per_page: 10,
+        page: 0,
+        per_page: 100,
       };
       const result = await getDataLeads(form);
       if (

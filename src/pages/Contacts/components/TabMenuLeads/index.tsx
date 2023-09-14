@@ -13,6 +13,7 @@ import { Tooltip } from "@mui/material";
 import { Title } from "../../../../styled-components/Title/index";
 import HelpVideo from "../../../../components/HelpVideo/HelpVideo";
 import ExportExcel from "../../../../components/ExportExcel/ExportExcel";
+import { BeatLoader } from "react-spinners";
 
 const TabMenuLeads = ({
   nameTab,
@@ -42,6 +43,7 @@ const TabMenuLeads = ({
   urlVideoTutorial,
   dataFile,
   titleDataFile,
+  totalPageSale,
 }: any) => {
   const [titleDatePickerLeads, setTitleDatePickerLeads] = useState(
     "Selecciona una fecha"
@@ -78,7 +80,15 @@ const TabMenuLeads = ({
               />
             </Tooltip>
             <Title fontSize="14px" color="#123249" className="ml-1">
-              {filtersCalendar.value}
+              {filtersCalendar.loading === 0 ? (
+                filtersCalendar.value
+              ) : dataLead.length === totalPageSale ? (
+                filtersCalendar.value
+              ) : (
+                <div className="loadingSale">
+                  <BeatLoader color="#3997FF" />
+                </div>
+              )}
             </Title>
           </div>
         ))}

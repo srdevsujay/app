@@ -179,3 +179,8 @@
 .filter-toggle-columns-dark div:nth-child(2) div {
   background: #050505;
 }
+
+.loadingSale span > span {
+  height: 5px !important;
+  width: 5px !important;
+}

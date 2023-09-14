@@ -42,6 +42,12 @@ export const obtainApiContacts = (page: number, pageSize: number): AppThunk => {
         per_page: pageSize,
       };
       let resultGetLeads = await getDataLeads(form);
+      const currentDataLead: any = _.orderBy(
+        resultGetLeads.data.data,
+        "id",
+        "desc"
+      );
+      let allData: any = currentDataLead;
       if (
         resultGetLeads.data.message === "Token is invalid!" ||
         resultGetLeads.data.error === "Signature has expired"
@@ -51,35 +57,26 @@ export const obtainApiContacts = (page: number, pageSize: number): AppThunk => {
       } else {
         let resultCurrentFor: any =
           resultGetLeads.data.total_results / resultGetLeads.data.per_page;
-        console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
 
-        let allData: any = [];
-        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+        for (let i = 1; i <= Math.floor(resultCurrentFor); i++) {
           const form = {
             page: i,
-            // page: resultGetLeads.data.page,
-            per_page: 100,
+            per_page: resultGetLeads.data.per_page,
           };
           const result = await getDataLeads(form);
-          console.log("result.data.data", result.data.data);
-
           const currentDataLead: any = _.orderBy(
             result.data.data,
             "id",
             "desc"
           );
-          console.log("resultContactos", result);
           allData = [...allData, ...currentDataLead];
+          dispatch(
+            setLeads({
+              dataLead: allData,
+              totalResults: result.data.total_results,
+            })
+          );
         }
-        console.log("allData", allData);
-        // const form = {
-        //   page: 1,
-        //   per_page: resultGetLeads.data.total_results,
-        // };
-        // console.log("form", form);
-        // const result = await getDataLeads(form);
-        // const currentDataLead: any = _.orderBy(result.data.data, "id", "desc");
-        dispatch(setLeads(allData));
       }
     } catch (error) {
       console.log(error);
@@ -179,10 +176,19 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
         page: page,
         per_page: pageSize,
       };
-      console.log("resultGetBookform", form);
       let resultGetBook = await getDataBooking(form);
+      const currentDataBook: any = _.orderBy(
+        resultGetBook.data.data,
+        ["id", "appoiment_date"],
+        ["desc", "asc"]
+      );
+      let allData: any = currentDataBook;
       console.log("resultGetBook", resultGetBook);
 
+      setBooking({
+        dataBooking: allData,
+        totalPageBook: resultGetBook.data.total_results,
+      });
       if (
         resultGetBook.data.message === "Token is invalid!" ||
         resultGetBook.data.error === "Signature has expired"
@@ -192,15 +198,12 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
       } else {
         let resultCurrentFor: any =
           resultGetBook.data.total_results / resultGetBook.data.per_page;
-        console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
-
-        let allData: any = [];
-        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+        for (let i = 1; i <= Math.floor(resultCurrentFor); i++) {
           const form = {
             page: i,
-            // per_page: resultGetBook.data.per_page,
             // page: resultGetBook.data.page,
-            per_page: 100,
+            per_page: resultGetBook.data.per_page,
+            // per_page: 100,
           };
           const result = await getDataBooking(form);
           const currentDataBook: any = _.orderBy(
@@ -208,24 +211,15 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
             ["id", "appoiment_date"],
             ["desc", "asc"]
           );
-          console.log("resultContactos", result);
           allData = [...allData, ...currentDataBook];
+          dispatch(
+            setBooking({
+              dataBooking: allData,
+              totalPageBook: result.data.total_results,
+            })
+          );
         }
-        console.log("allData", allData);
-        dispatch(setBooking(allData));
       }
-      // const currentDataLead: any = _.orderBy(
-      //   resultGetBook.data,
-      //   ["id", "appoiment_date"],
-      //   ["desc", "asc"]
-      // );
-      // console.log("currentDataLead", currentDataLead);
-
-      // const sortedDataBook = resultGetBook.data.sort(
-      //   (a: any, b: any) =>
-      //     new Date(b.date).getTime() - new Date(a.date).getTime()
-      // );
-      // dispatch(setBooking(currentDataLead));
     } catch (error) {
       console.log(error);
     }
@@ -326,6 +320,18 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
         per_page: pageSize,
       };
       const resultGetSale = await getDataSales(form);
+      const currentDataSale: any = _.orderBy(
+        resultGetSale.data.data,
+        "date",
+        "desc"
+      );
+      let allData: any = currentDataSale;
+      dispatch(
+        setSale({
+          dataSale: allData,
+          totalPageSale: resultGetSale.data.total_results,
+        })
+      );
       if (
         resultGetSale.data.message === "Token is invalid!" ||
         resultGetSale.data.error === "Signature has expired"
@@ -335,15 +341,13 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
       } else {
         let resultCurrentFor: any =
           resultGetSale.data.total_results / resultGetSale.data.per_page;
-        console.log("resultCurrentFor", Math.ceil(resultCurrentFor));
 
-        let allData: any = [];
-        for (let i = 1; i <= Math.ceil(resultCurrentFor); i++) {
+        for (let i = 1; i <= Math.floor(resultCurrentFor); i++) {
           const form = {
             page: i,
-            // per_page: resultGetBook.data.per_page,
             // page: resultGetSale.data.page,
-            per_page: 100,
+            per_page: resultGetSale.data.per_page,
+            // per_page: 100,
           };
           const result = await getDataSales(form);
           const currentDataSale: any = _.orderBy(
@@ -352,8 +356,13 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
             "desc"
           );
           allData = [...allData, ...currentDataSale];
+          dispatch(
+            setSale({
+              dataSale: allData,
+              totalPageSale: resultGetSale.data.total_results,
+            })
+          );
         }
-        dispatch(setSale(allData));
       }
     } catch (error) {
       console.log(error);

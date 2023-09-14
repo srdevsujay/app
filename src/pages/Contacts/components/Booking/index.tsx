@@ -32,7 +32,9 @@ setAutoFreeze(false);
 
 const Booking = () => {
   const dispatch = useAppDispatch();
-  const { dataBooking, isLoading } = useAppSelector((state) => state.contact);
+  const { dataBooking, isLoading, totalPageBook } = useAppSelector(
+    (state) => state.contact
+  );
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [nameTab, setNameTab] = useState("Añadir Booking");
   const [currentColumns, setCurrentColumns] = useState<any[]>([]);
@@ -205,7 +207,8 @@ const Booking = () => {
     {
       name: "Total Booking",
       image: themeState === true ? bookingsFilterDark : bookingsFilter,
-      value: filteredDataDos.length,
+      value: totalPageBook,
+      loading: 0,
     },
   ];
 
