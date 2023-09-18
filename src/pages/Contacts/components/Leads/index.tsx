@@ -72,7 +72,7 @@ const Leads = () => {
   // let allData: any = [];
   useEffect(() => {
     // dispatch(obtainApiContacts(0, 10, allData));
-    dispatch(obtainApiContacts(0, 100));
+    dispatch(obtainApiContacts(0, 25));
   }, []);
 
   // useEffect(() => {
