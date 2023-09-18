@@ -48,6 +48,12 @@ export const obtainApiContacts = (page: number, pageSize: number): AppThunk => {
         "desc"
       );
       let allData: any = currentDataLead;
+      dispatch(
+        setLeads({
+          dataLead: allData,
+          totalResults: resultGetLeads.data.total_results,
+        })
+      );
       if (
         resultGetLeads.data.message === "Token is invalid!" ||
         resultGetLeads.data.error === "Signature has expired"
@@ -359,7 +365,7 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
           dispatch(
             setSale({
               dataSale: allData,
-              totalPageSale: resultGetSale.data.total_results,
+              totalPageSale: result.data.total_results,
             })
           );
         }
