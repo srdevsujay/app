@@ -73,7 +73,7 @@ const Sales = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiSale(0, 25));
+    dispatch(obtainApiSale(0, 50));
     dispatch(obtainApiProduct());
   }, []);
 
