@@ -48,7 +48,7 @@ const Booking = () => {
   const searchStringDebounced = useDebounce(searchString, 3000);
 
   useEffect(() => {
-    dispatch(obtainApiBooking(1, 100));
+    dispatch(obtainApiBooking(0, 100));
   }, []);
 
   const [currentEdit, setCurrentEdit] = useState();
