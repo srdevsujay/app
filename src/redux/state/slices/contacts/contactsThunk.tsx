@@ -190,11 +190,12 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
       );
       let allData: any = currentDataBook;
       console.log("resultGetBook", resultGetBook);
-
-      setBooking({
-        dataBooking: allData,
-        totalPageBook: resultGetBook.data.total_results,
-      });
+      dispatch(
+        setBooking({
+          dataBooking: allData,
+          totalPageBook: resultGetBook.data.total_results,
+        })
+      );
       if (
         resultGetBook.data.message === "Token is invalid!" ||
         resultGetBook.data.error === "Signature has expired"
