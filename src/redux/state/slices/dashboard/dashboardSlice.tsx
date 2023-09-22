@@ -12,6 +12,8 @@ export const dashboardState: DashboardInfo = {
   dataFilter: "",
   tokenfacebook: false,
   tokengoogle: false,
+  tokenFacebookFunnel: false,
+  tokenGoogleFunnel: false,
   toggleSlider: false,
 };
 
@@ -44,6 +46,12 @@ export const dashboardSlice = createSlice({
     setTokenGoogle: (state, action: PayloadAction<boolean>) => {
       state.tokengoogle = action.payload;
     },
+    setTokenFacebookFunnel: (state, action: PayloadAction<boolean>) => {
+      state.tokenFacebookFunnel = action.payload;
+    },
+    setTokenGoogleToken: (state, action: PayloadAction<boolean>) => {
+      state.tokenGoogleFunnel = action.payload;
+    },
     setToggleSlider: (state, action: PayloadAction<boolean>) => {
       state.toggleSlider = action.payload;
     },
@@ -58,6 +66,8 @@ export const {
   setDataFilter,
   setTokenFacebook,
   setTokenGoogle,
+  setTokenFacebookFunnel,
+  setTokenGoogleToken,
   setToggleSlider,
 } = dashboardSlice.actions;
 

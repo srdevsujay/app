@@ -7,6 +7,8 @@ import {
   setTokenGoogle,
   setToggleSlider,
   setDataFilter,
+  setTokenFacebookFunnel,
+  setTokenGoogleToken,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -156,6 +158,8 @@ export const obtainApiDashboardFunnel = (
 
       dispatch(setDataFunnel(currentDataFunnel));
       dispatch(setDataFilter(resultAction.data.filters));
+      dispatch(setTokenFacebookFunnel(resultAction.data.tokenfacebook));
+      dispatch(setTokenGoogleToken(resultAction.data.tokengoogle));
     } catch (error) {
       console.log(error);
     }
@@ -216,6 +220,8 @@ export const obtainApiFunnel = (
       }
       dispatch(setDataFunnel(resultAction.data.data));
       dispatch(setDataFilter(resultAction.data.filters));
+      dispatch(setTokenFacebookFunnel(resultAction.data.tokenfacebook));
+      dispatch(setTokenGoogleToken(resultAction.data.tokengoogle));
     } catch (error) {
       console.log(error);
     }
