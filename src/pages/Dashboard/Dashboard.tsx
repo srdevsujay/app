@@ -108,8 +108,8 @@ const Dashboard = () => {
   }, [idUser]);
 
   useEffect(() => {
-    if (tokenfacebook === false || tokengoogle === false) {
-      if (tokenfacebook === false && tokengoogle === false) {
+    if (tokenfacebook === true || tokengoogle === true) {
+      if (tokenfacebook === true && tokengoogle === true) {
         setTitle(
           "Las integaciones tanto de Facebook como Google estan desactivadas"
         );
