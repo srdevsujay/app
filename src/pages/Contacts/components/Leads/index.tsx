@@ -72,6 +72,8 @@ const Leads = () => {
   // let allData: any = [];
   useEffect(() => {
     // dispatch(obtainApiContacts(0, 10, allData));
+    console.log("DispatchLeads");
+
     dispatch(obtainApiContacts(0, 50));
   }, []);
 
@@ -131,9 +133,12 @@ const Leads = () => {
     }
   }, [idEditCurrent]);
 
-  const updateData = useCallback((newData: any) => {
-    setColumnsToSet(newData);
-  }, []);
+  const updateData = useCallback(
+    (newData: any) => {
+      setColumnsToSet(newData);
+    },
+    [columnsToSet]
+  );
 
   useEffect(() => {
     if (searchStringDebounced.trim()) {
