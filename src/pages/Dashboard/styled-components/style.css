@@ -135,6 +135,7 @@ tr.backgroundTotal th:nth-child(n+2) {
 .MuiMenu-list {
   display: grid;
   padding: 20px !important;
+  background: #0d0d0d;
 }
 
 .MuiMenu-list > li {

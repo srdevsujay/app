@@ -1,19 +1,26 @@
-import { useState } from "react";
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const IntegrationAlert = (title: string, navigate: any) => {
-  Swal.fire({
-    title: title,
-    text: "Si deseas activarlas haz clic en el boton 'Ir a integraciones'",
-    icon: "warning",
-    showCancelButton: false,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Ir a Integraciones",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      localStorage.setItem("setIntegrationTab", "2");
+  toast.info(`${title} 'Clic para ir a integraciones'`, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 5000,
+    onClick: () => {
       navigate("/configuracion");
-    }
+    },
   });
+  // Swal.fire({
+  //   title: title,
+  //   text: "Si deseas activarlas haz clic en el boton 'Ir a integraciones'",
+  //   icon: "warning",
+  //   showCancelButton: false,
+  //   confirmButtonColor: "#3085d6",
+  //   cancelButtonColor: "#d33",
+  //   confirmButtonText: "Ir a Integraciones",
+  // }).then((result) => {
+  //   if (result.isConfirmed) {
+  //     localStorage.setItem("setIntegrationTab", "2");
+  //     navigate("/configuracion");
+  //   }
+  // });
 };
