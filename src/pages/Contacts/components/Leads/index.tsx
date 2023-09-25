@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useMemo,
   createContext,
+  useRef,
 } from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/appDispatch";
 import {
@@ -90,8 +91,8 @@ const Leads = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>("");
-  const [filteredDataDos, setFilteredDataDos] = useState<any[]>([]);
-
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>(dataLead);
+  const filteredDataDosRef = useRef<any[]>();
   const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
   const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
 
@@ -122,8 +123,9 @@ const Leads = () => {
     setCurrentColumns(columns as any);
     setOriginalData(dataLead);
     setFilteredData(dataLead);
-    setFilteredDataDos(dataLead);
+    // setFilteredDataDos(dataLead);
     // }
+    filteredDataDosRef.current = dataLead;
   }, [dataLead]);
 
   useEffect(() => {
@@ -193,9 +195,13 @@ const Leads = () => {
   // };
 
   const memoizedUsers: any = useMemo(() => {
-    return filteredDataDos;
-  }, [filteredDataDos]);
+    return filteredDataDosRef.current;
+    // return JSON.stringify(filteredDataDos);
+  }, [filteredDataDosRef]);
+
   console.log("memoizedUsers", memoizedUsers);
+  console.log("filteredDataDos", filteredDataDosRef.current);
+  console.log("filteredDataDos", filteredDataDosRef);
 
   console.log("isLoadingCOntact", isLoading);
 
