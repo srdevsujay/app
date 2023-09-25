@@ -120,12 +120,16 @@ const Dashboard = () => {
     if (tokenfacebook === true || tokengoogle === true) {
       if (tokenfacebook === true && tokengoogle === true) {
         setTitle(
-          "Las integraciones tanto de Facebook como Google estan desactivadas"
+          "Por favor iniciar sesion en FacebookAds y GoogleAds para actualizar los tokens"
         );
       } else if (tokenfacebook === true && tokengoogle === false) {
-        setTitle("La integacion de Facebook esta desactivada");
+        setTitle(
+          "Por favor iniciar sesion en FacebookAds para actualizar el token"
+        );
       } else if (tokenfacebook === false && tokengoogle === true) {
-        setTitle("La integacion de Google esta desactivada");
+        setTitle(
+          "Por favor iniciar sesion en GoogleAds para actualizar el token"
+        );
       }
     }
   }, [tokenfacebook, tokengoogle]);

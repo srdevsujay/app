@@ -6,6 +6,8 @@ export interface DashboardInfo {
   dataFilter: "",
   tokenfacebook: boolean,
   tokengoogle: boolean,
+  tokenFacebookFunnel: boolean,
+  tokenGoogleFunnel: boolean,
   toggleSlider: boolean,
   permissionFacebook: boolean,
 }

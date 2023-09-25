@@ -27,14 +27,18 @@ import {
 } from "../../redux/state/slices/dashboard/dashboardThunk";
 import { Title } from "../../styled-components/Title/index";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
+import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
+import { useNavigate } from "react-router-dom";
 
 const Funnel = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { data: dataFunnel, filters: filterJSON }: any = useAppSelector(
     (state) => state.dashboard.dataFunnel
   );
   const { id: user_funel } = useAppSelector((state) => state.user.user);
-  const { toggleSlider } = useAppSelector((state) => state.dashboard);
+  const { toggleSlider, tokenFacebookFunnel, tokenGoogleFunnel } =
+    useAppSelector((state) => state.dashboard);
 
   const [currentEdit, setCurrentEdit] = useState(0);
   const [idEditCurrent, setIdEditCurrent] = useState(0);
@@ -61,6 +65,7 @@ const Funnel = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
   const [showLodash, setShowLodash] = useState([]);
+  const [title, setTitle] = useState("");
 
   const toggleModal = () => setModalOpen(!isModalOpen);
 
@@ -227,6 +232,30 @@ const Funnel = () => {
   console.log("adAccounts--", adAccounts);
   const { theme, themeDarkLight, themeBackNewFunnel, themeFilterFunnel } =
     useContext(ThemeContext);
+
+  useEffect(() => {
+    if (tokenFacebookFunnel === true || tokenGoogleFunnel === true) {
+      if (tokenFacebookFunnel === true && tokenGoogleFunnel === true) {
+        setTitle(
+          "Por favor iniciar sesion en FacebookAds y GoogleAds para actualizar los tokens"
+        );
+      } else if (tokenFacebookFunnel === true && tokenGoogleFunnel === false) {
+        setTitle(
+          "Por favor iniciar sesion en FacebookAds para actualizar el token"
+        );
+      } else if (tokenFacebookFunnel === false && tokenGoogleFunnel === true) {
+        setTitle(
+          "Por favor iniciar sesion en GoogleAds para actualizar el token"
+        );
+      }
+    }
+  }, [tokenFacebookFunnel, tokenGoogleFunnel]);
+
+  useEffect(() => {
+    if (title === "") return;
+    IntegrationAlert(title, navigate);
+  }, [title]);
+
   return (
     <Main
       width={toggleSlider === true ? "87vw" : "96vw"}
