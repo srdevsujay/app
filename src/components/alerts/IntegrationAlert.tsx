@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const IntegrationAlert = (title: string, navigate: any) => {
   toast.info(`${title} 'Clic para ir a integraciones'`, {
     position: toast.POSITION.TOP_RIGHT,
-    autoClose: 5000,
+    autoClose: 15000,
     onClick: () => {
       navigate("/configuracion");
     },
@@ -23,4 +23,11 @@ export const IntegrationAlert = (title: string, navigate: any) => {
   //     navigate("/configuracion");
   //   }
   // });
+};
+
+export const IntegrationAlertPermissionFacebook = (title: string) => {
+  toast.info(title, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 15000,
+  });
 };

@@ -8,7 +8,7 @@ export const useIntegrationAlert = (tokenfacebook: boolean, tokengoogle: boolean
   const [title, setTitle] = useState('Las integaciones tanto de Facebook como Google estan desactivadas');
 
   if (tokenfacebook === false && tokengoogle === false) {
-    setTitle('Las integaciones tanto de Facebook como Google estan desactivadas');
+    setTitle('Las integraciones tanto de Facebook como Google estan desactivadas');
   } else if (tokenfacebook === false && tokengoogle === true) {
     setTitle('La integacion de Facebook esta desactivada');
   } else if (tokenfacebook === true && tokengoogle === false) {

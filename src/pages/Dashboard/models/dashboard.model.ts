@@ -7,6 +7,7 @@ export interface DashboardInfo {
   tokenfacebook: boolean,
   tokengoogle: boolean,
   toggleSlider: boolean,
+  permissionFacebook: boolean,
 }
 
 export interface Pnl {

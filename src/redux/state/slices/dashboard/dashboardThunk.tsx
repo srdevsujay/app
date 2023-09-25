@@ -7,6 +7,7 @@ import {
   setTokenGoogle,
   setToggleSlider,
   setDataFilter,
+  setPermissionFacebook,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -35,6 +36,7 @@ import { logoutUser } from "../login/authSlice";
 export const getMetricFunnel = (date?: DateFormat): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
+    dispatch(setPermissionFacebook(false));
     try {
       const dateFormat = getDate(date);
       const resultAction = await getDataPnl(!date ? dateFormat : date);
@@ -56,6 +58,8 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
         dispatch(setPNL(currentDataPNL));
         dispatch(setTokenFacebook(resultAction.data.tokenfacebook));
         dispatch(setTokenGoogle(resultAction.data.tokengoogle));
+        dispatch(setTokenGoogle(resultAction.data.tokengoogle));
+        dispatch(setPermissionFacebook(resultAction.data.permissionfacebook));
       }
     } catch (error: any) {
       if (error.code === "ERR_BAD_RESPONSE") {
@@ -110,6 +114,7 @@ export const obtainApiDashboardFunnel = (
 ): AppThunk => {
   return async (dispatch, getState) => {
     dispatch(starLoading());
+    dispatch(setPermissionFacebook(false));
     try {
       // return async (dispatch, getState) => {
       //   const { dataPNL, dataTracking } = getState().dashboard;
@@ -156,6 +161,7 @@ export const obtainApiDashboardFunnel = (
 
       dispatch(setDataFunnel(currentDataFunnel));
       dispatch(setDataFilter(resultAction.data.filters));
+      dispatch(setPermissionFacebook(resultAction.data.permissionfacebook));
     } catch (error) {
       console.log(error);
     }
