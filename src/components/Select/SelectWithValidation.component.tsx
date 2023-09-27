@@ -36,9 +36,9 @@ const SelectWithValidation = (props: SelectProps) => {
     ...otherProps
   } = props;
 
-  // const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
-  //   onChange && onChange(target.value);
-  // };
+  const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
+    onChange && onChange(target.value);
+  };
 
   const { theme } = useContext(ThemeContext);
 
@@ -48,13 +48,11 @@ const SelectWithValidation = (props: SelectProps) => {
       <Select
         {...register(name)}
         {...otherProps}
-        onChange={(newValue: any) => {
-          setSelectAttribute(newValue.target.value);
-        }}
+        onChange={handleChange}
         theme={theme}
       >
         {options.map((option: any, idx: number) => (
-          <option key={idx} value={option.id}>
+          <option key={idx} value={option.id || option.value}>
             {option.funnel_name || option.name}
           </option>
         ))}

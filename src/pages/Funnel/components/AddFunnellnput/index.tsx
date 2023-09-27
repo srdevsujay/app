@@ -24,12 +24,30 @@ const AddFunnelInput = ({
   const navigate = useNavigate();
   const theme: any = localStorage.getItem("Theme");
   const themeDark = JSON.parse(theme);
+  const [selectAttribute, setSelectAttribute] = useState(null);
+  const [selectTypeFunnel, setTypeFunnel] = useState(null);
+  const [currentIdProduct, setCurrentIdProduct] = useState();
+  const [currentTypeFunnel, setCurrentTypeFunnel] = useState();
 
   useEffect(() => {
     if (dataProduct.length === 0) {
       ProductAlert(navigate, "un Funnel");
     }
   }, [dataProduct]);
+
+  const handleChangeProduct = (campaing_plataform: any) => {
+    setSelectAttribute(campaing_plataform);
+  };
+
+  const handleChangeTypeFunnel = (campaing_plataform: any) => {
+    setTypeFunnel(campaing_plataform);
+  };
+
+  useEffect(() => {
+    if (currentDataEditFunnel === "") return;
+    setCurrentIdProduct(currentDataEditFunnel.product_id);
+    setCurrentTypeFunnel(currentDataEditFunnel.type_dashboard);
+  }, [currentDataEditFunnel]);
 
   return (
     <>
@@ -50,8 +68,12 @@ const AddFunnelInput = ({
               <HelpOutlineIcon className="mt-3 color" fontSize="small" />
             </a>
           </div>
-          <SelectStateBooking
+          <SelectWithValidation
             options={TypeFunnel as any}
+            value={
+              selectTypeFunnel === null ? currentTypeFunnel : selectTypeFunnel
+            }
+            onChange={handleChangeTypeFunnel}
             name="funnel_status"
             register={register}
             error={String(errors["funnel_status"]?.message)}
@@ -76,10 +98,14 @@ const AddFunnelInput = ({
           </div>
           <SelectWithValidation
             options={dataProduct as any}
+            value={
+              selectAttribute === null ? currentIdProduct : selectAttribute
+            }
             name="product_id"
             register={register}
             error={String(errors["product_id"]?.message)}
             // currentEdit={currentEdit}
+            onChange={handleChangeProduct}
           />
         </div>
       </div>
