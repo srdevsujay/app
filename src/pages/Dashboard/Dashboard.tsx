@@ -90,6 +90,7 @@ const Dashboard = () => {
 
   console.log("tokenfacebook", tokenfacebook);
   console.log("tokengoogle", tokengoogle);
+  console.log("isLoading", isLoading);
 
   const idUser = useAppSelector((state) => state.user.user.id);
 
@@ -328,7 +329,7 @@ const Dashboard = () => {
               </div>
             </div>
             {/* {isLoading === true ? ( */}
-            {dataPNL.length === 0 ? (
+            {dataPNL.length === 0 && isLoading === true ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "250px", zIndex: "99999999" }}
@@ -346,6 +347,7 @@ const Dashboard = () => {
             <Graphics
               selectPlatform={selectPlatform}
               groupPlataform={groupPlataform}
+              dataPNL={dataPNL}
               isLoading={dataPNL}
             />
           </div>

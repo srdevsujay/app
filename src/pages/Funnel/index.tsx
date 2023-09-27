@@ -27,7 +27,10 @@ import {
 } from "../../redux/state/slices/dashboard/dashboardThunk";
 import { Title } from "../../styled-components/Title/index";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
-import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
+import {
+  IntegrationAlert,
+  IntegrationAlertPermissionFacebook,
+} from "../../components/alerts/IntegrationAlert";
 import { useNavigate } from "react-router-dom";
 
 const Funnel = () => {
@@ -37,8 +40,12 @@ const Funnel = () => {
     (state) => state.dashboard.dataFunnel
   );
   const { id: user_funel } = useAppSelector((state) => state.user.user);
-  const { toggleSlider, tokenFacebookFunnel, tokenGoogleFunnel } =
-    useAppSelector((state) => state.dashboard);
+  const {
+    toggleSlider,
+    tokenFacebookFunnel,
+    tokenGoogleFunnel,
+    permissionFacebookFunnel,
+  } = useAppSelector((state) => state.dashboard);
 
   const [currentEdit, setCurrentEdit] = useState(0);
   const [idEditCurrent, setIdEditCurrent] = useState(0);
@@ -255,6 +262,14 @@ const Funnel = () => {
     if (title === "") return;
     IntegrationAlert(title, navigate);
   }, [title]);
+
+  useEffect(() => {
+    if (permissionFacebookFunnel === true) {
+      IntegrationAlertPermissionFacebook(
+        "Facebook ADS no tiene los permisos suficientes para obtener métricas de su cuenta publicitaria. Esto puede deberse a que la cuenta publicitaria no está asociada a su cuenta de Facebook personal o empresarial"
+      );
+    }
+  }, [permissionFacebookFunnel]);
 
   return (
     <Main

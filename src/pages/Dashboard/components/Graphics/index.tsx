@@ -10,7 +10,12 @@ import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
 import { SpanTitle } from "../../../../styled-components/span/index";
 import { BeatLoader } from "react-spinners";
 
-const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
+const Graphics = ({
+  selectPlatform,
+  groupPlataform,
+  dataPNL,
+  isLoading,
+}: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
@@ -207,7 +212,7 @@ const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
       <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
       </HeaderTitleGraphic>
-      {isLoading.length === 0 ? (
+      {dataPNL.length === 0 && isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "250px", zIndex: "99999999" }}
