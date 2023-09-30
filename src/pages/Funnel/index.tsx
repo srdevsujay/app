@@ -336,18 +336,18 @@ const Funnel = () => {
               setCurrentSteps={setCurrentSteps}
               showLodash={showLodash}
               setShowLodash={setShowLodash}
-              isModalOpen={isModalOpen}
-              toggleModal={toggleModal}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              register={register}
-              errors={errors}
-              currentDataEditFunnel={currentDataEditFunnel}
-              currentSteps={currentSteps}
-              removeStep={removeStep}
-              adAccounts={adAccounts}
-              setAdAccounts={setAdAccounts}
-              removeCampaign={removeCampaign}
+              // isModalOpen={isModalOpen}
+              // toggleModal={toggleModal}
+              // handleSubmit={handleSubmit}
+              // onSubmit={onSubmit}
+              // register={register}
+              // errors={errors}
+              // currentDataEditFunnel={currentDataEditFunnel}
+              // currentSteps={currentSteps}
+              // removeStep={removeStep}
+              // adAccounts={adAccounts}
+              // setAdAccounts={setAdAccounts}
+              // removeCampaign={removeCampaign}
             />
           </div>
         </div>
