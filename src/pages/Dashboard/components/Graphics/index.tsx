@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import * as echarts from "echarts";
 import ReactEcharts from "echarts-for-react";
 import { Pnl } from "../../models/dashboard.model";
@@ -30,24 +30,57 @@ const Graphics = ({
   const [auxDataIncome, setAuxDataIncome] = useState<number[]>([]);
   const [auxDataExpense, setAuxDataExpense] = useState<number[]>([]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   console.log("dashboardMain", dashboardMain);
+  //   const resultado = groupAndSumDatePNL(dashboardMain);
+  //   setDateTotal(resultado);
+  //   const dataIncome = resultado.map((data) => data.ingresos);
+  //   const dataExpense = resultado.map((data) => data.gastos);
+  //   const dateGraphic = resultado.map((data) => data.date);
+
+  //   setDataIncome(dataIncome.reverse());
+  //   const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+  //   setTotalIncome(sumTotalIncome);
+
+  //   setDataExpense(dataExpense.reverse());
+  //   const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+  //   setTotalExpense(sumTotalExpense);
+
+  //   setDateGraphic(dateGraphic.reverse());
+  //   console.log("resultado", resultado);
+  // }, [dashboardMain]);
+
+  console.log("...dashboardMain", dashboardMain);
+
+  const generateDataIncome = useCallback(() => {
+    console.log("dashboardMain", dashboardMain);
     const resultado = groupAndSumDatePNL(dashboardMain);
-    setDateTotal(resultado);
-    const dataIncome = resultado.map((data) => data.ingresos);
-    const dataExpense = resultado.map((data) => data.gastos);
-    const dateGraphic = resultado.map((data) => data.date);
+    const newDataIncome: number[] = [];
+    const newDataExpense: number[] = [];
+    const newDateGraphic: any = [];
 
-    setDataIncome(dataIncome.reverse());
-    const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+    let sumTotalIncome = 0;
+    let sumTotalExpense = 0;
+
+    resultado.forEach((data) => {
+      newDataIncome.unshift(data.ingresos);
+      newDataExpense.unshift(data.gastos);
+      newDateGraphic.unshift(data.date);
+
+      sumTotalIncome += data.ingresos;
+      sumTotalExpense += data.gastos;
+    });
+
+    setDataIncome(newDataIncome);
     setTotalIncome(sumTotalIncome);
-
-    setDataExpense(dataExpense.reverse());
-    const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+    setDataExpense(newDataExpense);
     setTotalExpense(sumTotalExpense);
-
-    setDateGraphic(dateGraphic.reverse());
-    console.log("resultado", resultado);
+    setDateGraphic(newDateGraphic);
   }, [dashboardMain]);
+
+  useEffect(() => {
+    generateDataIncome();
+  }, [generateDataIncome]);
 
   // useEffect(() => {
   //   const resultado = groupAndSumDatePNL(selectPlatform);
@@ -168,6 +201,7 @@ const Graphics = ({
   };
 
   useEffect(() => {
+    console.log("Entra al 2do effect");
     setAuxDataIncome(dataIncome);
     setAuxDataExpense(dataExpense);
     if (
