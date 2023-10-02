@@ -70,7 +70,7 @@ const Funnel = () => {
   //     adAccountIdentification: campaign.campaing_identify,
   const [adAccounts, setAdAccounts] = useState<AdAccountType[]>([]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>();
+  const [currentDataEditFunnel, setCurrentDataEditFunnel] = useState<any>(null);
   const [showLodash, setShowLodash] = useState([]);
   const [title, setTitle] = useState("");
 

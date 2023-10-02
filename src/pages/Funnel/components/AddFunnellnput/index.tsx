@@ -44,9 +44,9 @@ const AddFunnelInput = ({
   };
 
   useEffect(() => {
-    if (currentDataEditFunnel === "") return;
-    setCurrentIdProduct(currentDataEditFunnel.product_id);
-    setCurrentTypeFunnel(currentDataEditFunnel.type_dashboard);
+    if (currentDataEditFunnel === "" || currentDataEditFunnel === null) return;
+    setCurrentIdProduct(currentDataEditFunnel?.product_id);
+    setCurrentTypeFunnel(currentDataEditFunnel?.type_dashboard);
   }, [currentDataEditFunnel]);
 
   return (
