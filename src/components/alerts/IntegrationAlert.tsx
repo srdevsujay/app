@@ -24,3 +24,10 @@ export const IntegrationAlert = (title: string, navigate: any) => {
   //   }
   // });
 };
+
+export const IntegrationAlertPermissionFacebook = (title: string) => {
+  toast.info(title, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 15000,
+  });
+};

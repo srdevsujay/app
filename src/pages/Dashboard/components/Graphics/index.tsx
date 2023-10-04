@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import * as echarts from "echarts";
 import ReactEcharts from "echarts-for-react";
 import { Pnl } from "../../models/dashboard.model";
@@ -10,7 +10,12 @@ import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
 import { SpanTitle } from "../../../../styled-components/span/index";
 import { BeatLoader } from "react-spinners";
 
-const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
+const Graphics = ({
+  selectPlatform,
+  groupPlataform,
+  dataPNL,
+  isLoading,
+}: any) => {
   const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
@@ -25,24 +30,57 @@ const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
   const [auxDataIncome, setAuxDataIncome] = useState<number[]>([]);
   const [auxDataExpense, setAuxDataExpense] = useState<number[]>([]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   console.log("dashboardMain", dashboardMain);
+  //   const resultado = groupAndSumDatePNL(dashboardMain);
+  //   setDateTotal(resultado);
+  //   const dataIncome = resultado.map((data) => data.ingresos);
+  //   const dataExpense = resultado.map((data) => data.gastos);
+  //   const dateGraphic = resultado.map((data) => data.date);
+
+  //   setDataIncome(dataIncome.reverse());
+  //   const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+  //   setTotalIncome(sumTotalIncome);
+
+  //   setDataExpense(dataExpense.reverse());
+  //   const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+  //   setTotalExpense(sumTotalExpense);
+
+  //   setDateGraphic(dateGraphic.reverse());
+  //   console.log("resultado", resultado);
+  // }, [dashboardMain]);
+
+  console.log("...dashboardMain", dashboardMain);
+
+  const generateDataIncome = useCallback(() => {
+    console.log("dashboardMain", dashboardMain);
     const resultado = groupAndSumDatePNL(dashboardMain);
-    setDateTotal(resultado);
-    const dataIncome = resultado.map((data) => data.ingresos);
-    const dataExpense = resultado.map((data) => data.gastos);
-    const dateGraphic = resultado.map((data) => data.date);
+    const newDataIncome: number[] = [];
+    const newDataExpense: number[] = [];
+    const newDateGraphic: any = [];
 
-    setDataIncome(dataIncome.reverse());
-    const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
+    let sumTotalIncome = 0;
+    let sumTotalExpense = 0;
+
+    resultado.forEach((data) => {
+      newDataIncome.unshift(data.ingresos);
+      newDataExpense.unshift(data.gastos);
+      newDateGraphic.unshift(data.date);
+
+      sumTotalIncome += data.ingresos;
+      sumTotalExpense += data.gastos;
+    });
+
+    setDataIncome(newDataIncome);
     setTotalIncome(sumTotalIncome);
-
-    setDataExpense(dataExpense.reverse());
-    const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
+    setDataExpense(newDataExpense);
     setTotalExpense(sumTotalExpense);
-
-    setDateGraphic(dateGraphic.reverse());
-    console.log("resultado", resultado);
+    setDateGraphic(newDateGraphic);
   }, [dashboardMain]);
+
+  useEffect(() => {
+    generateDataIncome();
+  }, [generateDataIncome]);
 
   // useEffect(() => {
   //   const resultado = groupAndSumDatePNL(selectPlatform);
@@ -163,6 +201,7 @@ const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
   };
 
   useEffect(() => {
+    console.log("Entra al 2do effect");
     setAuxDataIncome(dataIncome);
     setAuxDataExpense(dataExpense);
     if (
@@ -207,7 +246,7 @@ const Graphics = ({ selectPlatform, groupPlataform, isLoading }: any) => {
       <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
       </HeaderTitleGraphic>
-      {isLoading.length === 0 ? (
+      {dataPNL.length === 0 && isLoading === true ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "250px", zIndex: "99999999" }}

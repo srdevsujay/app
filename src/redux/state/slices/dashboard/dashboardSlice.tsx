@@ -15,6 +15,8 @@ export const dashboardState: DashboardInfo = {
   tokenFacebookFunnel: false,
   tokenGoogleFunnel: false,
   toggleSlider: false,
+  permissionFacebook: false,
+  permissionFacebookFunnel: false,
 };
 
 export const dashboardSlice = createSlice({
@@ -55,6 +57,12 @@ export const dashboardSlice = createSlice({
     setToggleSlider: (state, action: PayloadAction<boolean>) => {
       state.toggleSlider = action.payload;
     },
+    setPermissionFacebook: (state, action: PayloadAction<boolean>) => {
+      state.permissionFacebook = action.payload;
+    },
+    setPermissionFacebookFunnel: (state, action: PayloadAction<boolean>) => {
+      state.permissionFacebookFunnel = action.payload;
+    },
   },
 });
 
@@ -69,6 +77,8 @@ export const {
   setTokenFacebookFunnel,
   setTokenGoogleToken,
   setToggleSlider,
+  setPermissionFacebook,
+  setPermissionFacebookFunnel,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

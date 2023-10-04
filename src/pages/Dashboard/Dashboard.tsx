@@ -19,7 +19,10 @@ import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
 import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
-import { IntegrationAlert } from "../../components/alerts/IntegrationAlert";
+import {
+  IntegrationAlert,
+  IntegrationAlertPermissionFacebook,
+} from "../../components/alerts/IntegrationAlert";
 
 import {
   yesterDay,
@@ -76,11 +79,18 @@ const Dashboard = () => {
   // };
   // console.log("theme", theme);
 
-  const { tokenfacebook, tokengoogle, toggleSlider, isLoading, dataPNL } =
-    useAppSelector((state) => state.dashboard);
+  const {
+    tokenfacebook,
+    tokengoogle,
+    toggleSlider,
+    isLoading,
+    dataPNL,
+    permissionFacebook,
+  } = useAppSelector((state) => state.dashboard);
 
   console.log("tokenfacebook", tokenfacebook);
   console.log("tokengoogle", tokengoogle);
+  console.log("isLoading", isLoading);
 
   const idUser = useAppSelector((state) => state.user.user.id);
 
@@ -130,7 +140,17 @@ const Dashboard = () => {
     IntegrationAlert(title, navigate);
   }, [title]);
 
-  const handleDateDashboardMain = () => {
+  useEffect(() => {
+    if (permissionFacebook === true) {
+      IntegrationAlertPermissionFacebook(
+        "Facebook ADS no tiene los permisos suficientes para obtener métricas de su cuenta publicitaria. Esto puede deberse a que la cuenta publicitaria no está asociada a su cuenta de Facebook personal o empresarial"
+      );
+    }
+  }, [permissionFacebook]);
+
+  const handleDateDashboardMain = (i: number) => {
+    console.log("indice", i);
+
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");
     const formate2 = moment(currentCalendar[0].endDate).format("YYYY-MM-DD");
     const dateFormat = {
@@ -306,12 +326,13 @@ const Dashboard = () => {
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                   handleThreeMonth={handleThreeMonth}
+                  index={0}
                   theme={theme}
                 />
               </div>
             </div>
             {/* {isLoading === true ? ( */}
-            {dataPNL.length === 0 ? (
+            {dataPNL.length === 0 && isLoading === true ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "250px", zIndex: "99999999" }}
@@ -329,6 +350,7 @@ const Dashboard = () => {
             <Graphics
               selectPlatform={selectPlatform}
               groupPlataform={groupPlataform}
+              dataPNL={dataPNL}
               isLoading={dataPNL}
             />
           </div>

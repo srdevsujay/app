@@ -7,8 +7,10 @@ import {
   setTokenGoogle,
   setToggleSlider,
   setDataFilter,
+  setPermissionFacebook,
   setTokenFacebookFunnel,
   setTokenGoogleToken,
+  setPermissionFacebookFunnel,
 } from "./dashboardSlice";
 import moment from "moment";
 import { DateFormat } from "@/models/dateFormat.model";
@@ -23,7 +25,7 @@ import {
   createFilterFunnelService,
 } from "../../../../pages/Dashboard/services/pnlApi";
 import _ from "lodash";
-import { setDate } from "date-fns";
+import { addDays, setDate } from "date-fns";
 import { AppThunk } from "@/redux/store";
 import { Pnl } from "../../../../pages/Dashboard/models/dashboard.model";
 import {
@@ -58,6 +60,8 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
         dispatch(setPNL(currentDataPNL));
         dispatch(setTokenFacebook(resultAction.data.tokenfacebook));
         dispatch(setTokenGoogle(resultAction.data.tokengoogle));
+        dispatch(setTokenGoogle(resultAction.data.tokengoogle));
+        dispatch(setPermissionFacebook(resultAction.data.permissionfacebook));
       }
     } catch (error: any) {
       if (error.code === "ERR_BAD_RESPONSE") {
@@ -97,11 +101,34 @@ export const getTrackingFunnel = (idUser: number): AppThunk => {
         "id",
         "asc"
       );
-      dispatch(setDataTracking(currentDataTracking));
+
+      const titleDateFunnel = funnelFilterDate();
+      console.log("titleDateFunnel", titleDateFunnel);
+
+      const dataTraking = currentDataTracking.map((data: any) => {
+        data.titleDateFunnel = titleDateFunnel;
+        return data;
+      });
+      dispatch(setDataTracking(dataTraking));
     } catch (error) {
       console.log(error);
     }
   };
+};
+
+const funnelFilterDate = () => {
+  const date = [
+    {
+      startDate: addDays(new Date(), -6),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ];
+  const titleDateFunnel = `${moment(date[0].startDate).format(
+    "YYYY-MM-DD"
+  )} - ${moment(date[0].endDate).format("YYYY-MM-DD")}`;
+
+  return titleDateFunnel;
 };
 
 export const obtainApiDashboardFunnel = (
@@ -113,17 +140,6 @@ export const obtainApiDashboardFunnel = (
   return async (dispatch, getState) => {
     dispatch(starLoading());
     try {
-      // return async (dispatch, getState) => {
-      //   const { dataPNL, dataTracking } = getState().dashboard;
-      //   dispatch(
-      //     setDataFunnel({
-      //       dataFunnel: currentDataFunnel,
-      //       dataPNL: dataPNL,
-      //       dataTracking: dataTracking,
-      //     } as any)
-      //   );
-      console.log("typeDashboard", typeDashboard);
-
       let type_dashboard = typeDashboard[i]?.type_dashboard;
       let dateFormat = getDate(date);
       let objFacebook = {
@@ -135,12 +151,6 @@ export const obtainApiDashboardFunnel = (
       console.log("type_dashboard", type_dashboard);
       console.log("objFacebook", objFacebook);
       const resultAction: any = await getDashboardFunnel(objFacebook);
-      console.log("resultAction--", resultAction);
-      // const currentDataFunnel: any = _.orderBy(
-      //   resultAction.data,
-      //   "id",
-      //   "asc"
-      // );
       if (
         resultAction.data.message === "Token is invalid!" ||
         resultAction.data.error === "Signature has expired"
@@ -154,10 +164,26 @@ export const obtainApiDashboardFunnel = (
         "date_start",
         "desc"
       );
-      console.log("currentDataFunnel--", currentDataFunnel);
 
+      const updatedDashboardData = typeDashboard.map(
+        (item: any, index: any) => {
+          if (index === i) {
+            return {
+              ...item,
+              titleDateFunnel: `${objFacebook.fecha_inicial} - ${objFacebook.fecha_final}`,
+            };
+          }
+          return item;
+        }
+      );
+      console.log("updatedDashboardData--", updatedDashboardData);
+
+      dispatch(setDataTracking(updatedDashboardData));
       dispatch(setDataFunnel(currentDataFunnel));
       dispatch(setDataFilter(resultAction.data.filters));
+      dispatch(
+        setPermissionFacebookFunnel(resultAction.data.permissionfacebook)
+      );
       dispatch(setTokenFacebookFunnel(resultAction.data.tokenfacebook));
       dispatch(setTokenGoogleToken(resultAction.data.tokengoogle));
     } catch (error) {
@@ -222,6 +248,9 @@ export const obtainApiFunnel = (
       dispatch(setDataFilter(resultAction.data.filters));
       dispatch(setTokenFacebookFunnel(resultAction.data.tokenfacebook));
       dispatch(setTokenGoogleToken(resultAction.data.tokengoogle));
+      dispatch(
+        setPermissionFacebookFunnel(resultAction.data.permissionfacebook)
+      );
     } catch (error) {
       console.log(error);
     }

@@ -9,6 +9,8 @@ export interface DashboardInfo {
   tokenFacebookFunnel: boolean,
   tokenGoogleFunnel: boolean,
   toggleSlider: boolean,
+  permissionFacebook: boolean,
+  permissionFacebookFunnel: boolean,
 }
 
 export interface Pnl {
