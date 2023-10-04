@@ -148,7 +148,9 @@ const Dashboard = () => {
     }
   }, [permissionFacebook]);
 
-  const handleDateDashboardMain = () => {
+  const handleDateDashboardMain = (i: number) => {
+    console.log("indice", i);
+
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");
     const formate2 = moment(currentCalendar[0].endDate).format("YYYY-MM-DD");
     const dateFormat = {
@@ -324,6 +326,7 @@ const Dashboard = () => {
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
                   handleThreeMonth={handleThreeMonth}
+                  index={0}
                   theme={theme}
                 />
               </div>

@@ -155,6 +155,8 @@ const AccordionFunnel = ({
     ).format("YYYY-MM-DD")}`
   );
 
+  console.log("titleDatePickerFunnel", titleDatePickerFunnel);
+
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([]);
   const [columnDataFunnelToggle, setColumnDataFunnelToggle] = useState<any>([]);
   const [columnsToSet, setColumnsToSet] = useState<any>([]);
@@ -164,29 +166,30 @@ const AccordionFunnel = ({
     type_dashboard: null,
     id: null,
   };
-  const [dataTrackingState, setDataTrakingState] = useState(
-    dataTrackingInitialState
-  );
+  const [dataTrackingState, setDataTrakingState] = useState(dataTracking[0]);
 
   const [searchString, setSearchString] = useState("");
   const [originalData, setOriginalData] = useState<any>();
   const [filteredData, setFilteredData] = useState<any[]>();
   const searchStringDebounced = useDebounce(searchString, 100);
 
-  useEffect(() => {
-    const tracking =
-      dataTracking.length > 0 ? dataTracking : [dataTrackingInitialState];
-    const typeDashboard = tracking[0];
+  // useEffect(() => {
+  //   const tracking =
+  //     dataTracking.length > 0 ? dataTracking : [dataTrackingInitialState];
+  //   const typeDashboard = tracking[0];
 
-    setDataTrakingState(typeDashboard);
-  }, [dataTracking]);
+  //   setDataTrakingState(typeDashboard);
+  // }, [dataTracking]);
 
   useEffect(() => {
+    console.log("primer dispatch del Effect");
+
     if (
       dataTrackingState.id !== undefined &&
       dataTrackingState.id !== null &&
       dataTracking.length > 0
     ) {
+      setExpanded(0);
       dispatch(
         obtainApiDashboardFunnel(dataTrackingState.id as any, dataTracking, 0)
       );
@@ -239,10 +242,15 @@ const AccordionFunnel = ({
   }, [objFilter, dataTrackingState]);
 
   const handleChange = (panel: any) => (event: any, newExpanded: any) => {
+    console.log("panel", panel);
+    console.log("event", event);
+    console.log("newExpanded", newExpanded);
     setExpanded(newExpanded ? panel : false);
   };
 
-  const handleDateDashboardMain = () => {
+  const handleDateDashboardMain = (i: number) => {
+    console.log("Onnnnn", i);
+
     const formate1 = moment(currentCalendar[0].startDate).format("YYYY-MM-DD");
     const formate2 = moment(currentCalendar[0].endDate).format("YYYY-MM-DD");
     const dateFormat = {
@@ -263,11 +271,12 @@ const AccordionFunnel = ({
       dateFormat.fecha_final !== "Invalid date"
     ) {
       setFlagModal(1);
+      setExpanded(i);
       return dispatch(
         obtainApiDashboardFunnel(
-          dataTrackingState.id as any,
+          dataTracking[i].id as any,
           dataTracking,
-          0,
+          i,
           dateFormat
         )
       );
@@ -966,7 +975,7 @@ const AccordionFunnel = ({
               </AccordionSummary>
               <ContainerFiltersFunnel>
                 <DateFilter
-                  titleDatePickerPNL={titleDatePickerFunnel}
+                  titleDatePickerPNL={tracking.titleDateFunnel}
                   handleDateDashboardMain={handleDateDashboardMain}
                   flagModal={flagModal}
                   setFlagModal={setFlagModal}
@@ -980,6 +989,7 @@ const AccordionFunnel = ({
                   handleThirtyDays={handleThirtyDays}
                   handleCurrentMonth={handleCurrentMonth}
                   handleFourteenDays={handleFourteenDays}
+                  index={index}
                 />
                 <HelpVideo
                   title={"Video Tutorial Funnel"}

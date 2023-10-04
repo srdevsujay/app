@@ -15,7 +15,7 @@ import "../../styled-components/style.css";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 
-const DateFilter = ({ 
+const DateFilter = ({
   titleDatePickerPNL,
   handleDateDashboardMain,
   flagModal,
@@ -30,6 +30,7 @@ const DateFilter = ({
   handleThirtyDays,
   handleCurrentMonth,
   handleFourteenDays,
+  index,
 }: // handleThreeMonth,
 any) => {
   const themeLocalStorage: any = localStorage.getItem("Theme");
@@ -171,7 +172,7 @@ any) => {
             <ButtonsModal
               className="btn btn-add"
               type="submit"
-              onClick={handleDateDashboardMain}
+              onClick={() => handleDateDashboardMain(index)}
             >
               Filtrar
             </ButtonsModal>
