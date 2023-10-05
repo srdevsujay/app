@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from "react";
+import { useState, useEffect, useCallback, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { saveAs } from "file-saver";
@@ -88,21 +88,11 @@ const Dashboard = () => {
     permissionFacebook,
   } = useAppSelector((state) => state.dashboard);
 
-  console.log("tokenfacebook", tokenfacebook);
-  console.log("tokengoogle", tokengoogle);
-  console.log("isLoading", isLoading);
-
   const idUser = useAppSelector((state) => state.user.user.id);
 
   // const themeState = useAppSelector((state) => state.configuration.theme);
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
-  console.log("themeState--.", themeState);
-
-  // Ejemplo del type, en este caso el tipo ":AppStore" viebe del Store
-  // const dataFunnel = useAppSelector(
-  //   (state: AppStore) => state.dashboard.dataFunnel
-  // );
 
   useEffect(() => {
     if (canCallMetricFunnel) {
@@ -277,8 +267,6 @@ const Dashboard = () => {
     totalPnl(selectPlatform, themeState, theme);
   }, [selectPlatform, themeState, theme]);
 
-  console.log("dataPNL.length", dataPNL.length);
-
   return (
     <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
       {/* <MuiMenuList background="red"> */}
@@ -331,8 +319,8 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-            {/* {isLoading === true ? ( */}
-            {dataPNL.length === 0 && isLoading === true ? (
+            {/* {dataPNL.length === 0 && isLoading === true ? ( */}
+            {dataPNL.length === 0 ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "250px", zIndex: "99999999" }}
@@ -347,12 +335,7 @@ const Dashboard = () => {
             )}
           </div>
           <div className="col-sm-12">
-            <Graphics
-              selectPlatform={selectPlatform}
-              groupPlataform={groupPlataform}
-              dataPNL={dataPNL}
-              isLoading={dataPNL}
-            />
+            <Graphics dataPNL={dataPNL} />
           </div>
         </div>
       </Card>
