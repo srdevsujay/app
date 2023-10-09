@@ -25,7 +25,7 @@ export const hadleLogin = (date: any): AppThunk => {
       console.log("resultAction", resultAction);
       if (resultAction.data.request === "Credentials Incorrects") {
         Swal.fire(
-          "Correcto",
+          "Error",
           "Correo o contraseña incorrecto, Intenta de nuevo",
           "error"
         );
