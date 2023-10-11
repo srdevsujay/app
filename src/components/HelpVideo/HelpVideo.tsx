@@ -8,7 +8,7 @@ import { Title } from "../../styled-components/Title/index";
 import { ButtonTitlePicker } from "../../pages/Dashboard/styled-components/dashboardStyled";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
-const HelpVideo = ({ title, image, url }: any) => {
+const HelpVideo = ({ title, image, url, classButton }: any) => {
   const { theme, themeFilterFunnel } = useContext(ThemeContext);
   const [isModalOpen, setModalState] = useState<boolean>(false);
   const toggleModal = () => setModalState(!isModalOpen);
@@ -28,7 +28,11 @@ const HelpVideo = ({ title, image, url }: any) => {
       placement="top"
     >
       <ButtonTitlePicker
-        className="div-button-video"
+        className={
+          classButton
+            ? "div-button-video button-video-integration"
+            : "div-button-video"
+        }
         theme={theme}
         onClick={handleOpen}
       >

@@ -91,6 +91,12 @@
   cursor: pointer;
 }
 
+.button-video-integration {
+  position: absolute;
+  top: 1.4vh;
+  right: 1.7vw;
+}
+
 .btn-export-excel {
   height: 30px;
   font-size: 11px;
