@@ -10,13 +10,8 @@ import { HeaderTitleGraphic } from "../../styled-components/dashboardStyled";
 import { SpanTitle } from "../../../../styled-components/span/index";
 import { BeatLoader } from "react-spinners";
 
-const Graphics = ({
-  selectPlatform,
-  groupPlataform,
-  dataPNL,
-  isLoading,
-}: any) => {
-  const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
+const Graphics = ({ dataPNL }: any) => {
+  // const dashboardMain = useAppSelector((state) => state.dashboard.dataPNL);
   const [dataIncome, setDataIncome] = useState<number[]>([]);
   const [dataExpense, setDataExpense] = useState<number[]>([]);
   const [dateGraphic, setDateGraphic] = useState<string[]>([]);
@@ -30,31 +25,8 @@ const Graphics = ({
   const [auxDataIncome, setAuxDataIncome] = useState<number[]>([]);
   const [auxDataExpense, setAuxDataExpense] = useState<number[]>([]);
 
-  // useEffect(() => {
-  //   console.log("dashboardMain", dashboardMain);
-  //   const resultado = groupAndSumDatePNL(dashboardMain);
-  //   setDateTotal(resultado);
-  //   const dataIncome = resultado.map((data) => data.ingresos);
-  //   const dataExpense = resultado.map((data) => data.gastos);
-  //   const dateGraphic = resultado.map((data) => data.date);
-
-  //   setDataIncome(dataIncome.reverse());
-  //   const sumTotalIncome = dataIncome.reduce((acc, val) => acc + val, 0);
-  //   setTotalIncome(sumTotalIncome);
-
-  //   setDataExpense(dataExpense.reverse());
-  //   const sumTotalExpense = dataExpense.reduce((acc, val) => acc + val, 0);
-  //   setTotalExpense(sumTotalExpense);
-
-  //   setDateGraphic(dateGraphic.reverse());
-  //   console.log("resultado", resultado);
-  // }, [dashboardMain]);
-
-  console.log("...dashboardMain", dashboardMain);
-
   const generateDataIncome = useCallback(() => {
-    console.log("dashboardMain", dashboardMain);
-    const resultado = groupAndSumDatePNL(dashboardMain);
+    const resultado = groupAndSumDatePNL(dataPNL);
     const newDataIncome: number[] = [];
     const newDataExpense: number[] = [];
     const newDateGraphic: any = [];
@@ -70,17 +42,16 @@ const Graphics = ({
       sumTotalIncome += data.ingresos;
       sumTotalExpense += data.gastos;
     });
-
     setDataIncome(newDataIncome);
     setTotalIncome(sumTotalIncome);
     setDataExpense(newDataExpense);
     setTotalExpense(sumTotalExpense);
     setDateGraphic(newDateGraphic);
-  }, [dashboardMain]);
+  }, [dataPNL]);
 
   useEffect(() => {
     generateDataIncome();
-  }, [generateDataIncome]);
+  }, [dataPNL]);
 
   // useEffect(() => {
   //   const resultado = groupAndSumDatePNL(selectPlatform);
@@ -172,7 +143,7 @@ const Graphics = ({
           focus: "series",
         },
         // data: [150, 232, 201, 154, 190, 330, 410],
-        data: dataExpense,
+        data: auxDataExpense,
       },
       {
         name: "",
@@ -195,39 +166,43 @@ const Graphics = ({
           focus: "series",
         },
         // data: [320, 332, 301, 334, 390, 330, 320],
-        data: dataIncome,
+        data: auxDataIncome,
       },
     ],
   };
 
   useEffect(() => {
-    console.log("Entra al 2do effect");
-    setAuxDataIncome(dataIncome);
-    setAuxDataExpense(dataExpense);
     if (
       checkedSelectIncomeGraphic === false &&
       checkedSelectCostsGraphic === false
     ) {
-      setDataIncome(auxDataIncome);
-      setDataExpense(auxDataExpense);
+      setAuxDataIncome([]);
+      setAuxDataExpense([]);
     } else if (
       checkedSelectIncomeGraphic === true &&
       checkedSelectCostsGraphic === true
     ) {
-      setDataIncome(auxDataIncome);
-      setDataExpense(auxDataExpense);
+      setAuxDataIncome(dataIncome);
+      setAuxDataExpense(dataExpense);
     } else if (
-      checkedSelectCostsGraphic === true &&
-      checkedSelectIncomeGraphic === false
+      checkedSelectIncomeGraphic === false &&
+      checkedSelectCostsGraphic === true
     ) {
-      setDataIncome([]);
+      setAuxDataIncome([]);
+      setAuxDataExpense(dataExpense);
     } else if (
       checkedSelectIncomeGraphic === true &&
       checkedSelectCostsGraphic === false
     ) {
-      setDataExpense([]);
+      setAuxDataIncome(dataIncome);
+      setAuxDataExpense([]);
     }
-  }, [checkedSelectIncomeGraphic, checkedSelectCostsGraphic]);
+  }, [
+    checkedSelectIncomeGraphic,
+    checkedSelectCostsGraphic,
+    dataIncome,
+    dataExpense,
+  ]);
 
   const handleChangeSelectGraphicIncome = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -246,7 +221,7 @@ const Graphics = ({
       <HeaderTitleGraphic>
         <span>Ingresos - Gastos</span>
       </HeaderTitleGraphic>
-      {dataPNL.length === 0 && isLoading === true ? (
+      {dataPNL.length === 0 ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "250px", zIndex: "99999999" }}

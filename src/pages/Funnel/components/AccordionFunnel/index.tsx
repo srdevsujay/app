@@ -185,9 +185,9 @@ const AccordionFunnel = ({
     console.log("primer dispatch del Effect");
 
     if (
-      dataTrackingState.id !== undefined &&
-      dataTrackingState.id !== null &&
-      dataTracking.length > 0
+      dataTrackingState?.id !== undefined &&
+      dataTrackingState?.id !== null &&
+      dataTracking?.length > 0
     ) {
       setExpanded(0);
       dispatch(

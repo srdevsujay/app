@@ -34,6 +34,11 @@ const IntegrationTab = () => {
   const [isModalOpenGoogle, setModalOpenGoogle] = useState<boolean>(false);
   const [isStripe, setIsStripe] = useState<boolean>(false);
 
+  const { theme } = useContext(ThemeContext);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const [facebook, setFacebook] = useState({
     my_access_token: "",
     ad_account_id: "",
@@ -109,6 +114,10 @@ const IntegrationTab = () => {
       event: toggleModalGoogle,
       guide:
         "https://sites.google.com/roalytics.com/ayuda-g-ads-integracion/inicio",
+      titleVideoTutorial: "Video Tutorial Google Ads",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
     {
       title: "Webhook Stripe",
@@ -118,6 +127,10 @@ const IntegrationTab = () => {
       event: eventStripe,
       guide:
         "https://sites.google.com/roalytics.com/ayuda-stripe-integracion/inicio",
+      titleVideoTutorial: "Video Tutorial Webhook Stripe",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
     {
       title: "Facebook",
@@ -126,6 +139,10 @@ const IntegrationTab = () => {
       active: !tokenfacebook,
       urlImg: Facebook,
       event: handleClickFacebook,
+      titleVideoTutorial: "Video Tutorial Facebook",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
     {
       title: "Paypal IPN",
@@ -135,6 +152,10 @@ const IntegrationTab = () => {
       event: eventPaypal,
       guide:
         "https://sites.google.com/roalytics.com/ayuda-paypal-integracion/inicio",
+      titleVideoTutorial: "Video Tutorial Paypal IPN",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
     {
       title: "Webhook Paypal",
@@ -142,6 +163,10 @@ const IntegrationTab = () => {
       active: true,
       urlImg: iconPaypal,
       event: eventPaypalWebhook,
+      titleVideoTutorial: "Video Tutorial Webhook Paypal",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
     {
       title: "Webhook Hotmart",
@@ -151,23 +176,15 @@ const IntegrationTab = () => {
       event: eventHotmartWebhook,
       guide:
         "https://sites.google.com/roalytics.com/ayuda-hotmart-integracion/inicio",
+      titleVideoTutorial: "Video Tutorial Webhook Hotmart",
+      imageVideoTutorial: !themeState ? video : videoDark,
+      urlVideoTutorial:
+        "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be",
     },
   ];
 
-  const { theme } = useContext(ThemeContext);
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
-
   return (
     <>
-      <div className="mt-3">
-        <HelpVideo
-          title={"Video Tutorial Integraciones"}
-          image={!themeState ? video : videoDark}
-          url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
-        />
-      </div>
       <div className="row">
         {integrationArr.map(
           (integration: any, i: number) => (
@@ -196,6 +213,12 @@ const IntegrationTab = () => {
                     className="imgApi"
                   />
                   <div className="ApiText">
+                    <HelpVideo
+                      title={integration.titleVideoTutorial}
+                      image={integration.imageVideoTutorial}
+                      url={integration.urlVideoTutorial}
+                      classButton={"button-video-integration"}
+                    />
                     <span className="title-card">{integration.title}</span>
                     <br />
                     <span className="card-body" style={{ padding: "0" }}>
