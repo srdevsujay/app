@@ -320,7 +320,7 @@ const Dashboard = () => {
               </div>
             </div>
             {/* {dataPNL.length === 0 && isLoading === true ? ( */}
-            {dataPNL.length === 0 ? (
+            {dataPNL.length === 0 && isLoading === true ? (
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{ height: "250px", zIndex: "99999999" }}
@@ -335,7 +335,7 @@ const Dashboard = () => {
             )}
           </div>
           <div className="col-sm-12">
-            <Graphics dataPNL={dataPNL} />
+            <Graphics dataPNL={dataPNL} isLoading={isLoading} />
           </div>
         </div>
       </Card>

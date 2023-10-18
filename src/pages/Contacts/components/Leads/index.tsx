@@ -91,7 +91,7 @@ const Leads = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isModalOpenUser, setModalOpenUser] = useState<boolean>(false);
   const [emailCustomerDetail, setEmailCustomerDetail] = useState<any>("");
-  const [filteredDataDos, setFilteredDataDos] = useState<any[]>(dataLead);
+  const [filteredDataDos, setFilteredDataDos] = useState<any[]>();
   const filteredDataDosRef = useRef<any[]>();
   const [isModalOpenFilter, setModalStateFilter] = useState<boolean>(false);
   const toggleModalFilter = () => setModalStateFilter(!isModalOpenFilter);
@@ -123,7 +123,7 @@ const Leads = () => {
     setCurrentColumns(columns as any);
     setOriginalData(dataLead);
     setFilteredData(dataLead);
-    // setFilteredDataDos(dataLead);
+    setFilteredDataDos(dataLead);
     // }
     filteredDataDosRef.current = dataLead;
   }, [dataLead]);
@@ -194,10 +194,10 @@ const Leads = () => {
   //   setFilteredData(e);
   // };
 
-  const memoizedUsers: any = useMemo(() => {
-    // return filteredDataDosRef.current;
-    return JSON.stringify(filteredDataDos);
-  }, [filteredDataDosRef]);
+  // const memoizedUsers: any = useMemo(() => {
+  //   // return filteredDataDosRef.current;
+  //   return JSON.stringify(filteredDataDos);
+  // }, [filteredDataDosRef]);
 
   // console.log("memoizedUsers", memoizedUsers);
   // console.log("filteredDataDos", filteredDataDosRef.current);
@@ -302,7 +302,7 @@ const Leads = () => {
         urlVideoTutorial={
           "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
         }
-        dataFile={memoizedUsers}
+        dataFile={filteredDataDos}
         titleDataFile={titleFile}
       />
       {/* <div style={{ width: "25%" }}>
