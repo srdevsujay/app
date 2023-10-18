@@ -20,9 +20,9 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
     dispatch(editStateBooking(form));
   };
 
-  useEffect(() => {
-    dispatch(obtainApiBooking(1, 100));
-  }, [booking]);
+  // useEffect(() => {
+  //   dispatch(obtainApiBooking(1, 100));
+  // }, [booking]);
 
   useEffect(() => {
     if (booking?.length > 0) {

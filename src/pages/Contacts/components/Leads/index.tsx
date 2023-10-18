@@ -195,13 +195,13 @@ const Leads = () => {
   // };
 
   const memoizedUsers: any = useMemo(() => {
-    return filteredDataDosRef.current;
-    // return JSON.stringify(filteredDataDos);
+    // return filteredDataDosRef.current;
+    return JSON.stringify(filteredDataDos);
   }, [filteredDataDosRef]);
 
-  console.log("memoizedUsers", memoizedUsers);
-  console.log("filteredDataDos", filteredDataDosRef.current);
-  console.log("filteredDataDos", filteredDataDosRef);
+  // console.log("memoizedUsers", memoizedUsers);
+  // console.log("filteredDataDos", filteredDataDosRef.current);
+  // console.log("filteredDataDos", filteredDataDosRef);
 
   console.log("isLoadingCOntact", isLoading);
 
@@ -251,7 +251,7 @@ const Leads = () => {
     setFilteredDataTotal(handleButtonsFilterCalendar);
     setFilteredDataDos(handleButtonsFilterCalendar);
     setModalStateFilter(false);
-  }, [handleButtonsFilterCalendar, memoizedUsers]);
+  }, [handleButtonsFilterCalendar]);
 
   const dataLeadsFilter = [
     {
@@ -350,7 +350,7 @@ const Leads = () => {
         </div>
       ) : (
         <GeneralTable
-          data={memoizedUsers}
+          data={filteredDataDos}
           columns={columnsToSet}
           pageSizeOptions={[10, 25, 50, 100]}
           maxBodyHeight={"64vh"}
