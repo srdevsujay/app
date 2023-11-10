@@ -447,7 +447,7 @@ export const deleteSale = (id: number): AppThunk => {
 
 export const obtainUserProfile = (data: any): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading());
+    // dispatch(starLoading());
     try {
       const result = await getUserProfile(data);
       console.log("resultProfile", result);
