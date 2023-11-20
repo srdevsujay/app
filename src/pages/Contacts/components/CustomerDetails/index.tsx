@@ -67,7 +67,9 @@ const CustomerDetails = ({ emailCustomerDetail }: any) => {
   }, [journey]);
 
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
+    <Main
+    // width={toggleSlider === true ? "87vw" : "96vw"}
+    >
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box

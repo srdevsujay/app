@@ -18,6 +18,10 @@ export const SpanColumnRule = styled.span`
     display: flex;
     width: max-content;
   }
+
+  .themeDark {
+    color: rgb(221, 221, 221);
+  }
 `;
 
 export const ExceptionDiv = styled.div`

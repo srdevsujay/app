@@ -98,7 +98,7 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
 }
 
 .backgroundTotalDark:nth-child(1) {
-  background: #0D0D0D;
+  background: #d5eafea1;
   display: table-row !important;
 }
 

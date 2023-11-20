@@ -200,15 +200,6 @@ export const obtainApiFunnel = (
   return async (dispatch, getState) => {
     dispatch(starLoading());
     try {
-      // return async (dispatch, getState) => {
-      //   const { dataPNL, dataTracking } = getState().dashboard;
-      //   dispatch(
-      //     setDataFunnel({
-      //       dataFunnel: currentDataFunnel,
-      //       dataPNL: dataPNL,
-      //       dataTracking: dataTracking,
-      //     } as any)
-      //   );
       console.log("typeDashboardFunnel", typeDashboard);
 
       let type_dashboard = typeDashboard?.type_dashboard;

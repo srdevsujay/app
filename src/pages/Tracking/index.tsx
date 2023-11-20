@@ -37,7 +37,7 @@ const Tracking = () => {
 
   return (
     <Main
-      width={toggleSlider === true ? "87vw" : "96vw"}
+      // width={toggleSlider === true ? "87vw" : "96vw"}
       theme={themeDarkLight}
     >
       <Card height="94vh" borderRadius="16px" theme={theme}>

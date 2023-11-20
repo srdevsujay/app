@@ -42,19 +42,23 @@ const RuleURL = () => {
   const [idDeleteCurrent, setIdDeleteCurrent] = useState(0);
   const [titleFile, setTitleFile] = useState("Tabla Reglas de URL");
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   useEffect(() => {
     // if (dataRule.length > 0) {
     const columns = ColumnsRule(
       dataRule,
       time_Zone,
       setCurrentEdit,
-      setIdEditCurrent
+      setIdEditCurrent,
+      themeState
     );
     setCurrentColumns(columns as any);
     setOriginalData(dataRule);
     setFilteredData(dataRule);
     // }
-  }, [dataRule]);
+  }, [dataRule, themeState]);
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
@@ -98,9 +102,6 @@ const RuleURL = () => {
       setModalOpen(true);
     }
   };
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <>

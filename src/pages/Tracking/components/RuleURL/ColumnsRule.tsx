@@ -13,13 +13,14 @@ export const ColumnsRule = (
   data: any,
   time_Zone: any,
   setCurrentEdit: any,
-  setIdEditCurrent: any
+  setIdEditCurrent: any,
+  themeState: any
 ) => {
   return [
     nameColumn(),
     tagRuleColumn(),
     applyToColumn(),
-    wordColumn(),
+    wordColumn(themeState),
     exeptionColumn(),
     createDateColumn(time_Zone),
     ButtonEditColumn(setCurrentEdit, setIdEditCurrent),

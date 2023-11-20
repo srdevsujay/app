@@ -88,7 +88,9 @@ const Auth = () => {
   };
 
   return (
-    <Main width={toggleSlider === true ? "87vw" : "96vw"}>
+    <Main
+    // width={toggleSlider === true ? "87vw" : "96vw"}
+    >
       <Card height="85vh" borderRadius="16px">
         <Title fontSize="17px" color="#123249">
           Autenticación Google

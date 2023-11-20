@@ -24,6 +24,7 @@ const FunnelTable = ({
   const { dataFilter: filterJSON, dataFunnel }: any = useAppSelector(
     (state) => state.dashboard
   );
+  console.log("datadatadatadata", data);
 
   const [currentTotalColumns, setCurrentTotalColumns] = useState<any>([]);
 

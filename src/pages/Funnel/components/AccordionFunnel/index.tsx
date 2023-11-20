@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
 import { ContainerFiltersFunnel } from "../../../Dashboard/styled-components/dashboardStyled";
 import MuiAccordion from "@mui/material/Accordion";
 import { styled } from "@mui/material/styles";
@@ -137,6 +144,10 @@ const AccordionFunnel = ({
   // console.log("dataFunnel--", Array.isArray(dataF.data));
   console.log("dataFunnel.", dataFunnel);
 
+  const memoizedDataFunnel = useMemo(() => dataFunnel, [dataFunnel]);
+
+  console.log("memoizedDataFunnel", memoizedDataFunnel);
+
   const time_Zone = useAppSelector((state) => state.user.user.time_zone);
   const [funnelDays, setFunnelDays] = useState<number>(7);
   const [expanded, setExpanded] = useState(0);
@@ -158,6 +169,8 @@ const AccordionFunnel = ({
   console.log("titleDatePickerFunnel", titleDatePickerFunnel);
 
   const [dataFunnelToggle, setDataFunnelToggle] = useState<any>([]);
+  console.log("dataFunnelToggle", dataFunnelToggle);
+
   const [columnDataFunnelToggle, setColumnDataFunnelToggle] = useState<any>([]);
   const [columnsToSet, setColumnsToSet] = useState<any>([]);
   console.log("columnsToSet--", columnsToSet);
@@ -169,9 +182,26 @@ const AccordionFunnel = ({
   const [dataTrackingState, setDataTrakingState] = useState(dataTracking[0]);
 
   const [searchString, setSearchString] = useState("");
-  const [originalData, setOriginalData] = useState<any>();
+  const [originalData, setOriginalData] = useState<any>([]);
   const [filteredData, setFilteredData] = useState<any[]>();
   const searchStringDebounced = useDebounce(searchString, 100);
+
+  // Utilizamos useMemo para memoizar dataTracking y evitar cambios innecesarios
+  // Memoizamos la referencia a dataTracking
+  // const dataTrackingRef = useMemo(() => dataTracking, [dataTracking]);
+  console.log("dataTrackingState", dataTrackingState);
+  console.log("searchStringDebounced", searchStringDebounced);
+
+  useEffect(() => {
+    console.log("primer dispatch del Effect");
+    const firstTrackingData = dataTracking[0];
+    if (firstTrackingData?.id !== undefined && firstTrackingData?.id !== null) {
+      setExpanded(0);
+      dispatch(
+        obtainApiDashboardFunnel(firstTrackingData.id as any, dataTracking, 0)
+      );
+    }
+  }, []);
 
   // useEffect(() => {
   //   const tracking =
@@ -181,39 +211,39 @@ const AccordionFunnel = ({
   //   setDataTrakingState(typeDashboard);
   // }, [dataTracking]);
 
-  useEffect(() => {
-    console.log("primer dispatch del Effect");
+  // Utiliza useRef para mantener el valor anterior de dataTracking[0]
 
-    if (
-      dataTrackingState?.id !== undefined &&
-      dataTrackingState?.id !== null &&
-      dataTracking?.length > 0
-    ) {
-      setExpanded(0);
-      dispatch(
-        obtainApiDashboardFunnel(dataTrackingState.id as any, dataTracking, 0)
-      );
-      // const currentColumnsJSON = JSON.stringify(SalesCall);
-      // const obj = {
-      //   filter_json: currentColumnsJSON,
-      //   id: 2,
-      // };
-      // dispatch(
-      //   createFilterFunnel(obj, dataTrackingState.id as any, dataTracking, 0)
-      // );
-    }
-  }, [dataTrackingState]);
+  // const obtainApiDashboardFunnelMemoized = useCallback(
+  //   (id: any, data: any, value: any) => {
+  //     dispatch(obtainApiDashboardFunnel(id, data, value));
+  //   },
+  //   [dispatch]
+  // );
+
+  // useEffect(() => {
+  //   console.log("primer dispatch del Effect");
+
+  //   if (
+  //     dataTrackingState?.id !== undefined &&
+  //     dataTrackingState?.id !== null &&
+  //     dataTracking?.length > 0
+  //   ) {
+  //     setExpanded(0);
+  //     // Utilizamos la versión memoizada de la función
+  //     obtainApiDashboardFunnelMemoized(dataTrackingState.id, dataTracking, 0);
+  //   }
+  // }, [dataTrackingState, obtainApiDashboardFunnelMemoized]);
 
   useEffect(() => {
     console.log("objFilter", objFilter);
     if (objFilter) {
       const filter = JSON.parse(objFilter);
       console.log("filterJSON", filter);
-
+      const firstTrackingData = dataTracking[0];
       const getDataColumns = filter.map((funnel: any) => {
         return TypeDashboardDataTableColumns(
           funnel,
-          dataTrackingState.type_dashboard,
+          firstTrackingData.type_dashboard,
           time_Zone
         );
       });
@@ -239,7 +269,17 @@ const AccordionFunnel = ({
       setDataFunnelToggle(getDataColumns2);
       setOriginalData(getDataColumns2);
     }
-  }, [objFilter, dataTrackingState]);
+  }, [objFilter, dataTracking]);
+
+  const memoizedColumns = useMemo(() => columnsToSet, [columnsToSet]);
+  console.log("memoizedColumns", memoizedColumns);
+
+  const memorizedFilterFunnel = useMemo(
+    () => dataFunnelToggle,
+    [dataFunnelToggle]
+  );
+
+  console.log("memorizedFilterFunnel", memorizedFilterFunnel);
 
   const handleChange = (panel: any) => (event: any, newExpanded: any) => {
     console.log("panel", panel);
@@ -452,10 +492,12 @@ const AccordionFunnel = ({
       const currentData = originalData.filter((item: any) =>
         item.name.toLowerCase().includes(searchStringDebounced.toLowerCase())
       );
+      console.log("currentData", currentData);
 
       setDataFunnelToggle(currentData);
     } else {
-      setDataFunnelToggle(originalData);
+      // console.log("originalData", originalData);
+      // setDataFunnelToggle(originalData);
     }
   }, [searchStringDebounced]);
 
@@ -936,7 +978,6 @@ const AccordionFunnel = ({
   //   },
   // ];
 
-  console.log("dataDataFunneldataFunnel", dataFunnel);
   const {
     theme,
     themeButtonDropdown,
@@ -998,7 +1039,10 @@ const AccordionFunnel = ({
                     "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
                   }
                 />
-                <ExportExcel dataFile={dataFunnel} titleFile={"tabla Funnel"} />
+                <ExportExcel
+                  dataFile={memoizedDataFunnel}
+                  titleFile={"tabla Funnel"}
+                />
                 <div className="dropdown ml-2">
                   <ButtonFilter
                     className="btn dropdown-toggle dropdown-toggle-icon d-flex justify-content-center"
@@ -1007,6 +1051,7 @@ const AccordionFunnel = ({
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
+                    disabled={memoizedColumns.length === 0 ? true : false}
                     // onClick={(e: any) => {
                     //   e.stopImmediatePropagation();
                     // }}
@@ -1037,7 +1082,7 @@ const AccordionFunnel = ({
                       className="filter-scroll"
                       theme={themeFilterFunnel}
                     >
-                      {dataFunnelToggle?.map((column: any) => {
+                      {memorizedFilterFunnel?.map((column: any) => {
                         if (column === undefined) {
                           return null;
                         } else {
@@ -1103,7 +1148,7 @@ const AccordionFunnel = ({
               <Typography>
                 <div className="table-responsive ocultarMostrar table-funnel">
                   {/* hay que añadirle el || dataFunnel bien en forma */}
-                  {showLodash.length === 0 || isLoading === true ? (
+                  {isLoading === true && memoizedColumns.length === 0 ? (
                     <div
                       className="d-flex justify-content-center align-items-center"
                       style={{ height: "250px", zIndex: "99999999" }}
@@ -1112,8 +1157,8 @@ const AccordionFunnel = ({
                     </div>
                   ) : (
                     <FunnelTable
-                      data={dataFunnel}
-                      columns={columnsToSet}
+                      data={memoizedDataFunnel}
+                      columns={memoizedColumns}
                       pageSizeOptions={[7, 15, 31]}
                       maxBodyHeight={"60vh"}
                       pageSize={7}

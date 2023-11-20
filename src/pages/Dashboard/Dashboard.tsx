@@ -268,7 +268,10 @@ const Dashboard = () => {
   }, [selectPlatform, themeState, theme]);
 
   return (
-    <Main width={toggleSlider ? "87vw" : "96vw"} theme={themeDarkLight}>
+    <Main
+      // width={toggleSlider ? "87vw" : "96vw"}
+      theme={themeDarkLight}
+    >
       {/* <MuiMenuList background="red"> */}
       <Card height="94vh" borderRadius="16px" theme={theme}>
         {/* <Container theme={theme}> */}

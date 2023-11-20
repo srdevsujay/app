@@ -295,13 +295,13 @@ export const Recorrido = styled.div`
 
   .overflow-scroll::-webkit-scrollbar-thumb {
     background: #3998ff;
-    border-radius: 40px;
+    /* border-radius: 40px; */
   }
   .overflow-scroll::-webkit-scrollbar {
     height: 3px;
     width: 50px;
     background-color: #aaa;
-    border-radius: 40px;
+    /* border-radius: 40px; */
   }
 `;
 
