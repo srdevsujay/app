@@ -1,7 +1,11 @@
 import { Select } from "../../../../../styled-components/select/index";
 import { stateBooking } from "../../../models/routes";
 
-export const stateColumn = (dataContacts: any, onChangeStatus: any) => {
+export const stateColumn = (
+  dataContacts: any,
+  onChangeStatus: any,
+  themeState: any
+) => {
   return {
     title: "Estado",
     field: "status",
@@ -10,7 +14,7 @@ export const stateColumn = (dataContacts: any, onChangeStatus: any) => {
         <Select
           onChange={(e) => onChangeStatus(e, dataBooking)}
           value={dataBooking.status}
-          className="select-booking"
+          theme={themeState}
         >
           {stateBooking.map((option: any, i = 1) => (
             <option key={i} value={option.value}>

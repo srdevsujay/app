@@ -11,7 +11,8 @@ export const ColumnTableBookingPopup = (
   time_Zone: any,
   // setCurrentEdit: any,
   // setIdEditCurrent: any,
-  onChangeStatus: any
+  onChangeStatus: any,
+  themeState: any
 ) => {
   return [
     appoimentDateColumn(time_Zone),
@@ -19,7 +20,7 @@ export const ColumnTableBookingPopup = (
     nameColumn(),
     eventColumn(),
     emailColumn(),
-    stateColumn(dataContacts, onChangeStatus),
+    stateColumn(dataContacts, onChangeStatus, themeState),
     // buttonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };

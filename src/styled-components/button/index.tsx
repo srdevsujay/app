@@ -214,7 +214,7 @@ export const ButtonsProfile = styled.button`
 `;
 
 export const ButtonDelete = styled.button`
-  background: #fef4f5 !important;
+  background: #fef4f5;
   color: #e71d36 !important;
   border-radius: 5px !important;
   width: 132px !important;
@@ -222,6 +222,10 @@ export const ButtonDelete = styled.button`
   font-size: 13px !important;
   font-family: "Helvetica-NeueL-Title";
   font-weight: 600;
+
+  &.btn-delete-photo {
+    background: rgb(231 29 54 / 13%);
+  }
 `;
 
 export const CopyButton = styled.button`

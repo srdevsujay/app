@@ -265,7 +265,14 @@ const ProfileTab = () => {
 
           <div className="form-group col-sm-5"></div>
           <div className="form-group col-sm-4 d-flex justify-content-center align-items-center">
-            <ButtonDelete className="btn btn-delete-photo" onClick={deleteFile}>
+            <ButtonDelete
+              className={
+                themeState === true || themeState === "true"
+                  ? "btn btn-delete-photo"
+                  : "btn"
+              }
+              onClick={deleteFile}
+            >
               <img src={borrar} alt="" height="15" className="mb-1 mr-1" />
               <span>Eliminar</span>
             </ButtonDelete>

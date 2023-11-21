@@ -10,6 +10,8 @@ import { useAppDispatch } from "../../../../hooks/appDispatch";
 const BookingPopup = ({ booking, time_Zone }: any) => {
   const dispatch = useAppDispatch();
   const [columnsBooking, setColumnsBooking] = useState<any>();
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
 
   const onChangeStatus = (e: any, paramBooking: any) => {
     const currentState = e.target.value;
@@ -31,7 +33,8 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
         time_Zone,
         // setCurrentEdit,
         // setIdEditCurrent,
-        onChangeStatus
+        onChangeStatus,
+        themeState
       );
       setColumnsBooking(columns);
       // setOriginalData(booking);

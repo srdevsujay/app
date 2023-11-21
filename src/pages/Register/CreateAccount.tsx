@@ -282,7 +282,7 @@ const CreateAccount = () => {
                 <Select
                   className={
                     themeDark === true
-                      ? "modoDarkSelect css-select-1 font-HelveticaNeueL"
+                      ? "modoDarkSelectRegister css-select-1 font-HelveticaNeueL"
                       : "css-select-1 font-HelveticaNeueL"
                   }
                   style={{ fontSize: "14px" }}
@@ -495,7 +495,7 @@ const CreateAccount = () => {
                 <Select
                   className={
                     themeDark === true
-                      ? "modoDarkSelect css-select-2 font-HelveticaNeueL"
+                      ? "modoDarkSelectRegister css-select-2 font-HelveticaNeueL"
                       : "css-select-2 font-HelveticaNeueL"
                   }
                   style={{ fontSize: "14px" }}
@@ -509,7 +509,7 @@ const CreateAccount = () => {
               </FormControl>
             </div>
             <div className="row">
-              <div className="col-sm-10">
+              <div className="col-sm-10 pt-2">
                 <Link
                   to="/terminosycondiciones"
                   className="font-text-Label-Configuracion"

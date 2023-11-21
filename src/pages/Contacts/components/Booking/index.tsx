@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 
 import {
   obtainApiBooking,
@@ -27,6 +27,7 @@ import bookingsFilter from "../../../../assets/images/bookingsFilter.svg";
 import bookingsFilterDark from "../../../../assets/images/bookingsFilterDark.svg";
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
+import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 
 setAutoFreeze(false);
 
@@ -60,6 +61,8 @@ const Booking = () => {
   const themeLocalStorage: any = localStorage.getItem("Theme");
   const themeState = JSON.parse(themeLocalStorage);
 
+  const { theme, themeTitleModal } = useContext(ThemeContext);
+
   const onChangeStatus = (e: any, paramBooking: any) => {
     const currentState = e.target.value;
     const form: any = {
@@ -76,14 +79,15 @@ const Booking = () => {
       time_Zone,
       setCurrentEdit,
       setIdEditCurrent,
-      onChangeStatus
+      onChangeStatus,
+      theme
     );
     setCurrentColumns(columns as any);
     setOriginalData(dataBooking);
     setFilteredData(dataBooking);
     setFilteredDataDos(dataBooking);
     // }
-  }, [dataBooking]);
+  }, [dataBooking, theme]);
 
   useEffect(() => {
     if (idEditCurrent !== 0) {

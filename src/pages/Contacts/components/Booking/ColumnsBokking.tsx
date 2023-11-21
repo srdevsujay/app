@@ -15,7 +15,8 @@ export const ColumnTableBooking = (
   time_Zone: any,
   setCurrentEdit: any,
   setIdEditCurrent: any,
-  onChangeStatus: any
+  onChangeStatus: any,
+  themeState: any
 ) => {
   return [
     appoimentDateColumn(time_Zone),
@@ -25,7 +26,7 @@ export const ColumnTableBooking = (
     emailColumn(),
     firstOriginColumn(),
     lastOriginColumn(),
-    stateColumn(dataContacts, onChangeStatus),
+    stateColumn(dataContacts, onChangeStatus, themeState),
     ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];
 };
