@@ -129,26 +129,6 @@ const SourceFilter = ({
 
   const [selectFilter, setSelectFilter] = useState(false);
 
-  // const onSelectFilter = () => {
-  //   console.log("onSelectFilter");
-  //   setSelectFilter(!selectFilter);
-  // };
-
-  // useEffect(() => {
-  //   // Accede al elemento body
-  //   const bodyElement = document.body;
-
-  //   if (bodyElement) {
-  //     // Captura el primer div hijo del body
-  //     const firstDiv = bodyElement.querySelector("div");
-
-  //     if (firstDiv) {
-  //       // Haz algo con el primer div hijo
-  //       console.log("Primer div hijo:", firstDiv);
-  //     }
-  //   }
-  // }, [selectFilter]);
-
   const handleFilterChange = () => {
     // Aquí puedes manejar los cambios en la selección de filtros
     console.log("Filtros seleccionados:");
@@ -171,7 +151,17 @@ const SourceFilter = ({
             return selected.join(", ");
           }}
           MenuProps={MenuProps}
-          inputProps={{ "aria-label": "Without label" }}
+          // inputProps={{ "aria-label": "Without label" }}
+          inputProps={{
+            "aria-label": "Without label",
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  backgroundColor: themeState === true ? "#0d0d0d" : "#fff",
+                },
+              },
+            },
+          }}
           className={
             themeState === true || themeState === "true"
               ? "menuStyleExample backMenuItem"
