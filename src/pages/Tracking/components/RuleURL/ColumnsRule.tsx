@@ -21,7 +21,7 @@ export const ColumnsRule = (
     tagRuleColumn(),
     applyToColumn(),
     wordColumn(themeState),
-    exeptionColumn(),
+    exeptionColumn(themeState),
     createDateColumn(time_Zone),
     ButtonEditColumn(setCurrentEdit, setIdEditCurrent),
   ];

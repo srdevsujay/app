@@ -95,7 +95,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
           ? `!${data.tag}`
           : `$${data.tag}`;
       form.tag = selectTag;
-      dispatch(editRuleURL(form));
+      dispatch(editRuleURL(form, themeState));
       setCurrentEdit();
       setIdEditLead(0);
       onClose();
@@ -116,7 +116,7 @@ const FormRule = ({ onClose, currentEdit, setCurrentEdit }: any) => {
             : `$${data.tag}`;
         form.tag = selectTag;
         console.log("form", form);
-        dispatch(createRuleURL(form));
+        dispatch(createRuleURL(form, themeState));
         onClose();
       }
     }

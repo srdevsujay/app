@@ -1,0 +1,14 @@
+.MuiMenu-list {
+  display: grid;
+  padding: 20px !important;
+  background: red;
+}
+
+.MuiMenu-list > li {
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 10px;
+  color: rgb(16,156,241);
+  padding-left: 7px;
+  padding-right: 10px;
+}

@@ -51,14 +51,18 @@ export const obtainApiProduct = (): AppThunk => {
   };
 };
 
-export const createProduct = (data: any): AppThunk => {
+export const createProduct = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await createProductService(data);
       if (result.data.message === "Create product successfully!") {
         dispatch(obtainApiProduct());
-        Swal.fire("Correcto", "Producto Creado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Producto Creado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -66,14 +70,18 @@ export const createProduct = (data: any): AppThunk => {
   };
 };
 
-export const editProduct = (data: any): AppThunk => {
+export const editProduct = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await editProductService(data);
       if (result.data.message === "Edit product successfully!") {
         dispatch(obtainApiProduct());
-        Swal.fire("Correcto", "Producto Editado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Producto Editado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -81,7 +89,7 @@ export const editProduct = (data: any): AppThunk => {
   };
 };
 
-export const deleteProducto = (id: number): AppThunk => {
+export const deleteProducto = (id: number, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
@@ -93,6 +101,7 @@ export const deleteProducto = (id: number): AppThunk => {
         confirmButtonColor: "#109cf1",
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
+        background: themeState === true ? "#0D0D0D" : "#fff",
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
@@ -102,11 +111,11 @@ export const deleteProducto = (id: number): AppThunk => {
             const resultData = await deleteProductService(objId);
             if (resultData.data.message === "Delete product successfully!") {
               dispatch(obtainApiProduct());
-              Swal.fire(
-                "Eliminado!",
-                "El Producto se ha eliminado correctamente.",
-                "success"
-              );
+              Swal.fire({
+                background: themeState === true ? "#0D0D0D" : "#fff",
+                title: "El Producto se ha eliminado correctamente.",
+                icon: "success",
+              });
             }
           } catch (error) {}
         }
@@ -157,7 +166,7 @@ export const obtainApiAttribution = (): AppThunk => {
   };
 };
 
-export const createAttribution = (data: any): AppThunk => {
+export const createAttribution = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
@@ -167,11 +176,11 @@ export const createAttribution = (data: any): AppThunk => {
         result.data.message === "Update rule attribution user successfully!"
       ) {
         // dispatch(obtainApiProduct());
-        Swal.fire(
-          "Correcto",
-          "Regla de Atribución creada correctamente!!",
-          "success"
-        );
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Regla de Atribución creada correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -199,14 +208,18 @@ export const obtainApiRuleURL = (): AppThunk => {
   };
 };
 
-export const createRuleURL = (data: any): AppThunk => {
+export const createRuleURL = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await createRuleURLService(data);
       if (result.data.message === "Create rule successfully!") {
         dispatch(obtainApiRuleURL());
-        Swal.fire("Correcto", "Regla Creado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Regla Creado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -214,14 +227,18 @@ export const createRuleURL = (data: any): AppThunk => {
   };
 };
 
-export const editRuleURL = (data: any): AppThunk => {
+export const editRuleURL = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result = await editRuleURLService(data);
       if (result.data.message === "Create rule successfully!") {
         dispatch(obtainApiRuleURL());
-        Swal.fire("Correcto", "Regla Editada correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Regla Editada correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -229,7 +246,7 @@ export const editRuleURL = (data: any): AppThunk => {
   };
 };
 
-export const deleteRuleURL = (id: number): AppThunk => {
+export const deleteRuleURL = (id: number, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
@@ -241,6 +258,7 @@ export const deleteRuleURL = (id: number): AppThunk => {
         confirmButtonColor: "#109cf1",
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
+        background: themeState === true ? "#0D0D0D" : "#fff",
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
@@ -250,11 +268,11 @@ export const deleteRuleURL = (id: number): AppThunk => {
             const resultData = await deleteRuleURLService(objId);
             if (resultData.data.message === "Delete rule successfully!") {
               dispatch(obtainApiRuleURL());
-              Swal.fire(
-                "Eliminado!",
-                "La regla se ha eliminado correctamente.",
-                "success"
-              );
+              Swal.fire({
+                background: themeState === true ? "#0D0D0D" : "#fff",
+                title: "La regla se ha eliminado correctamente.",
+                icon: "success",
+              });
             }
           } catch (error) {}
         }

@@ -2,6 +2,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { ThemeContext } from "./ThemeContext";
 import { useAppDispatch } from "../../hooks/appDispatch";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { updateTheme } from "../../redux/state/slices/configuration/configurationThunk";
 
 const Toggle: React.FC = () => {
@@ -12,26 +14,31 @@ const Toggle: React.FC = () => {
 
   const [themeClick, setThemeClick] = useState(themeDark);
   const [themeDarkLight, setThemeDarkLight] = useState<any>(null);
-  const { toggleTheme } = useContext(ThemeContext);
+  const { theme: themeContext, toggleTheme } = useContext(ThemeContext);
 
   const newToggleTheme = () => {
     console.log("entra al newToggleTheme", !themeClick);
     setThemeClick(!themeClick);
     localStorage.setItem("Theme", JSON.stringify(!themeClick));
-    toggleTheme();
+    toggleTheme(themeDark);
   };
 
-  console.log("themeLogin", theme);
   console.log("themeLoginthemeDark", themeDark);
   console.log("themeLoginthemeClick", themeClick);
+  console.log("themeLoginthemeClickThemee", themeContext);
 
-  // useEffect(() => {
-  //   toggleTheme();
-  // }, [themeDark]);
+  useEffect(() => {
+    toggleTheme(themeDark);
+  }, [themeDark]);
 
   return (
     <button className="btn handleTheme" onClick={newToggleTheme}>
-      {themeDark === true ? "Modo Claro" : "Modo Oscuro"}
+      {themeDark === true ? (
+        <LightModeOutlinedIcon />
+      ) : (
+        <DarkModeOutlinedIcon />
+      )}
+      {/* {themeDark === true ? "Modo Claro" : "Modo Oscuro"} */}
     </button>
   );
 };

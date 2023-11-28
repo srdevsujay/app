@@ -172,6 +172,11 @@ const SourceFilter = ({
           }}
           MenuProps={MenuProps}
           inputProps={{ "aria-label": "Without label" }}
+          className={
+            themeState === true || themeState === "true"
+              ? "menuStyleExample backMenuItem"
+              : "menuStyleExample"
+          }
         >
           {uniquePlataform.map((pnl) => (
             <MenuItem

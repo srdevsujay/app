@@ -229,19 +229,14 @@ const FormSale = ({
     if (idEditSale !== 0) {
       form.id = currentEdit.id;
       form.id_traffic = currentEdit.id_traffic;
-      console.log("formformformEdit", form);
-      dispatch(editSale(form));
+      dispatch(editSale(form, themeState));
       setCurrentEdit();
       setIdEditSale(0);
     } else {
-      console.log("formformformSucces", form);
-      dispatch(createSale(form));
+      dispatch(createSale(form, themeState));
     }
     onClose();
   };
-
-  console.log("refaund", refaund);
-  console.log("price", price);
 
   const handleChangePrice = () => {
     setRefaund(!refaund);

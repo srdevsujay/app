@@ -50,9 +50,12 @@ const Attribution = () => {
   //   }
   // }, [dataProduct]);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteProducto(idEditCurrent));
+      dispatch(deleteProducto(idEditCurrent, themeState));
       setIdEditCurrent(0);
     }
     console.log("idEditCurrent", idEditCurrent);

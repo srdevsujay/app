@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
-import { MuiMenuList } from "./styled-components/select";
+import { MuiMenuList, StyledComponent } from "./styled-components/select";
 import CreateAccount from "./pages/Register/CreateAccount";
 import AuthGuard from "./guards/auth.guard";
 import { publicRoutes, privateRoutes } from "./models/routes";
@@ -58,7 +58,6 @@ function App() {
   }, []);
 
   return (
-    // <MuiMenuList background="red">
     <Suspense
       fallback={
         <div
@@ -141,7 +140,6 @@ function App() {
         </AuthProvider>
       </Router>
     </Suspense>
-    // </MuiMenuList>
   );
 }
 

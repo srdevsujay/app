@@ -19,7 +19,7 @@ const BookingPopup = ({ booking, time_Zone }: any) => {
       status: currentState,
       id: paramBooking.id,
     };
-    dispatch(editStateBooking(form));
+    dispatch(editStateBooking(form, themeState));
   };
 
   // useEffect(() => {

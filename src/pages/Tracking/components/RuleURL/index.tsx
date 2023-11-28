@@ -62,7 +62,7 @@ const RuleURL = () => {
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteRuleURL(idEditCurrent));
+      dispatch(deleteRuleURL(idEditCurrent, themeState));
       setIdEditCurrent(0);
     }
     console.log("idEditCurrent", idEditCurrent);
@@ -151,13 +151,15 @@ const RuleURL = () => {
           <BeatLoader color="#3997FF" />
         </div>
       ) : (
-        <GeneralTable
-          data={filteredData}
-          columns={columnsToSet}
-          pageSizeOptions={[7, 15, 31]}
-          maxBodyHeight={"64vh"}
-          pageSize={7}
-        />
+        <div className="scrollbar-color">
+          <GeneralTable
+            data={filteredData}
+            columns={columnsToSet}
+            pageSizeOptions={[7, 15, 31]}
+            maxBodyHeight={"64vh"}
+            pageSize={7}
+          />
+        </div>
       )}
     </>
   );

@@ -130,7 +130,7 @@ const Leads = () => {
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteLead(idEditCurrent));
+      dispatch(deleteLead(idEditCurrent, themeState));
       setIdEditCurrent(0);
     }
   }, [idEditCurrent]);
@@ -349,24 +349,26 @@ const Leads = () => {
           <BeatLoader color="#3997FF" />
         </div>
       ) : (
-        <GeneralTable
-          data={filteredDataDos}
-          columns={columnsToSet}
-          pageSizeOptions={[10, 25, 50, 100]}
-          maxBodyHeight={"64vh"}
-          pageSize={7}
-          getUserProfile={getUserProfile}
-          // obtainDataPageChange={obtainDataPageChange}
-          totalPages={totalLeads}
-          // rowsPerPage={rowsPerPage}
-          // setRowsPerPage={setRowsPerPage}
-          // totalPage={totalPageLead}
-          // setCurrentPageLead={setCurrentPageLead}
-          // currentPerPage={currentPerPage}
-          // setCurrentPerPage={setCurrentPerPage}
-          // currentPage={currentPage}
-          // setCurrentPage={setCurrentPage}
-        />
+        <div className="scrollbar-color">
+          <GeneralTable
+            data={filteredDataDos}
+            columns={columnsToSet}
+            pageSizeOptions={[10, 25, 50, 100]}
+            maxBodyHeight={"64vh"}
+            pageSize={7}
+            getUserProfile={getUserProfile}
+            // obtainDataPageChange={obtainDataPageChange}
+            totalPages={totalLeads}
+            // rowsPerPage={rowsPerPage}
+            // setRowsPerPage={setRowsPerPage}
+            // totalPage={totalPageLead}
+            // setCurrentPageLead={setCurrentPageLead}
+            // currentPerPage={currentPerPage}
+            // setCurrentPerPage={setCurrentPerPage}
+            // currentPage={currentPage}
+            // setCurrentPage={setCurrentPage}
+          />
+        </div>
       )}
     </>
   );

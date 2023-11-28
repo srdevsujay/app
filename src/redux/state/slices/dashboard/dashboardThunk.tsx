@@ -36,7 +36,10 @@ import Swal from "sweetalert2";
 import { deleteFunnelService } from "../../../../pages/Dashboard/services/pnlApi";
 import { logoutUser } from "../login/authSlice";
 
-export const getMetricFunnel = (date?: DateFormat): AppThunk => {
+export const getMetricFunnel = (
+  date?: DateFormat,
+  themeState?: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
@@ -65,11 +68,12 @@ export const getMetricFunnel = (date?: DateFormat): AppThunk => {
       }
     } catch (error: any) {
       if (error.code === "ERR_BAD_RESPONSE") {
-        Swal.fire(
-          "",
-          "En este momento no puede mostrarte este filtro con tantos días, vuelve a intentarlo con menos días",
-          "info"
-        );
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title:
+            "En este momento no puede mostrarte este filtro con tantos días, vuelve a intentarlo con menos días.",
+          icon: "info",
+        });
       }
       console.log(error);
     }
@@ -195,7 +199,8 @@ export const obtainApiDashboardFunnel = (
 export const obtainApiFunnel = (
   id: number,
   typeDashboard: any,
-  date?: DateFormat
+  date?: DateFormat,
+  themeState?: boolean
 ): AppThunk => {
   return async (dispatch, getState) => {
     dispatch(starLoading());
@@ -204,11 +209,11 @@ export const obtainApiFunnel = (
 
       let type_dashboard = typeDashboard?.type_dashboard;
       if (type_dashboard === null) {
-        Swal.fire(
-          "",
-          "En este momento no tienes un tipo de Funnel registrado.",
-          "info"
-        );
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "En este momento no tienes un tipo de Funnel registrado.",
+          icon: "info",
+        });
         return;
       }
       let dateFormat = getDate(date);
@@ -274,14 +279,22 @@ export const createFilterFunnel = (
   };
 };
 
-export const createFunnel = (data: any, id: number): AppThunk => {
+export const createFunnel = (
+  data: any,
+  id: number,
+  themeState: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
       const result: any = await createFunnelService(data);
       if (result.data.message === "Create funnel successfully!") {
         dispatch(getTrackingFunnel(id));
-        Swal.fire("Correcto", "Funnel Creado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Funnel Creado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -289,7 +302,11 @@ export const createFunnel = (data: any, id: number): AppThunk => {
   };
 };
 
-export const editFunnel = (data: any, id: number): AppThunk => {
+export const editFunnel = (
+  data: any,
+  id: number,
+  themeState: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
@@ -297,7 +314,11 @@ export const editFunnel = (data: any, id: number): AppThunk => {
       console.log("resultEdit", result);
       if (result.data.message === "Update funnel successfully!") {
         dispatch(getTrackingFunnel(id));
-        Swal.fire("Correcto", "Funnel actualizado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Funnel actualizado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -305,7 +326,11 @@ export const editFunnel = (data: any, id: number): AppThunk => {
   };
 };
 
-export const deleteFunnel = (data: any, id: number): AppThunk => {
+export const deleteFunnel = (
+  data: any,
+  id: number,
+  themeState: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
@@ -326,11 +351,11 @@ export const deleteFunnel = (data: any, id: number): AppThunk => {
           if (deleteResult.data.message === "Delete funnel successfully!") {
             // dispatch(downloadTypeform(false));
             dispatch(getTrackingFunnel(id));
-            Swal.fire(
-              "¡Eliminado!",
-              "El Funnel se ha eliminado correctamente.",
-              "success"
-            );
+            Swal.fire({
+              background: themeState === true ? "#0D0D0D" : "#fff",
+              title: "El Funnel se ha eliminado correctamente.",
+              icon: "success",
+            });
           }
         } catch (error) {
           console.log("error", error);

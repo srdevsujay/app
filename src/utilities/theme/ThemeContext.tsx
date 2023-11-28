@@ -1,5 +1,5 @@
 // ThemeContext.tsx
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   ThemeType,
   lightTheme,
@@ -35,7 +35,7 @@ interface ThemeContextProps {
   themeFilterFunnelColumns: ThemeType;
   themeSliderText: ThemeType;
   themeTable: ThemeType;
-  toggleTheme: () => void;
+  toggleTheme: (themeDark: boolean) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps>({
@@ -58,12 +58,16 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeDark = JSON.parse(themeLocalStorage);
+  // const themeLocalStorage: any = localStorage.getItem("Theme");
+  // const themeDark = JSON.parse(themeLocalStorage);
+  const [themePersist, setThemePersist] = useState();
 
-  console.log("themeLoginContext", themeLocalStorage);
-  console.log("themeLoginthemeDarkContext", themeDark);
+  // useEffect(() => {
+  //   console.log("theme.back", theme.background === "#FFFFFF");
+  // }, [themeDark]);
 
+  // console.log("themeLoginContext", themeLocalStorage);
+  // console.log("themeLoginthemeDarkContext", themeDark);
   const [theme, setTheme] = useState<ThemeType>(lightTheme);
   const [themeDarkLight, setThemeDarkLight] = useState<ThemeType>(lightTheme);
   const [themeTitleModal, setThemeTitleModal] =
@@ -94,54 +98,49 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   /////////////////////////////////////////////////////////////////
 
-  const toggleTheme = () => {
-    console.log("toggleTheme...");
+  const toggleTheme = (themeDark: any = false) => {
+    console.log("toggleTheme...", themeDark);
 
-    setTheme((prevTheme: any) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme
+    setTheme(() => (themeDark === true ? darkTheme : lightTheme));
+    setThemeDarkLight(() => (themeDark === true ? darkLightTheme : lightTheme));
+    setThemeTitleModal(() =>
+      themeDark === true ? lightThemeTitleModal : darkThemeTitleModal
     );
-    setThemeDarkLight((prevTheme) =>
-      prevTheme === lightTheme ? darkLightTheme : lightTheme
+    setThemeTitleTab(() =>
+      themeDark === true ? darkThemeTitleTab : lightThemeTitleTab
     );
-    setThemeTitleModal((prevTheme) =>
-      prevTheme === darkThemeTitleModal
-        ? lightThemeTitleModal
-        : darkThemeTitleModal
+    setThemeButtonDropdown(() =>
+      themeDark === true ? darkButtonThemeDropdown : lightButtonThemeDropdown
     );
-    setThemeTitleTab((prevTheme) =>
-      prevTheme === lightThemeTitleTab ? darkThemeTitleTab : lightThemeTitleTab
+    setThemeFilterDropdown(() =>
+      themeDark === true ? darkFilterThemeDropdown : lightFilterThemeDropdown
     );
-    setThemeButtonDropdown((prevTheme) =>
-      prevTheme === lightButtonThemeDropdown
-        ? darkButtonThemeDropdown
-        : lightButtonThemeDropdown
+    setThemeBackNewFunnel(() =>
+      themeDark === true ? darkTheme : lightBackNewFunnel
     );
-    setThemeFilterDropdown((prevTheme) =>
-      prevTheme === lightFilterThemeDropdown
-        ? darkFilterThemeDropdown
-        : lightFilterThemeDropdown
-    );
-    setThemeBackNewFunnel((prevTheme) =>
-      prevTheme === lightBackNewFunnel ? darkTheme : lightBackNewFunnel
-    );
-    setThemeFilterFunnel((prevTheme) =>
-      prevTheme === lightFilterFunnel ? darkFilterFunnel : lightFilterFunnel
+    setThemeFilterFunnel(() =>
+      themeDark === true ? darkFilterFunnel : lightFilterFunnel
     );
 
-    setThemeFilterFunnelColumns((prevTheme) =>
-      prevTheme === lightFilterThemeDropdown
-        ? darkFilterFunnelColumns
-        : lightFilterThemeDropdown
+    setThemeFilterFunnelColumns(() =>
+      themeDark === true ? darkFilterFunnelColumns : lightFilterThemeDropdown
     );
 
-    setThemeSliderText((prevTheme) =>
-      prevTheme === lightSidebarText ? darkSidebarText : lightSidebarText
+    setThemeSliderText(() =>
+      themeDark === true ? darkSidebarText : lightSidebarText
     );
     setThemeTable(
-      (prevTheme) => (prevTheme === lightTable ? darkTable : lightTable)
+      () => (themeDark === true ? darkTable : lightTable)
       // prevTheme === lightTable || themeDark === true ? darkTable : lightTable
     );
   };
+
+  // useEffect(() => {
+  //   if (themeDark === true && theme.background === "#FFFFFF") {
+  //     console.log("entra al persist2");
+  //     toggleTheme();
+  //   }
+  // }, [themeDark]);
 
   return (
     <ThemeContext.Provider

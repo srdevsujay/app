@@ -9,6 +9,7 @@ import {
 } from "../../../Dashboard/styled-components/dashboardStyled";
 import { ButtonsModal } from "../../../../styled-components/button/index";
 import calendar from "../../../../assets/images/calendar.svg";
+import calendarDark from "../../../../assets/images/calendarDark.svg";
 import { ThemeContext } from "../../../../utilities/theme/ThemeContext";
 import { useSelector } from "react-redux";
 
@@ -235,7 +236,11 @@ const FilterContacts = ({
         theme={theme}
       >
         <span className="btn-calendar-title">{titleDatePickerLeads}</span>
-        <img src={calendar} alt="" className="" />
+        <img
+          src={themeState === true ? calendarDark : calendar}
+          alt={titleDatePickerLeads}
+          className=""
+        />
       </ButtonTitlePicker>
       <Modal
         title={""}

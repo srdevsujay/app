@@ -1,6 +1,7 @@
 import { Modal } from "../../../../components/modal";
 import React, { useState, useEffect, useContext } from "react";
 import calendar from "../../../../assets/images/calendar.svg";
+import calendarDark from "../../../../assets/images/calendarDark.svg";
 import {
   ButtonTitlePicker,
   ButtonFilterCalendar,
@@ -65,7 +66,11 @@ any) => {
         theme={theme}
       >
         <span className="btn-calendar-title">{titleDatePickerPNL}</span>
-        <img src={calendar} alt="" className="" />
+        <img
+          src={themeState === true ? calendarDark : calendar}
+          alt=""
+          className=""
+        />
       </ButtonTitlePicker>
       <Modal
         title={""}

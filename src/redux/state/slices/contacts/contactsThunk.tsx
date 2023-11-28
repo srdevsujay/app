@@ -90,7 +90,7 @@ export const obtainApiContacts = (page: number, pageSize: number): AppThunk => {
   };
 };
 
-export const createLead = (data: any): AppThunk => {
+export const createLead = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
@@ -105,7 +105,11 @@ export const createLead = (data: any): AppThunk => {
       const result = await createLeadService(form);
       if (result.data.message === "Create Lead successfully!") {
         dispatch(obtainApiContacts(1, 100));
-        Swal.fire("Correcto", "Lead Creado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Lead Creado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -113,7 +117,11 @@ export const createLead = (data: any): AppThunk => {
   };
 };
 
-export const editLead = (data: any, id: number): AppThunk => {
+export const editLead = (
+  data: any,
+  id: number,
+  themeState: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
@@ -125,11 +133,16 @@ export const editLead = (data: any, id: number): AppThunk => {
         funnel_id: data.selectFunnel,
         name: data.fullName,
         phone: data.telephone,
+        background: themeState === true ? "#0D0D0D" : "#fff",
       };
       const result = await editLeadService(form);
       if (result.data.message === "Create Event and device successfully!") {
         dispatch(obtainApiContacts(1, 100));
-        Swal.fire("Correcto", "Lead Editado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Lead Editado correctamente!!",
+          icon: "success",
+        });
       }
       // setCreateLead
     } catch (error) {
@@ -138,7 +151,7 @@ export const editLead = (data: any, id: number): AppThunk => {
   };
 };
 
-export const deleteLead = (id: number): AppThunk => {
+export const deleteLead = (id: number, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     // dispatch(starLoading());
     try {
@@ -150,6 +163,7 @@ export const deleteLead = (id: number): AppThunk => {
         confirmButtonColor: "#109cf1",
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
+        background: themeState === true ? "#0D0D0D" : "#fff",
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
@@ -159,11 +173,11 @@ export const deleteLead = (id: number): AppThunk => {
             const resultData = await deleteLeadService(objId);
             if (resultData.data.message === "Delete lead successfully!") {
               dispatch(obtainApiContacts(1, 100));
-              Swal.fire(
-                "Eliminado!",
-                "El Lead se ha eliminado correctamente.",
-                "success"
-              );
+              Swal.fire({
+                background: themeState === true ? "#0D0D0D" : "#fff",
+                title: "El Lead se ha eliminado correctamente.",
+                icon: "success",
+              });
             }
           } catch (error) {}
         }
@@ -233,14 +247,20 @@ export const obtainApiBooking = (page: number, pageSize: number): AppThunk => {
   };
 };
 
-export const createBooking = (data: any): AppThunk => {
+export const createBooking = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
       const result = await createBookingService(data);
-      if (result.data.message === "Create Booking successfully!") {
+      console.log("resultBooking", result);
+      // if (result.status === "Create Booking successfully!") {
+      if (result.status === 200) {
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Booking Creado correctamente!!",
+          icon: "success",
+        });
         dispatch(obtainApiBooking(1, 100));
-        Swal.fire("Correcto", "Booking Creado correctamente!!", "success");
       }
     } catch (error) {
       console.log(error);
@@ -248,14 +268,20 @@ export const createBooking = (data: any): AppThunk => {
   };
 };
 
-export const editBooking = (data: any): AppThunk => {
+export const editBooking = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
       const result = await editBookingService(data);
-      if (result.data.message === "Edit Booking successfully!") {
+      console.log("resultBooking", result);
+      // if (result.data.message === "Edit Booking successfully!") {
+      if (result.status === 200) {
         dispatch(obtainApiBooking(1, 100));
-        Swal.fire("Correcto", "Booking Editado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Booking Editado correctamente!!",
+          icon: "success",
+        });
       }
       // setCreateLead
     } catch (error) {
@@ -264,18 +290,18 @@ export const editBooking = (data: any): AppThunk => {
   };
 };
 
-export const editStateBooking = (data: any): AppThunk => {
+export const editStateBooking = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
       const result = await editBookingStateService(data);
       if (result.data.message === "Edit Booking successfully!") {
         dispatch(obtainApiBooking(1, 100));
-        Swal.fire(
-          "Correcto",
-          "El estado del booking ha sido editado correctamente!!",
-          "success"
-        );
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "El estado del booking ha sido editado correctamente!!",
+          icon: "success",
+        });
       }
       // setCreateLead
     } catch (error) {
@@ -284,7 +310,7 @@ export const editStateBooking = (data: any): AppThunk => {
   };
 };
 
-export const deleteBooking = (id: number): AppThunk => {
+export const deleteBooking = (id: number, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     try {
       Swal.fire({
@@ -295,6 +321,7 @@ export const deleteBooking = (id: number): AppThunk => {
         confirmButtonColor: "#109cf1",
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
+        background: themeState === true ? "#0D0D0D" : "#fff",
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
@@ -302,14 +329,15 @@ export const deleteBooking = (id: number): AppThunk => {
               id,
             };
             const resultData = await deleteBookingService(objId);
+            console.log("resultBooking", resultData);
             if (resultData.data.message === "Delete Booking successfully!") {
               dispatch(starLoading());
               dispatch(obtainApiBooking(1, 100));
-              Swal.fire(
-                "Eliminado!",
-                "El Booking se ha eliminado correctamente.",
-                "success"
-              );
+              Swal.fire({
+                background: themeState === true ? "#0D0D0D" : "#fff",
+                title: "El Booking se ha eliminado correctamente.",
+                icon: "success",
+              });
             }
           } catch (error) {}
         }
@@ -377,7 +405,7 @@ export const obtainApiSale = (page: number, pageSize: number): AppThunk => {
   };
 };
 
-export const createSale = (data: any): AppThunk => {
+export const createSale = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
@@ -387,7 +415,11 @@ export const createSale = (data: any): AppThunk => {
         result.data.message === "Create Sale successfully!"
       ) {
         dispatch(obtainApiSale(1, 100));
-        Swal.fire("Correcto", "Venta Creada correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Venta Creada correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -395,14 +427,18 @@ export const createSale = (data: any): AppThunk => {
   };
 };
 
-export const editSale = (data: any): AppThunk => {
+export const editSale = (data: any, themeState: boolean): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
       const result = await editSaleService(data);
       if (result.data.message === "Edit Sale successfully!") {
         dispatch(obtainApiSale(1, 100));
-        Swal.fire("Correcto", "Venta Editada correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Venta Editada correctamente!!",
+          icon: "success",
+        });
       }
       // setCreateLead
     } catch (error) {
@@ -411,9 +447,8 @@ export const editSale = (data: any): AppThunk => {
   };
 };
 
-export const deleteSale = (id: number): AppThunk => {
+export const deleteSale = (id: number, themeState: boolean): AppThunk => {
   return async (dispatch) => {
-    dispatch(starLoading());
     try {
       Swal.fire({
         title: "¿Estas seguro?",
@@ -423,20 +458,24 @@ export const deleteSale = (id: number): AppThunk => {
         confirmButtonColor: "#109cf1",
         cancelButtonColor: "#E71D36",
         confirmButtonText: "Sí, Borrar!",
+        background: themeState === true ? "#0D0D0D" : "#fff",
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
             const objId = {
               id_event: id,
             };
+            dispatch(starLoading());
             const resultData = await deleteSaleService(objId);
+            console.log("resultDataSales", resultData);
+
             if (resultData.data.message === "Delete Sale successfully!") {
               dispatch(obtainApiSale(1, 100));
-              Swal.fire(
-                "Eliminado!",
-                "La venta se ha eliminado correctamente.",
-                "success"
-              );
+              Swal.fire({
+                background: themeState === true ? "#0D0D0D" : "#fff",
+                title: "La venta se ha eliminado correctamente.",
+                icon: "success",
+              });
             }
           } catch (error) {}
         }
@@ -459,7 +498,10 @@ export const obtainUserProfile = (data: any): AppThunk => {
   };
 };
 
-export const createTrafficSource = (data: any): AppThunk => {
+export const createTrafficSource = (
+  data: any,
+  themeState: boolean
+): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading());
     try {
@@ -468,7 +510,11 @@ export const createTrafficSource = (data: any): AppThunk => {
       if (result.data.message === "Attribution Of Sale successfully!") {
         dispatch(obtainApiSale(1, 100));
         dispatch(obtainApiContacts(1, 100));
-        Swal.fire("Correcto", "Trafico Editado correctamente!!", "success");
+        Swal.fire({
+          background: themeState === true ? "#0D0D0D" : "#fff",
+          title: "Trafico Editado correctamente!!",
+          icon: "success",
+        });
       }
     } catch (error) {
       console.log(error);

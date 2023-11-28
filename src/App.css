@@ -123,9 +123,13 @@ body {
 
 .modoDarkFooterTerminosPoliticas {
   background-color: #0D0D0D;
-  color: #333;
+  color: rgb(70, 70, 70);
 }
 
 /* .MuiMenu-list {
+  background: red !important;
+} */
+
+/* *[class*="MuiMenu-list"] {
   background: red !important;
 } */

@@ -1,6 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import FooterMenu from "../Footer";
+import { Title } from "../../styled-components/Title/index";
 
 const Politicasdeprivacidad = () => {
   const themeLocalStorage: any = localStorage.getItem("Theme");
@@ -21,7 +21,12 @@ const Politicasdeprivacidad = () => {
       >
         <div className="col-6">
           <div className="page-title-box">
-            <h4 className="page-title pl-3">Políticas de Privacidad</h4>
+            <Title
+              fontSize="22px"
+              className={themeDark === true ? "page-title-dark pl-3" : "pl-3"}
+            >
+              Políticas de Privacidad
+            </Title>
           </div>
         </div>
         <div className="col-6">

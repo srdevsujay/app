@@ -69,7 +69,7 @@ const Booking = () => {
       status: currentState,
       id: paramBooking.id,
     };
-    dispatch(editStateBooking(form));
+    dispatch(editStateBooking(form, themeState));
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const Booking = () => {
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteBooking(idEditCurrent));
+      dispatch(deleteBooking(idEditCurrent, themeState));
       setIdEditCurrent(0);
     }
   }, [idEditCurrent]);
@@ -290,14 +290,16 @@ const Booking = () => {
           <BeatLoader color="#3997FF" />
         </div>
       ) : (
-        <GeneralTable
-          data={filteredDataDos}
-          columns={columnsToSet}
-          pageSizeOptions={[10, 25, 50, 100]}
-          maxBodyHeight={"64vh"}
-          pageSize={7}
-          getUserProfile={getUserProfile}
-        />
+        <div className="scrollbar-color">
+          <GeneralTable
+            data={filteredDataDos}
+            columns={columnsToSet}
+            pageSizeOptions={[10, 25, 50, 100]}
+            maxBodyHeight={"64vh"}
+            pageSize={7}
+            getUserProfile={getUserProfile}
+          />
+        </div>
       )}
     </>
   );

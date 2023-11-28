@@ -173,7 +173,7 @@ const Funnel = () => {
         };
       });
       form.id = currentEdit;
-      dispatch(editFunnel(form, user_funel));
+      dispatch(editFunnel(form, user_funel, themeState));
       setCurrentEdit(0);
       // setIdEditLead(0);
     } else {
@@ -199,7 +199,7 @@ const Funnel = () => {
           // funnel_id: currentEdit,
         };
       });
-      dispatch(createFunnel(form, user_funel));
+      dispatch(createFunnel(form, user_funel, themeState));
     }
     toggleModal();
   };

@@ -1,8 +1,6 @@
-import { useState, useEffect, useCallback, useContext, useMemo } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import { saveAs } from "file-saver";
-import { setAutoFreeze } from "immer";
 import moment from "moment";
 import { addDays } from "date-fns";
 import { Card, Main } from "../../styled-components/main";
@@ -17,7 +15,6 @@ import DateFilter from "./components/DateFilter";
 import "./styled-components/style.css";
 import SourceFilter from "./components/SourceFilter";
 import Graphics from "./components/Graphics";
-import FooterMenu from "../../components/Footer/index";
 import { Title } from "../../styled-components/Title/index";
 import {
   IntegrationAlert,
@@ -35,21 +32,10 @@ import {
 import { totalPnl } from "./components/TotalTablePnl";
 import styled from "styled-components";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
-import Toggle from "../../utilities/theme/ToggleButton";
-// import { DataHelpVideo } from "../../utilities/DataHelpVideo";
 import { HelpVideo } from "../../components/HelpVideo";
 import ExportExcel from "../../components/ExportExcel/ExportExcel";
 import video from "../../assets/images/video.svg";
 import videoDark from "../../assets/images/videoDark.svg";
-import { MuiMenuList } from "../../styled-components/select/index";
-
-// setAutoFreeze(false);
-
-const Container = styled.div`
-  background-color: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.text};
-  // Agrega estilos adicionales según sea necesario
-`;
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -161,7 +147,7 @@ const Dashboard = () => {
       dateFormat.fecha_final !== "Invalid date"
     ) {
       setFlagModal(1);
-      return dispatch(getMetricFunnel(dateFormat));
+      return dispatch(getMetricFunnel(dateFormat, themeState));
     }
   };
 
@@ -170,7 +156,7 @@ const Dashboard = () => {
     setPnlDays(1);
     setFlagModal(1);
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
-    return dispatch(getMetricFunnel(item));
+    return dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleToday = () => {
@@ -186,7 +172,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
     setPnlDays(7);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleCurrentWeek = () => {
@@ -197,7 +183,7 @@ const Dashboard = () => {
     const diff = fechaFin - fechaInicio;
     setPnlDays(diff / (1000 * 60 * 60 * 24) + 1);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleLastWeek = () => {
@@ -208,7 +194,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
     setPnlDays(diff / (1000 * 60 * 60 * 24) + 1);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleThirtyDays = () => {
@@ -216,7 +202,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
     setPnlDays(30);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleCurrentMonth = () => {
@@ -227,7 +213,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
     setPnlDays(diff / (1000 * 60 * 60 * 24) + 1);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleFourteenDays = () => {
@@ -235,7 +221,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${item.fecha_inicial} - ${item.fecha_final}`);
     setPnlDays(14);
     setFlagModal(1);
-    dispatch(getMetricFunnel(item));
+    dispatch(getMetricFunnel(item, themeState));
   };
 
   const handleThreeMonth = () => {
@@ -257,7 +243,7 @@ const Dashboard = () => {
     setTitleDatePickerPNL(`${firstDay} - ${lastDay}`);
     setPnlDays(diff / (1000 * 60 * 60 * 24) + 1);
     setFlagModal(1);
-    dispatch(getMetricFunnel(dateFormat));
+    dispatch(getMetricFunnel(dateFormat, themeState));
   };
 
   const { theme, themeDarkLight } = useContext(ThemeContext);
@@ -272,11 +258,8 @@ const Dashboard = () => {
       // width={toggleSlider ? "87vw" : "96vw"}
       theme={themeDarkLight}
     >
-      {/* <MuiMenuList background="red"> */}
       <Card height="94vh" borderRadius="16px" theme={theme}>
-        {/* <Container theme={theme}> */}
         <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
-        {/* </Container> */}
         <div className="row">
           <Bar></Bar>
           <div className="col-sm-12">
@@ -331,10 +314,12 @@ const Dashboard = () => {
                 <BeatLoader color="#3997FF" />
               </div>
             ) : (
-              <TablePNL
-                tablePnl={groupPlataform}
-                selectPlatform={selectPlatform}
-              />
+              <div className="scrollbar-color">
+                <TablePNL
+                  tablePnl={groupPlataform}
+                  selectPlatform={selectPlatform}
+                />
+              </div>
             )}
           </div>
           <div className="col-sm-12">
@@ -342,8 +327,6 @@ const Dashboard = () => {
           </div>
         </div>
       </Card>
-      {/* </MuiMenuList> */}
-      {/* <FooterMenu /> */}
     </Main>
   );
 };

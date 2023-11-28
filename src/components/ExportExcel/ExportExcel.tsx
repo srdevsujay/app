@@ -2,12 +2,16 @@ import { useContext } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import exportar from "../../assets/images/exportar.svg";
+import exportarDark from "../../assets/images/exportarDark.svg";
 import "../../styled-components/style.css";
 import { ButtonTitlePicker } from "../../pages/Dashboard/styled-components/dashboardStyled";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 
 const ExportExcel = ({ dataFile, titleFile }: any) => {
   const { theme, themeFilterFunnel } = useContext(ThemeContext);
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   function convertDataToExcel(data: any[]) {
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
@@ -34,7 +38,11 @@ const ExportExcel = ({ dataFile, titleFile }: any) => {
       onClick={handleExportToExcel}
     >
       Exportar
-      <img src={exportar} alt="" className="" />
+      <img
+        src={themeState === false ? exportar : exportarDark}
+        alt=""
+        className=""
+      />
     </ButtonTitlePicker>
   );
 };

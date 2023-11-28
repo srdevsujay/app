@@ -46,6 +46,12 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const [appoimentDate, setAppoimentDate] = useState<any>(today);
   const [selectFunnel, setSelectFunnel] = useState(funnels[0]?.id);
   const [selectState, setSelectState] = useState(stateBooking[0]?.value);
+
+  const { theme, themeFilterFunnel } = useContext(ThemeContext);
+
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const schema = yup.object().shape({
     fullName: yup.string().required("El nombre completo es requerido"),
     nameDate: yup.string().required("El nombre del booking es requerid"),
@@ -155,19 +161,14 @@ const FormBooking = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     };
     if (idEditBooking !== 0) {
       form.id = currentEdit.id;
-      dispatch(editBooking(form));
+      dispatch(editBooking(form, themeState));
       setCurrentEdit();
       setIdEditBooking(0);
     } else {
-      dispatch(createBooking(form));
+      dispatch(createBooking(form, themeState));
     }
     onClose();
   };
-
-  const { theme, themeFilterFunnel } = useContext(ThemeContext);
-
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

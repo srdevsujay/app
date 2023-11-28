@@ -62,13 +62,16 @@ const FormLead = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
   }, [currentEdit, setValue]);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const onSubmit = (data: any) => {
     if (idEditLead !== 0) {
-      dispatch(editLead(data, idEditLead));
+      dispatch(editLead(data, idEditLead, themeState));
       setCurrentEdit();
       setIdEditLead(0);
     } else {
-      dispatch(createLead(data));
+      dispatch(createLead(data, themeState));
     }
     onClose();
   };

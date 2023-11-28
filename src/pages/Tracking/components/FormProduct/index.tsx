@@ -47,16 +47,19 @@ const FormProducts = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     }
   }, [currentEdit, setValue]);
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const onSubmit = (data: any) => {
     data.tag = `$${data.name}`;
     console.log(data);
     if (idEditLead !== 0) {
       data.id = idEditLead;
-      dispatch(editProduct(data));
+      dispatch(editProduct(data, themeState));
       setCurrentEdit();
       setIdEditLead(0);
     } else {
-      dispatch(createProduct(data));
+      dispatch(createProduct(data, themeState));
     }
     onClose();
   };

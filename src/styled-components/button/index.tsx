@@ -10,7 +10,7 @@ export const ButtonLogout = styled.div`
   /* background: #fff; */
   height: 60px;
   position: absolute;
-  bottom: 0;
+  bottom: 4vw;
   left: 0;
   padding: 20px;
   display: flex;
@@ -30,14 +30,14 @@ export const ButtonLogout = styled.div`
     padding-left: 10px !important;
     transition: all 1.5s linear;
     font-size: 14px;
-    bottom: 0;
+    bottom: 4vw;
   }
 
   button.handleTheme {
     background: rgba(91, 147, 255, 0.06274509803921569);
     color: #5b93ff;
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 6px 9px;
     border-radius: 5px;
     font-family: "Helvetica-NeueL-Title";
     padding-left: 10px !important;
@@ -53,7 +53,7 @@ export const ButtonTheme = styled.div`
   /* background: #fff; */
   height: 60px;
   position: absolute;
-  bottom: 4vw;
+  bottom: 0vw;
   left: 0;
   padding: 20px;
   display: flex;
@@ -67,7 +67,7 @@ export const ButtonTheme = styled.div`
     background: rgba(91, 147, 255, 0.06274509803921569);
     color: #5b93ff;
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 6px 9px;
     border-radius: 5px;
     font-family: "Helvetica-NeueL-Title";
     padding-left: 10px !important;

@@ -55,3 +55,11 @@ code {
   font-size: 14px;
   font-family: 'Helvetica-NeueL';
 }
+
+.page-title-dark {
+  color: rgb(70, 70, 70);
+}
+
+.swal2-popup.swal2-modal.swal2-icon-success.swal2-show {
+  border: 1px solid;
+}

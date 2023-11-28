@@ -71,7 +71,7 @@ const FormTrafficSource = ({ onClose, currentEdit }: any) => {
       id_traffic_source: data.id_traffic,
       id_traffic_source_attribute: selectedOption.value,
     };
-    dispatch(createTrafficSource(form));
+    dispatch(createTrafficSource(form, themeState));
     onClose();
   };
 

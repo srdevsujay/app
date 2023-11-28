@@ -55,6 +55,9 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     // category: yup.string().required("La Categoria es requerido"),
   });
 
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const initForm = () => {
     if (currentEdit) {
       const { selectAttribute: attribute } = currentEdit;
@@ -119,7 +122,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     //   setCurrentEdit();
     //   setIdEditLead(0);
     // } else {
-    dispatch(createAttribution(form));
+    dispatch(createAttribution(form, themeState));
     // }
     // onClose();
   };
@@ -127,8 +130,6 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   // const handleChangeOperator = () => {
   //   setOperator(!operator)
   // };
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
 
   return (
     <FormAttributionSale>

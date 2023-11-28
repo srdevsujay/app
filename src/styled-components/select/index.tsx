@@ -27,14 +27,41 @@ export const Select = styled.select`
   }
 `;
 
-export const MuiMenuList = styled.ul<MuiMenu>(({ background }) => ({
-  "div > ul.MuiMenu-list": {
-    background: background,
-  },
-  "& div > ul .MuiMenu-list": {
-    background: background,
-  },
-  "& div > ul > .MuiMenu-list": {
-    background: background,
-  },
-}));
+// export const MuiMenuList = styled.ul`
+//   /* Otros estilos para tu MuiMenuList aquí */
+
+//   &&& *[class*="MuiMenu-list"] {
+//     /* Estilos que deseas aplicar a la clase global */
+//     background: red !important;
+//   }
+// `;
+
+export const MuiMenuList = styled.ul`
+  /* Estilos de la clase global */
+  background-color: red;
+  color: white;
+  /* Añade cualquier otro estilo adicional que desees */
+`;
+
+// Agrega la clase de la librería externa usando styled
+export const StyledComponent = styled(MuiMenuList).attrs(() => ({
+  className: "MuiMenu-list",
+}))``;
+
+// export const MuiMenuList = styled.ul<MuiMenu>(({ background }) => ({
+//   style: {
+//     "*[class*='MuiMenu-list']": {
+//       /* Estilos que deseas aplicar a la clase global */
+//       background: background,
+//     },
+//   },
+//   // "div > ul.MuiMenu-list": {
+//   //   background: background,
+//   // },
+//   // "& div > ul .MuiMenu-list": {
+//   //   background: background,
+//   // },
+//   // "& div > ul > .MuiMenu-list": {
+//   //   background: background,
+//   // },
+// }));

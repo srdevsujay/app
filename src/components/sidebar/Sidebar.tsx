@@ -167,15 +167,15 @@ const Sidebar: FC = () => {
               <button onClick={toggleTheme}>Toggle</button>
             </div> */}
             <div className="d-flex">
-              <ButtonTheme>
-                <Toggle />
-              </ButtonTheme>
               <ButtonLogout theme={theme}>
                 <button className="btn handleLogout" onClick={handleLogout}>
                   {/* <img src={edit} height="12" className="" /> */}
                   Cerrar Sesión
                 </button>
               </ButtonLogout>
+              <ButtonTheme>
+                <Toggle />
+              </ButtonTheme>
             </div>
           </>
         ) : (

@@ -1,15 +1,20 @@
 import { SpanColumnRule } from "../../../styled-components/TableRule";
 
-export const exeptionColumn = () => {
+export const exeptionColumn = (themeState: any) => {
   return {
     title: "Excepciones",
     field: "exeptions",
     render: (dataRule: any) => {
       let dataExeption = JSON.parse(dataRule.exeptions);
-      console.log("dataExeption", dataExeption);
       return dataExeption.map((dExc: any) => (
         <SpanColumnRule>
-          <span>{dExc}</span>
+          <span
+            className={
+              themeState === true || themeState === "true" ? "themeDark" : ""
+            }
+          >
+            {dExc}
+          </span>
         </SpanColumnRule>
       ));
     },

@@ -251,7 +251,7 @@ const Sales = () => {
 
   useEffect(() => {
     if (idEditCurrent !== 0) {
-      dispatch(deleteSale(idEditCurrent));
+      dispatch(deleteSale(idEditCurrent, themeState));
       setIdEditCurrent(0);
     }
   }, [idEditCurrent]);
@@ -430,14 +430,16 @@ const Sales = () => {
           <BeatLoader color="#3997FF" />
         </div>
       ) : (
-        <GeneralTable
-          data={filteredDataDos}
-          columns={columnsToSet}
-          pageSizeOptions={[10, 25, 50, 100]}
-          maxBodyHeight={"64vh"}
-          pageSize={7}
-          getUserProfile={getUserProfile}
-        />
+        <div className="scrollbar-color">
+          <GeneralTable
+            data={filteredDataDos}
+            columns={columnsToSet}
+            pageSizeOptions={[10, 25, 50, 100]}
+            maxBodyHeight={"64vh"}
+            pageSize={7}
+            getUserProfile={getUserProfile}
+          />
+        </div>
       )}
     </>
   );

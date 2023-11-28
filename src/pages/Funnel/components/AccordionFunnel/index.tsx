@@ -119,7 +119,9 @@ const AccordionFunnel = ({
   const dataTracking: any[] = useAppSelector(
     (state) => state.dashboard.dataTracking
   );
-  console.log("dataTracking", dataTracking);
+  const themeLocalStorage: any = localStorage.getItem("Theme");
+  const themeState = JSON.parse(themeLocalStorage);
+
   const { id: user_funel } = useAppSelector((state) => state.user.user);
   const { isLoading } = useAppSelector((state) => state.dashboard);
   // .map((data: any) => ({
@@ -524,7 +526,7 @@ const AccordionFunnel = ({
     const objId = {
       id: dataTracking[i].id,
     };
-    dispatch(deleteFunnel(objId, user_funel));
+    dispatch(deleteFunnel(objId, user_funel, themeState));
   };
 
   const pruebaDataColumnsToSet = [
@@ -985,9 +987,6 @@ const AccordionFunnel = ({
     themeFilterFunnelColumns,
   } = useContext(ThemeContext);
 
-  const themeLocalStorage: any = localStorage.getItem("Theme");
-  const themeState = JSON.parse(themeLocalStorage);
-
   return (
     <div className="mt-3">
       {dataTracking.map((tracking: any, index: number) => (
@@ -1006,7 +1005,9 @@ const AccordionFunnel = ({
                     ? "colorToggleAccordionDark"
                     : "colorToggleAccordion"
                 }`}
-                onClick={() => dispatch(obtainApiFunnel(tracking.id, tracking))}
+                onClick={() =>
+                  dispatch(obtainApiFunnel(tracking.id, tracking, themeState))
+                }
               >
                 <Typography>
                   <span className="title-accordeon-funnel">
@@ -1109,7 +1110,11 @@ const AccordionFunnel = ({
                   <button
                     id="btnGroupDrop1"
                     type="button"
-                    className="btn mr-2 dropdown-toggle"
+                    className={
+                      themeState === false
+                        ? "btn ml-2 dropdown-toggle"
+                        : "btn ml-2 dropdown-toggle dropdown-toggle-dark"
+                    }
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
@@ -1156,13 +1161,15 @@ const AccordionFunnel = ({
                       <BeatLoader color="#3997FF" />
                     </div>
                   ) : (
-                    <FunnelTable
-                      data={memoizedDataFunnel}
-                      columns={memoizedColumns}
-                      pageSizeOptions={[7, 15, 31]}
-                      maxBodyHeight={"60vh"}
-                      pageSize={7}
-                    />
+                    <div className="scrollbar-color">
+                      <FunnelTable
+                        data={memoizedDataFunnel}
+                        columns={memoizedColumns}
+                        pageSizeOptions={[7, 15, 31]}
+                        maxBodyHeight={"60vh"}
+                        pageSize={7}
+                      />
+                    </div>
                   )}
                 </div>
               </Typography>

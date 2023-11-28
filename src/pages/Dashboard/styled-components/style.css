@@ -98,7 +98,7 @@ span.MuiButtonBase-root .MuiTableSortLabel-root {
 }
 
 .backgroundTotalDark:nth-child(1) {
-  background: #d5eafea1;
+  background: #d5eafe4f;
   display: table-row !important;
 }
 
@@ -132,10 +132,17 @@ tr.backgroundTotal th:nth-child(n+2) {
   color: #DDDDDD;
 }
 
+div.MuiMenu-list {
+  background: transparent;
+  /* background: currentColor; */
+}
+
 .MuiMenu-list {
   display: grid;
   padding: 20px !important;
-  background: #0d0d0d;
+  /* background: #0d0d0d; */
+  background: transparent;
+  /* background: currentColor; */
 }
 
 .MuiMenu-list > li {

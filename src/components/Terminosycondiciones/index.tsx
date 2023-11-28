@@ -22,7 +22,10 @@ const Terminosycondiciones = () => {
         >
           <div className="col-6">
             <div className="page-title-box">
-              <Title fontSize="22px" className="page-title pl-3">
+              <Title
+                fontSize="22px"
+                className={themeDark === true ? "page-title-dark pl-3" : "pl-3"}
+              >
                 Términos y Condiciones
               </Title>
             </div>
