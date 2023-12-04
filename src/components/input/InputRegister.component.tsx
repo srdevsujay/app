@@ -13,7 +13,8 @@ type InputProps = {
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
 const InputRegister = (props: InputProps) => {
-  const { label, onChange, name, register, error, ...otherProps } = props;
+  const { label, onChange, name, register, value, error, ...otherProps } =
+    props;
 
   const { theme } = useContext(ThemeContext);
 
@@ -26,6 +27,7 @@ const InputRegister = (props: InputProps) => {
         {label}
       </label>
       <Input
+        defaultValue={value || ""}
         theme={theme}
         {...register(name)}
         {...otherProps}

@@ -6,6 +6,7 @@ export const trackingState: any = {
   dataTag: [],
   dataAttribution: [],
   dataRule: [],
+  currentAttribution: [],
 };
 
 export const trackingSlice = createSlice({
@@ -31,9 +32,18 @@ export const trackingSlice = createSlice({
       state.isLoading = false;
       state.dataRule = action.payload;
     },
+    setCurrentAttribution: (state, action) => {
+      state.currentAttribution = action.payload;
+    },
   },
 });
 
-export const { starLoading, setProduct, setTag, setAttribution, setRule } =
-  trackingSlice.actions;
+export const {
+  starLoading,
+  setProduct,
+  setTag,
+  setAttribution,
+  setRule,
+  setCurrentAttribution,
+} = trackingSlice.actions;
 export default trackingSlice.reducer;

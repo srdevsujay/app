@@ -8,6 +8,7 @@ import {
 import { AppThunk } from "../../../store";
 import {
   setAttribution,
+  setCurrentAttribution,
   setProduct,
   setRule,
   setTag,
@@ -30,6 +31,7 @@ import {
   getDataAttribution,
 } from "../../../../pages/Tracking/services/index";
 import { logoutUser, setUserUpload } from "../login/authSlice";
+import { getUser } from "../../../../pages/Configuration/services/index";
 
 export const obtainApiProduct = (): AppThunk => {
   return async (dispatch) => {
@@ -171,11 +173,10 @@ export const createAttribution = (data: any, themeState: boolean): AppThunk => {
     dispatch(starLoading);
     try {
       const result = await createAttributionService(data);
-      console.log("resultAttribution", result);
       if (
         result.data.message === "Update rule attribution user successfully!"
       ) {
-        // dispatch(obtainApiProduct());
+        dispatch(setCurrentAttribution([result.data.data]));
         Swal.fire({
           background: themeState === true ? "#0D0D0D" : "#fff",
           title: "Regla de Atribución creada correctamente!!",
@@ -302,5 +303,14 @@ export const handleRGPD = (data: any): AppThunk => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const onObtainUser = (id: number): AppThunk => {
+  return async (dispatch) => {
+    try {
+      const result = await getUser(id);
+      console.log("resultThunk", result);
+    } catch (error) {}
   };
 };

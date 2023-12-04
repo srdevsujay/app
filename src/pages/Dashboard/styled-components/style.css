@@ -132,16 +132,10 @@ tr.backgroundTotal th:nth-child(n+2) {
   color: #DDDDDD;
 }
 
-div.MuiMenu-list {
-  background: transparent;
-  /* background: currentColor; */
-}
-
 .MuiMenu-list {
   display: grid;
   padding: 20px !important;
   /* background: #0d0d0d; */
-  background: transparent;
   /* background: currentColor; */
 }
 

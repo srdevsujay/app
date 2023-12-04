@@ -127,6 +127,12 @@ const SelectTag = ({
         className="w-100"
         onKeyPress={handleKeyPress}
       />
+      <div
+        className={
+          onFocused ? "custom-div-close d-block" : "custom-div-close d-none"
+        }
+        onClick={() => setOnFocused(0)}
+      ></div>
       <OnFocused className={onFocused ? "d-block" : "d-none"} theme={theme}>
         {uniqueTags?.map((tag: any, i: number) => (
           <div

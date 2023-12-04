@@ -12,6 +12,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import {
   createAttribution,
   obtainApiAttribution,
+  onObtainUser,
 } from "../../../../redux/state/slices/tracking/trackingThunk";
 import { FormAttributionSale } from "../../../../styled-components/Form/index";
 import { Bar } from "../../../Dashboard/styled-components/dashboardStyled";
@@ -30,21 +31,23 @@ const dataAttributionMajorMinor: any = [
 ];
 
 const dataAttributionOrigen: any = [
-  { id: 0, value: 0, name: "Primer clic" },
-  { id: 1, value: 1, name: "Ultimo clic" },
-  { id: 2, value: 2, name: "Condicional" },
+  { id: 0, value: 0, label: "Primer clic" },
+  { id: 1, value: 1, label: "Ultimo clic" },
+  { id: 2, value: 2, label: "Condicional" },
 ];
 
 const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   const dispatch = useAppDispatch();
-  const { dataAttribution } = useAppSelector((state) => state.tracking);
-  const { userattributionrule } = useAppSelector((state) => state.user.user);
+  const { currentAttribution } = useAppSelector((state) => state.tracking);
+  const { id, userattributionrule }: any = useAppSelector(
+    (state) => state.user.user
+  );
   const [idEditLead, setIdEditLead] = useState<number>(0);
   const [selectAttribute, setSelectAttribute] = useState();
   const [selectMajorMinor, setSelectMajorMinor] = useState(
     dataAttributionMajorMinor
   );
-  const [selectOrigen, setSelectOrigen] = useState(dataAttributionOrigen);
+  const [selectOrigen, setSelectOrigen] = useState("0");
   const [operator, setOperator] = useState<any>(0);
   const [days, setDays] = useState<any>(7);
   const [click, setClick] = useState<any>(0);
@@ -69,7 +72,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   //   console.log("dataAttribution", dataAttribution);
 
   //   // if (!dataAttribution) return;
-  //   // setSelectAttribute(dataAttribution[0].id);
+  //   // setSelectAttribute(dataAttribution[0].log);
   // }, [dataAttribution]);
 
   useEffect(() => {
@@ -86,27 +89,25 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    if (currentEdit) {
-      setValue("selectAttribute", currentEdit.selectAttribute);
-      setValue("days", currentEdit.days);
-      // setValue("name", currentEdit.name);
-      // setValue("category", currentEdit.category);
-      setIdEditLead(currentEdit.id);
-    }
-  }, [currentEdit, setValue]);
+  // useEffect(() => {
+  //   if (currentEdit) {
+  //     setValue("selectAttribute", currentEdit.selectAttribute);
+  //     setValue("days", currentEdit.days);
+  //     // setValue("name", currentEdit.name);
+  //     // setValue("category", currentEdit.category);
+  //     setIdEditLead(currentEdit.id);
+  //   }
+  // }, [currentEdit, setValue]);
 
-  useEffect(() => {
-    setValue("selectAttribute", selectAttribute);
-  }, [selectAttribute]);
+  // useEffect(() => {
+  //   setValue("selectAttribute", selectAttribute);
+  // }, [selectAttribute]);
 
   const onSubmit = (data: any) => {
     const dataUserAttributionRule: any = userattributionrule;
-    const currentOperator =
-      selectOrigen === "1" ? "?" : selectOrigen === "0" ? "?" : "<=";
-    const currentclick =
-      selectOrigen === "1" ? "ASC" : selectOrigen === "0" ? "ASC" : "DESC";
-    const currentDays = data.days === "" ? days : data.days;
+    const currentOperator = selectOrigen === "2" ? "<=" : "?";
+    const currentclick = selectOrigen === "2" ? "DESC" : "ASC";
+    const currentDays = selectOrigen === "2" ? data.days : "7";
     const form = {
       id: dataUserAttributionRule[0].id,
       value: currentDays,
@@ -123,6 +124,8 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
     //   setIdEditLead(0);
     // } else {
     dispatch(createAttribution(form, themeState));
+    setDays(7);
+    // dispatch(onObtainUser(id));
     // }
     // onClose();
   };
@@ -130,6 +133,24 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
   // const handleChangeOperator = () => {
   //   setOperator(!operator)
   // };
+
+  useEffect(() => {
+    if (currentAttribution.length !== 0) {
+      if (currentAttribution[0]?.click === "DESC") {
+        setSelectOrigen("2");
+        setValue("selectOrigen", 2);
+        setDays(currentAttribution[0]?.value);
+        return;
+      }
+    } else {
+      if (userattributionrule[0]?.click === "DESC") {
+        setSelectOrigen("2");
+        setValue("selectOrigen", 2);
+        setDays(userattributionrule[0]?.value);
+        return;
+      }
+    }
+  }, [userattributionrule, currentAttribution]);
 
   return (
     <FormAttributionSale>
@@ -145,19 +166,41 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
         <div className="row flex-column">
           <div className="col-sm-6">
             <div className="w-50 mb-3">
-              <SelectWithValidation
+              <SelectComponent
                 label="Origen"
                 options={dataAttributionOrigen}
                 name="selectOrigen"
                 register={register}
                 error={String(errors["selectOrigen"]?.message)}
                 disabled={currentEdit ? true : false}
-                setSelectAttribute={setSelectOrigen}
+                onChange={setSelectOrigen}
+                value={selectOrigen}
               />
             </div>
-            <div
+            {selectOrigen === "2" && (
+              <div className="w-50 mb-3">
+                <InputRegister
+                  placeholder="ingresa los días de atribución"
+                  label="Fuente de origen mas antiguo de"
+                  id="0"
+                  type="number"
+                  min={1}
+                  max={30}
+                  name="days"
+                  register={register}
+                  error={String(errors["days"]?.message)}
+                  value={days}
+                  onChange={(newValue: any) => {
+                    setDays(newValue.target.value);
+                  }}
+                />
+              </div>
+            )}
+            {/* <div
               className={
-                selectOrigen === "2" ? "w-50 mb-3 d-block" : "w-50 d-none"
+                selectOrigen === "2" || userattributionrule[0]?.click === "DESC"
+                  ? "w-50 mb-3 d-block"
+                  : "w-50 d-none"
               }
             >
               <InputRegister
@@ -174,7 +217,7 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
                   setDays(newValue.target.value);
                 }}
               />
-            </div>
+            </div> */}
             {/* <div
               className={
                 selectAttribute === "3"
@@ -198,17 +241,15 @@ const FormAttribution = ({ onClose, currentEdit, setCurrentEdit }: any) => {
               </ButtonsModal>
             </div>
           </div>
-          <div className="col-sm-6">
-            <HelpVideo
-              title={"Video Tutorial Atribución"}
-              image={!themeState ? video : videoDark}
-              url={
-                "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
-              }
-            />
-          </div>
         </div>
       </form>
+      <div className="">
+        <HelpVideo
+          title={"Video Tutorial Atribución"}
+          image={!themeState ? video : videoDark}
+          url={"https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"}
+        />
+      </div>
     </FormAttributionSale>
   );
 };

@@ -13,11 +13,12 @@ export interface Option {
 type SelectProps = {
   label?: string;
   options: Option[];
+  value?: number;
   onChange?: (value: string) => void;
 } & Omit<SelectHTMLAttributes<HTMLSelectElement>, "onChange">;
 
 const SelectComponent = (props: any) => {
-  const { label, onChange, options, ...otherPros } = props;
+  const { label, onChange, value, options, ...otherPros } = props;
 
   const handleChange: ChangeEventHandler<HTMLSelectElement> = ({ target }) => {
     onChange && onChange(target.value);
@@ -28,7 +29,12 @@ const SelectComponent = (props: any) => {
   return (
     <>
       {label ? <label htmlFor={otherPros.id}>{label}</label> : ""}
-      <Select onChange={handleChange} {...otherPros} theme={theme}>
+      <Select
+        onChange={handleChange}
+        value={value || ""}
+        {...otherPros}
+        theme={theme}
+      >
         <option value="" disabled>
           Selecciona una opción
         </option>
