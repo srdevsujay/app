@@ -134,6 +134,8 @@ const SourceFilter = ({
     console.log("Filtros seleccionados:");
   };
 
+  console.log("themeState--Dash", themeState);
+
   return (
     <FilterSource theme={theme} onChange={handleFilterChange}>
       <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
@@ -150,13 +152,14 @@ const SourceFilter = ({
 
             return selected.join(", ");
           }}
-          MenuProps={MenuProps}
+          // MenuProps={MenuProps}
           // inputProps={{ "aria-label": "Without label" }}
           inputProps={{
-            "aria-label": "Without label",
             MenuProps: {
               PaperProps: {
-                sx: {
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                  width: 250,
                   backgroundColor: themeState === true ? "#0d0d0d" : "#fff",
                 },
               },
