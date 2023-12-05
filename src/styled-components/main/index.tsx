@@ -37,6 +37,13 @@ export const Main = styled.div`
   }
 `;
 
+export const MainDetail = styled.div`
+  width: 100%;
+  padding: 20px;
+  max-width: ${(props) => props.theme.width};
+  background-color: ${(props) => props.theme.background};
+`;
+
 export const Card = styled.div<CardProps>(
   ({ height, borderRadius, theme }) => ({
     boxShadow: "0 0 35px 0 rgb(154 161 171 / 15%)",

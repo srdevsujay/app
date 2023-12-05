@@ -413,10 +413,10 @@ const Sales = () => {
         title="Detalles del cliente potencial"
         isOpen={isModalOpenUser}
         onClose={toggleModalUser}
-        width="150vh"
+        width="85%"
         padding="10px 32px"
         bottom="14px"
-        height="480px"
+        height="auto"
         btnClose={1}
         subTitle={emailCustomerDetail}
       >

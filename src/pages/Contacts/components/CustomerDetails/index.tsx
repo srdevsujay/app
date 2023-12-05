@@ -3,7 +3,7 @@ import { Box, Tab } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Card, Main } from "../../../../styled-components/main/index";
+import { MainDetail } from "../../../../styled-components/main/index";
 import "../../styled-components/style.css";
 import { useAppSelector } from "../../../../hooks/appDispatch";
 import moment from "moment";
@@ -67,7 +67,7 @@ const CustomerDetails = ({ emailCustomerDetail }: any) => {
   }, [journey]);
 
   return (
-    <Main
+    <MainDetail
     // width={toggleSlider === true ? "87vw" : "96vw"}
     >
       <Box sx={{ width: "100%", typography: "body1" }}>
@@ -119,7 +119,7 @@ const CustomerDetails = ({ emailCustomerDetail }: any) => {
           </TabPanel>
         </TabContext>
       </Box>
-    </Main>
+    </MainDetail>
   );
 };
 
