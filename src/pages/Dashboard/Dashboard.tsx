@@ -36,6 +36,7 @@ import { HelpVideo } from "../../components/HelpVideo";
 import ExportExcel from "../../components/ExportExcel/ExportExcel";
 import video from "../../assets/images/video.svg";
 import videoDark from "../../assets/images/videoDark.svg";
+import { Sidebar } from "../../components/sidebar";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -254,80 +255,83 @@ const Dashboard = () => {
   }, [selectPlatform, themeState, theme]);
 
   return (
-    <Main
-      // width={toggleSlider ? "87vw" : "96vw"}
-      theme={themeDarkLight}
-    >
-      <Card height="94vh" borderRadius="16px" theme={theme}>
-        <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
-        <div className="row">
-          <Bar></Bar>
-          <div className="col-sm-12">
-            <div className="d-flex justify-content-end">
-              {/* <Title fontSize="14px" color="#192a3e">
-                      {`PNL (${pnlDays})`}
-                    </Title> */}
-              <div className="d-flex mt-2">
-                <SourceFilter
-                  groupPlataform={groupPlataform}
-                  setGroupPlataform={setGroupPlataform}
-                  setSelectPlatform={setSelectPlatform}
-                />
-                <HelpVideo
-                  title={"Video Tutorial Dashboard"}
-                  image={!themeState ? video : videoDark}
-                  url={
-                    "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
-                  }
-                />
-                <ExportExcel
-                  dataFile={groupPlataform}
-                  titleFile={"tabla pnl"}
-                />
-                <DateFilter
-                  titleDatePickerPNL={titleDatePickerPNL}
-                  handleDateDashboardMain={handleDateDashboardMain}
-                  flagModal={flagModal}
-                  setFlagModal={setFlagModal}
-                  currentCalendar={currentCalendar}
-                  setCurrentCalendar={setCurrentCalendar}
-                  handleYesterday={handleYesterday}
-                  handleToday={handleToday}
-                  handleSevenDay={handleSevenDay}
-                  handleCurrentWeek={handleCurrentWeek}
-                  handleLastWeek={handleLastWeek}
-                  handleThirtyDays={handleThirtyDays}
-                  handleCurrentMonth={handleCurrentMonth}
-                  handleFourteenDays={handleFourteenDays}
-                  handleThreeMonth={handleThreeMonth}
-                  index={0}
-                  theme={theme}
-                />
+    <>
+      <Sidebar />
+      <Main
+        // width={toggleSlider ? "87vw" : "96vw"}
+        theme={themeDarkLight}
+      >
+        <Card height="94vh" borderRadius="16px" theme={theme}>
+          <Title fontSize="17px">Dashboard PNL ({pnlDays})</Title>
+          <div className="row">
+            <Bar></Bar>
+            <div className="col-sm-12">
+              <div className="d-flex justify-content-end">
+                {/* <Title fontSize="14px" color="#192a3e">
+                        {`PNL (${pnlDays})`}
+                      </Title> */}
+                <div className="d-flex mt-2">
+                  <SourceFilter
+                    groupPlataform={groupPlataform}
+                    setGroupPlataform={setGroupPlataform}
+                    setSelectPlatform={setSelectPlatform}
+                  />
+                  <HelpVideo
+                    title={"Video Tutorial Dashboard"}
+                    image={!themeState ? video : videoDark}
+                    url={
+                      "https://www.youtube.com/watch?v=fF7c1esNhGI&feature=youtu.be"
+                    }
+                  />
+                  <ExportExcel
+                    dataFile={groupPlataform}
+                    titleFile={"tabla pnl"}
+                  />
+                  <DateFilter
+                    titleDatePickerPNL={titleDatePickerPNL}
+                    handleDateDashboardMain={handleDateDashboardMain}
+                    flagModal={flagModal}
+                    setFlagModal={setFlagModal}
+                    currentCalendar={currentCalendar}
+                    setCurrentCalendar={setCurrentCalendar}
+                    handleYesterday={handleYesterday}
+                    handleToday={handleToday}
+                    handleSevenDay={handleSevenDay}
+                    handleCurrentWeek={handleCurrentWeek}
+                    handleLastWeek={handleLastWeek}
+                    handleThirtyDays={handleThirtyDays}
+                    handleCurrentMonth={handleCurrentMonth}
+                    handleFourteenDays={handleFourteenDays}
+                    handleThreeMonth={handleThreeMonth}
+                    index={0}
+                    theme={theme}
+                  />
+                </div>
               </div>
+              {/* {dataPNL.length === 0 && isLoading === true ? ( */}
+              {dataPNL.length === 0 && isLoading === true ? (
+                <div
+                  className="d-flex justify-content-center align-items-center"
+                  style={{ height: "250px", zIndex: "99999999" }}
+                >
+                  <BeatLoader color="#3997FF" />
+                </div>
+              ) : (
+                <div className="scrollbar-color">
+                  <TablePNL
+                    tablePnl={groupPlataform}
+                    selectPlatform={selectPlatform}
+                  />
+                </div>
+              )}
             </div>
-            {/* {dataPNL.length === 0 && isLoading === true ? ( */}
-            {dataPNL.length === 0 && isLoading === true ? (
-              <div
-                className="d-flex justify-content-center align-items-center"
-                style={{ height: "250px", zIndex: "99999999" }}
-              >
-                <BeatLoader color="#3997FF" />
-              </div>
-            ) : (
-              <div className="scrollbar-color">
-                <TablePNL
-                  tablePnl={groupPlataform}
-                  selectPlatform={selectPlatform}
-                />
-              </div>
-            )}
+            <div className="col-sm-12">
+              <Graphics dataPNL={dataPNL} isLoading={isLoading} />
+            </div>
           </div>
-          <div className="col-sm-12">
-            <Graphics dataPNL={dataPNL} isLoading={isLoading} />
-          </div>
-        </div>
-      </Card>
-    </Main>
+        </Card>
+      </Main>
+    </>
   );
 };
 

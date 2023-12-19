@@ -32,6 +32,7 @@ import {
   IntegrationAlertPermissionFacebook,
 } from "../../components/alerts/IntegrationAlert";
 import { useNavigate } from "react-router-dom";
+import { Sidebar } from "../../components/sidebar";
 
 const Funnel = () => {
   const navigate = useNavigate();
@@ -272,93 +273,96 @@ const Funnel = () => {
   }, [permissionFacebookFunnel]);
 
   return (
-    <Main
-      // width={toggleSlider === true ? "87vw" : "96vw"}
-      theme={themeDarkLight}
-    >
-      <Modal
-        title={"Crear Funnel"}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        width="60%"
-        height="543px"
-        padding="12px 2.25rem 16px"
-        btnClose={1}
-        overflowY="auto"
+    <>
+      <Sidebar />
+      <Main
+        // width={toggleSlider === true ? "87vw" : "96vw"}
+        theme={themeDarkLight}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <AddFunnelInput
-            register={register}
-            errors={errors}
-            isModalOpen={isModalOpen}
-            currentDataEditFunnel={currentDataEditFunnel}
-          />
-          <StepsFunnel
-            currentSteps={currentSteps}
-            setCurrentSteps={setCurrentSteps}
-            currentDataEditFunnel={currentDataEditFunnel}
-            removeStep={removeStep}
-          />
-          <AdAccount
-            adAccounts={adAccounts}
-            setAdAccounts={setAdAccounts}
-            isModalOpen={isModalOpen}
-            currentDataEditFunnel={currentDataEditFunnel}
-            removeCampaign={removeCampaign}
-          />
-          <ContainerSticky className="row" theme={theme}>
-            <Bar className="mb-3"></Bar>
-            <div className="form-group col-sm-6">
-              <ButtonsModal
-                className="btn btn-close"
-                onClick={toggleModal}
-                theme={themeFilterFunnel}
-              >
-                Cerrar
-              </ButtonsModal>
-            </div>
-            <div className="form-group col-sm-6">
-              <ButtonsModal className="btn btn-add" type="submit">
-                {/* {idEditBooking !== 0 ? "Editar" : "Guardar"} */}
-                Guardar
-              </ButtonsModal>
-            </div>
-          </ContainerSticky>
-        </form>
-      </Modal>
-      <Card height="84vh" borderRadius="16px 16px 0 0" theme={theme}>
-        <Title fontSize="17px">Funnel</Title>
-        <div className="row">
-          <Bar></Bar>
-          <div className="col-sm-12">
-            <AccordionFunnel
-              obtainFunnelEdit={obtainFunnelEdit}
-              setCurrentSteps={setCurrentSteps}
-              showLodash={showLodash}
-              setShowLodash={setShowLodash}
-              // isModalOpen={isModalOpen}
-              // toggleModal={toggleModal}
-              // handleSubmit={handleSubmit}
-              // onSubmit={onSubmit}
-              // register={register}
-              // errors={errors}
-              // currentDataEditFunnel={currentDataEditFunnel}
-              // currentSteps={currentSteps}
-              // removeStep={removeStep}
-              // adAccounts={adAccounts}
-              // setAdAccounts={setAdAccounts}
-              // removeCampaign={removeCampaign}
+        <Modal
+          title={"Crear Funnel"}
+          isOpen={isModalOpen}
+          onClose={toggleModal}
+          width="60%"
+          height="543px"
+          padding="12px 2.25rem 16px"
+          btnClose={1}
+          overflowY="auto"
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <AddFunnelInput
+              register={register}
+              errors={errors}
+              isModalOpen={isModalOpen}
+              currentDataEditFunnel={currentDataEditFunnel}
             />
+            <StepsFunnel
+              currentSteps={currentSteps}
+              setCurrentSteps={setCurrentSteps}
+              currentDataEditFunnel={currentDataEditFunnel}
+              removeStep={removeStep}
+            />
+            <AdAccount
+              adAccounts={adAccounts}
+              setAdAccounts={setAdAccounts}
+              isModalOpen={isModalOpen}
+              currentDataEditFunnel={currentDataEditFunnel}
+              removeCampaign={removeCampaign}
+            />
+            <ContainerSticky className="row" theme={theme}>
+              <Bar className="mb-3"></Bar>
+              <div className="form-group col-sm-6">
+                <ButtonsModal
+                  className="btn btn-close"
+                  onClick={toggleModal}
+                  theme={themeFilterFunnel}
+                >
+                  Cerrar
+                </ButtonsModal>
+              </div>
+              <div className="form-group col-sm-6">
+                <ButtonsModal className="btn btn-add" type="submit">
+                  {/* {idEditBooking !== 0 ? "Editar" : "Guardar"} */}
+                  Guardar
+                </ButtonsModal>
+              </div>
+            </ContainerSticky>
+          </form>
+        </Modal>
+        <Card height="84vh" borderRadius="16px 16px 0 0" theme={theme}>
+          <Title fontSize="17px">Funnel</Title>
+          <div className="row">
+            <Bar></Bar>
+            <div className="col-sm-12">
+              <AccordionFunnel
+                obtainFunnelEdit={obtainFunnelEdit}
+                setCurrentSteps={setCurrentSteps}
+                showLodash={showLodash}
+                setShowLodash={setShowLodash}
+                // isModalOpen={isModalOpen}
+                // toggleModal={toggleModal}
+                // handleSubmit={handleSubmit}
+                // onSubmit={onSubmit}
+                // register={register}
+                // errors={errors}
+                // currentDataEditFunnel={currentDataEditFunnel}
+                // currentSteps={currentSteps}
+                // removeStep={removeStep}
+                // adAccounts={adAccounts}
+                // setAdAccounts={setAdAccounts}
+                // removeCampaign={removeCampaign}
+              />
+            </div>
           </div>
-        </div>
-      </Card>
-      <NewFunnel theme={themeBackNewFunnel}>
-        <ButtonFunnel theme={themeDarkLight} onClick={addNewFunnel}>
-          + Nuevo
-        </ButtonFunnel>
-      </NewFunnel>
-      {/* <FooterMenu /> */}
-    </Main>
+        </Card>
+        <NewFunnel theme={themeBackNewFunnel}>
+          <ButtonFunnel theme={themeDarkLight} onClick={addNewFunnel}>
+            + Nuevo
+          </ButtonFunnel>
+        </NewFunnel>
+        {/* <FooterMenu /> */}
+      </Main>
+    </>
   );
 };
 

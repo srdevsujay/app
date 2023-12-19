@@ -15,6 +15,7 @@ import "./styled-components/styled.css";
 import { useAppSelector } from "../../hooks/appDispatch";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
 import RGPD from "./components/RGPD/RGPD";
+import { Sidebar } from "../../components/sidebar";
 
 const Tracking = () => {
   const { toggleSlider } = useAppSelector((state) => state.dashboard);
@@ -36,49 +37,52 @@ const Tracking = () => {
   const { theme, themeDarkLight } = useContext(ThemeContext);
 
   return (
-    <Main
-      // width={toggleSlider === true ? "87vw" : "96vw"}
-      theme={themeDarkLight}
-    >
-      <Card height="94vh" borderRadius="16px" theme={theme}>
-        <Box sx={{ width: "100%", typography: "body1" }}>
-          <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Tab label="Script" value="1" />
-                <Tab label="Reglas de URL" value="2" />
-                <Tab label="Productos" value="3" />
-                <Tab label="Etiquetas" value="4" />
-                <Tab label="Atribución de venta" value="5" />
-                <Tab label="RGPD" value="6" />
-              </TabList>
-            </Box>
-            <TabPanel value="1">
-              <ScriptTab />
-            </TabPanel>
-            <TabPanel value="2">
-              <RuleURL />
-            </TabPanel>
-            <TabPanel value="3">
-              <Products />
-            </TabPanel>
-            <TabPanel value="4">
-              <TagTracking />
-            </TabPanel>
-            <TabPanel value="5">
-              <FormAttribution />
-            </TabPanel>
-            <TabPanel value="6">
-              <RGPD />
-            </TabPanel>
-          </TabContext>
-        </Box>
-      </Card>
-      {/* <FooterMenu /> */}
-    </Main>
+    <>
+      <Sidebar />
+      <Main
+        // width={toggleSlider === true ? "87vw" : "96vw"}
+        theme={themeDarkLight}
+      >
+        <Card height="94vh" borderRadius="16px" theme={theme}>
+          <Box sx={{ width: "100%", typography: "body1" }}>
+            <TabContext value={value}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example"
+                >
+                  <Tab label="Script" value="1" />
+                  <Tab label="Reglas de URL" value="2" />
+                  <Tab label="Productos" value="3" />
+                  <Tab label="Etiquetas" value="4" />
+                  <Tab label="Atribución de venta" value="5" />
+                  <Tab label="RGPD" value="6" />
+                </TabList>
+              </Box>
+              <TabPanel value="1">
+                <ScriptTab />
+              </TabPanel>
+              <TabPanel value="2">
+                <RuleURL />
+              </TabPanel>
+              <TabPanel value="3">
+                <Products />
+              </TabPanel>
+              <TabPanel value="4">
+                <TagTracking />
+              </TabPanel>
+              <TabPanel value="5">
+                <FormAttribution />
+              </TabPanel>
+              <TabPanel value="6">
+                <RGPD />
+              </TabPanel>
+            </TabContext>
+          </Box>
+        </Card>
+        {/* <FooterMenu /> */}
+      </Main>
+    </>
   );
 };
 

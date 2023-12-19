@@ -12,6 +12,7 @@ import BillingTab from "./components/BillingTab/index";
 import { useAppDispatch, useAppSelector } from "../../hooks/appDispatch";
 import { obtainSubscriptionUser } from "../../redux/state/slices/configuration/configurationThunk";
 import { ThemeContext } from "../../utilities/theme/ThemeContext";
+import { Sidebar } from "../../components/sidebar";
 
 const Configuration = () => {
   const { toggleSlider } = useAppSelector((state) => state.dashboard);
@@ -39,49 +40,52 @@ const Configuration = () => {
   const { theme, themeDarkLight } = useContext(ThemeContext);
 
   return (
-    <Main
-      // width={toggleSlider === true ? "87vw" : "96vw"}
-      theme={themeDarkLight}
-    >
-      <Card height="94vh" borderRadius="16px" theme={theme}>
-        <Box sx={{ width: "100%", typography: "body1" }}>
-          <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Tab
-                  label="Perfil"
-                  value="1"
-                  style={{ padding: "12px 16px" }}
-                />
-                <Tab
-                  label="Integraciones"
-                  value="2"
-                  style={{ padding: "12px 16px" }}
-                />
-                <Tab
-                  label="Facturación"
-                  value="3"
-                  style={{ padding: "12px 16px" }}
-                />
-              </TabList>
-            </Box>
-            <TabPanel value="1">
-              <ProfileTab />
-            </TabPanel>
-            <TabPanel value="2">
-              <IntegrationTab />
-            </TabPanel>
-            <TabPanel value="3">
-              <BillingTab />
-            </TabPanel>
-          </TabContext>
-        </Box>
-      </Card>
-      {/* <FooterMenu /> */}
-    </Main>
+    <>
+      <Sidebar />
+      <Main
+        // width={toggleSlider === true ? "87vw" : "96vw"}
+        theme={themeDarkLight}
+      >
+        <Card height="94vh" borderRadius="16px" theme={theme}>
+          <Box sx={{ width: "100%", typography: "body1" }}>
+            <TabContext value={value}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example"
+                >
+                  <Tab
+                    label="Perfil"
+                    value="1"
+                    style={{ padding: "12px 16px" }}
+                  />
+                  <Tab
+                    label="Integraciones"
+                    value="2"
+                    style={{ padding: "12px 16px" }}
+                  />
+                  <Tab
+                    label="Facturación"
+                    value="3"
+                    style={{ padding: "12px 16px" }}
+                  />
+                </TabList>
+              </Box>
+              <TabPanel value="1">
+                <ProfileTab />
+              </TabPanel>
+              <TabPanel value="2">
+                <IntegrationTab />
+              </TabPanel>
+              <TabPanel value="3">
+                <BillingTab />
+              </TabPanel>
+            </TabContext>
+          </Box>
+        </Card>
+        {/* <FooterMenu /> */}
+      </Main>
+    </>
   );
 };
 

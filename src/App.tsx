@@ -12,7 +12,6 @@ import CreateAccount from "./pages/Register/CreateAccount";
 import AuthGuard from "./guards/auth.guard";
 import { publicRoutes, privateRoutes } from "./models/routes";
 import RoutesWithNotFound from "./utilities/RoutesWithNotFound.utility";
-import { Sidebar } from "./components/sidebar";
 import { useAppSelector } from "./hooks";
 import { useSelector } from "react-redux";
 import { AppStore } from "./redux/store";
@@ -45,7 +44,6 @@ function App() {
   const subscriptionUser = useAppSelector(
     (state) => state.configuration?.subscriptionUser
   );
-  console.log("entra siempre");
 
   let hostedpage: any = "";
   useEffect(() => {
@@ -73,7 +71,6 @@ function App() {
           <ToastContainer />
           <div className={`${hostedpage.length !== 5 ? `d-flex` : `d-block`}`}>
             <ThemeProvider>
-              {user !== null ? <Sidebar /> : ""}
               <RoutesWithNotFound>
                 <Route
                   path={publicRoutes.TERMINOSYCONDICIONES}
@@ -95,8 +92,7 @@ function App() {
                 <Route element={<AuthGuard />}>
                   {usersub?.usersub.length !== 0 ||
                   Object.keys(subscriptionUser).length !== 0 ||
-                  user.user_type === 1 ? (
-                    // console.log("navigate dash");
+                  user?.user_type === 1 ? (
                     <>
                       <Route
                         path={privateRoutes.DASHBOARD}
@@ -117,7 +113,6 @@ function App() {
                       />
                     </>
                   ) : (
-                    // console.log("navigate conf");
                     <Route
                       path={privateRoutes.CONFIGURATION}
                       element={<Configuration />}
