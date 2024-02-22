@@ -37,6 +37,7 @@ import { useMinMaxDateFilter } from "../../hooks";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
+import {setLeads} from "../../../../redux/state/slices/contacts/contactsSlice";
 
 setAutoFreeze(false);
 
@@ -106,6 +107,15 @@ const Leads = () => {
 
   const [filteredDataTotal, setFilteredDataTotal] = useState<any>(dataLead);
   const [titleFile, setTitleFile] = useState("Tabla Leads");
+  console.log('filteredDataTotal', filteredDataTotal)
+
+  useEffect(() => {
+    dispatch(setLeads({
+      dataLead: filteredDataTotal,
+      totalResults: filteredDataTotal.length
+    }))
+
+  }, [filteredDataTotal]);
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);
 
