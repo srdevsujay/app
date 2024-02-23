@@ -37,7 +37,7 @@ import { useMinMaxDateFilter } from "../../hooks";
 import { FormatNumber } from "../../../../utilities/FormatNumber";
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
-import {setLeads} from "../../../../redux/state/slices/contacts/contactsSlice";
+import {setLeadsTotal} from "../../../../redux/state/slices/contacts/contactsSlice";
 
 setAutoFreeze(false);
 
@@ -110,11 +110,9 @@ const Leads = () => {
   console.log('filteredDataTotal', filteredDataTotal)
 
   useEffect(() => {
-    dispatch(setLeads({
-      dataLead: filteredDataTotal,
+    dispatch(setLeadsTotal({
       totalResults: filteredDataTotal.length
     }))
-
   }, [filteredDataTotal]);
 
   const { minDate, maxDate, selectedDates } = useMinMaxDateFilter(dataLead);

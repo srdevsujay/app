@@ -39,7 +39,7 @@ const FilterContacts = ({
     };
 
     const [dataInRange, setDataInRange] = useState([]);
-    //console.log('dataInRange', dataInRange)
+    console.log('dataInRange', dataInRange)
 
 
     const handleSevenDay = () => {

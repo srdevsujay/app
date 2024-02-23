@@ -72,7 +72,8 @@ const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY as any, {
 const BillingTab = () => {
     // const stripe = new Stripe('TU_CLAVE_API_PRIVADA');
     const dispatch = useAppDispatch();
-    const {email} = useAppSelector((state) => state.user.user);
+    const {email, name, last_name} = useAppSelector((state) => state.user.user);
+
     const {customerId, coupon} = useAppSelector((state) => state.configuration);
 
     const {status, subscription_plan, subscription_user, payment_gateway} =
@@ -110,13 +111,27 @@ const BillingTab = () => {
         dispatch(createSubscriptionStripe(subscription));
     }, [subscription]);
 
+    const updatecustomerstripe = async () => {
+        if (email !== '' && name !== '') {
+            const fullname = name + ' ' + last_name
+            const update = await stripe.customers.update(customerId, {
+                email: email,
+                name: fullname
+            })
+            console.log("agrega correo y nombre", update)
+            return;
+        }
+    }
     useEffect(() => {
-        if (!customerId) return;
+        if (!customerId && !idSubscription.income && !idSubscriptionPlan.name) return;
         console.log("customerId", customerId);
         const planId = `${idSubscription.income}${idSubscriptionPlan.name}`;
-        if (coupon !== '') {
-            createCoupon(customerId, coupon);
-        }
+        console.log("plan id",planId)
+        //if (coupon !== '') {
+        //    createCoupon(customerId, coupon);
+        //}
+        //createCoupon(customerId,'ROATEST')
+        //updatecustomerstripe()
         createSubscription(customerId, planId);
     }, [customerId]);
     const createCoupon = async (customerId: string, coupon: string) => {

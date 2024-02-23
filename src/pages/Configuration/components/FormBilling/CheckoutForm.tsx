@@ -44,7 +44,7 @@ const CheckoutForm = ({setSubscription}: any) => {
             email,
             name: fullName
         } as any);
-        console.log("por aca si pasa", token);
+        //console.log("token", token)
         setSubscription(token);
         if (error) {
             setCardError(error.message);

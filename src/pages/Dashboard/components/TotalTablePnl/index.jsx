@@ -10,7 +10,7 @@ export const totalPnl = (tempGroup, themeState, theme) => {
     ingresos: _.sumBy(tempGroup, 'ingresos'),
     porcentajerentabilidad: _.sumBy(tempGroup, 'porcentajerentabilidad'),
     rentabilidad: (_.sumBy(tempGroup, 'ingresos'))-Math.abs((_.sumBy(tempGroup, 'rentabilidad'))),
-    roi: _.sumBy(tempGroup, 'roi'), 
+    roi: _.sumBy(tempGroup, 'roi'),
     leeds: _.sumBy(tempGroup, 'leeds'),
     bookings: _.sumBy(tempGroup, 'bookings'), 
     meetings: _.sumBy(tempGroup, 'meetings'), 

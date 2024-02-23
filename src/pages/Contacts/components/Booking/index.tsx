@@ -28,7 +28,7 @@ import bookingsFilterDark from "../../../../assets/images/bookingsFilterDark.svg
 import video from "../../../../assets/images/video.svg";
 import videoDark from "../../../../assets/images/videoDark.svg";
 import {ThemeContext} from "../../../../utilities/theme/ThemeContext";
-import {setBooking} from "../../../../redux/state/slices/contacts/contactsSlice";
+import {setBookingTotal} from "../../../../redux/state/slices/contacts/contactsSlice";
 
 setAutoFreeze(false);
 
@@ -151,8 +151,7 @@ const Booking = () => {
 
     ////console.log("filteredDataDos", filteredDataDos);
     useEffect(() => {
-        dispatch(setBooking({
-            dataBooking: filteredDataDos,
+        dispatch(setBookingTotal({
             totalPageBook: filteredDataDos.length
         }))
     }, [filteredDataDos]);

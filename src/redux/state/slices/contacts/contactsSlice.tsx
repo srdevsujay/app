@@ -25,6 +25,9 @@ export const contactSlice = createSlice({
       state.dataLead = action.payload.dataLead;
       state.totalPageLead = action.payload.totalResults;
     },
+    setLeadsTotal: (state, action) => {
+      state.totalPageLead = action.payload.totalResults;
+    },
     setCreateLead: (state, action) => {
       state.isLoading = false;
       // state.registerLead = action.payload;
@@ -36,6 +39,9 @@ export const contactSlice = createSlice({
     setBooking: (state, action) => {
       state.isLoading = false;
       state.dataBooking = action.payload.dataBooking;
+      state.totalPageBook = action.payload.totalPageBook;
+    },
+    setBookingTotal: (state, action) => {
       state.totalPageBook = action.payload.totalPageBook;
     },
     setSale: (state, action) => {
@@ -57,7 +63,9 @@ export const contactSlice = createSlice({
 export const {
   starLoading,
   setLeads,
+  setLeadsTotal,
   setCreateLead,
+  setBookingTotal,
   setBooking,
   setSale,
   setProduct,

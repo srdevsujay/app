@@ -42,6 +42,14 @@ export const createSubscriptionStripeService = async (data: any) => {
   });
 };
 
+export const validatecouponstripe = async (data: any) => {
+  return clientAxios.post("/validar-cupon", data, {
+    headers: {
+      "x-access-tokens": <string>getJwt(),
+    }
+  });
+};
+
 export const getDataSubscriptionsPlans = async () => {
   return clientAxios.get("/subscriptions_plans", {
     headers: {

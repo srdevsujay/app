@@ -190,9 +190,10 @@ export const createSubscriptionStripe = (token: any): AppThunk => {
   return async (dispatch) => {
     dispatch(starLoading);
     try {
-      console.log("token", token);
+      console.log("token para agregar subscripcion", token);
       const currentToken = {
-        token: token.id,
+        token: token.id
+        //email:token.email
       };
       const result = await createSubscriptionStripeService(currentToken);
       console.log("resultTokenId", result);
