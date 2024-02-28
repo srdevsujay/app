@@ -82,20 +82,20 @@ const BillingTab = () => {
         (state) => state.configuration.subscriptionUser
     );
     const {amount} = useAppSelector((state) => state.configuration.amount);
-    console.log("amount", amount);
-    console.log("subscription_plan", subscription_plan);
-    console.log("subscription_user", subscription_user);
-    console.log("coupon", coupon);
+    //console.log("amount", amount);
+    //console.log("subscription_plan", subscription_plan);
+    //console.log("subscription_user", subscription_user);
+    //console.log("coupon", coupon);
     const [subscription, setSubscription] = useState("");
     const [selectedPayment, setSelectedPayment] = useState("0");
     const [selectedPlanProduct, setSelectedPlanProduct] = useState("0");
     const [idSubscription, setIdSubscription] = useState<any>({});
     const [idSubscriptionPlan, setIdSubscriptionPlan] = useState<any>({});
     const [transactionDetails, setTransactionDetails] = useState([]);
-    console.log("idSubscription", idSubscription);
-    console.log("idSubscriptionPlan", idSubscriptionPlan);
-    console.log("customerId---", customerId);
-    console.log("transactionDetails---", transactionDetails);
+    //console.log("idSubscription", idSubscription);
+    //console.log("idSubscriptionPlan", idSubscriptionPlan);
+    //console.log("customerId---", customerId);
+    //console.log("transactionDetails---", transactionDetails);
 
     useEffect(() => {
         dispatch(obtainApiStripe());
@@ -118,45 +118,33 @@ const BillingTab = () => {
                 email: email,
                 name: fullname
             })
-            console.log("agrega correo y nombre", update)
+            //console.log("agrega correo y nombre", update)
             return;
         }
     }
     useEffect(() => {
         if (!customerId && !idSubscription.income && !idSubscriptionPlan.name) return;
-        console.log("customerId", customerId);
         const planId = `${idSubscription.income}${idSubscriptionPlan.name}`;
-        console.log("plan id",planId)
-        //if (coupon !== '') {
-        //    createCoupon(customerId, coupon);
-        //}
-        //createCoupon(customerId,'ROATEST')
-        //updatecustomerstripe()
+
+        updatecustomerstripe()
         createSubscription(customerId, planId);
     }, [customerId]);
-    const createCoupon = async (customerId: string, coupon: string) => {
-        // Aplicar el cupón al cliente (si se proporciona un cupón)
-        if (coupon !== '' && customerId) {
-            try {
-                const rescoupon = await stripe.customers.update(customerId, {
-                    coupon
-                });
-                console.log(rescoupon)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-    }
+
+
+
+
     const createSubscription = async (customerId: string, planId: string) => {
+
 
         console.log('aca es que realmente se crea la susripcion')
         const subscription: any = await stripe.subscriptions.create({
             customer: customerId,
             items: [{plan: planId}],
             trial_period_days: 14,
+            coupon: coupon
         });
         const currentFont = selectedPayment === "2" ? "Stripe" : "Paypal";
-        console.log("subscriptionClientSecret", subscription);
+        // console.log("subscriptionClientSecret", subscription);
 
         const timestamp = subscription.start_date;
         const date = new Date(timestamp * 1000);
@@ -182,10 +170,10 @@ const BillingTab = () => {
     const [dataTable, setDataTable] = useState([billingState]);
     const [totalMonth, setTotalMonth] = useState<any>(0);
     const {balance, create, description}: any = billingState;
-    console.log("totalMonth", totalMonth);
+    // console.log("totalMonth", totalMonth);
 
     useEffect(() => {
-        console.log("entra al efect");
+        //console.log("entra al efect");
 
         if (!create) return;
         const timestamp = create;
@@ -193,19 +181,19 @@ const BillingTab = () => {
         const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
             .toString()
             .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-        console.log("formattedDate", formattedDate);
+        //console.log("formattedDate", formattedDate);
 
         setCurrentCreate(formattedDate);
     }, [billingState]);
 
     async function consultarEstadoUsuarioEnStripe(customerId: any) {
-        console.log("customerId", customerId);
+        //console.log("customerId", customerId);
 
         try {
-            console.log("dfdfdfdfd");
+            //console.log("dfdfdfdfd");
 
             const customer = await stripe.customers.retrieve(customerId);
-            console.log("Estado del usuario:", customer);
+            //console.log("Estado del usuario:", customer);
             setBillingState(customer);
             // Realiza las operaciones necesarias con la información del usuario en Stripe
         } catch (error) {
@@ -216,7 +204,7 @@ const BillingTab = () => {
         }
     }
 
-    console.log("billingState", billingState);
+    //console.log("billingState", billingState);
 
     const handleChange = (event: any) => {
         setSelectedPayment(event);
@@ -226,7 +214,7 @@ const BillingTab = () => {
         setSelectedPlanProduct(plan);
         setSelectedPayment("1");
     };
-    console.log("selectedPlanProduct", selectedPlanProduct);
+    // console.log("selectedPlanProduct", selectedPlanProduct);
 
     const onReturnSelect = (resetSelect: any) => {
         setSelectedPayment(resetSelect);
@@ -332,10 +320,10 @@ const BillingTab = () => {
                 data,
                 {headers}
             );
-            console.log("responseToken", response);
+            // console.log("responseToken", response);
 
             const accessToken = response.data.access_token;
-            console.log("Token de acceso de PayPal:", accessToken);
+            //  console.log("Token de acceso de PayPal:", accessToken);
             return accessToken;
         } catch (error) {
             console.error("Error al obtener el token de acceso de PayPal", error);
@@ -344,7 +332,7 @@ const BillingTab = () => {
     };
 
     const hadlePlansPaypal = (accessToken: string) => {
-        console.log("entra AccesToken");
+        // console.log("entra AccesToken");
         const fetchPlans = async () => {
             try {
                 const response = await axios.get(
@@ -355,7 +343,7 @@ const BillingTab = () => {
                         },
                     }
                 );
-                console.log("responsePlans", response);
+                //    console.log("responsePlans", response);
                 setPlans(response.data.plans);
             } catch (error) {
                 console.error("Error al obtener los planes de PayPal", error);
@@ -373,7 +361,7 @@ const BillingTab = () => {
                     }
                 );
 
-                console.log("responsePlans", response.data.transaction_details);
+                //    console.log("responsePlans", response.data.transaction_details);
                 setTransactionDetails(response.data.transaction_details);
             } catch (error) {
                 console.error("Error retrieving PayPal transactions:", error);
@@ -389,7 +377,7 @@ const BillingTab = () => {
             try {
                 const paymentIntents = await stripe.paymentIntents.list();
                 // setTransactions(paymentIntents.data);
-                console.log("responsetransactionsStripe", paymentIntents); // Puedes almacenar los datos en un estado o utilizarlos de otra manera
+                //console.log("responsetransactionsStripe", paymentIntents); // Puedes almacenar los datos en un estado o utilizarlos de otra manera
             } catch (error) {
                 console.error("Error fetching transactions:", error);
             }
@@ -399,13 +387,13 @@ const BillingTab = () => {
     }, []);
 
     const [toggleEditSubscription, setToggleEditSubscription] = useState(0);
-    console.log("status--", status);
-    console.log("subscriptionUser--", subscriptionUser);
-    console.log("toggleEditSubscription--", toggleEditSubscription);
+    //console.log("status--", status);
+    //console.log("subscriptionUser--", subscriptionUser);
+    //console.log("toggleEditSubscription--", toggleEditSubscription);
 
     useEffect(() => {
         if (Object.keys(subscriptionUser).length !== 0) {
-            console.log("entra al length");
+            //console.log("entra al length");
             setSelectedPayment("5");
         }
     }, [subscriptionUser]);

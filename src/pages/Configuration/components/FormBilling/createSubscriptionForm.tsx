@@ -15,7 +15,7 @@ export async function createSubscription(
     email: string,
     coupon: string
 ): Promise<any> {
-    console.log("entra al fetch", coupon);
+    console.log("entra al fetch ", coupon);
     try {
         const customer = await stripe.customers.create({
             email,
